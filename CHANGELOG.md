@@ -30,5 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **False-Positive Immunity:** Added code stripping for inline and block comments, plus support for next-line and inline exception flags (`pure-saas-ignore <rule>: <reason>`, `EXC-xxx`).
 - **File Integrity Repair:** Repaired zero-byte `LICENSE`, `integrations/cursor/.cursorrules`, and `integrations/windsurf/.windsurfrules` files.
 - **Visual & Responsive Defect Corrections:** Tested and refined mobile responsive behavior (375px viewport) on all three design examples using headless Chrome, eliminating text clipping and header overflow.
-- **Clean Project Smoke Testing:** Validated full package packing, clean project installation, and CLI command execution from an isolated temporary project.
+- **Complete Source Provenance Ledger:** Added exhaustive file-by-file provenance table in `THIRD_PARTY_NOTICES.md` documenting upstream assets from `ui-ux-pro-max-skill`, `zero-slop-design-plugin`, and legal rationale for the clean-room reimplementation of platform guidelines without Apple HIG text.
+- **Independent Real-World App Test:** Executed full verification on an independent billing and seat management application (`tests/real-world-app/`), confirming 100% contract preservation, reduction of 22 raw color violations to 0, and elimination of horizontal clipping on 375px mobile viewports with headless Chrome screenshots.
+- **Release Artifact & Agent Spec Verification:** Verified npm registry availability (`pure-saas` is available), confirmed npm tarball contents (45 clean files, 53KB gzipped), and added `integrations/README.md` explicitly distinguishing tested native skills from instruction-file compatibility.
+
 

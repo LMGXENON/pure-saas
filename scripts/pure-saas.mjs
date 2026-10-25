@@ -326,7 +326,8 @@ export function scanSourceDirectory(srcDir, designTokens = {}) {
     ...Object.keys(designTokens.spacing || {}),
     ...Object.keys(designTokens.radii || {}).map(r => `radius-${r}`),
     ...Object.keys(designTokens.typography?.font_families || {}).map(f => `font-${f}`),
-    ...Object.keys(designTokens.typography?.scale || {}).map(s => `font-size-${s}`)
+    ...Object.keys(designTokens.typography?.scale || {}).map(s => `font-size-${s}`),
+    ...Object.keys(designTokens.layout || {}).map(l => `layout-${l}`)
   ]);
 
   function walk(dir) {
@@ -493,6 +494,24 @@ export function exportTokens(designData, format = 'css') {
     out += '\n  /* Border Radii */\n';
     for (const [k, v] of Object.entries(radii)) {
       out += `  --radius-${k}: ${v};\n`;
+    }
+    if (typography.font_families) {
+      out += '\n  /* Typography: Families */\n';
+      for (const [k, v] of Object.entries(typography.font_families)) {
+        out += `  --font-${k}: ${v};\n`;
+      }
+    }
+    if (typography.scale) {
+      out += '\n  /* Typography: Scale */\n';
+      for (const [k, v] of Object.entries(typography.scale)) {
+        out += `  --font-size-${k}: ${v};\n`;
+      }
+    }
+    if (tokens.layout) {
+      out += '\n  /* Layout */\n';
+      for (const [k, v] of Object.entries(tokens.layout)) {
+        out += `  --layout-${k}: ${v};\n`;
+      }
     }
     out += '}\n';
     return out;

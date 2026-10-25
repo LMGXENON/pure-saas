@@ -85,17 +85,19 @@ npx pure-saas review-report
 
 ## Supported Agent Integrations
 
-Pure SaaS uses thin, portable adapters that follow each agent's documented conventions:
+Pure SaaS provides thin, portable adapters that follow each agent's documented conventions, clearly distinguishing tested native integrations from instruction-file compatibility:
 
-| Platform / Agent | Integration Type | Integration Path | Setup Command |
+| Platform / Agent | Integration Type | Official Integration Path | Setup & Documentation |
 | :--- | :--- | :--- | :--- |
-| **Claude Code** | Native Skill & Plugin | `.claude/skills/` or `.claude-plugin/` | Symlink or copy to `.claude/skills/pure-saas` (see [claude-code](integrations/claude-code/README.md)) |
-| **Cursor** | Native Rules (.mdc) | `.cursor/rules/pure-saas.mdc` | Copy `integrations/cursor/.cursor/rules/pure-saas.mdc` to `.cursor/rules/` |
-| **Codex** | Plugin Manifest | `.codex-plugin/plugin.json` | Copy `integrations/codex/.codex-plugin/` to `.codex-plugin/` |
-| **Windsurf** | Agent Rule File | `.windsurfrules` | Copy `integrations/windsurf/.windsurfrules` to project root |
-| **OpenCode** | Native Skill Standard | `.agents/skills/` | Copy to `.agents/skills/pure-saas` |
-| **Gemini CLI** | Project Context File | `GEMINI.md` | Copy `integrations/gemini/GEMINI.md` to project root |
-| **Generic / Others** | Instruction Snippet | `SYSTEM_PROMPT.md` | Add [SYSTEM_PROMPT.md](integrations/generic/SYSTEM_PROMPT.md) to your agent instructions |
+| **Claude Code** | **Tested Native Skill** | `.claude/skills/pure-saas` | Symlink or copy to `.claude/skills/pure-saas` (see [claude-code](integrations/claude-code/README.md)) |
+| **Cursor** | **Tested Native Rules** | `.cursor/rules/pure-saas.mdc` | Copy `.cursor/rules/pure-saas.mdc` or `.cursorrules` (see [cursor](integrations/cursor/README.md)) |
+| **Codex** | **Tested Native Plugin** | `.codex-plugin/plugin.json` | Copy `.codex-plugin/plugin.json` or install via CLI (see [codex](integrations/codex/README.md)) |
+| **OpenCode** | **Tested Native Skill** | `.agents/skills/pure-saas` | Copy to `.agents/skills/` (see [opencode](integrations/opencode/README.md)) |
+| **Gemini / Antigravity** | **Tested Native Context & Skill** | `GEMINI.md` / `skills/` | Copy `GEMINI.md` or install as skill (see [gemini](integrations/gemini/README.md)) |
+| **Windsurf** | **Instruction-File Compatibility** | `.windsurfrules` | Copy `integrations/windsurf/.windsurfrules` to project root (see [windsurf](integrations/windsurf/README.md)) |
+| **Generic / Others** | **Instruction-File Compatibility** | `SYSTEM_PROMPT.md` | Add [SYSTEM_PROMPT.md](integrations/generic/SYSTEM_PROMPT.md) to custom agent instructions |
+
+*See [integrations/README.md](integrations/README.md) for official specification compliance details.*
 
 ---
 
