@@ -8,6 +8,7 @@ triggers:
   - "/pure-saas:fix"
   - "/pure-saas:tokens"
   - "/pure-saas:reference"
+  - "/pure-saas reference"
   - "create a website"
   - "design a website"
   - "build a landing page"
@@ -52,7 +53,7 @@ Respond to these standard workflow commands:
 | `/pure-saas:review` | **Audit & Inspection** | Audit markup against Top 12 AI Slop patterns and WCAG 2.2 AA accessibility. | `references/anti-slop-rules.md`, `references/design-review.md` |
 | `/pure-saas:fix` | **Regression-Free Fix** | Remediate UI defects while preserving 100% of backend APIs, routes, and DOM IDs. | `references/color-and-tokens.md` |
 | `/pure-saas:tokens` | **Token Management** | Validate `DESIGN.md`, scan for styling drift, and export to CSS/Tailwind/JSON. | `references/color-and-tokens.md` |
-| `/pure-saas:reference` | **Reference Analysis** | Deconstruct a live reference website into measured craft parameters. | `references/reference-analysis.md`, `references/motion.md` |
+| `/pure-saas reference <url>` | **Reference Recreation** | Deep DevTools inspection, 16-section `DESIGN.md`, and high-fidelity recreation. | `references/reference-analysis.md`, `references/motion.md` |
 
 ---
 
@@ -202,4 +203,50 @@ For isolated tasks (e.g., tweaking a button, adding a badge, fixing a table colu
 2. **Implement:** Apply approved tokens without creating ad-hoc raw styles.
 3. **Verify:** Check hover, focus-visible, and mobile responsiveness.
 4. **Report:** Briefly state changes made and tokens adhered to.
+
+---
+
+## Reference Website Analysis & Recreation Protocol (`/pure-saas reference <url>`)
+
+When invoked with `/pure-saas reference <url>` or `/pure-saas:reference <url>`:
+
+### 1. Deep Reference Inspection (Browser DevTools)
+1. **Rendered Page & DevTools:** Open in a real browser, inspect DOM, computed styles, stylesheets, and scripts.
+2. **HTML & DOM Structure:** Identify section boundaries, semantic elements, layout wrappers, and component trees.
+3. **CSS in Depth:** Examine computed styles, CSS variables (`--*`), typography, colors, dimensions, borders, and shadows.
+4. **JavaScript & Animations:** Inspect scroll reveals, transitions, easing curves, sticky elements, and hover/focus states.
+5. **Assets & Resources:** Identify fonts, SVGs, and images; reuse only when permitted, or create original equivalents.
+6. **Responsive Ergonomics:** Test at 1440px desktop, 768px tablet, and 375px mobile viewports.
+
+### 2. Mandatory Design Specification: `DESIGN.md` (16 Sections)
+Before implementing code, author or update root-level `DESIGN.md` capturing all 16 required sections:
+1. Reference overview (URL, date, viewports, tools, limitations, confidence)
+2. Design direction (aesthetic, visual identity, brand personality, hierarchy)
+3. Page architecture (every section in order, dimensions, spacing, transitions)
+4. Layout system (container max-widths, margins, grids, flex, sticky, overflow)
+5. Spacing system (observed and inferred values for sections, headings, cards)
+6. Colour system (background, surface, text, action, border, status variables)
+7. Typography (font families, weights, sizes, line heights, letter spacing, measure)
+8. Component inventory (nav, hero, buttons, cards, media, footer, states)
+9. Assets (source paths, formats, dimensions, aspect ratios, reuse permission)
+10. Motion and interaction (triggers, durations, easing, transitions, reduced-motion)
+11. Responsive behaviour (breakpoints, navigation drawer collapse, stacking)
+12. Technical observations (DOM structure, custom properties, dependencies)
+13. Design tokens (frontmatter tokens and CSS variables)
+14. Implementation architecture (component tree, file structure, styling strategy)
+15. Accessibility and states (keyboard navigation, focus rings, WCAG 2.2 AA, 8 states)
+16. Implementation checklist (complete checklist of sections, components, states)
+
+Validate with: `node scripts/pure-saas.mjs validate DESIGN.md`
+
+### 3. Execution Sequence & Acceptance Criterion
+1. **Inspect:** DevTools inspection of reference URL across DOM, styles, motion, and viewports.
+2. **Specify:** Create root-level `DESIGN.md` with all 16 sections.
+3. **Plan:** Establish design tokens and implementation architecture.
+4. **Build:** Implement full website adapting branding to user's product.
+5. **Compare:** Inspect side-by-side with reference at 1440px, 768px, and 375px.
+6. **Refine:** Fix visual and interaction differences; update `DESIGN.md`.
+7. **Report:** Conclude with an honest verification report.
+
+**Acceptance criterion:** A developer should be able to read `DESIGN.md` and understand the complete page structure, visual system, component specifications, spacing, colours, typography, assets, responsive behaviour, and motion well enough to reproduce the intended experience without guessing.
 

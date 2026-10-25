@@ -101,3 +101,36 @@ test('Integrity: All prompt toolkit references point to real existing files', ()
     }
   }
 });
+
+test('Reference Workflow: /pure-saas reference specifies all 16 DESIGN.md sections and DevTools inspection', () => {
+  const refCmd = fs.readFileSync(path.resolve(process.cwd(), 'commands/reference.md'), 'utf8');
+  const refPrompt = fs.readFileSync(path.resolve(process.cwd(), 'prompts/reference.md'), 'utf8');
+
+  assert.ok(refCmd.includes('/pure-saas reference'), 'commands/reference.md must document /pure-saas reference');
+  assert.ok(refCmd.includes('DevTools'), 'commands/reference.md must require DevTools inspection');
+
+  const REQUIRED_16_SECTIONS = [
+    'Reference overview',
+    'Design direction',
+    'Page architecture',
+    'Layout system',
+    'Spacing system',
+    'Colour system',
+    'Typography',
+    'Component inventory',
+    'Assets',
+    'Motion and interaction',
+    'Responsive behaviour',
+    'Technical observations',
+    'Design tokens',
+    'Implementation architecture',
+    'Accessibility and states',
+    'Implementation checklist'
+  ];
+
+  for (const section of REQUIRED_16_SECTIONS) {
+    const pattern = new RegExp(section.replace(/\s+/g, '[\\s_-]+'), 'i');
+    assert.ok(pattern.test(refCmd), `commands/reference.md must include section "${section}"`);
+    assert.ok(pattern.test(refPrompt), `prompts/reference.md must include section "${section}"`);
+  }
+});

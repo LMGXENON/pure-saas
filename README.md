@@ -89,7 +89,7 @@ Pure SaaS provides 6 core workflows accessible via **native slash commands** whe
 | **Review** | `/pure-saas:review [path]` | `@pure-saas-review` | [`prompts/review.md`](prompts/review.md) | Audit UI for visual quality, WCAG 2.2 AA accessibility, and slop. |
 | **Fix** | `/pure-saas:fix [issues]` | `@pure-saas-fix` | [`prompts/fix.md`](prompts/fix.md) | Remediate UI defects while strictly preserving backend APIs & contracts. |
 | **Tokens** | `/pure-saas:tokens [format]` | `@pure-saas-tokens` | [`prompts/tokens.md`](prompts/tokens.md) | Validate `DESIGN.md`, scan code for drift, and export tokens. |
-| **Reference** | `/pure-saas:reference <url>` | `@pure-saas-reference` | [`prompts/reference.md`](prompts/reference.md) | Deconstruct a live reference website into measured craft parameters. |
+| **Reference** | `/pure-saas reference <url>` | `@pure-saas-reference` | [`prompts/reference.md`](prompts/reference.md) | DevTools inspection, 16-section `DESIGN.md`, and high-fidelity recreation. |
 
 ---
 
@@ -129,10 +129,12 @@ Strict mandate: Do not modify any API route, server action, authentication flow,
 /pure-saas:tokens Validate our DESIGN.md and export CSS Custom Properties to styles/tokens.css and Tailwind extensions to tailwind.tokens.js.
 ```
 
-### 6. Deconstruct a Reference Website
+### 6. Reference Analysis & Recreation
 ```markdown
-/pure-saas:reference https://example.com
-Inspect typography scale, color palette, section pacing, and motion choreography. Record findings in reference-record.md and translate relevant craft principles into our DESIGN.md without copying brand identity.
+/pure-saas reference https://example.com
+Analyse the supplied website using browser DevTools (DOM, computed styles, motion, assets, responsive breakpoints).
+Author the mandatory 16-section DESIGN.md specification before implementing.
+Then recreate the reference's design language and interaction patterns for our product.
 ```
 
 ---

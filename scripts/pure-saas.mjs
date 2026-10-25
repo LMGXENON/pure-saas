@@ -164,13 +164,13 @@ export function validateDesignDocument(filePath) {
   const { data, body } = parseFrontmatter(raw);
 
   // If frontmatter is missing or empty, attempt markdown section fallback
-  const isBrief = filePath.includes('brief') || data.product_name;
-  const isReference = filePath.includes('reference') || data.source_url;
+  const isBrief = filePath.includes('brief') || (data.product_name && !data.tokens);
+  const isReferenceRecord = (filePath.includes('reference') && !filePath.includes('DESIGN')) || (data.source_url && !data.tokens);
 
   if (isBrief) {
     return validateBriefData(data, body, filePath);
   }
-  if (isReference) {
+  if (isReferenceRecord) {
     return validateReferenceData(data, body, filePath);
   }
 
@@ -232,6 +232,35 @@ export function validateDesignDocument(filePath) {
   }
   if (body.includes('🚀') || body.includes('✨') || body.includes('🔥')) {
     warnings.push('Emoji detected in design specification; ensure interface icons use proper SVGs.');
+  }
+
+  // Reference specification section verification for reference-based DESIGN.md
+  const isReferenceDesign = Boolean(data.source_url || data.reference_overview || /reference\s+overview/i.test(body));
+  if (isReferenceDesign) {
+    const requiredSections = [
+      'Reference overview',
+      'Design direction',
+      'Page architecture',
+      'Layout system',
+      'Spacing system',
+      'Colour system',
+      'Typography',
+      'Component inventory',
+      'Assets',
+      'Motion and interaction',
+      'Responsive behaviour',
+      'Technical observations',
+      'Design tokens',
+      'Implementation architecture',
+      'Accessibility and states',
+      'Implementation checklist'
+    ];
+    for (const section of requiredSections) {
+      const pattern = new RegExp(section.replace(/\s+/g, '[\\s_-]+'), 'i');
+      if (!pattern.test(body) && !data[section.toLowerCase().replace(/\s+/g, '_')]) {
+        warnings.push(`Reference specification section "${section}" recommended but not explicitly found.`);
+      }
+    }
   }
 
   return {
