@@ -33,9 +33,31 @@ If using the Claude Code plugin marketplace:
 
 ---
 
+## Native Slash Commands
+
+When Pure SaaS is installed as a Claude Code plugin or via `.claude/commands/`, the following slash commands are natively available:
+
+| Slash Command | Description | Example Invocation |
+| :--- | :--- | :--- |
+| `/pure-saas:init` | Initialize starter `DESIGN.md` and `design-brief.md` | `/pure-saas:init` |
+| `/pure-saas:design` | Execute full 9-stage design/redesign workflow | `/pure-saas:design landing page with live terminal demo` |
+| `/pure-saas:review` | Audit existing UI for visual craft, contrast, and slop | `/pure-saas:review src/components` |
+| `/pure-saas:fix` | Remediate UI defects while preserving backend APIs & IDs | `/pure-saas:fix contrast and raw hex violations` |
+| `/pure-saas:tokens` | Validate tokens and export to CSS / Tailwind / JSON | `/pure-saas:tokens css` |
+| `/pure-saas:reference` | Deconstruct a live reference website into `DESIGN.md` | `/pure-saas:reference https://convio.dev/` |
+
+### Adding Slash Commands to an Existing Repository
+To add these slash commands to any existing repository without installing a global plugin:
+```bash
+mkdir -p .claude/commands
+cp -r node_modules/pure-saas/commands/* .claude/commands/
+```
+
+---
+
 ## How It Activates in Claude Code
 
-Claude Code automatically activates Pure SaaS when you prompt it with tasks involving:
+In addition to explicit slash commands, Claude Code automatically activates Pure SaaS when you prompt it with tasks involving:
 - Designing or redesigning web pages or SaaS interfaces.
 - Generating a `DESIGN.md` design system.
 - Auditing existing markup for AI slop or generic patterns.

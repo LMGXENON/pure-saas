@@ -12,3 +12,17 @@ Append the contents of `SYSTEM_PROMPT.md` into your agent's system prompt or pro
 ### File Placement:
 Keep `DESIGN.md` in your project root so the agent can read and maintain it.
 
+---
+
+## Ready-to-Paste Prompts
+
+For chat-based assistants (ChatGPT, Claude web, Copilot Chat, Aider):
+Use the modular prompts in the [`prompts/`](../../prompts/) directory for specific tasks:
+
+- [`prompts/init.md`](../../prompts/init.md): Initialize `DESIGN.md` and `design-brief.md`
+- [`prompts/design.md`](../../prompts/design.md): Full 9-stage design/redesign workflow
+- [`prompts/review.md`](../../prompts/review.md): Quality, accessibility & anti-slop audit
+- [`prompts/fix.md`](../../prompts/fix.md): Remediate UI while preserving backend APIs
+- [`prompts/tokens.md`](../../prompts/tokens.md): Validate and export design tokens
+- [`prompts/reference.md`](../../prompts/reference.md): Deconstruct reference website into tokens
+

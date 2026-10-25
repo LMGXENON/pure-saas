@@ -14,11 +14,17 @@ cp integrations/windsurf/.windsurfrules .windsurfrules
 
 ---
 
-## What Cascade Follows
+## Workflow Invocations in Windsurf (Cascade)
 
-When Cascade processes frontend or design requests:
-1. Discovers existing styles and checks for `DESIGN.md`.
-2. Replaces generic AI templates with product-specific compositions.
-3. Generates semantic CSS variables or Tailwind tokens adhering to the Pure SaaS schema.
-4. Validates design output using `node scripts/pure-saas.mjs validate`.
+> [!NOTE]
+> Windsurf Cascade does not support third-party custom `/slash` commands. In Cascade chat, invoke Pure SaaS workflows by referencing the workflow name or copying prompts from `prompts/`:
+
+| Workflow | Cascade Mention / Trigger | Portable Prompt | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Initialize** | "Pure SaaS init" | [`prompts/init.md`](../../prompts/init.md) | Initialize `DESIGN.md` and `design-brief.md` |
+| **Design / Redesign** | "Pure SaaS design" | [`prompts/design.md`](../../prompts/design.md) | Full 9-stage design workflow |
+| **Audit & Review** | "Pure SaaS review" | [`prompts/review.md`](../../prompts/review.md) | Quality, accessibility & anti-slop audit |
+| **Fix Issues** | "Pure SaaS fix" | [`prompts/fix.md`](../../prompts/fix.md) | Remediate UI while preserving backend APIs |
+| **Tokens & Export** | "Pure SaaS tokens" | [`prompts/tokens.md`](../../prompts/tokens.md) | Validate and export tokens |
+| **Reference Analysis** | "Pure SaaS reference" | [`prompts/reference.md`](../../prompts/reference.md) | Deconstruct reference website into `DESIGN.md` |
 

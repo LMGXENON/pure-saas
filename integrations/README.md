@@ -6,15 +6,15 @@ Pure SaaS provides thin, portable adapters for AI coding agents. Rather than req
 
 ## Integration Matrix & Official Specification Compliance
 
-| Platform / Agent | Official Configuration Format | Integration Classification | Integration Asset Path |
-| :--- | :--- | :--- | :--- |
-| **Claude Code** | Anthropic Skills Standard (`.claude/skills/`) | **Tested Native Skill** | `integrations/claude-code/` |
-| **Cursor** | Cursor 0.40+ MDC Rules (`.cursor/rules/*.mdc`) & `.cursorrules` | **Tested Native Rules** | `integrations/cursor/` |
-| **Codex** | Codex Plugin Manifest (`.codex-plugin/plugin.json`) | **Tested Native Plugin Manifest** | `integrations/codex/` |
-| **OpenCode** | OpenCode Agent Convention (`.agents/skills/`) | **Tested Native Skill** | `integrations/opencode/` |
-| **Gemini CLI / Antigravity** | Gemini Project Context (`GEMINI.md`) & Antigravity Skills | **Tested Native Context & Skill** | `integrations/gemini/` |
-| **Windsurf (Cascade)** | Windsurf Global / Workspace Rules (`.windsurfrules`) | **Instruction-File Compatibility** | `integrations/windsurf/` |
-| **Generic / Others** | System Prompt Injection (`SYSTEM_PROMPT.md`, `AGENTS.md`) | **Instruction-File Compatibility** | `integrations/generic/` |
+| Platform / Agent | Official Configuration Format | Command / Invocation Method | Integration Classification | Integration Asset Path |
+| :--- | :--- | :--- | :--- | :--- |
+| **Claude Code** | Anthropic Skills Standard (`.claude/skills/`) | Native Slash Commands (`/pure-saas:*`) | **Tested Native Skill & Commands** | `integrations/claude-code/` |
+| **Cursor** | Cursor 0.40+ MDC Rules (`.cursor/rules/*.mdc`) | Mention Invocations (`@pure-saas-*`) | **Tested Native Rules** | `integrations/cursor/` |
+| **Codex** | Codex Plugin Manifest (`.codex-plugin/plugin.json`) | Plugin Actions & Portable Prompts | **Tested Native Plugin Manifest** | `integrations/codex/` |
+| **OpenCode** | OpenCode Agent Convention (`.agents/skills/`) | Native Slash Commands (`/pure-saas:*`) | **Tested Native Skill & Commands** | `integrations/opencode/` |
+| **Gemini CLI / Antigravity** | Gemini Project Context (`GEMINI.md`) & Antigravity Skills | Slash Commands & Skill Triggers | **Tested Native Context & Skill** | `integrations/gemini/` |
+| **Windsurf (Cascade)** | Windsurf Global / Workspace Rules (`.windsurfrules`) | Rule Triggers & Portable Prompts | **Instruction-File Compatibility** | `integrations/windsurf/` |
+| **Generic / Others** | System Prompt Injection (`SYSTEM_PROMPT.md`, `AGENTS.md`) | Copy-Ready Markdown Prompts | **Instruction-File Compatibility** | `integrations/generic/` |
 
 ---
 

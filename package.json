@@ -39,6 +39,8 @@
     "references",
     "schemas",
     "templates",
+    "prompts",
+    "commands",
     "integrations",
     "SKILL.md",
     "AGENTS.md",

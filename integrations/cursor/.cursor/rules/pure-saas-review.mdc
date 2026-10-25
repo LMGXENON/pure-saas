@@ -1,0 +1,15 @@
+---
+description: Pure SaaS UI & Anti-Slop Audit Workflow (@pure-saas-review)
+globs: ["**/*.{tsx,jsx,ts,js,html,css,vue,svelte}", "DESIGN.md"]
+alwaysApply: false
+---
+
+# Pure SaaS: UI & Anti-Slop Audit
+
+Audit the UI for visual quality, accessibility (WCAG 2.2 AA), responsiveness, and anti-slop compliance:
+
+1. Run automated token scanner: `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src`.
+2. Inspect for the Top 12 AI Slop Patterns (`references/anti-slop-rules.md`).
+3. Verify WCAG 2.2 AA contrast ratios ($\ge 4.5:1$ body, $\ge 3.0:1$ secondary, 2px focus rings) (`references/accessibility.md`).
+4. Format all findings using `Issue -> Impact -> Evidence -> Recommendation` (`references/design-review.md`).
+5. Record any unverified browser or screen-reader checks as `untested`.

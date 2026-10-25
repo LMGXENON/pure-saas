@@ -1,0 +1,14 @@
+---
+description: Pure SaaS Project Initialization Workflow (@pure-saas-init)
+globs: ["DESIGN.md", "design-brief.md"]
+alwaysApply: false
+---
+
+# Pure SaaS: Project Initialization
+
+Initialize the project with Pure SaaS persistent design specifications:
+
+1. Check if `DESIGN.md` or `design-brief.md` exist. Do not overwrite without confirmation.
+2. Run `npx pure-saas init --reference` (or copy templates from `templates/`).
+3. Validate: `node scripts/pure-saas.mjs validate DESIGN.md`.
+4. Prompt the user to confirm product name, target audience, and visual archetype.

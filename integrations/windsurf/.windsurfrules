@@ -12,5 +12,12 @@ When modifying or generating frontend components, styling, or layouts:
    - Target WCAG 2.2 AA contrast.
    - Enforce visible keyboard focus indicators on all interactive elements.
    - Add prefers-reduced-motion queries for all animations.
-4. Validation:
+4. Available Workflows (refer to prompts/ directory):
+   - init: Initialize DESIGN.md and design-brief.md (prompts/init.md)
+   - design: Full 9-stage design/redesign workflow (prompts/design.md)
+   - review: UI audit for visual quality, contrast, and slop (prompts/review.md)
+   - fix: Remediate UI defects preserving backend APIs (prompts/fix.md)
+   - tokens: Validate and export design tokens (prompts/tokens.md)
+   - reference: Deconstruct reference website into tokens (prompts/reference.md)
+5. Validation:
    - Run node scripts/pure-saas.mjs validate DESIGN.md to ensure structural integrity.

@@ -3,6 +3,15 @@
   "version": "1.0.0",
   "description": "Universal AI-agent design skill and anti-slop enforcement toolkit",
   "skill": "./SKILL.md",
-  "rules": "./AGENTS.md"
+  "rules": "./AGENTS.md",
+  "prompts": "./prompts",
+  "commands": [
+    "./commands/init.md",
+    "./commands/design.md",
+    "./commands/review.md",
+    "./commands/fix.md",
+    "./commands/tokens.md",
+    "./commands/reference.md"
+  ]
 }
 

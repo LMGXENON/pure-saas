@@ -13,6 +13,8 @@ Pure SaaS is an open-source, universal AI-agent skill and design enforcement too
 pure-saas/
 ├── SKILL.md              # Canonical agent-agnostic operational skill instruction set
 ├── AGENTS.md             # This agent operations manual
+├── commands/             # Native slash commands for supported agents (/pure-saas:*)
+├── prompts/              # Portable copy-ready Markdown prompts for any LLM
 ├── references/           # In-depth architectural & craft guides (typography, tokens, layout, etc.)
 ├── schemas/              # Formal JSON schemas for DESIGN.md, design-brief.md, and references
 ├── templates/            # Ready-to-use markdown starter templates (DESIGN.md, design-brief.md)

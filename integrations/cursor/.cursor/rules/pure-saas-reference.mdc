@@ -1,0 +1,19 @@
+---
+description: Pure SaaS Reference Website Analysis Workflow (@pure-saas-reference)
+globs: ["reference-record.md", "DESIGN.md"]
+alwaysApply: false
+---
+
+# Pure SaaS: Reference Website Craft Deconstruction
+
+Deconstruct a live reference website and translate structural principles into `DESIGN.md`:
+
+1. Inspect reference target at 1440px desktop and 375px mobile.
+2. Measure and record craft parameters in `reference-record.md` (`templates/reference-record.md`):
+   - Typography scales, weights, and tracking (`references/typography.md`).
+   - Surface colors, canvas depth, borders, and ambient lighting (`references/color-and-tokens.md`).
+   - Motion curves, durations, translations, and cascade delays (`references/motion.md`).
+   - Layout composition, asymmetry, and responsive collapse (`references/layout-and-composition.md`).
+3. Validate: `node scripts/pure-saas.mjs validate reference-record.md`.
+4. Synthesize structural principles into `DESIGN.md` for the current project. Never duplicate branding, logos, or copy verbatim.
+5. Validate resulting system: `node scripts/pure-saas.mjs validate DESIGN.md`.

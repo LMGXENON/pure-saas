@@ -101,6 +101,27 @@ Pure SaaS provides thin, portable adapters that follow each agent's documented c
 
 ---
 
+## Slash Commands & Portable Prompts
+
+Pure SaaS provides 6 standard workflows operating either via **native slash commands** (Claude Code, OpenCode), **rule mentions** (Cursor), or **copy-ready portable prompts** for any chat assistant:
+
+| Workflow | Native Slash Command | Cursor Mention | Portable Prompt | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| **Initialize** | `/pure-saas:init` | `@pure-saas-init` | [`prompts/init.md`](prompts/init.md) | Initialize project with `DESIGN.md` and `design-brief.md` starter specifications. |
+| **Design** | `/pure-saas:design [scope]` | `@pure-saas-design` | [`prompts/design.md`](prompts/design.md) | Execute full 9-stage design/redesign workflow without generic AI slop. |
+| **Review** | `/pure-saas:review [path]` | `@pure-saas-review` | [`prompts/review.md`](prompts/review.md) | Audit UI for visual quality, accessibility (WCAG 2.2 AA), contrast, and slop. |
+| **Fix** | `/pure-saas:fix [issues]` | `@pure-saas-fix` | [`prompts/fix.md`](prompts/fix.md) | Remediate UI defects while strictly preserving backend APIs & DOM contracts. |
+| **Tokens** | `/pure-saas:tokens [format]`| `@pure-saas-tokens` | [`prompts/tokens.md`](prompts/tokens.md) | Validate `DESIGN.md`, scan source for drift, and export tokens (CSS/Tailwind/JSON). |
+| **Reference** | `/pure-saas:reference <url>`| `@pure-saas-reference` | [`prompts/reference.md`](prompts/reference.md) | Deconstruct a live reference website into measured craft parameters. |
+
+### How Each Agent Operates
+- **Claude Code:** Commands in `commands/` or `.claude/commands/` are natively discovered and invoked via `/pure-saas:design`, `/pure-saas:review`, etc.
+- **Cursor:** Cursor does not support third-party custom slash commands; invoke workflows by typing `@pure-saas-design` in Composer or pasting from `prompts/`.
+- **OpenCode:** Commands in `.opencode/commands/` are natively available as slash commands.
+- **Codex / Gemini / Windsurf / Copilot:** Use the copy-ready markdown prompts in `prompts/` for deterministic instructions in standard chat sessions.
+
+---
+
 ## The 9-Stage Agent Workflow
 
 When an AI coding agent is tasked with creating or redesigning an interface, Pure SaaS directs it through 9 disciplined stages:

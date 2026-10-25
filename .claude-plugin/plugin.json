@@ -4,6 +4,14 @@
   "description": "Universal AI-agent skill and design enforcement toolkit for professional web design without AI slop.",
   "author": "Pure SaaS Contributors",
   "license": "MIT",
-  "keywords": ["ui-ux", "design-system", "anti-slop", "frontend", "claude-code"]
+  "keywords": ["ui-ux", "design-system", "anti-slop", "frontend", "claude-code"],
+  "commands": [
+    "./commands/init.md",
+    "./commands/design.md",
+    "./commands/review.md",
+    "./commands/fix.md",
+    "./commands/tokens.md",
+    "./commands/reference.md"
+  ]
 }
 

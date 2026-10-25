@@ -1,0 +1,19 @@
+---
+description: Pure SaaS Full Design and Redesign Workflow (@pure-saas-design)
+globs: ["**/*.{tsx,jsx,ts,js,html,css,vue,svelte}", "DESIGN.md", "design-brief.md"]
+alwaysApply: false
+---
+
+# Pure SaaS: Full Product Design / Redesign
+
+Execute the 9-stage Pure SaaS workflow (`SKILL.md`) without generic AI slop:
+
+1. **Stage A (Discover):** Audit project constraints, framework, and styles. Preserve all backend APIs in existing code.
+2. **Stage B (Define):** Update `design-brief.md` with product narrative and audience.
+3. **Stage C (Establish):** Define semantic design tokens in `DESIGN.md` (18+ required color tokens, typography scales, spacing). Validate with `node scripts/pure-saas.mjs validate DESIGN.md`.
+4. **Stage D (Plan):** Plan layout asymmetry (e.g. 60/40 hero split), clear hierarchy, and reading rhythm (`references/layout-and-composition.md`).
+5. **Stage E (Build):** Implement clean semantic HTML and styles. Strictly bind styles to tokens in `DESIGN.md`. Reject all raw hex colors and arbitrary spacing.
+6. **Stage F (Inspect):** Inspect 1440px desktop and 375px mobile layouts for text wrapping and overflow.
+7. **Stage G (Critique & Refine):** Fix high/critical issues following `references/design-review.md`.
+8. **Stage H (Enforce System):** Run `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src`. Ensure 0 violations.
+9. **Stage I (Report Honest Results):** Report verified vs untested areas honestly.
