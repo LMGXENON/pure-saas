@@ -1,0 +1,10 @@
+# Pure SaaS Cursor Rules
+# Universal UI/UX Design System & Anti-Slop Discipline
+
+When creating or modifying frontend interfaces:
+1. Adhere strictly to the project's DESIGN.md tokens for color, typography, spacing, and radii.
+2. Eliminate generic AI design patterns: no unapproved purple/cyan gradient text, no glassmorphism abuse, no repetitive 3-column cards.
+3. Every interactive control must define hover, focus-visible (min 2px solid ring, min 3:1 contrast), and pressed states.
+4. Target WCAG 2.2 AA accessibility standards.
+5. In existing applications, preserve backend APIs, authentication, and database schemas.
+6. Validate design documents with: node scripts/pure-saas.mjs validate DESIGN.md

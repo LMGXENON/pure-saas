@@ -24,6 +24,7 @@
   --space-4: 1rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
+  --space-12: 3rem;
   --space-16: 4rem;
   --space-24: 6rem;
 
@@ -370,4 +371,43 @@ body {
   font-size: 0.8125rem;
   color: var(--color-text-muted);
   text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
+  .nav-links {
+    display: none;
+  }
+  .header-cta .btn {
+    font-size: 0.75rem;
+    padding: 0 var(--space-3);
+    min-height: 2rem;
+  }
+  .hero-showcase {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-12);
+  }
+  .hero-headline {
+    font-size: 2.25rem;
+    line-height: 1.15;
+  }
+  .hero-subtext {
+    font-size: 1rem;
+  }
+  .cinema-frame {
+    height: 10rem;
+  }
+  .cap-split {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .cap-title {
+    font-size: 1.625rem;
+  }
+  .timeline-tracks {
+    overflow-x: auto;
+  }
 }

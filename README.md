@@ -87,15 +87,15 @@ npx pure-saas review-report
 
 Pure SaaS uses thin, portable adapters that follow each agent's documented conventions:
 
-| Platform / Agent | Integration Path | Setup Command |
-| :--- | :--- | :--- |
-| **Claude Code** | Native skill or `.claude-plugin/` | Symlink or copy to `.claude/skills/pure-saas` (see [claude-code](integrations/claude-code/README.md)) |
-| **Cursor** | `.cursor/rules/pure-saas.mdc` | Copy `integrations/cursor/.cursor/rules/pure-saas.mdc` to `.cursor/rules/` |
-| **Codex** | `.codex-plugin/plugin.json` | Copy `integrations/codex/.codex-plugin/` to `.codex-plugin/` |
-| **Windsurf** | `.windsurfrules` | Copy `integrations/windsurf/.windsurfrules` to project root |
-| **OpenCode** | `.agents/skills/` | Copy to `.agents/skills/pure-saas` |
-| **Gemini CLI** | `GEMINI.md` | Copy `integrations/gemini/GEMINI.md` to project root |
-| **Generic / Others** | `SYSTEM_PROMPT.md` | Add [SYSTEM_PROMPT.md](integrations/generic/SYSTEM_PROMPT.md) to your agent instructions |
+| Platform / Agent | Integration Type | Integration Path | Setup Command |
+| :--- | :--- | :--- | :--- |
+| **Claude Code** | Native Skill & Plugin | `.claude/skills/` or `.claude-plugin/` | Symlink or copy to `.claude/skills/pure-saas` (see [claude-code](integrations/claude-code/README.md)) |
+| **Cursor** | Native Rules (.mdc) | `.cursor/rules/pure-saas.mdc` | Copy `integrations/cursor/.cursor/rules/pure-saas.mdc` to `.cursor/rules/` |
+| **Codex** | Plugin Manifest | `.codex-plugin/plugin.json` | Copy `integrations/codex/.codex-plugin/` to `.codex-plugin/` |
+| **Windsurf** | Agent Rule File | `.windsurfrules` | Copy `integrations/windsurf/.windsurfrules` to project root |
+| **OpenCode** | Native Skill Standard | `.agents/skills/` | Copy to `.agents/skills/pure-saas` |
+| **Gemini CLI** | Project Context File | `GEMINI.md` | Copy `integrations/gemini/GEMINI.md` to project root |
+| **Generic / Others** | Instruction Snippet | `SYSTEM_PROMPT.md` | Add [SYSTEM_PROMPT.md](integrations/generic/SYSTEM_PROMPT.md) to your agent instructions |
 
 ---
 

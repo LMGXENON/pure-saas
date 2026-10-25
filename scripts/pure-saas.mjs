@@ -155,6 +155,12 @@ export function validateDesignDocument(filePath) {
   }
 
   const raw = fs.readFileSync(filePath, 'utf8');
+
+  // Check for unterminated frontmatter block
+  if (raw.trim().startsWith('---') && !raw.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/)) {
+    issues.push('Unterminated frontmatter block: file begins with "---" but lacks a closing "---".');
+  }
+
   const { data, body } = parseFrontmatter(raw);
 
   // If frontmatter is missing or empty, attempt markdown section fallback
@@ -346,14 +352,36 @@ export function scanSourceDirectory(srcDir, designTokens = {}) {
 function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
   const content = fs.readFileSync(filePath, 'utf8');
   const lines = content.split(/\r?\n/);
+  let ignoreNextLine = false;
 
   for (let idx = 0; idx < lines.length; idx++) {
-    const line = lines[idx];
+    const rawLine = lines[idx];
     const lineNum = idx + 1;
 
+    if (ignoreNextLine) {
+      ignoreNextLine = false;
+      continue;
+    }
+
     // Check for inline exception bypass (e.g. /* pure-saas-ignore rule: reason */)
-    const hasIgnore = line.includes('pure-saas-ignore') || line.includes('design-check-ignore') || line.includes('EXC-');
-    if (hasIgnore) continue;
+    const hasIgnore = rawLine.includes('pure-saas-ignore') || rawLine.includes('design-check-ignore') || rawLine.includes('EXC-');
+    if (hasIgnore) {
+      const trimmed = rawLine.trim();
+      if (trimmed.startsWith('/*') || trimmed.startsWith('//') || trimmed.includes('-next-line')) {
+        ignoreNextLine = true;
+      }
+      continue;
+    }
+
+    // Ignore pure comment lines (//, /* ... */, or block comment stars *)
+    const trimmed = rawLine.trim();
+    if (trimmed.startsWith('//') || (trimmed.startsWith('/*') && trimmed.endsWith('*/')) || trimmed.startsWith('*')) {
+      continue;
+    }
+
+    // Strip inline comments before inspecting code to prevent false positives in comments
+    const line = rawLine.replace(/\/\*.*?\*\//g, '').replace(/\/\/.*$/, '');
+    if (!line.trim()) continue;
 
     // Check raw hex colors in styling
     const hexMatches = line.match(/#[0-9a-fA-F]{3,8}\b/g);

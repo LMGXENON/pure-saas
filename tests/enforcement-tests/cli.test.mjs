@@ -15,6 +15,37 @@ test('CLI: Validate command exits 1 on missing or invalid file', async () => {
 
   const codeInvalid = await runCli(['validate', 'tests/fixtures/invalid-design-missing-tokens.md']);
   assert.strictEqual(codeInvalid, 1, 'Exit code must be 1 for invalid tokens');
+
+  const codeBadStatus = await runCli(['validate', 'tests/fixtures/invalid-design-bad-status.md']);
+  assert.strictEqual(codeBadStatus, 1, 'Exit code must be 1 for invalid status');
+
+  const codeMalformed = await runCli(['validate', 'tests/fixtures/malformed-yaml.md']);
+  assert.strictEqual(codeMalformed, 1, 'Exit code must be 1 for malformed YAML');
+});
+
+test('CLI: Source scan ignores comments and does not produce false positives', () => {
+  const fixtureDesign = path.resolve(process.cwd(), 'tests/fixtures/valid-design.md');
+  const raw = fs.readFileSync(fixtureDesign, 'utf8');
+  const { data } = parseFrontmatter(raw);
+
+  const srcDir = path.resolve(process.cwd(), 'tests/fixtures/test-src');
+  const scan = scanSourceDirectory(srcDir, data.tokens);
+
+  // false-positive-comment.css has a commented #ff00ea, an EXC-002, and pure-saas-ignore.
+  // None of those should appear in rawColorViolations.
+  const hasCommentViolation = scan.rawColorViolations.some(v => v.value === '#ff00ea' || v.value === '#ffaa00' || v.value === '#000000');
+  assert.strictEqual(hasCommentViolation, false, 'Must not flag hex colors in comments or approved exceptions');
+});
+
+test('CLI: Source scan handles complex TypeScript syntax without errors', () => {
+  const fixtureDesign = path.resolve(process.cwd(), 'tests/fixtures/valid-design.md');
+  const raw = fs.readFileSync(fixtureDesign, 'utf8');
+  const { data } = parseFrontmatter(raw);
+
+  const srcDir = path.resolve(process.cwd(), 'tests/fixtures/test-src');
+  const scan = scanSourceDirectory(srcDir, data.tokens);
+
+  assert.ok(scan.scannedFiles >= 6, 'Must scan TypeScript files as well');
 });
 
 test('CLI: Style command returns matching design styles', async () => {

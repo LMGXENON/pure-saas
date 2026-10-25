@@ -50,6 +50,7 @@ tokens:
     space-4: "1rem"    # 16px
     space-6: "1.5rem"  # 24px
     space-8: "2rem"    # 32px
+    space-12: "3rem"   # 48px
     space-16: "4rem"   # 64px
     space-24: "6rem"   # 96px
   layout:

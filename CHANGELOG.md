@@ -24,3 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Automated Test Suite:** Built-in test runner tests covering JSON schemas, token validation, CLI execution, source scanning, and agent adapter conventions.
 - **Open-Source Foundations:** MIT License, comprehensive documentation, third-party attribution notices, contribution guidelines, issue templates, and CI workflow.
 
+### Changed & Hardened (Release-Readiness Audit)
+- **Style Intelligence CLI (`scripts/pure-saas.mjs`):** Added `pure-saas style [query]` command backed by `references/design-styles-catalog.json` (adapted from `ui-ux-pro-max-skill`).
+- **Enhanced Static Linter:** Integrated Tailwind palette class detection (`bg-blue-500`, `text-slate-400`) and arbitrary bracket dimension detection (`p-[17px]`, `rounded-[11px]`) adapted from `zero-slop-design`.
+- **False-Positive Immunity:** Added code stripping for inline and block comments, plus support for next-line and inline exception flags (`pure-saas-ignore <rule>: <reason>`, `EXC-xxx`).
+- **File Integrity Repair:** Repaired zero-byte `LICENSE`, `integrations/cursor/.cursorrules`, and `integrations/windsurf/.windsurfrules` files.
+- **Visual & Responsive Defect Corrections:** Tested and refined mobile responsive behavior (375px viewport) on all three design examples using headless Chrome, eliminating text clipping and header overflow.
+- **Clean Project Smoke Testing:** Validated full package packing, clean project installation, and CLI command execution from an isolated temporary project.
+
