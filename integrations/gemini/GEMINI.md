@@ -12,3 +12,4 @@ When generating, designing, or refactoring user interfaces:
    node scripts/pure-saas.mjs validate DESIGN.md
    ```
 4. Conclude design tasks with an honest verification report disclosing tested vs untested areas.
+

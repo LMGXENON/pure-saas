@@ -68,3 +68,4 @@ Financial figures, metrics, counters, and table columns must use tabular figures
    ```
 2. **Font Display:** Use `font-display: swap;` for body text to avoid blank text flash.
 3. **Weight Availability:** Never declare `font-weight: 800` or `italic` unless the corresponding font file or variable axis is actually loaded. Synthetic bolding and oblique rendering distort glyph geometry.
+

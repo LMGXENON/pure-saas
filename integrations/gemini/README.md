@@ -23,3 +23,4 @@ cp -r . ~/.gemini/skills/pure-saas
 
 ## Behavior
 Gemini will automatically follow the 9-stage Pure SaaS workflow, enforce anti-slop rules, generate persistent `DESIGN.md` specifications, and run validation scripts.
+

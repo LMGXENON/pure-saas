@@ -14,3 +14,4 @@ You are instructed to follow the Pure SaaS professional design standard:
    - Constrain paragraph measure to 45–75 characters and apply `text-wrap: balance` to headings.
 4. **Preserve Architecture:** Never rewrite backend APIs, auth logic, or data structures during UI work.
 5. **Honest Reporting:** Report verified checks, failed checks, and untested viewports transparently.
+

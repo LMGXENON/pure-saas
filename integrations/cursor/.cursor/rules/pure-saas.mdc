@@ -17,3 +17,4 @@ When designing or implementing user interfaces, web pages, or frontend component
 3. **Semantic Tokens Only:** Bind styling to tokens (`--color-bg-canvas`, `--color-action-primary`) rather than hardcoded hex codes.
 4. **Interactive States:** Provide hover, focus-visible, and active states for all interactive elements.
 5. **Enforcement:** Run `node scripts/pure-saas.mjs validate DESIGN.md` to ensure design system compliance.
+

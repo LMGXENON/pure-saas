@@ -21,3 +21,4 @@ When Cascade processes frontend or design requests:
 2. Replaces generic AI templates with product-specific compositions.
 3. Generates semantic CSS variables or Tailwind tokens adhering to the Pure SaaS schema.
 4. Validates design output using `node scripts/pure-saas.mjs validate`.
+

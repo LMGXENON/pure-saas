@@ -245,3 +245,4 @@ We welcome contributions from designers, engineers, and open-source contributors
 Pure SaaS is released under the [MIT License](LICENSE).
 
 Conceptual inspirations and workflow insights from open-source projects (including `ui-ux-pro-max-skill` and `zero-slop-design-plugin`) are gratefully acknowledged in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Pure SaaS does not incorporate proprietary or uncleared materials.
+

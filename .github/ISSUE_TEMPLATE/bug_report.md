@@ -19,3 +19,4 @@ A clear and concise description of what you expected to happen.
 - OS: [e.g. macOS, Linux, Windows]
 - Node.js Version: [e.g. 20.x, 22.x]
 - Agent: [e.g. Claude Code, Cursor, Codex, Windsurf, Gemini]
+

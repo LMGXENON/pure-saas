@@ -55,3 +55,4 @@ When recording reference data in a `reference-record.json` or `reference-record.
 - `unknown`: Not verifiable from the available materials (e.g., mobile layout not captured, focus states not documented).
 
 Never convert an `estimated` value into an `approved` token without explicit design validation.
+

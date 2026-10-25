@@ -66,3 +66,4 @@ All CSS transitions, animations, and smooth scrolling must respect `prefers-redu
   - What automated checks were run.
   - What manual keyboard and screen reader checks were performed.
   - What remains unverified.
+

@@ -43,3 +43,4 @@ Claude Code automatically activates Pure SaaS when you prompt it with tasks invo
 
 You can also trigger it explicitly:
 > "Claude, use the Pure SaaS skill to create a design brief and DESIGN.md for our developer API platform."
+

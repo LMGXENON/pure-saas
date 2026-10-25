@@ -80,3 +80,4 @@ Before declaring any design task complete, the agent must verify:
 - [ ] Are all corner radii systematically proportional to the brand geometry?
 - [ ] Does all copy describe real product capabilities rather than generic hype?
 - [ ] Is every color, space, and radius mapped to a semantic design token?
+

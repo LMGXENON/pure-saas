@@ -52,3 +52,4 @@ Never claim that an interface is responsive, accessible, visually verified, or s
 Reference websites (e.g., Firecrawl, Butter, Linear) are sources of design insight, not templates to clone.
 - **Deconstruct principles:** Analyze how references handle density, contrast, typography scaling, and product storytelling.
 - **Synthesize uniquely:** Apply those structural insights to create a distinct, bespoke identity tailored exclusively to the target product and audience.
+

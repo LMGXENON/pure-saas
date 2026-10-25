@@ -42,3 +42,4 @@ For every interactive component (buttons, inputs, select menus, list rows, tabs,
 - **Never clear user input upon an error:** If submission fails, preserve every character the user typed so they do not have to re-enter their data.
 - **Scroll to first error:** On failed submission, focus and scroll to the first invalid input.
 - **Explain requirements up front:** If a field has formatting rules (e.g., password length, phone format), display the requirements *before* the user submits, not only as an angry error message afterwards.
+

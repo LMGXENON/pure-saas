@@ -53,3 +53,4 @@ accessibility_tier: "WCAG 2.2 AA"
 
 ## 9. Unresolved Questions
 - **Q-001:** Should the pricing tier include monthly/annual toggle or annual-only? (Impact: Hero pricing card layout).
+

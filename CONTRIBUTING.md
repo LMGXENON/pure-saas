@@ -64,3 +64,4 @@ node scripts/pure-saas.mjs review-report --json
 3. If adding a new feature or rule, add corresponding tests in `tests/`.
 4. Update `CHANGELOG.md` under the `[Unreleased]` or current version header.
 5. Open a Pull Request with a clear explanation of the change and rationale.
+

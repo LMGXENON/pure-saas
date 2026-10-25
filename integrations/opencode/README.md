@@ -14,3 +14,4 @@ cp -r /path/to/pure-saas .agents/skills/pure-saas
 ```
 
 Or configure `.agents/plugins/marketplace.json` to include Pure SaaS as a verified design skill.
+

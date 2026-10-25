@@ -51,3 +51,4 @@ test('Tokens: Exports tokens to CSS, Tailwind, and JSON correctly', () => {
   assert.ok(parsed.colors, 'JSON export must include colors object');
   assert.strictEqual(parsed.colors['color-bg-canvas'], '#ffffff');
 });
+

@@ -43,3 +43,4 @@ accessibility_tier: "WCAG 2.2 AA"
 
 # Design Brief: Monograph
 Quiet authority and typographic excellence for long-form research.
+

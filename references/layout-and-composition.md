@@ -69,3 +69,4 @@ Instead, ask:
 - **Desktop (1024px – 1440px+):** Utilize horizontal breathing room, multi-column compositions, and sticky side navigation or contextual controls.
 - **Tablet (768px – 1023px):** Transition multi-column grids to 2-column layouts; adjust padding to maintain reading measure.
 - **Mobile (360px – 767px):** Single-column vertical flow with full-width action bars, drawer navigation, and touch-optimized tap targets (`>= 44px`). Never simply scale down desktop widths into cramped horizontal scroll containers unless explicitly designed as a swipeable carousel.
+

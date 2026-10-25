@@ -30,3 +30,4 @@ Motion in Pure SaaS is functional, purposeful, and restrained. It exists to comm
 ## 3. Mandatory Accessibility Fallback
 
 Every animation or transition declaration must be disabled when `prefers-reduced-motion: reduce` is detected by the client.
+

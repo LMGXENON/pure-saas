@@ -56,3 +56,4 @@ node scripts/pure-saas.mjs review-report --json
 3. **Preserve Architecture in Existing Apps:** Never rewrite backend APIs, auth flows, or database structures during UI refactors without explicit user authorization.
 4. **Enforce Semantic Tokens:** Reject raw hex codes and arbitrary Tailwind numbers. Ensure all styling resolves to documented tokens in `DESIGN.md`.
 5. **Enforce Anti-Slop Discipline:** Halt and challenge generic purple/cyan gradient text, excessive glassmorphism blur, and repetitive 3-column feature cards.
+

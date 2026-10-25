@@ -29,3 +29,4 @@ Cursor will enforce:
 - Semantic tokens instead of arbitrary Tailwind or raw hex styling.
 - Elimination of generic AI gradient meshes and repetitive 3-column cards.
 - Automated validation via `node scripts/pure-saas.mjs validate`.
+

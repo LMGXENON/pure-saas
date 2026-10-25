@@ -7,6 +7,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // --- Lightweight Frontmatter & YAML Parser ---
 
@@ -287,11 +291,19 @@ function validateReferenceData(data, body, filePath) {
 }
 
 // --- Source Code Scan for Tokens & Anti-Slop ---
+// Incorporates static analysis patterns adapted from zero-slop-design (MIT License, Copyright (c) 2026 zero-slop-design contributors)
+
+const PALETTE = 'slate|gray|grey|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose';
+const PALETTE_CLASS = new RegExp(`(?<![\\w-])(?:[a-z]+:)*(?:bg|text|border(?:-[trblxy])?|ring|ring-offset|outline|from|via|to|fill|stroke|decoration|shadow|accent|caret|divide|placeholder)-(?:${PALETTE})-(?:50|[1-9]00|950)(?:\\/\\d+)?(?![\\w-])`, 'g');
+const UTILITY_DIMENSION = /(?<![\w-])(?:[a-z]+:)*(p[xytrbl]?|m[xytrbl]?|gap(?:-[xy])?|space-[xy]|rounded(?:-[a-z]+)?|text|tracking)-\[([^\]\s]+)\]/g;
+const COLOR_FUNCTION = /\b(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch)\(\s*[^)]*\)/g;
 
 export function scanSourceDirectory(srcDir, designTokens = {}) {
   const results = {
     scannedFiles: 0,
     rawColorViolations: [],
+    paletteClassViolations: [],
+    arbitraryDimensionViolations: [],
     unresolvedTokenRefs: [],
     antiSlopWarnings: []
   };
@@ -320,7 +332,7 @@ export function scanSourceDirectory(srcDir, designTokens = {}) {
       const fullPath = path.join(dir, entry.name);
       if (entry.isDirectory()) {
         walk(fullPath);
-      } else if (/\.(jsx?|tsx?|html|css|vue|svelte)$/i.test(entry.name)) {
+      } else if (/\.(jsx?|tsx?|html|css|vue|svelte|astro|mdx)$/i.test(entry.name)) {
         results.scannedFiles++;
         inspectFile(fullPath, knownColorValues, knownTokenNames, results);
       }
@@ -339,22 +351,49 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
     const line = lines[idx];
     const lineNum = idx + 1;
 
+    // Check for inline exception bypass (e.g. /* pure-saas-ignore rule: reason */)
+    const hasIgnore = line.includes('pure-saas-ignore') || line.includes('design-check-ignore') || line.includes('EXC-');
+    if (hasIgnore) continue;
+
     // Check raw hex colors in styling
     const hexMatches = line.match(/#[0-9a-fA-F]{3,8}\b/g);
     if (hexMatches) {
       for (const hex of hexMatches) {
         const normalized = hex.toLowerCase();
         if (knownColorValues.size > 0 && !knownColorValues.has(normalized)) {
-          // Allow comments or approved exceptions
-          if (!line.includes('EXC-') && !line.includes('pure-saas-ignore')) {
-            results.rawColorViolations.push({
-              file: filePath,
-              line: lineNum,
-              value: hex,
-              message: `Raw hex color ${hex} not mapped to approved DESIGN.md semantic token.`
-            });
-          }
+          results.rawColorViolations.push({
+            file: filePath,
+            line: lineNum,
+            value: hex,
+            message: `Raw hex color ${hex} not mapped to approved DESIGN.md semantic token.`
+          });
         }
+      }
+    }
+
+    // Check utility palette classes bypassing design tokens (e.g. bg-blue-500, text-slate-700)
+    const paletteMatches = line.match(PALETTE_CLASS);
+    if (paletteMatches) {
+      for (const cls of paletteMatches) {
+        results.paletteClassViolations.push({
+          file: filePath,
+          line: lineNum,
+          value: cls,
+          message: `Utility palette class "${cls}" bypasses semantic design tokens. Map to semantic role instead.`
+        });
+      }
+    }
+
+    // Check arbitrary bracket dimensions (e.g. p-[17px], m-[11px])
+    const dimMatches = line.match(UTILITY_DIMENSION);
+    if (dimMatches) {
+      for (const dim of dimMatches) {
+        results.arbitraryDimensionViolations.push({
+          file: filePath,
+          line: lineNum,
+          value: dim,
+          message: `Arbitrary bracket utility "${dim}" bypasses spacing tokens.`
+        });
       }
     }
 
@@ -620,6 +659,45 @@ export async function runCli(args = process.argv.slice(2)) {
     return report.summary.violations_count === 0 ? 0 : 1;
   }
 
+  if (command === 'style' || command === 'styles') {
+    const query = (args[1] || '').toLowerCase().trim();
+    const jsonOutput = args.includes('--json');
+    const catalogPath = path.resolve(__dirname, '../references/design-styles-catalog.json');
+
+    if (!fs.existsSync(catalogPath)) {
+      console.error('Error: Design styles catalog not found at ' + catalogPath);
+      return 1;
+    }
+
+    const { styles } = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+    let matches = styles;
+    if (query && query !== '--json') {
+      matches = styles.filter(s =>
+        s.name.toLowerCase().includes(query) ||
+        s.category.toLowerCase().includes(query) ||
+        s.keywords.some(k => k.toLowerCase().includes(query)) ||
+        s.best_for.some(b => b.toLowerCase().includes(query))
+      );
+    }
+
+    if (jsonOutput) {
+      console.log(JSON.stringify(matches, null, 2));
+      return 0;
+    }
+
+    console.log(`=== Pure SaaS Design Style Intelligence (${matches.length} matching styles) ===\n`);
+    for (const style of matches) {
+      console.log(`[${style.name}] (${style.category})`);
+      console.log(`  Keywords: ${style.keywords.join(', ')}`);
+      console.log(`  Best For: ${style.best_for.join(', ')}`);
+      console.log(`  Avoid For: ${style.do_not_use_for.join(', ')}`);
+      console.log(`  Typography: ${style.typography.heading_family} (headings) | ${style.typography.body_family} (body)`);
+      console.log(`  Palette: Canvas ${style.colors.canvas} | Surface ${style.colors.surface} | Accent ${style.colors.accent}`);
+      console.log(`  Anti-Slop: ${style.anti_slop_notes}\n`);
+    }
+    return 0;
+  }
+
   if (command === 'init') {
     const templateName = args[1] || 'developer';
     const briefDest = path.resolve(process.cwd(), 'design-brief.md');
@@ -630,8 +708,8 @@ export async function runCli(args = process.argv.slice(2)) {
       return 1;
     }
 
-    const tplBriefPath = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../templates/design-brief.md');
-    const tplDesignPath = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../templates/DESIGN.md');
+    const tplBriefPath = path.resolve(__dirname, '../templates/design-brief.md');
+    const tplDesignPath = path.resolve(__dirname, '../templates/DESIGN.md');
 
     fs.copyFileSync(tplBriefPath, briefDest);
     fs.copyFileSync(tplDesignPath, designDest);
@@ -681,6 +759,7 @@ Commands:
   check-tokens [file] [--source] Check design tokens and scan source code for raw styling or drift
   export-tokens [file] [--format] Export tokens from DESIGN.md to CSS, Tailwind, or JSON
   review-report                   Generate an honest verification report with tested vs untested areas
+  style [query]                   Query curated design intelligence styles (adapted from ui-ux-pro-max)
   init [template]                 Initialize starter design-brief.md and DESIGN.md in the current repo
 
 Options:

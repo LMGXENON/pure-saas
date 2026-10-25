@@ -54,3 +54,4 @@ confidence_levels:
 ## 7. Missing Information / Unresolved
 - Mobile navigation drawer open states not inspected.
 - Screen reader ARIA announcements for interactive code runner require verification.
+

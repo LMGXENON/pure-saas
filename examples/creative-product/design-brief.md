@@ -42,3 +42,4 @@ accessibility_tier: "WCAG 2.2 AA"
 
 # Design Brief: FrameCraft
 Cinematic sequencing environment for modern visual storytellers.
+

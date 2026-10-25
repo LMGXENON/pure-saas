@@ -31,3 +31,4 @@ jobs:
           node scripts/pure-saas.mjs validate examples/creative-product/DESIGN.md
           node scripts/pure-saas.mjs validate examples/editorial-saas/DESIGN.md
           node scripts/pure-saas.mjs validate examples/existing-app-redesign/DESIGN.md
+

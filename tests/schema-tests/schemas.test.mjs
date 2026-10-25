@@ -23,3 +23,4 @@ test('JSON Schemas: Syntax and Structure Verification', () => {
     assert.ok(Array.isArray(parsed.required), `Schema ${file} must declare required properties`);
   }
 });
+

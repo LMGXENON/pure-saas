@@ -55,3 +55,4 @@ test('Agents: All 4 example projects pass complete validation and token verifica
     assert.ok(fs.existsSync(design), `Example ${ex} must have DESIGN.md`);
   }
 });
+

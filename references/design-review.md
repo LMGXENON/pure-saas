@@ -63,3 +63,4 @@ Fix **Critical** (broken layouts, unreadable contrast < 3:1, missing keyboard na
 ## 3. Honest Reporting Rule
 
 If a page, viewport, or interaction state was not directly tested in a running browser or rendering harness, **it must be reported as "Untested", never as "Passed" or "Verified".**
+

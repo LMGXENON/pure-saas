@@ -23,3 +23,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `examples/existing-app-redesign`: VaultGuard enterprise secrets console demonstrating UI modernization while strictly preserving backend APIs and authentication contracts.
 - **Automated Test Suite:** Built-in test runner tests covering JSON schemas, token validation, CLI execution, source scanning, and agent adapter conventions.
 - **Open-Source Foundations:** MIT License, comprehensive documentation, third-party attribution notices, contribution guidelines, issue templates, and CI workflow.
+

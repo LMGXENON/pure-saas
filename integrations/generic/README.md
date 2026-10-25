@@ -11,3 +11,4 @@ Append the contents of `SYSTEM_PROMPT.md` into your agent's system prompt or pro
 
 ### File Placement:
 Keep `DESIGN.md` in your project root so the agent can read and maintain it.
+

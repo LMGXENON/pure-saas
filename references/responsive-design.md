@@ -52,3 +52,4 @@ When running responsive review (via browser or viewport simulation):
 1. **At 375px (iPhone standard):** Is the navigation menu fully functional? Are forms usable without horizontal zoom? Do buttons wrap cleanly?
 2. **At 768px (iPad portrait):** Do multi-column cards transition gracefully without awkward 1-card orphan rows?
 3. **At 1440px (Desktop):** Does the content container remain centered without excessive stretching or runaway line lengths?
+

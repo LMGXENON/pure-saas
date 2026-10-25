@@ -23,3 +23,4 @@ cp integrations/codex/.codex-plugin/plugin.json .codex-plugin/plugin.json
 
 ## Usage in Codex
 When prompted for frontend, UI, or styling work, Codex will automatically adhere to `SKILL.md` rules and validate output against `DESIGN.md`.
+

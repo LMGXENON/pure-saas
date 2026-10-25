@@ -41,3 +41,4 @@ accessibility_tier: "WCAG 2.2 AA"
 
 # Design Brief: VaultGuard (v2.0 Redesign)
 Redesigning the frontend secret management console while strictly preserving backend architecture and cryptographic integrity.
+

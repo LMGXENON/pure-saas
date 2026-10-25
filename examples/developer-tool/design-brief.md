@@ -44,3 +44,4 @@ accessibility_tier: "WCAG 2.2 AA"
 
 # Design Brief: HyperTrace
 Distributed eBPF tracing for engineering teams who demand precision and transparency.
+

@@ -181,3 +181,4 @@ For isolated tasks (e.g., tweaking a button, adding a badge, fixing a table colu
 2. **Implement:** Apply approved tokens without creating ad-hoc raw styles.
 3. **Verify:** Check hover, focus-visible, and mobile responsiveness.
 4. **Report:** Briefly state changes made and tokens adhered to.
+

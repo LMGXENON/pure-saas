@@ -158,3 +158,4 @@ Every interactive element must support:
 
 ## 9. Unresolved Questions
 *(None pending)*
+

@@ -92,3 +92,4 @@ Use standardized token naming across all export formats (CSS Custom Properties, 
 - **No Gratuitous Purples/Cyans:** Banish automatic indigo-to-cyan or purple-to-pink gradient meshes behind text headlines unless explicitly specified by brand identity.
 - **Surface Purpose:** Backgrounds should be clean, solid, or use subtle, meaningful textures (e.g., subtle dot grids for developer tools, warm paper tint for editorial tools).
 - **Subtle Depth:** If shadows are used, use multi-layered soft ambient shadows (`rgba(0, 0, 0, 0.04)` and `rgba(0, 0, 0, 0.08)`) instead of harsh, single-point black dropshadows.
+

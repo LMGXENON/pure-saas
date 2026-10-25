@@ -45,3 +45,4 @@ Interfaces must feel natural and respectful of host platform ergonomics without 
    ```
 3. **Prevent Accidental Double-Tap Zoom:**
    Buttons and interactive links should apply `touch-action: manipulation;` to eliminate the 300ms click delay on mobile web browsers without disabling pinch-to-zoom for text accessibility.
+

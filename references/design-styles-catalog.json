@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pure SaaS Design Styles Catalog",
+  "description": "Curated catalog of UI/UX design archetypes adapted from ui-ux-pro-max-skill (MIT License, Copyright (c) 2024 Next Level Builder).",
+  "styles": [
+    {
+      "id": "minimalism-swiss",
+      "name": "Minimalism & Swiss Style",
+      "category": "General",
+      "keywords": ["clean", "spacious", "functional", "whitespace", "high-contrast", "geometric", "sans-serif", "grid-based"],
+      "best_for": ["Enterprise apps", "dashboards", "documentation sites", "SaaS platforms", "developer tools"],
+      "do_not_use_for": ["Creative portfolios", "playful consumer brands", "gaming websites"],
+      "colors": {
+        "canvas": "#ffffff",
+        "surface": "#f8fafc",
+        "text_primary": "#09090b",
+        "text_secondary": "#52525b",
+        "accent": "#09090b"
+      },
+      "typography": {
+        "heading_family": "Geist, Inter, Helvetica Neue, sans-serif",
+        "body_family": "Geist, Inter, sans-serif",
+        "scale_ratio": "1.25 (Major Third)",
+        "reading_measure": "60ch to 65ch"
+      },
+      "geometry": {
+        "radii": "0px to 4px",
+        "shadows": "none or subtle 1px ambient border",
+        "borders": "1px solid #e4e4e7"
+      },
+      "anti_slop_notes": "Avoid decorative gradient meshes, glowing text, and unnecessary drop shadows. Let typography and layout structure the hierarchy."
+    },
+    {
+      "id": "developer-technical",
+      "name": "Technical Terminal & Infrastructure",
+      "category": "Developer Tooling",
+      "keywords": ["code-first", "dark-mode", "monospace", "high-density", "tabular-data", "terminal", "sub-millisecond"],
+      "best_for": ["CLI tools", "cloud infrastructure", "APIs", "observability platforms", "devops consoles"],
+      "do_not_use_for": ["Lifestyle consumer apps", "fashion", "luxury goods"],
+      "colors": {
+        "canvas": "#0c0d0e",
+        "surface": "#151719",
+        "surface_sunken": "#050607",
+        "text_primary": "#f9fafb",
+        "text_secondary": "#9ca3af",
+        "accent": "#fa5d29"
+      },
+      "typography": {
+        "heading_family": "Geist, -apple-system, sans-serif",
+        "body_family": "Geist, sans-serif",
+        "code_family": "JetBrains Mono, ui-monospace, SFMono-Regular, monospace",
+        "reading_measure": "65ch"
+      },
+      "geometry": {
+        "radii": "4px to 6px",
+        "shadows": "none or dark ambient",
+        "borders": "1px solid #26282c"
+      },
+      "anti_slop_notes": "Hero must demonstrate real code, endpoint execution, or terminal output. Never use fake vanity metrics or generic gradients."
+    },
+    {
+      "id": "data-dense-dashboard",
+      "name": "Data-Dense Operations Console",
+      "category": "BI / Analytics",
+      "keywords": ["data-dense", "kpi-metrics", "data-tables", "tabular-nums", "compact-padding", "high-information-density"],
+      "best_for": ["Financial trading", "cloud billing", "log inspection", "network operations center (NOC)"],
+      "do_not_use_for": ["Marketing homepages", "onboarding wizards", "consumer storytelling"],
+      "colors": {
+        "canvas": "#0f172a",
+        "surface": "#1e293b",
+        "text_primary": "#f8fafc",
+        "text_secondary": "#94a3b8",
+        "accent": "#38bdf8"
+      },
+      "typography": {
+        "heading_family": "Inter, -apple-system, sans-serif",
+        "body_family": "Inter, sans-serif",
+        "code_family": "JetBrains Mono, monospace"
+      },
+      "geometry": {
+        "radii": "4px to 6px",
+        "padding": "compact (8px to 12px)",
+        "borders": "1px solid #334155"
+      },
+      "anti_slop_notes": "Use tabular numbers for all financial and metric data. Avoid oversized cards; use compact tables with sticky headers."
+    },
+    {
+      "id": "editorial-literary",
+      "name": "Editorial Literary & Publishing",
+      "category": "Editorial / Content",
+      "keywords": ["archival-paper", "serif-typography", "literary", "long-form-reading", "generous-margins", "drop-cap", "zero-cards"],
+      "best_for": ["Research publications", "technical essays", "academic journals", "law/policy reviews", "literary magazines"],
+      "do_not_use_for": ["SaaS dashboards", "gaming consoles", "mobile checkout funnels"],
+      "colors": {
+        "canvas": "#faf9f5",
+        "surface": "#f4f1ea",
+        "text_primary": "#1c1917",
+        "text_secondary": "#57534e",
+        "accent": "#14532d"
+      },
+      "typography": {
+        "heading_family": "Newsreader, Georgia, serif",
+        "body_family": "Newsreader, Georgia, serif",
+        "ui_family": "Instrument Sans, sans-serif",
+        "reading_measure": "62ch to 68ch"
+      },
+      "geometry": {
+        "radii": "2px to 4px",
+        "borders": "1px solid #e7e2d6",
+        "shadows": "none"
+      },
+      "anti_slop_notes": "Banish cards from reading surfaces. Use typographic hierarchy, hairline dividers, and margin notes."
+    },
+    {
+      "id": "creative-studio",
+      "name": "Creative Studio & Media Sequencing",
+      "category": "Creative Product",
+      "keywords": ["cinematic", "expressive-display", "tight-tracking", "dark-studio-canvas", "media-led", "canvas-viewport"],
+      "best_for": ["Video editors", "motion graphics", "music production DAWs", "3D creation tools", "photography suites"],
+      "do_not_use_for": ["Dense accounting software", "legal documentation", "spreadsheets"],
+      "colors": {
+        "canvas": "#121214",
+        "surface": "#1a1a1e",
+        "text_primary": "#ffffff",
+        "text_secondary": "#a1a1aa",
+        "accent": "#f59e0b"
+      },
+      "typography": {
+        "heading_family": "Cabinet Grotesk, Clash Display, sans-serif",
+        "body_family": "Inter, sans-serif",
+        "code_family": "JetBrains Mono, monospace"
+      },
+      "geometry": {
+        "radii": "6px to 8px",
+        "borders": "1px solid #27272e"
+      },
+      "anti_slop_notes": "Media preview canvas must dominate the viewport. Interface controls remain neutral studio grey so they do not distort color perception."
+    },
+    {
+      "id": "modern-enterprise-saas",
+      "name": "Modern Enterprise Workflow SaaS",
+      "category": "Workflow / Productivity",
+      "keywords": ["rational", "keyboard-first", "neutral-surfaces", "high-clarity", "subtle-borders", "segmented-controls"],
+      "best_for": ["Issue trackers", "project management", "CRM", "HR platforms", "collaboration tools"],
+      "do_not_use_for": ["Consumer entertainment", "portfolio showcases"],
+      "colors": {
+        "canvas": "#ffffff",
+        "surface": "#f8fafc",
+        "text_primary": "#0f172a",
+        "text_secondary": "#475569",
+        "accent": "#2563eb"
+      },
+      "typography": {
+        "heading_family": "General Sans, Inter, sans-serif",
+        "body_family": "Inter, sans-serif"
+      },
+      "geometry": {
+        "radii": "6px to 8px",
+        "borders": "1px solid #e2e8f0"
+      },
+      "anti_slop_notes": "Support full keyboard shortcuts (Cmd+K). Avoid floating pill navigation bars and repetitive 3-column feature cards."
+    }
+  ]
+}
