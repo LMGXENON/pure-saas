@@ -12,3 +12,4 @@ Initialize the project with Pure SaaS persistent design specifications:
 2. Run `npx pure-saas init --reference` (or copy templates from `templates/`).
 3. Validate: `node scripts/pure-saas.mjs validate DESIGN.md`.
 4. Prompt the user to confirm product name, target audience, and visual archetype.
+

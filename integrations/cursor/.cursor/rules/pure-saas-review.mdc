@@ -13,3 +13,4 @@ Audit the UI for visual quality, accessibility (WCAG 2.2 AA), responsiveness, an
 3. Verify WCAG 2.2 AA contrast ratios ($\ge 4.5:1$ body, $\ge 3.0:1$ secondary, 2px focus rings) (`references/accessibility.md`).
 4. Format all findings using `Issue -> Impact -> Evidence -> Recommendation` (`references/design-review.md`).
 5. Record any unverified browser or screen-reader checks as `untested`.
+

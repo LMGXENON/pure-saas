@@ -54,3 +54,4 @@ Validate `DESIGN.md`, scan the codebase for unapproved styling, and export token
 
 4. **Report Results:**
    Summarize token validation status, number of scanned files, and output paths of exported artifacts.
+

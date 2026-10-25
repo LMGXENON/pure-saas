@@ -14,3 +14,4 @@ Execute reference deconstruction workflow:
 3. Validate: `node scripts/pure-saas.mjs validate reference-record.md`.
 4. Synthesize structural principles into `DESIGN.md` for the current project. Never duplicate branding, logos, or copy verbatim.
 5. Validate resulting system: `node scripts/pure-saas.mjs validate DESIGN.md`.
+

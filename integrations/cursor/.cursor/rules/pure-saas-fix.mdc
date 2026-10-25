@@ -13,3 +13,4 @@ Remediate design defects and anti-slop violations without breaking business logi
 3. Eliminate anti-slop patterns (restore solid high-contrast typography, remove unnecessary glassmorphism blur, add `:focus-visible` rings).
 4. Verify code with `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src`.
 5. Run existing tests (`npm test`) to confirm zero regressions in application logic.
+

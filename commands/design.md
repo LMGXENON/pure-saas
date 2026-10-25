@@ -14,3 +14,4 @@ Execute the 9-stage workflow:
 7. **Stage G (Critique & Refine):** Fix high/critical issues following `references/design-review.md`.
 8. **Stage H (Enforce System):** Run `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src`. Ensure 0 violations.
 9. **Stage I (Report Honest Results):** Report verified vs untested areas honestly.
+

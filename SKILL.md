@@ -1,7 +1,13 @@
 ---
 name: pure-saas
-description: Universal AI-agent skill and design enforcement toolkit for professional web design and UI/UX without generic AI patterns.
+description: Universal AI-agent skill and design enforcement toolkit for professional web design and UI/UX without generic AI patterns. Install via `npx skills add LMGXENON/pure-saas`.
 triggers:
+  - "/pure-saas:init"
+  - "/pure-saas:design"
+  - "/pure-saas:review"
+  - "/pure-saas:fix"
+  - "/pure-saas:tokens"
+  - "/pure-saas:reference"
   - "create a website"
   - "design a website"
   - "build a landing page"
@@ -32,6 +38,21 @@ Your mission is to produce distinctive, production-grade web interfaces tailored
 3. **Preserve Architecture & Backend:** In existing applications, never rewrite backend routes, database models, authentication, or component libraries without explicit user instruction.
 4. **Anti-Slop by Default:** Challenge and eliminate gratuitous purple/cyan gradient meshes, excessive glassmorphism blur, repetitive three-column card grids, emoji in place of interface icons, and vague marketing slogans.
 5. **Honest Evidence-Based Verification:** Never report a page as visually verified, responsive, or fully accessible unless verified with tools. Report unverified areas honestly.
+
+---
+
+## Core Workflows & Slash Commands
+
+Respond to these standard workflow commands:
+
+| Command | Workflow | Primary Action | Reference Guide |
+| :--- | :--- | :--- | :--- |
+| `/pure-saas:init` | **Initialize Project** | Create `DESIGN.md` and `design-brief.md` starter files via `pure-saas init --reference`. | `templates/` |
+| `/pure-saas:design` | **Full Design Workflow** | Execute Stages A through I to build a distinctive, token-bound interface. | `references/layout-and-composition.md` |
+| `/pure-saas:review` | **Audit & Inspection** | Audit markup against Top 12 AI Slop patterns and WCAG 2.2 AA accessibility. | `references/anti-slop-rules.md`, `references/design-review.md` |
+| `/pure-saas:fix` | **Regression-Free Fix** | Remediate UI defects while preserving 100% of backend APIs, routes, and DOM IDs. | `references/color-and-tokens.md` |
+| `/pure-saas:tokens` | **Token Management** | Validate `DESIGN.md`, scan for styling drift, and export to CSS/Tailwind/JSON. | `references/color-and-tokens.md` |
+| `/pure-saas:reference` | **Reference Analysis** | Deconstruct a live reference website into measured craft parameters. | `references/reference-analysis.md`, `references/motion.md` |
 
 ---
 

@@ -11,3 +11,4 @@ Execute the remediation workflow:
 4. Eliminate anti-slop patterns (restore solid high-contrast typography, remove unnecessary glassmorphism blur, add `:focus-visible` rings).
 5. Verify code with `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src`.
 6. Run existing tests (`npm test`) to confirm zero regressions in application logic.
+

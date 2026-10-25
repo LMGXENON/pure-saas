@@ -39,3 +39,4 @@ Remediate design defects and anti-slop violations while strictly preserving all 
 
 5. **Functional Verification:**
    Run the project test suite (`npm test` or equivalent) to confirm 100% of business logic and API contracts remain unbroken.
+

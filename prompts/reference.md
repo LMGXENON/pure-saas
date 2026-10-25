@@ -34,3 +34,4 @@ Follow the reference analysis methodology from `references/reference-analysis.md
    - **Zero Brand Duplication:** Do NOT copy company names, logos, color values verbatim, SVG illustrations, or marketing copy.
    - **Bespoke Identity:** Create an original narrative, color palette, and interface components tailored exclusively to the target domain.
    - Validate resulting tokens: `node scripts/pure-saas.mjs validate DESIGN.md`.
+

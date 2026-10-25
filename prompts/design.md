@@ -37,3 +37,4 @@ Consult `references/anti-slop-rules.md`. Prohibit:
 - Repetitive 3-column cards ("card vomit").
 - Emojis in place of interface icons.
 - Generic marketing hype ("Supercharge your workflow").
+

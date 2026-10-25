@@ -54,3 +54,4 @@ Conduct a thorough review of the user interface for visual quality, usability, a
 
 5. **Honest Status Reporting:**
    Any check that could not be evaluated in a live running browser or screen reader must be explicitly declared as `untested`. Never fabricate visual or assistive technology test results.
+

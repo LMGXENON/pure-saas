@@ -815,7 +815,7 @@ Commands:
   check-tokens [file] [--source] Check design tokens and scan source code for raw styling or drift
   export-tokens [file] [--format] Export tokens from DESIGN.md to CSS, Tailwind, or JSON
   review-report                   Generate an honest verification report with tested vs untested areas
-  style [query]                   Query curated design intelligence styles (adapted from ui-ux-pro-max)
+  style [query]                   Query curated design intelligence styles
   init [--reference]              Initialize starter design-brief.md and DESIGN.md in the current repo
 
 Options:

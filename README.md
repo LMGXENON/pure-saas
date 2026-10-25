@@ -1,230 +1,250 @@
 # Pure SaaS
 
-> Universal AI-agent skill and design enforcement toolkit for professional web design and UI/UX without generic AI slop.
+> Universal AI-agent skill and design enforcement toolkit for professional web design and UI/UX without generic AI patterns.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-success.svg)](package.json)
+[![Node.js >= 18](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](package.json)
 
 ---
 
-## The Problem
+## What is Pure SaaS?
 
-When asked to design websites or web applications, AI coding agents (Claude Code, Cursor, Codex, Windsurf, OpenCode, Gemini) frequently converge on the same repetitive aesthetic clichés regardless of the product:
-
-- Massive purple/cyan gradient text and blurred glassmorphism glows.
-- Repetitive three-column feature cards stacked monotonously down the page.
-- Generic centered hero layouts followed by predictable content blocks.
-- Arbitrary spacing, random colors, and inconsistent component geometry.
+When asked to design websites or web applications, AI coding agents frequently fall into repetitive, generic design clichés:
+- Monotonous purple/cyan gradient text and blurred glassmorphism glows.
+- Identical three-column feature cards stacked repetitively down the page.
+- Arbitrary colors, unmapped spacing, and inconsistent geometry.
 - Emoji used as interface icons (`🚀`, `⚡`, `🔥`) instead of crisp SVGs.
 - Generic marketing jargon ("Unlock your potential", "Supercharge your workflow").
-- Beautiful desktop screenshots that lack responsive ergonomics, keyboard navigation, or interaction states.
+- Desktop mockups lacking responsive mobile layouts, keyboard accessibility, or interaction states.
 
-The problem is not that agents cannot write CSS or components. The problem is that **agents begin coding without an explicit design brief, a persistent design system, rules against generic defaults, or a reliable verification process.**
-
----
-
-## The Solution: Pure SaaS
-
-Pure SaaS is a universal, open-source design skill and deterministic enforcement toolkit that makes AI coding agents follow disciplined design engineering:
-
-1. **Design System First:** Requires agents to establish a persistent `DESIGN.md` with semantic tokens (colors, typography, spacing, radii) before generating components.
-2. **Anti-Slop by Default:** Challenges generic gradients, excessive cards, and AI clichés, guiding agents toward content-specific layouts and authentic product storytelling.
-3. **Preserves Existing Architectures:** Protects backend APIs, authentication, and database models in existing applications during visual upgrades.
-4. **Deterministic Enforcement CLI:** A zero-dependency command-line validator that verifies `DESIGN.md` structure, scans source code for raw styling drift, and exports tokens to CSS and Tailwind.
-5. **Honest Verification Reporting:** Forbids agents from claiming an untested interface is "verified" or "accessible" without running real checks.
+**Pure SaaS** solves this at the agent level. It equips AI coding assistants with an explicit design brief, a persistent design system, strict anti-slop rules, deterministic token validation, and an evidence-based verification protocol.
 
 ---
 
-## Core Capabilities
+## Installation
 
-- **Design Brief Workflow (`design-brief.md`):** Distinguishes user-approved decisions, agent proposals, and unresolved questions.
-- **Persistent Design System (`DESIGN.md`):** One canonical source of truth for semantic tokens, typography scales, layout grids, component states, and accessibility rules.
-- **Typography Engine:** Evaluates typeface personality (e.g. Geist, Cabinet Grotesk, Newsreader), restricts body line measure (45–75 characters), balances heading wrapping, and enforces tabular numerals.
-- **Content-Specific Composition:** Replaces generic 3-card repetition with asymmetrical splits, live interactive code runners, and editorial density.
-- **Complete Interaction State Matrix:** Enforces `hover`, `focus-visible`, `active/pressed`, `disabled`, `loading`, `empty`, `error`, and `success` states.
-- **Cross-Agent Portability:** Works across Claude Code, Cursor, Codex, Windsurf, OpenCode, Gemini CLI, and generic markdown-compatible agents.
-- **Deterministic CLI:** Validates design files, checks tokens, scans code for violations, exports tokens, and produces CI-ready JSON reports.
+### Install via the Skills CLI (Recommended)
 
----
-
-## Quick Start
-
-### 1. Initialize Pure SaaS in your project
+Install Pure SaaS into your repository using the standard Skills CLI:
 
 ```bash
-# Using npx directly (zero installation required)
-npx pure-saas init developer
+npx skills add LMGXENON/pure-saas
 ```
 
-This creates a starter `design-brief.md` and `DESIGN.md` in your project root.
+The Skills CLI automatically discovers `SKILL.md` at the repository root, installs the toolkit into `.agents/skills/pure-saas`, and configures symlinks for Claude Code (`.claude/skills/pure-saas`).
 
-### 2. Validate your design system
+#### Options
 
 ```bash
-# Validate DESIGN.md structure and required tokens
-npx pure-saas validate DESIGN.md
+# Install globally for your machine
+npx skills add LMGXENON/pure-saas -g
 
-# Scan source code (e.g., src/) for raw hex colors or unapproved styles
-npx pure-saas check-tokens DESIGN.md --source src
+# Install targeting specific agents
+npx skills add LMGXENON/pure-saas --agent claude-code cursor
+
+# List skills in repository without installing
+npx skills add LMGXENON/pure-saas --list
 ```
 
-### 3. Export tokens to your CSS or Tailwind config
+### Initialize a Project Design System (Separate CLI)
 
-```bash
-# Export CSS custom properties
-npx pure-saas export-tokens DESIGN.md --format css --out src/styles/tokens.css
-
-# Export Tailwind config extension
-npx pure-saas export-tokens DESIGN.md --format tailwind --out tailwind.tokens.js
-```
-
-### 4. Generate an honest verification report
-
-```bash
-npx pure-saas review-report
-```
-
----
-
-## Supported Agent Integrations
-
-Pure SaaS provides thin, portable adapters that follow each agent's documented conventions, clearly distinguishing tested native integrations from instruction-file compatibility:
-
-| Platform / Agent | Integration Type | Official Integration Path | Setup & Documentation |
-| :--- | :--- | :--- | :--- |
-| **Claude Code** | **Tested Native Skill** | `.claude/skills/pure-saas` | Symlink or copy to `.claude/skills/pure-saas` (see [claude-code](integrations/claude-code/README.md)) |
-| **Cursor** | **Tested Native Rules** | `.cursor/rules/pure-saas.mdc` | Copy `.cursor/rules/pure-saas.mdc` or `.cursorrules` (see [cursor](integrations/cursor/README.md)) |
-| **Codex** | **Tested Native Plugin** | `.codex-plugin/plugin.json` | Copy `.codex-plugin/plugin.json` or install via CLI (see [codex](integrations/codex/README.md)) |
-| **OpenCode** | **Tested Native Skill** | `.agents/skills/pure-saas` | Copy to `.agents/skills/` (see [opencode](integrations/opencode/README.md)) |
-| **Gemini / Antigravity** | **Tested Native Context & Skill** | `GEMINI.md` / `skills/` | Copy `GEMINI.md` or install as skill (see [gemini](integrations/gemini/README.md)) |
-| **Windsurf** | **Instruction-File Compatibility** | `.windsurfrules` | Copy `integrations/windsurf/.windsurfrules` to project root (see [windsurf](integrations/windsurf/README.md)) |
-| **Generic / Others** | **Instruction-File Compatibility** | `SYSTEM_PROMPT.md` | Add [SYSTEM_PROMPT.md](integrations/generic/SYSTEM_PROMPT.md) to custom agent instructions |
-
-*See [integrations/README.md](integrations/README.md) for official specification compliance details.*
-
----
-
-## Slash Commands & Portable Prompts
-
-Pure SaaS provides 6 standard workflows operating either via **native slash commands** (Claude Code, OpenCode), **rule mentions** (Cursor), or **copy-ready portable prompts** for any chat assistant:
-
-| Workflow | Native Slash Command | Cursor Mention | Portable Prompt | Description |
-| :--- | :--- | :--- | :--- | :--- |
-| **Initialize** | `/pure-saas:init` | `@pure-saas-init` | [`prompts/init.md`](prompts/init.md) | Initialize project with `DESIGN.md` and `design-brief.md` starter specifications. |
-| **Design** | `/pure-saas:design [scope]` | `@pure-saas-design` | [`prompts/design.md`](prompts/design.md) | Execute full 9-stage design/redesign workflow without generic AI slop. |
-| **Review** | `/pure-saas:review [path]` | `@pure-saas-review` | [`prompts/review.md`](prompts/review.md) | Audit UI for visual quality, accessibility (WCAG 2.2 AA), contrast, and slop. |
-| **Fix** | `/pure-saas:fix [issues]` | `@pure-saas-fix` | [`prompts/fix.md`](prompts/fix.md) | Remediate UI defects while strictly preserving backend APIs & DOM contracts. |
-| **Tokens** | `/pure-saas:tokens [format]`| `@pure-saas-tokens` | [`prompts/tokens.md`](prompts/tokens.md) | Validate `DESIGN.md`, scan source for drift, and export tokens (CSS/Tailwind/JSON). |
-| **Reference** | `/pure-saas:reference <url>`| `@pure-saas-reference` | [`prompts/reference.md`](prompts/reference.md) | Deconstruct a live reference website into measured craft parameters. |
-
-### How Each Agent Operates
-- **Claude Code:** Commands in `commands/` or `.claude/commands/` are natively discovered and invoked via `/pure-saas:design`, `/pure-saas:review`, etc.
-- **Cursor:** Cursor does not support third-party custom slash commands; invoke workflows by typing `@pure-saas-design` in Composer or pasting from `prompts/`.
-- **OpenCode:** Commands in `.opencode/commands/` are natively available as slash commands.
-- **Codex / Gemini / Windsurf / Copilot:** Use the copy-ready markdown prompts in `prompts/` for deterministic instructions in standard chat sessions.
-
----
-
-## The 9-Stage Agent Workflow
-
-When an AI coding agent is tasked with creating or redesigning an interface, Pure SaaS directs it through 9 disciplined stages:
-
-1. **Stage A: Discover** — Inspects repository framework, existing styling, brand assets, and immutable backend contracts.
-2. **Stage B: Define** — Authors or updates `design-brief.md`, isolating approved decisions from proposals and open questions.
-3. **Stage C: Establish** — Generates or updates `DESIGN.md`, defining semantic tokens, typography, radii, and states.
-4. **Stage D: Plan** — Plans page composition and information architecture before touching markup.
-5. **Stage E: Build** — Implements components bound directly to semantic tokens; avoids decorative dependencies.
-6. **Stage F: Inspect** — Examines the rendered interface at 375px (Mobile), 768px (Tablet), and 1440px (Desktop) viewports when browser tools are available.
-7. **Stage G: Refine** — Corrects hierarchy flaws, orphaned headings, contrast failures, and missing states.
-8. **Stage H: Enforce** — Runs `pure-saas validate` and `pure-saas check-tokens` in CI or local environment.
-9. **Stage I: Report** — Concludes with an honest report disclosing verified checks, failed checks, and untested areas.
-
-*For minor UI changes (e.g. tweaking a button), agents follow a shortened workflow: inspect `DESIGN.md`, apply tokens, verify states, and report.*
-
----
-
-## Anatomy of `DESIGN.md`
-
-`DESIGN.md` is the persistent source of truth for your application's visual system:
-
-```yaml
----
-name: "Acme Cloud Design System"
-version: "1.0.0"
-status: "approved"
-tokens:
-  colors:
-    color-bg-canvas: "#0c0d0e"
-    color-bg-surface: "#151719"
-    color-bg-surface-elevated: "#1f2226"
-    color-bg-surface-sunken: "#050607"
-    color-text-primary: "#f9fafb"
-    color-text-secondary: "#9ca3af"
-    color-text-muted: "#6b7280"
-    color-text-inverse: "#0c0d0e"
-    color-action-primary: "#fa5d29"
-    color-action-hover: "#ea580c"
-    color-action-active: "#c2410c"
-    color-border-subtle: "#26282c"
-    color-border-strong: "#374151"
-    color-border-focus: "#fa5d29"
-    color-status-success: "#10b981"
-    color-status-warning: "#f59e0b"
-    color-status-error: "#ef4444"
-    color-status-info: "#3b82f6"
-  typography:
-    font_families:
-      sans: "Geist, sans-serif"
-      mono: "JetBrains Mono, monospace"
-    scale:
-      h1: "2.5rem"
-      h2: "1.75rem"
-      h3: "1.25rem"
-      body: "1rem"
-      body_small: "0.875rem"
-      label: "0.875rem"
-  spacing:
-    space-1: "4px"
-    space-2: "8px"
-    space-4: "16px"
-    space-6: "24px"
-    space-8: "32px"
-  radii:
-    none: "0"
-    sm: "4px"
-    md: "6px"
-    lg: "8px"
-principles:
-  - "Developer evidence before marketing assertion."
-accessibility:
-  tier: "WCAG 2.2 AA"
----
-```
-
----
-
-## Starter Templates & Project Initialization
-
-Pure SaaS is designed as a modular, reusable skill. Rather than shipping bloated example applications or locking teams into fixed templates, it provides canonical starter templates and automation tooling to initialize bespoke, project-specific design systems:
-
-- **[`templates/design-brief.md`](templates/design-brief.md)**: Product brief defining user personas, competitive differentiators, typography personality, and anti-slop rules.
-- **[`templates/DESIGN.md`](templates/DESIGN.md)**: Codified semantic token specification (colors, typography, spacing, radii, accessibility).
-- **[`templates/reference-record.md`](templates/reference-record.md)**: Structured observation format for deconstructing live design references.
-
-### Initialize a New Project
-Initialize a project with official starter specifications in one command:
+To scaffold a starter design system in your consumer project independently of agent skill installation:
 
 ```bash
 npx pure-saas init
 ```
 
-This copies `design-brief.md` and `DESIGN.md` into your repository, ready for your AI coding assistant to configure for your specific domain and aesthetic.
+This creates canonical starter specifications in your project root:
+- `design-brief.md` — Product identity, brand personality, and scope boundaries.
+- `DESIGN.md` — Codified semantic design tokens (colors, typography, spacing, radii, accessibility).
+- `reference-record.md` — (Optional with `--reference`) Template for deconstructing live visual references.
+
+---
+
+## Supported Agent Integrations
+
+Pure SaaS provides native integration adapters and standard prompt fallbacks, clearly distinguishing verified native integrations from instruction-file compatibility:
+
+| Platform / Agent | Integration Type | Native Path / Mechanism | How to Operate |
+| :--- | :--- | :--- | :--- |
+| **Claude Code** | **Verified Native Skill** | `.claude/skills/pure-saas`, `commands/` | Native slash commands (`/pure-saas:design`, etc.) or prompt mentions. |
+| **Cursor** | **Verified Native Rules** | `.cursor/rules/pure-saas-*.mdc` | Type `@pure-saas-design`, `@pure-saas-review` in Composer or Chat. |
+| **OpenCode** | **Verified Native Skill** | `.agents/skills/pure-saas`, `.opencode/commands/` | Native slash commands (`/pure-saas:design`, etc.) in chat. |
+| **Codex** | **Verified Native Plugin** | `.codex-plugin/plugin.json` | Plugin actions or portable prompts from `prompts/`. |
+| **Gemini / Antigravity** | **Verified Native Skill** | `GEMINI.md` / `skills/pure-saas` | Context instructions or native skill invocation. |
+| **Windsurf** | **Instruction-File Compatibility** | `.windsurfrules` | Rules file at project root or portable prompts from `prompts/`. |
+| **Generic / Others** | **Instruction-File Compatibility** | `SYSTEM_PROMPT.md` | Add instructions to system prompt or paste from `prompts/`. |
+
+---
+
+## Core Workflows & Slash Commands
+
+Pure SaaS provides 6 core workflows accessible via **native slash commands** where supported, **Cursor rule mentions**, or **portable copy-ready markdown prompts**:
+
+| Workflow | Native Slash Command | Cursor Mention | Portable Prompt | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| **Initialize** | `/pure-saas:init` | `@pure-saas-init` | [`prompts/init.md`](prompts/init.md) | Initialize project with `DESIGN.md` and `design-brief.md`. |
+| **Design** | `/pure-saas:design [scope]` | `@pure-saas-design` | [`prompts/design.md`](prompts/design.md) | Execute full 9-stage design workflow without generic AI slop. |
+| **Review** | `/pure-saas:review [path]` | `@pure-saas-review` | [`prompts/review.md`](prompts/review.md) | Audit UI for visual quality, WCAG 2.2 AA accessibility, and slop. |
+| **Fix** | `/pure-saas:fix [issues]` | `@pure-saas-fix` | [`prompts/fix.md`](prompts/fix.md) | Remediate UI defects while strictly preserving backend APIs & contracts. |
+| **Tokens** | `/pure-saas:tokens [format]` | `@pure-saas-tokens` | [`prompts/tokens.md`](prompts/tokens.md) | Validate `DESIGN.md`, scan code for drift, and export tokens. |
+| **Reference** | `/pure-saas:reference <url>` | `@pure-saas-reference` | [`prompts/reference.md`](prompts/reference.md) | Deconstruct a live reference website into measured craft parameters. |
+
+---
+
+## Example Prompts
+
+If your agent does not support custom slash commands, copy and paste these prompts directly into your chat:
+
+### 1. Initialize a New Project
+```markdown
+Initialize Pure SaaS for this project:
+1. Run `npx pure-saas init` to create `design-brief.md` and `DESIGN.md`.
+2. Guide me through defining the product identity, target personas, and primary aesthetic.
+3. Validate the tokens using `node scripts/pure-saas.mjs validate DESIGN.md`.
+```
+
+### 2. Design an Interface
+```markdown
+/pure-saas:design Build a high-density analytics dashboard for our database monitoring service.
+Follow the 9-stage workflow in SKILL.md. Ensure layout uses asymmetrical data splits rather than repetitive 3-column cards. Bind all styling to tokens in DESIGN.md.
+```
+
+### 3. Review an Existing UI
+```markdown
+/pure-saas:review Audit src/components/Dashboard.tsx and styles/dashboard.css.
+Check against the Top 12 AI Slop patterns and WCAG 2.2 AA accessibility guidelines.
+Run `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src` and report verified, failed, and untested areas honestly.
+```
+
+### 4. Fix Issues Without Regression
+```markdown
+/pure-saas:fix Fix the focus ring contrast and mobile navigation overflow on the billing page.
+Strict mandate: Do not modify any API route, server action, authentication flow, or DOM ID. Bind all changes to semantic tokens in DESIGN.md.
+```
+
+### 5. Validate & Export Tokens
+```markdown
+/pure-saas:tokens Validate our DESIGN.md and export CSS Custom Properties to styles/tokens.css and Tailwind extensions to tailwind.tokens.js.
+```
+
+### 6. Deconstruct a Reference Website
+```markdown
+/pure-saas:reference https://example.com
+Inspect typography scale, color palette, section pacing, and motion choreography. Record findings in reference-record.md and translate relevant craft principles into our DESIGN.md without copying brand identity.
+```
+
+---
+
+## Core Capabilities
+
+### 1. Anti-Slop by Default
+Pure SaaS actively challenges generic AI defaults:
+- **No Gratuitous Gradients:** Replaces purple/cyan gradient text with intentional, high-contrast typography.
+- **Asymmetrical & Content-Driven Layout:** Forbids default 3-column feature card stacks in favor of interactive demos, split flows, and dense data displays.
+- **Micro-Typography Polish:** Enforces line-height proportional to font size, body line-length measure (45–75 characters), tabular numerals for metrics, and optical balance.
+- **Crisp Vector Iconography:** Replaces emoji in UI components with purpose-built inline SVGs.
+
+### 2. Persistent `DESIGN.md` System
+All interface styling resolves to a codified token specification before code is generated. `DESIGN.md` tracks:
+- Semantic color palette (canvas, surface, text, action, border, status).
+- Proportional typography scales and font stacks.
+- Spacing, layout grids, and component radii.
+- Accessibility target tier (WCAG 2.2 AA).
+
+### 3. Strict Backend & Architecture Preservation
+When modifying existing applications, Pure SaaS strictly forbids agents from rewriting backend logic:
+- Preserves 100% of API endpoints, route handlers, and server actions.
+- Preserves database schemas, ORM models, and data contracts.
+- Preserves authentication session lifecycles and state machines.
+- Retains test IDs and DOM landmarks required by automated integration tests.
+
+### 4. The 9-Stage Agent Workflow
+1. **Stage A: Discover** — Map frameworks, brand guidelines, and immutable contracts.
+2. **Stage B: Define** — Author or update `design-brief.md`.
+3. **Stage C: Establish** — Define semantic tokens in `DESIGN.md`.
+4. **Stage D: Plan** — Plan page layout, content pacing, and visual hierarchy.
+5. **Stage E: Build** — Implement components bound directly to semantic tokens.
+6. **Stage F: Inspect** — Check viewports at 375px, 768px, and 1440px.
+7. **Stage G: Refine** — Eliminate contrast failures, orphaned headings, and missing states.
+8. **Stage H: Enforce** — Run static code checks and token validation.
+9. **Stage I: Report** — Provide an honest verification ledger (verified, failed, untested).
+
+*For minor UI updates (e.g., button tweaks), agents execute an expedited workflow: read `DESIGN.md`, apply tokens, verify states, and report.*
+
+### 5. Complete Interaction State Matrix
+Every interactive component must define 8 explicit states: `hover`, `focus-visible`, `active/pressed`, `disabled`, `loading`, `empty`, `error`, and `success`.
+
+---
+
+## Project Structure
+
+```
+pure-saas/
+├── SKILL.md              # Canonical agent-agnostic operational skill instruction set
+├── AGENTS.md             # Developer & agent operations manual
+├── commands/             # Native slash commands for supported agents (/pure-saas:*)
+├── prompts/              # Portable copy-ready Markdown prompts for any LLM
+├── references/           # In-depth architectural & craft guides
+│   ├── anti-slop-rules.md
+│   ├── color-and-tokens.md
+│   ├── typography.md
+│   ├── layout-and-composition.md
+│   ├── motion.md
+│   ├── design-review.md
+│   ├── reference-analysis.md
+│   └── design-styles-catalog.json
+├── schemas/              # Formal JSON schemas for DESIGN.md and design-brief.md
+├── templates/            # Ready-to-use starter templates (DESIGN.md, design-brief.md)
+├── scripts/              # Zero-dependency Node.js CLI (pure-saas.mjs)
+├── integrations/         # Platform adapters (Claude Code, Cursor, Codex, Windsurf, OpenCode, Gemini)
+└── tests/                # Automated tests (schema, token, enforcement, and agent workflow)
+```
+
+---
+
+## Deterministic CLI Reference
+
+The Pure SaaS CLI is zero-dependency and runs with Node.js >= 18:
+
+```bash
+# Validate DESIGN.md or design-brief.md structure and required tokens
+npx pure-saas validate [path/to/DESIGN.md]
+
+# Scan source code for raw hex colors, unmapped styles, or anti-slop violations
+npx pure-saas check-tokens [DESIGN.md] --source src
+
+# Export tokens to CSS Custom Properties, Tailwind, or JSON
+npx pure-saas export-tokens DESIGN.md --format css --out styles/tokens.css
+npx pure-saas export-tokens DESIGN.md --format tailwind --out tailwind.tokens.js
+npx pure-saas export-tokens DESIGN.md --format json --out tokens.json
+
+# Query curated design intelligence taxonomy
+npx pure-saas style "developer tool dark mode"
+
+# Generate comprehensive verification report
+npx pure-saas review-report --json
+
+# Initialize starter templates in current repository
+npx pure-saas init
+```
+
+---
+
+## Limitations
+
+- **Browser-less Sandboxes:** In environments without a headless browser or screen-reader runtime, Pure SaaS performs static code analysis and token verification. Visual rendering, fluid animation fidelity, and screen-reader keyboard traps are recorded as `untested` rather than fabricated as verified.
+- **Dynamic CSS-in-JS:** The static source scanner parses CSS, Tailwind utility classes, HTML, JSX, TSX, Svelte, and Vue files. Dynamic runtime style calculations (e.g., `style={{ color: dynamicHex }}`) should use token mappings or be marked with `/* pure-saas-ignore rule: reason */`.
 
 ---
 
 ## Testing & Quality Assurance
 
-Run the built-in test suite:
+Run the automated test suite:
 
 ```bash
-# Run all tests using Node.js native test runner
+# Run all tests using Node.js native test runner (zero external dependencies)
 npm test
 
 # Run individual test suites
@@ -234,47 +254,10 @@ npm run test:enforcement
 npm run test:agents
 ```
 
-Zero external npm dependencies are required to run tests or the CLI.
-
----
-
-## Known Limitations
-
-- **Browser-less Environments:** When running in an environment without headless browser tooling (e.g. standard terminal sandbox), Pure SaaS performs static code analysis and token verification. It will flag visual rendering and interactive keyboard trapping as "untested" rather than making false claims.
-- **Dynamic CSS-in-JS:** The static source scanner parses CSS, Tailwind utility classes, HTML, JSX, TSX, Svelte, and Vue files. Highly dynamic runtime style computations (e.g. `style={{ color: dynamicHex }}`) should use token mappings or be marked with `/* pure-saas-ignore */`.
-
----
-
-## Roadmap
-
-### Completed in v1.0
-- [x] Canonical agent-agnostic `SKILL.md` instruction set.
-- [x] Persistent `design-brief.md` and `DESIGN.md` specifications.
-- [x] Anti-slop review rules and typography hierarchy engine.
-- [x] Zero-dependency Node.js CLI (`pure-saas.mjs` and wrapper scripts).
-- [x] Token verification, source scanner, and export to CSS / Tailwind / JSON.
-- [x] Integrations for Claude Code, Cursor, Codex, Windsurf, OpenCode, Gemini, and Generic.
-- [x] Modular starter templates for design briefs and specifications.
-- [x] Clean zero-dependency CLI project initialization (`pure-saas init`).
-- [x] Automated test suite covering schemas, tokens, CLI, and agent conventions.
-
-### Planned for Future Releases
-- [ ] Headless browser screenshot comparison runner in CI.
-- [ ] Automated color contrast calculation across composite alpha backgrounds.
-- [ ] Design system migration script for legacy Figma token exports.
-- [ ] Interactive terminal UI (`pure-saas studio`) for visual token tuning.
-
----
-
-## Contributing
-
-We welcome contributions from designers, engineers, and open-source contributors! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for local setup, development guidelines, and pull request procedures.
-
 ---
 
 ## License & Attribution
 
-Pure SaaS is released under the [MIT License](LICENSE).
+Pure SaaS is open-source software licensed under the [MIT License](LICENSE).
 
-Conceptual inspirations and workflow insights from open-source projects (including `ui-ux-pro-max-skill` and `zero-slop-design-plugin`) are gratefully acknowledged in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Pure SaaS does not incorporate proprietary or uncleared materials.
-
+Third-party notices, curated style taxonomies, and static check utilities adapted from open-source projects are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

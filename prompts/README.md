@@ -27,3 +27,4 @@ This directory provides copy-ready Markdown prompts for operating **Pure SaaS** 
    Open the corresponding prompt file (e.g. `prompts/design.md`), copy the prompt text, fill in your specific product details if desired, and paste it into your chat session.
 
 Every prompt is engineered to invoke the canonical instructions in `SKILL.md` and reference guides in `references/` without duplicating or contradicting them.
+

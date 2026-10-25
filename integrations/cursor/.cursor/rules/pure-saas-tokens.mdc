@@ -14,3 +14,4 @@ Validate `DESIGN.md`, enforce token consistency, and export tokens:
    - CSS: `node scripts/pure-saas.mjs export-tokens DESIGN.md --format css --out styles/tokens.css`
    - Tailwind: `node scripts/pure-saas.mjs export-tokens DESIGN.md --format tailwind --out tailwind.config.tokens.js`
    - JSON: `node scripts/pure-saas.mjs export-tokens DESIGN.md --format json --out tokens.json`
+

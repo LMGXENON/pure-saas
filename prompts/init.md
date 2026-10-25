@@ -35,3 +35,4 @@ You are operating under the **Pure SaaS** design standard (`SKILL.md`). Initiali
    - **Accessibility Target:** Default is `WCAG 2.2 AA`.
 
 Once initialized, guide the user to the next stage by recommending `/pure-saas:design` or `/pure-saas:reference`.
+
