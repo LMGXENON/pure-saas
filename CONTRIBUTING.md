@@ -45,8 +45,8 @@ node --test tests/agent-workflow-tests/*.test.mjs
 # Validate templates
 node scripts/pure-saas.mjs validate templates/DESIGN.md
 
-# Scan an example
-node scripts/pure-saas.mjs check-tokens examples/developer-tool/DESIGN.md --source examples/developer-tool/src
+# Scan fixtures
+node scripts/pure-saas.mjs check-tokens tests/fixtures/valid-design.md --source tests/fixtures/test-src
 
 # Generate report
 node scripts/pure-saas.mjs review-report --json

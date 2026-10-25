@@ -25,10 +25,8 @@ jobs:
       - name: Run Test Suite
         run: npm test
 
-      - name: Validate Example Projects
+      - name: Validate Starter Templates & Fixtures
         run: |
-          node scripts/pure-saas.mjs validate examples/developer-tool/DESIGN.md
-          node scripts/pure-saas.mjs validate examples/creative-product/DESIGN.md
-          node scripts/pure-saas.mjs validate examples/editorial-saas/DESIGN.md
-          node scripts/pure-saas.mjs validate examples/existing-app-redesign/DESIGN.md
+          node scripts/pure-saas.mjs validate templates/DESIGN.md
+          node scripts/pure-saas.mjs validate tests/fixtures/valid-design.md
 

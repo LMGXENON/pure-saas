@@ -179,15 +179,22 @@ accessibility:
 
 ---
 
-## Example Projects
+## Starter Templates & Project Initialization
 
-Pure SaaS includes reference implementations demonstrating distinct visual directions and craft analysis:
+Pure SaaS is designed as a modular, reusable skill. Rather than shipping bloated example applications or locking teams into fixed templates, it provides canonical starter templates and automation tooling to initialize bespoke, project-specific design systems:
 
-1. **[Convio Reference Showcase (`examples/convio-showcase`)](examples/convio-showcase/)**: Operon — Autonomous engineering control plane. Deconstructs the craft, typography, and motion of [convio.dev](https://convio.dev/) into a 100% token-adherent, original implementation with live interactive console, 4-stage stepper, and Ed25519 cryptographic release gate. Includes comprehensive [Showcase Report](examples/convio-showcase/SHOWCASE_REPORT.md) and headless browser screenshots.
-2. **[Developer Tool (`examples/developer-tool`)](examples/developer-tool/)**: HyperTrace — Technical clarity, 60/40 hero split with live eBPF terminal runner, tabular benchmark tables, and dark mode.
-3. **[Creative Product (`examples/creative-product`)](examples/creative-product/)**: FrameCraft — Expressive display typography (Cabinet Grotesk), dynamic aspect-ratio canvas, and multi-track sequencer.
-4. **[Editorial SaaS (`examples/editorial-saas`)](examples/editorial-saas/)**: Monograph — Literary serif typography (Newsreader), warm archival canvas, generous whitespace, and zero card containers.
-5. **[Existing App Redesign (`examples/existing-app-redesign`)](examples/existing-app-redesign/)**: VaultGuard — Modernizes frontend UI into a high-density security console while strictly preserving Node/Express backend APIs, database models, and authentication contracts.
+- **[`templates/design-brief.md`](templates/design-brief.md)**: Product brief defining user personas, competitive differentiators, typography personality, and anti-slop rules.
+- **[`templates/DESIGN.md`](templates/DESIGN.md)**: Codified semantic token specification (colors, typography, spacing, radii, accessibility).
+- **[`templates/reference-record.md`](templates/reference-record.md)**: Structured observation format for deconstructing live design references.
+
+### Initialize a New Project
+Initialize a project with official starter specifications in one command:
+
+```bash
+npx pure-saas init
+```
+
+This copies `design-brief.md` and `DESIGN.md` into your repository, ready for your AI coding assistant to configure for your specific domain and aesthetic.
 
 ---
 
@@ -226,7 +233,8 @@ Zero external npm dependencies are required to run tests or the CLI.
 - [x] Zero-dependency Node.js CLI (`pure-saas.mjs` and wrapper scripts).
 - [x] Token verification, source scanner, and export to CSS / Tailwind / JSON.
 - [x] Integrations for Claude Code, Cursor, Codex, Windsurf, OpenCode, Gemini, and Generic.
-- [x] 5 distinct example projects (Developer, Creative, Editorial, Existing App, Convio Showcase).
+- [x] Modular starter templates for design briefs and specifications.
+- [x] Clean zero-dependency CLI project initialization (`pure-saas init`).
 - [x] Automated test suite covering schemas, tokens, CLI, and agent conventions.
 
 ### Planned for Future Releases

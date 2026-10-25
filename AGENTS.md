@@ -15,11 +15,10 @@ pure-saas/
 ├── AGENTS.md             # This agent operations manual
 ├── references/           # In-depth architectural & craft guides (typography, tokens, layout, etc.)
 ├── schemas/              # Formal JSON schemas for DESIGN.md, design-brief.md, and references
-├── templates/            # Ready-to-use markdown starter templates
+├── templates/            # Ready-to-use markdown starter templates (DESIGN.md, design-brief.md)
 ├── scripts/              # Zero-dependency Node.js CLI & wrappers (pure-saas.mjs, validate-design, etc.)
 ├── integrations/         # Thin adapters for Claude Code, Cursor, Codex, Windsurf, OpenCode, Gemini, generic
-├── tests/                # Automated tests (schema, token, enforcement, and agent workflow)
-└── examples/             # Canonical design direction examples (developer-tool, creative-product, editorial-saas)
+└── tests/                # Automated tests (schema, token, enforcement, and agent workflow)
 ```
 
 ---

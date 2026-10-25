@@ -35,7 +35,7 @@ tokens:
       body_large: "1.125rem" # 18px
       body_small: "0.875rem" # 14px
       label: "0.875rem"  # 14px
-      metadata: "0.75rem"# 12px
+      metadata: "0.75rem" # 12px
       code: "0.875rem"   # 14px
     line_heights:
       tight: "1.15"

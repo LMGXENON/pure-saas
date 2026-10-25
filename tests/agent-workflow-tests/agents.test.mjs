@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert';
 import fs from 'node:fs';
 import path from 'node:path';
+import { validateDesignDocument } from '../../scripts/pure-saas.mjs';
 
 test('Agents: All 7 agent integration adapters exist and contain documented instructions', () => {
   const integrations = [
@@ -39,21 +40,22 @@ test('Agents: SKILL.md and AGENTS.md satisfy required operational sections', () 
   assert.ok(skillContent.includes('Anti-Slop'), 'SKILL.md must include Anti-Slop guidance');
 });
 
-test('Agents: All 5 example projects pass complete validation and token verification', () => {
-  const examples = [
-    'developer-tool',
-    'creative-product',
-    'editorial-saas',
-    'existing-app-redesign',
-    'convio-showcase'
+test('Agents: Starter templates exist and satisfy schema and validation rules', () => {
+  const templates = [
+    'design-brief.md',
+    'DESIGN.md',
+    'reference-record.md'
   ];
 
-  for (const ex of examples) {
-    const brief = path.resolve(process.cwd(), 'examples', ex, 'design-brief.md');
-    const design = path.resolve(process.cwd(), 'examples', ex, 'DESIGN.md');
-
-    assert.ok(fs.existsSync(brief), `Example ${ex} must have design-brief.md`);
-    assert.ok(fs.existsSync(design), `Example ${ex} must have DESIGN.md`);
+  for (const tpl of templates) {
+    const tplPath = path.resolve(process.cwd(), 'templates', tpl);
+    assert.ok(fs.existsSync(tplPath), `Template ${tpl} must exist in templates/`);
+    const content = fs.readFileSync(tplPath, 'utf8');
+    assert.ok(content.length > 50, `Template ${tpl} must contain substantial starter content`);
   }
+
+  const designValidation = validateDesignDocument(path.resolve(process.cwd(), 'templates/DESIGN.md'));
+  assert.strictEqual(designValidation.valid, true, 'Starter template DESIGN.md must pass validation');
+  assert.strictEqual(designValidation.issues.length, 0, 'Starter template DESIGN.md must have zero issues');
 });
 
