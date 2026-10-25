@@ -74,3 +74,35 @@ test('CLI: Help and version flags execute successfully', async () => {
   assert.strictEqual(await runCli(['--version']), 0);
 });
 
+test('CLI: Init command creates complete starter project and supports --reference', async () => {
+  const tmpDir = path.resolve(process.cwd(), 'tests/fixtures/.tmp-init-test');
+  if (fs.existsSync(tmpDir)) fs.rmSync(tmpDir, { recursive: true, force: true });
+  fs.mkdirSync(tmpDir, { recursive: true });
+
+  const originalCwd = process.cwd();
+  try {
+    process.chdir(tmpDir);
+
+    // 1. Run init --reference
+    const code = await runCli(['init', '--reference']);
+    assert.strictEqual(code, 0, 'init --reference must exit with 0');
+    assert.ok(fs.existsSync(path.join(tmpDir, 'DESIGN.md')), 'DESIGN.md must be created');
+    assert.ok(fs.existsSync(path.join(tmpDir, 'design-brief.md')), 'design-brief.md must be created');
+    assert.ok(fs.existsSync(path.join(tmpDir, 'reference-record.md')), 'reference-record.md must be created');
+
+    // 2. Validate created files
+    const designValid = await runCli(['validate', 'DESIGN.md']);
+    assert.strictEqual(designValid, 0, 'Initialized DESIGN.md must pass validation');
+
+    const briefValid = await runCli(['validate', 'design-brief.md']);
+    assert.strictEqual(briefValid, 0, 'Initialized design-brief.md must pass validation');
+
+    // 3. Second init must warn and exit 1 (no accidental overwrite)
+    const secondCode = await runCli(['init']);
+    assert.strictEqual(secondCode, 1, 'init must prevent accidental overwrite of existing DESIGN.md');
+  } finally {
+    process.chdir(originalCwd);
+    if (fs.existsSync(tmpDir)) fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+

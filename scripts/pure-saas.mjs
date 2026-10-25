@@ -763,6 +763,15 @@ export async function runCli(args = process.argv.slice(2)) {
     console.log(`Initialized Pure SaaS project with starter templates:`);
     console.log(`  -> ${path.relative(process.cwd(), briefDest)}`);
     console.log(`  -> ${path.relative(process.cwd(), designDest)}`);
+
+    if (args.includes('--reference') || args.includes('-r')) {
+      const refDest = path.resolve(process.cwd(), 'reference-record.md');
+      const tplRefPath = path.resolve(__dirname, '../templates/reference-record.md');
+      if (fs.existsSync(tplRefPath)) {
+        fs.copyFileSync(tplRefPath, refDest);
+        console.log(`  -> ${path.relative(process.cwd(), refDest)}`);
+      }
+    }
     return 0;
   }
 
@@ -807,7 +816,7 @@ Commands:
   export-tokens [file] [--format] Export tokens from DESIGN.md to CSS, Tailwind, or JSON
   review-report                   Generate an honest verification report with tested vs untested areas
   style [query]                   Query curated design intelligence styles (adapted from ui-ux-pro-max)
-  init [template]                 Initialize starter design-brief.md and DESIGN.md in the current repo
+  init [--reference]              Initialize starter design-brief.md and DESIGN.md in the current repo
 
 Options:
   --json                          Output results as machine-readable JSON (suitable for CI)
