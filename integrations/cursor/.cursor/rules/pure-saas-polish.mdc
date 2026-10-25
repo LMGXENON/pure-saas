@@ -1,0 +1,19 @@
+---
+description: Pure SaaS Visual & Craft Polish Workflow (@pure-saas-polish, /pure-saas polish)
+globs: ["**/*.{tsx,jsx,ts,js,html,css,vue,svelte}"]
+alwaysApply: false
+---
+
+# Pure SaaS: /pure-saas polish
+
+Raise visual and tactile craft quality of an existing implementation beyond basic functionality.
+
+## Usage
+Type `@pure-saas-polish [request]` or `/pure-saas polish [request]` in Composer or Chat.
+
+## Instructions
+1. Elevate typography: tighten heading tracking (`-0.02em`), restrict body measure (`max-w-[65ch]`), and use tabular numbers (`tabular-nums`) for metrics.
+2. Refine surfaces: layered background depths (`color-bg-canvas`, `color-bg-surface`), crisp 1px borders, and subtle ambient shadows.
+3. Harmonize nested corner radii (outer radius = inner radius + padding).
+4. Add smooth tactile micro-interactions (150ms hover lift, active press scale, visible focus ring).
+5. Preserve 100% of working backend APIs, routes, and business logic.

@@ -2,9 +2,11 @@
 # Universal UI/UX Design System & Anti-Slop Discipline
 
 When creating or modifying frontend interfaces:
-1. Adhere strictly to the project's DESIGN.md tokens for color, typography, spacing, and radii.
-2. Eliminate generic AI design patterns: no unapproved purple/cyan gradient text, no glassmorphism abuse, no repetitive 3-column cards.
-3. Every interactive control must define hover, focus-visible (min 2px solid ring, min 3:1 contrast), and pressed states.
-4. Target WCAG 2.2 AA accessibility standards.
-5. In existing applications, preserve backend APIs, authentication, and database schemas.
-6. Validate design documents with: node scripts/pure-saas.mjs validate DESIGN.md
+1. Universal Command: Use `@pure-saas [request]` or `/pure-saas [request]` for any UI/UX design, implementation, or refactoring task.
+2. Specialized Rules: `@pure-saas-reference`, `@pure-saas-design`, `@pure-saas-build`, `@pure-saas-audit`, `@pure-saas-fix`, `@pure-saas-polish`, `@pure-saas-responsive`, `@pure-saas-accessible`, `@pure-saas-motion`, `@pure-saas-tokens`, `@pure-saas-component`, `@pure-saas-verify`, `@pure-saas-system`, `@pure-saas-migrate`.
+3. Design System First: Adhere strictly to the project's DESIGN.md tokens for color, typography, spacing, and radii.
+4. Eliminate AI Slop: No unapproved purple/cyan gradient text, no glassmorphism abuse, no repetitive 3-column cards, no emoji as icons.
+5. Interactive States: Every interactive control must define the 8 states (default, hover, focus-visible, active, disabled, loading, empty, error/success).
+6. Target WCAG 2.2 AA accessibility standards (contrast, keyboard navigation, semantic HTML).
+7. In existing applications, preserve 100% of backend APIs, authentication, and database schemas.
+8. Validate design documents with: node scripts/pure-saas.mjs validate DESIGN.md

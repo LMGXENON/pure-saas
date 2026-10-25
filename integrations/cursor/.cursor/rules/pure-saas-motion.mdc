@@ -1,0 +1,19 @@
+---
+description: Pure SaaS Motion & Interaction Design Workflow (@pure-saas-motion, /pure-saas motion)
+globs: ["**/*.{tsx,jsx,ts,js,html,css,vue,svelte}"]
+alwaysApply: false
+---
+
+# Pure SaaS: /pure-saas motion
+
+Design, implement, or refine purposeful motion, transitions, and micro-interactions.
+
+## Usage
+Type `@pure-saas-motion [request]` or `/pure-saas motion [request]` in Composer or Chat.
+
+## Instructions
+1. Use physics-based easing curves (`cubic-bezier(0.16, 1, 0.3, 1)` for reveals, `cubic-bezier(0.4, 0, 0.2, 1)` for standard transitions).
+2. Fast duration budget: micro-interactions (150ms–200ms), entrance reveals (250ms–350ms).
+3. Restrain animated properties to GPU-accelerated `transform` and `opacity` to maintain 60/120fps.
+4. Enforce `@media (prefers-reduced-motion: reduce)` fallbacks disabling motion for users with vestibular sensitivities.
+5. Avoid random directions or unnecessary decorative movement that degrades usability.

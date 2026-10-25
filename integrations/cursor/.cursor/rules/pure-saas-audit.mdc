@@ -1,0 +1,19 @@
+---
+description: Pure SaaS Quality & Usability Audit Workflow (@pure-saas-audit, /pure-saas audit)
+globs: ["**/*.{tsx,jsx,ts,js,html,css,vue,svelte}", "DESIGN.md"]
+alwaysApply: false
+---
+
+# Pure SaaS: /pure-saas audit
+
+Comprehensive quality audit across visual hierarchy, responsive behavior, accessibility, and tokens.
+
+## Usage
+Type `@pure-saas-audit [scope]` or `/pure-saas audit [scope]` in Composer or Chat.
+
+## Instructions
+1. Evaluate visual hierarchy, anti-slop compliance (`references/anti-slop-rules.md`), typography measure (45–75ch), and surface elevation.
+2. Check responsive overflow at 1440px desktop, 768px tablet, and 375px mobile viewports.
+3. Check WCAG 2.2 AA accessibility: color contrast (≥4.5:1), visible focus rings, and semantic HTML landmarks.
+4. Run `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src` to detect unmapped styles.
+5. Produce findings categorized by severity (Critical, High, Medium, Low). Do not modify files during an audit.

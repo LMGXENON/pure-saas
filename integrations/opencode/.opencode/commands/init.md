@@ -10,3 +10,4 @@ Execute the initialization workflow:
 3. Validate initial files with `node scripts/pure-saas.mjs validate DESIGN.md`.
 4. If arguments were provided ($ARGUMENTS), configure product name and archetype in `design-brief.md`. Otherwise, prompt the user for product direction.
 5. Guide user to next workflow: `/pure-saas:design` or `/pure-saas:reference`.
+

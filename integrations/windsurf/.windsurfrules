@@ -2,22 +2,22 @@
 # Universal UI/UX Design System & Anti-Slop Discipline
 
 When modifying or generating frontend components, styling, or layouts:
-1. Always maintain and reference DESIGN.md for semantic colors, typography hierarchy, and spacing tokens.
-2. Anti-Slop Enforcement:
-   - Prohibit unapproved purple/cyan gradient backgrounds and text.
-   - Prohibit excessive glassmorphism and blurry backdrops.
-   - Avoid monotonous three-column card grids; use asymmetrical and editorial layouts.
-   - Use clean SVG icons (Lucide, Heroicons), never emojis.
-3. Accessible Craft:
-   - Target WCAG 2.2 AA contrast.
-   - Enforce visible keyboard focus indicators on all interactive elements.
-   - Add prefers-reduced-motion queries for all animations.
-4. Available Workflows (refer to prompts/ directory):
-   - init: Initialize DESIGN.md and design-brief.md (prompts/init.md)
-   - design: Full 9-stage design/redesign workflow (prompts/design.md)
-   - review: UI audit for visual quality, contrast, and slop (prompts/review.md)
+1. Universal Command: Use `/pure-saas [request]` or copy from `prompts/pure-saas.md` for any design, implementation, or refactoring task.
+2. Specialized Subcommands (see prompts/ directory):
+   - reference: Reverse-engineer visual reference via browser DevTools (prompts/reference.md)
+   - design: Establish or update persistent DESIGN.md specification (prompts/design.md)
+   - build: Execute complete working implementation (prompts/build.md)
+   - audit: Quality audit across hierarchy, responsive, a11y, performance (prompts/audit.md)
    - fix: Remediate UI defects preserving backend APIs (prompts/fix.md)
+   - polish: Raise visual craft, typography, and micro-interactions (prompts/polish.md)
+   - responsive: Cross-device layout optimization (1440px, 768px, 375px) (prompts/responsive.md)
+   - accessible: WCAG 2.2 AA accessibility and focus management (prompts/accessible.md)
+   - motion: Purposeful transitions and reduced motion (prompts/motion.md)
    - tokens: Validate and export design tokens (prompts/tokens.md)
-   - reference: Deconstruct reference website into tokens (prompts/reference.md)
-5. Validation:
-   - Run node scripts/pure-saas.mjs validate DESIGN.md to ensure structural integrity.
+   - component: Reusable component engineering across 8 states (prompts/component.md)
+   - verify: End-to-end verification and testing (prompts/verify.md)
+   - system: Evolve product design foundations (prompts/system.md)
+   - migrate: Modernize legacy styles without regressions (prompts/migrate.md)
+3. Anti-Slop Discipline: Prohibit unapproved purple/cyan gradient text, excessive glassmorphism, monotonous 3-column cards, and emoji icons.
+4. Semantic Tokens: Bind all styling to tokens in DESIGN.md. Validate with `node scripts/pure-saas.mjs validate DESIGN.md`.
+5. Non-Regression: Preserve 100% of existing backend APIs, server actions, and database schemas.

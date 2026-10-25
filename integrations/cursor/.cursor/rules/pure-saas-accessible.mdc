@@ -1,0 +1,20 @@
+---
+description: Pure SaaS Accessibility & Inclusive Interaction Workflow (@pure-saas-accessible, /pure-saas accessible)
+globs: ["**/*.{tsx,jsx,ts,js,html,css,vue,svelte}"]
+alwaysApply: false
+---
+
+# Pure SaaS: /pure-saas accessible
+
+Improve accessibility (WCAG 2.2 AA) and inclusive interaction across markup and styles.
+
+## Usage
+Type `@pure-saas-accessible [request]` or `/pure-saas accessible [request]` in Composer or Chat.
+
+## Instructions
+1. Ensure HTML5 semantic landmarks (`<header>`, `<nav>`, `<main>`, `<footer>`, `<dialog>`).
+2. Verify all controls are operable via keyboard (`Tab`, `Enter`, `Space`, `Escape`) with visible focus rings.
+3. Check color contrast: ≥ 4.5:1 for normal text, ≥ 3:1 for large text and UI boundaries.
+4. Connect all form inputs to explicit `<label>` tags with `aria-describedby` for error text.
+5. Provide `@media (prefers-reduced-motion: reduce)` fallbacks for non-essential animations.
+6. Verify minimum 44x44px touch targets.

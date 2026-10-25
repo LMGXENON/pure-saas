@@ -1,0 +1,19 @@
+---
+description: Pure SaaS Complete Implementation Workflow (@pure-saas-build, /pure-saas build)
+globs: ["**/*.{tsx,jsx,ts,js,html,css,vue,svelte}"]
+alwaysApply: false
+---
+
+# Pure SaaS: /pure-saas build
+
+Execute complete implementation from scratch or continue existing project.
+
+## Usage
+Type `@pure-saas-build [request]` or `/pure-saas build [request]` in Composer or Chat.
+
+## Instructions
+1. Inspect existing project framework, styling architecture, and backend contracts.
+2. Bind all styling to semantic tokens in `DESIGN.md`. Reject hardcoded hex colors and arbitrary spacing numbers.
+3. Build complete working product with real interaction states and logic—never stop at a mockup or hero scaffold.
+4. Strictly preserve backend routes, database models, and authentication flows.
+5. Verify desktop (1440px) and mobile (375px) layouts, run `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src`, and report results.

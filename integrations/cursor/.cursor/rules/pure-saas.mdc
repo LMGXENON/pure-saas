@@ -1,20 +1,20 @@
 ---
-description: Pure SaaS Design System and Anti-Slop Enforcement
+description: Pure SaaS Universal UI/UX Design and Implementation Skill (@pure-saas, /pure-saas)
 globs: ["**/*.{tsx,jsx,ts,js,html,css,vue,svelte}", "DESIGN.md", "design-brief.md"]
 alwaysApply: true
 ---
 
-# Pure SaaS Rules for Cursor
+# Pure SaaS: Universal Agent Design & Implementation Skill
 
-When designing or implementing user interfaces, web pages, or frontend components:
+Universal entry point for any UI/UX design, implementation, refactoring, or audit task.
 
-1. **Check for `DESIGN.md`:** Always inspect the project's `DESIGN.md` for semantic color tokens, typography scales, and spacing scales before generating styles.
-2. **No Generic AI Slop:**
-   - Never use purple/cyan gradient text or blurred backdrop glows without explicit user authorization.
-   - Do not repeat the same 3-column card layout across the page.
-   - Use clean SVG icons (Lucide, Heroicons), never emojis.
-   - Constrain body text measure to 45–75 characters (`max-w-[65ch]`) and apply `text-wrap: balance` to headings.
-3. **Semantic Tokens Only:** Bind styling to tokens (`--color-bg-canvas`, `--color-action-primary`) rather than hardcoded hex codes.
-4. **Interactive States:** Provide hover, focus-visible, and active states for all interactive elements.
-5. **Enforcement:** Run `node scripts/pure-saas.mjs validate DESIGN.md` to ensure design system compliance.
+## Usage in Cursor
+- Type `@pure-saas [request]` or `/pure-saas [request]` in Cursor Composer or Chat.
+- Automatically understands natural-language requests, inspects project context, chains necessary workflows, implements complete outcomes, and verifies them.
 
+## Core Mandates
+1. **No Generic AI Slop:** Reject purple/cyan gradient text, blurred glassmorphism glows, monotonous 3-column card grids, and emoji UI icons.
+2. **Persistent Design System:** Codify tokens in `DESIGN.md` before generating styles. Bind styling to semantic tokens (`--color-bg-canvas`, `--color-action-primary`).
+3. **Preserve Architecture & APIs:** Never overwrite backend endpoints, database schemas, or authentication during visual upgrades.
+4. **The 8-State Matrix:** Cover `default`, `hover`, `focus-visible`, `active`, `disabled`, `loading`, `empty`, and `error/success`.
+5. **Honest Verification:** Run `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src` and report results honestly.

@@ -1,22 +1,22 @@
 # Gemini Project Instructions: Pure SaaS Standard
 
 When generating, designing, or refactoring user interfaces:
-1. Always establish or update `DESIGN.md` in the project root before implementing visual components.
-2. Follow the Pure SaaS anti-slop principles:
-   - Challenge and avoid generic purple/cyan gradient backgrounds and text.
-   - Restrain corner radii and eliminate unnecessary glassmorphism.
-   - Avoid monotonous three-column cards; create varied, content-specific layouts.
-   - Use clean SVG icons, never emojis.
-3. Core Workflows:
-   - `/pure-saas:init` (or `prompts/init.md`): Initialize `DESIGN.md` and `design-brief.md`.
-   - `/pure-saas:design` (or `prompts/design.md`): Execute 9-stage design workflow.
-   - `/pure-saas:review` (or `prompts/review.md`): Audit UI for accessibility and anti-slop compliance.
-   - `/pure-saas:fix` (or `prompts/fix.md`): Remediate UI defects preserving backend APIs.
-   - `/pure-saas:tokens` (or `prompts/tokens.md`): Validate and export tokens.
-   - `/pure-saas:reference` (or `prompts/reference.md`): Deconstruct reference website into tokens.
-4. Validate design system integrity with:
-   ```bash
-   node scripts/pure-saas.mjs validate DESIGN.md
-   ```
-5. Conclude design tasks with an honest verification report disclosing tested vs untested areas.
-
+1. Universal Command: Use `/pure-saas [request]` for any UI/UX design, implementation, refactoring, or audit task across websites, web applications, dashboards, mobile apps, desktop apps, and components.
+2. Specialized Subcommands:
+   - `/pure-saas reference [URL]` (or `prompts/reference.md`): Reverse-engineer visual references using browser DevTools and recreate.
+   - `/pure-saas design` (or `prompts/design.md`): Author or update `DESIGN.md`.
+   - `/pure-saas build` (or `prompts/build.md`): Execute complete working implementation.
+   - `/pure-saas audit` (or `prompts/audit.md`): Comprehensive quality and WCAG 2.2 AA audit.
+   - `/pure-saas fix` (or `prompts/fix.md`): Remediate defects while preserving backend APIs.
+   - `/pure-saas polish` (or `prompts/polish.md`): Elevate typography, surfaces, and micro-interactions.
+   - `/pure-saas responsive` (or `prompts/responsive.md`): Cross-device ergonomics (1440px, 768px, 375px).
+   - `/pure-saas accessible` (or `prompts/accessible.md`): Accessible interaction, focus rings, and landmarks.
+   - `/pure-saas motion` (or `prompts/motion.md`): Purposeful motion and reduced-motion support.
+   - `/pure-saas tokens` (or `prompts/tokens.md`): Token validation, scanning, and export.
+   - `/pure-saas component` (or `prompts/component.md`): Reusable components across the 8-state matrix.
+   - `/pure-saas verify` (or `prompts/verify.md`): End-to-end verification and testing.
+   - `/pure-saas system` (or `prompts/system.md`): Evolve product design foundations.
+   - `/pure-saas migrate` (or `prompts/migrate.md`): Modernize legacy styling without regressions.
+3. Anti-Slop Discipline: Reject generic purple/cyan gradient text, monotonous 3-column cards, and emoji icons.
+4. Persistent Tokens: Bind styling to semantic tokens in `DESIGN.md`. Validate with `node scripts/pure-saas.mjs validate DESIGN.md`.
+5. Honest Verification: Report verified results and untested areas honestly.

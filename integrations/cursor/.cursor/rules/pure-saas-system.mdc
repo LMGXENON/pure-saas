@@ -1,0 +1,19 @@
+---
+description: Pure SaaS Design System Architecture Workflow (@pure-saas-system, /pure-saas system)
+globs: ["DESIGN.md", "design-brief.md", "**/styles/**", "**/tokens/**"]
+alwaysApply: false
+---
+
+# Pure SaaS: /pure-saas system
+
+Establish or evolve a coherent product-wide design system supporting incremental adoption.
+
+## Usage
+Type `@pure-saas-system [request]` or `/pure-saas system [request]` in Composer or Chat.
+
+## Instructions
+1. Inspect existing codebase styles and components to identify styling discrepancies.
+2. Define or update semantic foundations in `DESIGN.md` (colors, typography, spacing, radii, a11y).
+3. Validate specification: `node scripts/pure-saas.mjs validate DESIGN.md`.
+4. Export tokens to code: `node scripts/pure-saas.mjs export-tokens DESIGN.md --format css --out styles/tokens.css`.
+5. Establish core foundation components and guidelines enabling incremental adoption without whole-app rewrites.

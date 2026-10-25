@@ -1,20 +1,35 @@
-# Pure SaaS: /pure-saas:tokens
+# Pure SaaS: /pure-saas tokens
 
-Validate `DESIGN.md`, enforce token consistency across source files, and export tokens to CSS custom properties, Tailwind configuration, or JSON.
+Manage the design token system: create, inspect, extract, validate, refactor, and export tokens.
 
-## Options: $ARGUMENTS
+## Usage
 
-Execute token management workflow:
-1. Validate `DESIGN.md` required tokens (18 semantic colors, typography scale, spacing):
-   ```bash
-   node scripts/pure-saas.mjs validate DESIGN.md
-   ```
-2. Scan source directory for raw styling drift:
-   ```bash
-   node scripts/pure-saas.mjs check-tokens DESIGN.md --source src
-   ```
-3. If export requested (or matching arguments):
-   - CSS: `node scripts/pure-saas.mjs export-tokens DESIGN.md --format css --out styles/tokens.css`
-   - Tailwind: `node scripts/pure-saas.mjs export-tokens DESIGN.md --format tailwind --out tailwind.config.tokens.js`
-   - JSON: `node scripts/pure-saas.mjs export-tokens DESIGN.md --format json --out tokens.json`
-4. Report token verification status and exported file paths.
+```bash
+/pure-saas tokens [request]
+# or
+/pure-saas:tokens [request]
+```
+
+**Target Request / Format:** `$ARGUMENTS`
+
+---
+
+## Operational Instructions
+
+1. **Token Scope & Alignment:**
+   - Manage semantic tokens in `DESIGN.md`: colors, typography, spacing, sizing, radii, borders, shadows, transitions, and breakpoints.
+   - Respect existing project conventions and keep tokens aligned with `DESIGN.md`.
+2. **Validation & Source Scanning:**
+   - Validate `DESIGN.md` required tokens (18 semantic colors, typography scale, spacing, accessibility):
+     ```bash
+     node scripts/pure-saas.mjs validate DESIGN.md
+     ```
+   - Scan source directory for raw styling drift, hardcoded hex values, or arbitrary Tailwind numbers:
+     ```bash
+     node scripts/pure-saas.mjs check-tokens DESIGN.md --source src
+     ```
+3. **Exporting Tokens:**
+   - CSS Custom Properties: `node scripts/pure-saas.mjs export-tokens DESIGN.md --format css --out styles/tokens.css`
+   - Tailwind Configuration: `node scripts/pure-saas.mjs export-tokens DESIGN.md --format tailwind --out tailwind.tokens.js`
+   - JSON Tokens: `node scripts/pure-saas.mjs export-tokens DESIGN.md --format json --out tokens.json`
+4. **Report:** Output token verification status, scan findings, and exported file paths.

@@ -1,0 +1,19 @@
+---
+description: Pure SaaS Responsive & Cross-Device Layout Workflow (@pure-saas-responsive, /pure-saas responsive)
+globs: ["**/*.{tsx,jsx,ts,js,html,css,vue,svelte}"]
+alwaysApply: false
+---
+
+# Pure SaaS: /pure-saas responsive
+
+Optimize layouts across desktop (1440px), tablet (768px), and mobile (375px) viewports.
+
+## Usage
+Type `@pure-saas-responsive [request]` or `/pure-saas responsive [request]` in Composer or Chat.
+
+## Instructions
+1. Inspect layout across 1440px desktop, 768px tablet, and 375px mobile viewports.
+2. Eliminate horizontal scroll issues, wrap overflowing identifiers, and use container scroll wrappers on dense tables.
+3. Ensure touch targets on interactive controls meet the 44x44px minimum bounding box.
+4. Scale large display headings gracefully on mobile to prevent single-word line breaks.
+5. Retain all backend API connections, event listeners, and form validations.

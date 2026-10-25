@@ -1,0 +1,19 @@
+---
+description: Pure SaaS Reusable Component Workflow (@pure-saas-component, /pure-saas component)
+globs: ["**/*.{tsx,jsx,ts,js,vue,svelte}"]
+alwaysApply: false
+---
+
+# Pure SaaS: /pure-saas component
+
+Build or improve robust, accessible, reusable UI components aligned with the design system.
+
+## Usage
+Type `@pure-saas-component [request]` or `/pure-saas component [request]` in Composer or Chat.
+
+## Instructions
+1. Inspect existing components to prevent duplicating components or conflicting APIs.
+2. Bind all styling to semantic tokens in `DESIGN.md`. Reject hardcoded hex colors and arbitrary spacing.
+3. Fully implement the 8-state matrix: `default`, `hover`, `focus-visible`, `active`, `disabled`, `loading`, `empty`, and `error/success`.
+4. Ensure built-in keyboard navigation, visible focus offset, and ARIA roles.
+5. Provide clean component APIs with typed variants, composition, and ref forwarding.

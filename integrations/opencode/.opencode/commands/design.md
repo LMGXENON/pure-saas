@@ -1,16 +1,40 @@
-# Pure SaaS: /pure-saas:design
+# Pure SaaS: /pure-saas design
 
-Design or redesign a web page or SaaS product using the complete 9-stage Pure SaaS workflow (`SKILL.md`) without generic AI slop.
+Establish or update the project's persistent design specification (`DESIGN.md`) before implementation.
 
-## Target / Requirements: $ARGUMENTS
+## Usage
 
-Execute the 9-stage workflow:
-1. **Stage A (Discover):** Audit project constraints, framework, and styles. Preserve all backend APIs in existing code.
-2. **Stage B (Define Direction):** Update `design-brief.md` with requirements from $ARGUMENTS.
-3. **Stage C (Establish Design System):** Define semantic design tokens in `DESIGN.md`. Validate with `node scripts/pure-saas.mjs validate DESIGN.md`.
-4. **Stage D (Plan Layout):** Consult `references/layout-and-composition.md`. Plan asymmetric layout, typography hierarchy, and rhythm before writing components.
-5. **Stage E (Build Interface):** Implement clean semantic HTML and styles. Strictly bind styles to tokens in `DESIGN.md`. Reject all raw hex colors and arbitrary spacing.
-6. **Stage F (Inspect):** Inspect 1440px desktop and 375px mobile layouts for text wrapping and overflow.
-7. **Stage G (Critique & Refine):** Fix high/critical issues following `references/design-review.md`.
-8. **Stage H (Enforce System):** Run `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src`. Ensure 0 violations.
-9. **Stage I (Report Honest Results):** Report verified vs untested areas honestly.
+```bash
+/pure-saas design [request]
+# or
+/pure-saas:design [request]
+```
+
+**Target Request:** `$ARGUMENTS`
+
+---
+
+## Operational Instructions
+
+1. **Establish Root-Level `DESIGN.md`:**
+   Create or update a comprehensive, implementation-ready `DESIGN.md` before coding when the task requires a new or substantially revised design. Document:
+   - **Design direction:** Aesthetic archetype, visual identity, brand personality, and design principles.
+   - **Page architecture & IA:** Complete page or application structure, section sequence, content hierarchy, dimensions, and spacing.
+   - **Layout system:** Container widths, max widths, margins, grids, flex layouts, sticky positioning, and overflow behavior.
+   - **Colour system:** Semantic colors (canvas, surface, text, action, border, status), gradients, and CSS variables.
+   - **Typography:** Font families, weights, sources, sizing scale, line heights, letter spacing, responsive scaling, and body measure (45–75ch).
+   - **Components & States:** Variants, geometry, radii, borders, shadows, layering, and full 8-state matrix.
+   - **Design tokens:** Complete tokens in frontmatter and CSS custom properties.
+   - **Assets & Icons:** SVGs, vector icons, imagery, and treatments.
+   - **Motion & Interaction:** Timing, easing curves, transitions, triggers, and reduced-motion support.
+   - **Responsive behaviour:** Breakpoints and cross-device adaptations.
+   - **Accessibility & Constraints:** Contrast targets (WCAG 2.2 AA), focus rings, semantic HTML, and technical constraints.
+   - **Implementation Architecture:** Component tree, file structure, implementation checklist, and verification criteria.
+2. **Scope Discipline:**
+   - Clearly distinguish observed facts, inferred values, and unknowns.
+   - For small changes, update only the relevant specification instead of needlessly regenerating the entire document.
+3. **Validate:**
+   ```bash
+   node scripts/pure-saas.mjs validate DESIGN.md
+   ```
+4. **Report:** Output a concise summary of the established or updated design specification.

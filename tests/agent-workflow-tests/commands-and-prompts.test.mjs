@@ -3,17 +3,43 @@ import assert from 'node:assert';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const WORKFLOWS = [
-  'init',
+const SUBCOMMANDS = [
+  'reference',
   'design',
-  'review',
+  'build',
+  'audit',
   'fix',
+  'polish',
+  'responsive',
+  'accessible',
+  'motion',
   'tokens',
-  'reference'
+  'component',
+  'verify',
+  'system',
+  'migrate',
+  'init',
+  'review'
 ];
 
-test('Prompts: All 6 core portable prompts exist and contain substantive instructions', () => {
-  for (const wf of WORKFLOWS) {
+test('Global Command: Universal /pure-saas prompt and command exist', () => {
+  const globalPromptPath = path.resolve(process.cwd(), 'prompts/pure-saas.md');
+  const globalCmdPath = path.resolve(process.cwd(), 'commands/pure-saas.md');
+
+  assert.ok(fs.existsSync(globalPromptPath), 'prompts/pure-saas.md must exist');
+  assert.ok(fs.existsSync(globalCmdPath), 'commands/pure-saas.md must exist');
+
+  const promptContent = fs.readFileSync(globalPromptPath, 'utf8');
+  assert.ok(promptContent.includes('Pure SaaS'), 'Global prompt must reference Pure SaaS');
+  assert.ok(promptContent.length > 200, 'Global prompt must be substantive');
+
+  const cmdContent = fs.readFileSync(globalCmdPath, 'utf8');
+  assert.ok(cmdContent.includes('/pure-saas'), 'Global command must declare /pure-saas');
+  assert.ok(cmdContent.includes('$ARGUMENTS'), 'Global command must handle $ARGUMENTS');
+});
+
+test('Prompts: All specialized subcommand prompts exist and contain substantive instructions', () => {
+  for (const wf of SUBCOMMANDS) {
     const promptPath = path.resolve(process.cwd(), 'prompts', `${wf}.md`);
     assert.ok(fs.existsSync(promptPath), `prompts/${wf}.md must exist`);
     const content = fs.readFileSync(promptPath, 'utf8');
@@ -25,24 +51,24 @@ test('Prompts: All 6 core portable prompts exist and contain substantive instruc
   assert.ok(fs.existsSync(readmePath), 'prompts/README.md must exist');
 });
 
-test('Commands: All 6 core slash command definitions exist for Claude Code and OpenCode', () => {
-  for (const wf of WORKFLOWS) {
+test('Commands: All specialized subcommand definitions exist for Claude Code and OpenCode', () => {
+  for (const wf of SUBCOMMANDS) {
     const cmdPath = path.resolve(process.cwd(), 'commands', `${wf}.md`);
     assert.ok(fs.existsSync(cmdPath), `commands/${wf}.md must exist`);
     const content = fs.readFileSync(cmdPath, 'utf8');
     assert.ok(content.length > 50, `commands/${wf}.md must contain substantive instructions`);
-    assert.ok(content.includes(`pure-saas:${wf}`), `commands/${wf}.md must declare /pure-saas:${wf}`);
+    assert.ok(content.includes(`pure-saas`), `commands/${wf}.md must declare pure-saas command`);
   }
 });
 
-test('Claude Code: Plugin manifest registers all 6 commands and matches package standards', () => {
+test('Claude Code: Plugin manifest registers commands and matches package standards', () => {
   const pluginPath = path.resolve(process.cwd(), '.claude-plugin/plugin.json');
   assert.ok(fs.existsSync(pluginPath), '.claude-plugin/plugin.json must exist');
 
   const plugin = JSON.parse(fs.readFileSync(pluginPath, 'utf8'));
   assert.strictEqual(plugin.name, 'pure-saas');
   assert.ok(Array.isArray(plugin.commands), 'plugin.json must have commands array');
-  assert.strictEqual(plugin.commands.length, 6, 'plugin.json must register all 6 commands');
+  assert.ok(plugin.commands.length >= 15, 'plugin.json must register commands for all workflows');
 
   for (const cmdRef of plugin.commands) {
     const resolvedPath = path.resolve(process.cwd(), '.claude-plugin', cmdRef);
@@ -50,8 +76,11 @@ test('Claude Code: Plugin manifest registers all 6 commands and matches package 
   }
 });
 
-test('Cursor: All 6 workflow rules exist in .cursor/rules/*.mdc', () => {
-  for (const wf of WORKFLOWS) {
+test('Cursor: Universal rule and specialized workflow rules exist in .cursor/rules/*.mdc', () => {
+  const globalRule = path.resolve(process.cwd(), 'integrations/cursor/.cursor/rules/pure-saas.mdc');
+  assert.ok(fs.existsSync(globalRule), 'Global pure-saas.mdc rule must exist');
+
+  for (const wf of SUBCOMMANDS) {
     const rulePath = path.resolve(process.cwd(), 'integrations/cursor/.cursor/rules', `pure-saas-${wf}.mdc`);
     assert.ok(fs.existsSync(rulePath), `integrations/cursor/.cursor/rules/pure-saas-${wf}.mdc must exist`);
     const content = fs.readFileSync(rulePath, 'utf8');
@@ -59,8 +88,8 @@ test('Cursor: All 6 workflow rules exist in .cursor/rules/*.mdc', () => {
   }
 });
 
-test('OpenCode: All 6 commands exist in .opencode/commands/', () => {
-  for (const wf of WORKFLOWS) {
+test('OpenCode: All subcommand files exist in .opencode/commands/', () => {
+  for (const wf of SUBCOMMANDS) {
     const cmdPath = path.resolve(process.cwd(), 'integrations/opencode/.opencode/commands', `${wf}.md`);
     assert.ok(fs.existsSync(cmdPath), `integrations/opencode/.opencode/commands/${wf}.md must exist`);
   }
@@ -87,7 +116,7 @@ test('Integrity: All prompt toolkit references point to real existing files', ()
     'tailwind.tokens.js'
   ];
 
-  for (const wf of WORKFLOWS) {
+  for (const wf of SUBCOMMANDS) {
     const promptPath = path.resolve(process.cwd(), 'prompts', `${wf}.md`);
     const content = fs.readFileSync(promptPath, 'utf8');
     let match;

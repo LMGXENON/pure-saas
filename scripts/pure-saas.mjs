@@ -598,7 +598,7 @@ export async function runCli(args = process.argv.slice(2)) {
     return result.valid ? 0 : 1;
   }
 
-  if (command === 'check-tokens') {
+  if (command === 'check-tokens' || command === 'tokens') {
     const designFile = path.resolve(process.cwd(), args[1] && !args[1].startsWith('--') ? args[1] : 'DESIGN.md');
     const jsonOutput = args.includes('--json');
     const srcIndex = args.indexOf('--source');
@@ -668,7 +668,7 @@ export async function runCli(args = process.argv.slice(2)) {
     return 0;
   }
 
-  if (command === 'review-report') {
+  if (command === 'review-report' || command === 'audit' || command === 'verify') {
     const designFile = path.resolve(process.cwd(), 'DESIGN.md');
     const briefFile = path.resolve(process.cwd(), 'design-brief.md');
     const jsonOutput = args.includes('--json');
@@ -841,9 +841,9 @@ Usage:
 
 Commands:
   validate [file]                 Validate DESIGN.md or design-brief.md structure and required tokens
-  check-tokens [file] [--source] Check design tokens and scan source code for raw styling or drift
+  check-tokens, tokens [file]     Check design tokens and scan source code for raw styling or drift
   export-tokens [file] [--format] Export tokens from DESIGN.md to CSS, Tailwind, or JSON
-  review-report                   Generate an honest verification report with tested vs untested areas
+  audit, review-report, verify    Generate an honest verification report with tested vs untested areas
   style [query]                   Query curated design intelligence styles
   init [--reference]              Initialize starter design-brief.md and DESIGN.md in the current repo
 

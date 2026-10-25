@@ -52,19 +52,42 @@ The document must capture all 16 required sections:
 
 ---
 
-## 3. Required Execution Order
+## 3. Design Specification Requirements
 
-1. **Inspect:** DevTools inspection of reference URL across DOM, styles, motion, and viewports.
-2. **Specify:** Create root-level `DESIGN.md` with all 16 sections. Validate: `node scripts/pure-saas.mjs validate DESIGN.md`.
-3. **Plan:** Establish design tokens and implementation architecture.
-4. **Build:** Implement full website adapting branding to user's product.
-5. **Compare:** Inspect side-by-side with reference at 1440px, 768px, and 375px.
-6. **Refine:** Fix visual and interaction differences; update `DESIGN.md`.
-7. **Report:** Conclude with an honest verification report.
+- Use clear headings, tables, and code blocks. Include actual CSS custom-property definitions for design tokens.
+- Be specific and actionable. Avoid vague descriptions like "use generous spacing" when a measurable value can be observed or reasonably estimated.
+- Separate **observed values**, **inferred values**, and **unknowns**. Never fabricate inspection results.
+- Record all relevant sections rather than documenting only the hero or first viewport.
+- If a `DESIGN.md` already exists, inspect it and preserve unrelated project decisions. Update it carefully rather than overwriting blindly.
+- Keep the document consistent with reference inspection and implementation. Document reasons for any necessary deviations.
+- Treat `DESIGN.md` as the project's persistent design source of truth.
 
 ---
 
-## 4. Expected Outcome & Acceptance Criterion
+## 4. Inspection Rules
+
+- Use actual browser DevTools whenever tools permit; a screenshot or basic HTML fetch alone is insufficient for deep inspection.
+- Never assume minified JavaScript reveals the full original implementation. Trace observable behavior and inspect loaded resources.
+- Do not bypass authentication, paywalls, access controls, browser security restrictions, or other protections.
+- Never claim to have inspected inaccessible CSS, scripts, network resources, or interactions.
+- If DevTools or browser automation is unavailable, explain that limitation and use the deepest available alternative (rendered-page inspection, accessible stylesheets, public source maps, screenshots) while recording unverified areas as `untested`.
+- Preserve existing project architecture and functionality. Do not overwrite unrelated files or add unnecessary dependencies.
+
+---
+
+## 5. Required Execution Order
+
+1. **Inspect:** Inspect the reference website using available browser and DevTools capabilities.
+2. **Specify:** Create the complete 16-section `DESIGN.md`. Validate: `node scripts/pure-saas.mjs validate DESIGN.md`.
+3. **Plan:** Establish design tokens and implementation architecture from that specification.
+4. **Build:** Build the full website using the specification, adapting content and branding to the user's product.
+5. **Compare:** Run the implementation locally and inspect it beside the reference at matching viewport sizes (1440px, 768px, 375px).
+6. **Refine:** Fix visual and interaction differences, then update `DESIGN.md` to reflect verified final decisions.
+7. **Report:** Conclude with an honest report of what was inspected, implemented, tested, and left unverified.
+
+---
+
+## 6. Expected Outcome & Acceptance Criterion
 
 A technically informed, high-fidelity implementation based on both the reference's rendered appearance and its observable behaviour, not a generic imitation.
 
