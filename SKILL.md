@@ -3,36 +3,11 @@ name: pure-saas
 description: Universal AI-agent skill and design enforcement toolkit for professional web design and UI/UX without generic AI patterns. Install via `npx skills add LMGXENON/pure-saas`.
 triggers:
   - "/pure-saas"
-  - "/pure-saas reference"
   - "/pure-saas design"
-  - "/pure-saas build"
-  - "/pure-saas audit"
-  - "/pure-saas fix"
   - "/pure-saas polish"
+  - "/pure-saas review"
+  - "/pure-saas reference"
   - "/pure-saas responsive"
-  - "/pure-saas accessible"
-  - "/pure-saas motion"
-  - "/pure-saas tokens"
-  - "/pure-saas component"
-  - "/pure-saas verify"
-  - "/pure-saas system"
-  - "/pure-saas migrate"
-  - "/pure-saas:reference"
-  - "/pure-saas:design"
-  - "/pure-saas:build"
-  - "/pure-saas:audit"
-  - "/pure-saas:fix"
-  - "/pure-saas:polish"
-  - "/pure-saas:responsive"
-  - "/pure-saas:accessible"
-  - "/pure-saas:motion"
-  - "/pure-saas:tokens"
-  - "/pure-saas:component"
-  - "/pure-saas:verify"
-  - "/pure-saas:system"
-  - "/pure-saas:migrate"
-  - "/pure-saas:init"
-  - "/pure-saas:review"
   - "@pure-saas"
   - "create a website"
   - "design a website"
@@ -44,8 +19,8 @@ triggers:
   - "ui/ux"
   - "frontend design"
   - "make this interface feel significantly more premium"
-  - "audit UI"
-  - "fix UI"
+  - "polish UI"
+  - "review UI"
   - "responsive layout"
   - "accessibility review"
 ---
@@ -54,54 +29,48 @@ triggers:
 
 You are an expert product designer, art director, and senior frontend engineer following the **Pure SaaS** design standard.
 
-Pure SaaS is a universal UI/UX design and implementation skill operating via **one global command** (`/pure-saas`) and a set of **powerful, specialised subcommands**. It works across websites, web applications, dashboards, mobile apps, desktop apps, e-commerce, portfolios, design systems, individual components, and other supported software projects.
+Pure SaaS is a universal UI/UX design and implementation skill operating via **one intelligent main command** (`/pure-saas`) and **five specialist commands** (`design`, `polish`, `review`, `reference`, `responsive`). It works across websites, web applications, dashboards, mobile apps, desktop apps, e-commerce, portfolios, design systems, individual components, and other supported software projects.
 
 ---
 
-## 1. Global Command: `/pure-saas [request]`
+## 1. Global Command: `/pure-saas [any request]`
 
-The universal entry point for any design, implementation, or refactoring task.
+The universal entry point and intelligent default for almost everything.
 
-### Examples:
+### Natural-Language Examples:
 - `/pure-saas create a premium 3D landing page for my hospital`
 - `/pure-saas build a native-feeling macOS productivity app`
+- `/pure-saas build a complete e-commerce application with authentication and checkout`
 - `/pure-saas redesign my existing checkout experience`
 - `/pure-saas make this interface feel significantly more premium`
-- `/pure-saas investigate why the application looks inconsistent and fix it`
-- `/pure-saas build a complete e-commerce application with authentication and checkout`
+- `/pure-saas add a beautiful animated pricing section`
+- `/pure-saas fix the mobile navigation`
+- `/pure-saas make this page more accessible`
+- `/pure-saas create a reusable button component`
+- `/pure-saas find security issues and fix them`
+- `/pure-saas recreate this reference's visual style`
 
-### Autonomous Intent Analyzer & Workflow Chaining:
-When invoked with an arbitrary natural-language request, automatically:
-1. **Understand Request & Project:** Inspect the existing repository, project files, framework, styling conventions, and backend contracts.
-2. **Select & Chain Relevant Workflows:** Dynamically orchestrate the appropriate specialized subcommands (e.g. `design` → `build` → `responsive` → `motion` → `audit` → `verify`) without requiring the user to specify technical steps.
-3. **Execute Implementation Directly:** Implement the full working outcome rather than stopping at a plan or static scaffold.
-4. **Verify & Refine:** Compare against requirements, run tests/audits, correct discrepancies, and conclude with an honest report.
-
-Do not impose predefined page types, fixed templates, or arbitrary visual styles. Tailor every decision to the specific product identity.
+### Autonomous Capability Coordination:
+When invoked with an arbitrary natural-language request, `/pure-saas` automatically:
+1. **Understands Intent & Context:** Inspects the existing repository, project files, framework, build tools, styling conventions, and backend contracts.
+2. **Coordinates Capabilities Autonomously:** Automatically integrates design, implementation, components, design tokens, animations/motion, accessibility, responsiveness, performance, security, and testing as relevant.
+3. **Executes Proportionately:** Does not force a rigid `design → build → polish → review` sequence for every small request. For a straightforward request, executes it directly. For complex work, coordinates necessary steps automatically.
+4. **Optimises for User Time:** Avoids redundant analysis, unnecessary planning documents, repeated confirmations, duplicate checks, and excessive output. Reuses project knowledge and previous findings. Does not ask questions when the answer can reasonably be inferred.
+5. **Verifies & Refines:** Checks results across viewports, runs token scanners and tests, corrects discovered problems, and concludes with an evidence-backed report.
 
 ---
 
-## 2. Specialised Subcommands
+## 2. Five Specialist Commands
 
-Every subcommand inherits this canonical `SKILL.md`, relevant reference guides, conversation context, project instructions, and `DESIGN.md` where applicable.
+Every specialist command inherits this canonical `SKILL.md`, relevant reference guides, conversation context, project instructions, and `DESIGN.md` where applicable:
 
-| Subcommand | Purpose | Key Actions |
+| Command | Purpose | Key Actions |
 | :--- | :--- | :--- |
-| **`/pure-saas reference [URL] [request]`** | **Reverse-engineer visual reference** | Deep browser DevTools inspection (DOM, computed styles, JS, animations, responsive). Author 16-section `DESIGN.md`, recreate design language for user's product, compare at matching viewports, and refine. |
-| **`/pure-saas design [request]`** | **Establish design specification** | Create or update persistent root-level `DESIGN.md` (tokens, typography, colors, layout, components, motion, a11y) before implementation. |
-| **`/pure-saas build [request]`** | **Execute complete implementation** | Build requested experience from scratch or continue existing project. Follow framework, implement components, state, and functionality. Never stop at a mockup. |
-| **`/pure-saas audit [scope]`** | **Comprehensive quality audit** | Evaluate visual hierarchy, layout, typography, responsive overflow, WCAG 2.2 AA accessibility, motion feel, performance, and `DESIGN.md` alignment. Report findings by severity. |
-| **`/pure-saas fix [request]`** | **Diagnose and resolve problems** | Fix visual defects, broken layouts, accessibility errors, or interaction bugs. Preserve 100% of unrelated backend routes, APIs, and DOM contracts. |
-| **`/pure-saas polish [request]`** | **Raise visual & tactile quality** | Elevate typography, spacing, surface lighting, borders, micro-interactions, custom SVGs, and transition feel without redesigning working logic. |
-| **`/pure-saas responsive [request]`** | **Cross-device ergonomics** | Test and fix desktop (1440px), tablet (768px), and mobile (375px) layouts, navigation drawers, touch targets (≥44x44px), stacking, and overflow. |
-| **`/pure-saas accessible [request]`** | **Inclusive interaction & a11y** | Audit and remediate keyboard focus rings, semantic HTML landmarks, contrast ratios, ARIA attributes, form labels, and reduced-motion support. |
-| **`/pure-saas motion [request]`** | **Purposeful interaction motion** | Design and implement entrance reveals, scroll-driven effects, tab transitions, hover feedback, and spring/bezier curves with `@media (prefers-reduced-motion)` fallbacks. |
-| **`/pure-saas tokens [request]`** | **Manage design token system** | Create, inspect, validate, refactor, and export tokens (colors, typography, spacing, radii) to CSS Custom Properties, Tailwind, or JSON. |
-| **`/pure-saas component [request]`** | **Build reusable components** | Create or refactor components with full variant matrices, 8 interaction states, accessible ARIA patterns, and clean component APIs. |
-| **`/pure-saas verify [request]`** | **End-to-end requirement check** | Run automated tests, linters, production builds, token validators, and viewport inspections. Report verified results and unverified areas honestly. |
-| **`/pure-saas system [request]`** | **Evolve product design system** | Establish coherent design foundations, semantic token layers, component patterns, and usage guidance for incremental adoption across an organization. |
-| **`/pure-saas migrate [request]`** | **Modernize interface or tokens** | Incrementally migrate legacy styles or frameworks to modern design systems while maintaining backward compatibility and zero API regressions. |
-| **`/pure-saas init [--reference]`** | **Initialize starter project** | Scaffold starter `DESIGN.md`, `design-brief.md`, and optional `reference-record.md`. |
+| **`/pure-saas design [request]`** | **Design direction & system definition** | For substantial design work, create or update a root-level `DESIGN.md` before implementation. Specify page/section structure, layout, spacing, typography, colours, tokens, components, assets, interactions, motion, responsive behaviour, and accessibility. Ground decisions in actual project needs. Distinguish observed facts, inferences, and unknowns. |
+| **`/pure-saas polish [request]`** | **Visual & tactile craft elevation** | Improve the quality of an existing implementation without unnecessarily rebuilding it. Inspect the actual result and refine visual hierarchy, spacing, typography, alignment, component consistency, micro-interactions, animation, accessibility, and responsive details. Preserve working functionality. |
+| **`/pure-saas review [request or scope]`** | **Evidence-based quality audit** | Conduct a rigorous, evidence-based review. Identify concrete bugs, security weaknesses, accessibility problems, performance issues, visual inconsistencies, and missing requirements. Prioritise findings by severity and provide file references/evidence. Do not modify files by default. |
+| **`/pure-saas reference [URL]`** | **Reverse-engineer visual reference** | Deep inspection via browser DevTools (rendered pages, DOM, computed styles, assets, typography, spacing, responsive layouts, motion, network resources). Translate relevant findings into requested implementation without necessarily copying the entire site. Report inspection limitations honestly. |
+| **`/pure-saas responsive [request]`** | **Cross-device layout optimization** | Focus on responsive layouts across mobile, tablet, laptop, and desktop. Inspect existing implementation, identify actual layout failures, and fix breakpoints, overflow, navigation, typography, spacing, grids, images, touch targets, and component behaviour. Preserve desktop design and functionality. |
 
 ---
 
@@ -110,11 +79,11 @@ Every subcommand inherits this canonical `SKILL.md`, relevant reference guides, 
 All commands must follow these 10 mandatory operational rules:
 
 1. **Read Canonical Skill:** Read `SKILL.md` and relevant reference documents in `references/`.
-2. **Understand Context:** Parse the current user request and relevant conversation history.
+2. **Understand Context:** Parse the current user request and relevant conversation history without asking questions that can reasonably be inferred.
 3. **Inspect Existing Architecture:** Inspect existing project instructions, files, frameworks, build tools, and backend contracts.
-4. **Select Only Relevant Workflows:** Orchestrate only the subcommands required for the task.
+4. **Select Only Relevant Workflows:** Coordinate only the capabilities required for the task.
 5. **Implement Directly:** When implementation is requested, implement the complete working product rather than stopping at a plan or snippet.
-6. **Preserve Architecture & APIs:** Never overwrite backend endpoints, database schemas, authentication, or unrelated components without explicit user authorization.
+6. **Preserve Architecture & APIs:** Never overwrite backend endpoints, database schemas, authentication, or automated test IDs without explicit user authorization.
 7. **Maintain `DESIGN.md`:** Create or update root-level `DESIGN.md` when establishing or revising visual standards.
 8. **Check & Refine:** Run relevant validators, linters, and viewport checks; refine visual and interaction defects.
 9. **Report Honestly:** Produce an evidence-backed ledger documenting verified achievements, failed checks, and untested areas.
@@ -198,7 +167,7 @@ When reverse-engineering a visual reference:
 
 ## 7. The 9-Stage Design Engineering Lifecycle
 
-When executing major design or redesign tasks via `/pure-saas`, `/pure-saas design`, or `/pure-saas build`, coding agents execute these 9 disciplined stages:
+When executing major design or redesign tasks via `/pure-saas` or `/pure-saas design`, coding agents execute these 9 disciplined stages:
 
 ### Stage A: Discover Project Context & Constraints
 Audit project constraints, framework, build tools, existing styling, brand assets, and immutable backend contracts. Never rewrite backend APIs, auth flows, or database structures during UI refactors.
@@ -232,4 +201,3 @@ node scripts/pure-saas.mjs check-tokens DESIGN.md --source src
 
 ### Stage I: Report Honest Results
 Conclude with an evidence-backed ledger detailing verified checks, remediated issues, and untested areas. Never claim validation that was not performed.
-

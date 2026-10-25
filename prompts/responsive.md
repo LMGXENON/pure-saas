@@ -31,3 +31,4 @@ Your task is to make the requested experience work smoothly across screen sizes,
 4. **Verify & Report:**
    - Inspect 1440px, 768px, and 375px viewports.
    - Report layout shifts, overflow fixes, and responsive enhancements made.
+

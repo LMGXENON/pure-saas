@@ -27,32 +27,34 @@ pure-saas/
 
 ## 2. Command Architecture
 
-### Universal Entry Point: `/pure-saas [request]`
-Accepts arbitrary natural-language requests, inspects project context, and dynamically orchestrates the appropriate subcommands.
+Pure SaaS operates via **one intelligent main command and five specialist commands**:
 
-### Specialised Subcommands:
-- `/pure-saas reference [URL]` — Reverse-engineer visual references via browser DevTools.
-- `/pure-saas design [request]` — Establish or update root-level `DESIGN.md`.
-- `/pure-saas build [request]` — Complete implementation from scratch or within existing project.
-- `/pure-saas audit [scope]` — Comprehensive quality and WCAG 2.2 AA audit.
-- `/pure-saas fix [request]` — Diagnose and resolve defects while preserving backend APIs.
-- `/pure-saas polish [request]` — Elevate visual craft, typography tracking, and micro-interactions.
-- `/pure-saas responsive [request]` — Optimize layouts across desktop, tablet, and mobile.
-- `/pure-saas accessible [request]` — Enforce WCAG 2.2 AA, focus rings, and ARIA landmarks.
-- `/pure-saas motion [request]` — Design purposeful transitions with reduced-motion support.
-- `/pure-saas tokens [request]` — Validate, scan, and export design tokens.
-- `/pure-saas component [request]` — Build reusable components across the 8-state matrix.
-- `/pure-saas verify [request]` — End-to-end check of requirements, builds, and tests.
-- `/pure-saas system [request]` — Establish or evolve product-wide design foundations.
-- `/pure-saas migrate [request]` — Modernize legacy styling or tokens incrementally.
-- `/pure-saas init` — Scaffold starter specifications.
+### 1. Universal Main Command: `/pure-saas [any request]`
+The default entry point for almost everything. Accepts arbitrary natural-language requests, inspects project context, and automatically handles:
+- Design & specification (`DESIGN.md`)
+- Full component & application implementation
+- Reusable components across the 8-state matrix
+- Semantic design token management & enforcement
+- Purposeful motion, transitions & micro-interactions
+- Accessibility (WCAG 2.2 AA) & keyboard focus
+- Responsive cross-device layout optimization
+- Performance & security optimizations
+- Bug diagnostics & direct remediation preserving backend APIs
+- Testing & end-to-end verification
+
+### 2. Specialist Commands:
+- `/pure-saas design [request]` — Establish or update root-level `DESIGN.md` specification before implementation.
+- `/pure-saas polish [request]` — Elevate visual craft, typography tracking, surface lighting, and micro-interactions without rebuilding working logic.
+- `/pure-saas review [request or scope]` — Rigorous, evidence-based quality audit across bugs, security, accessibility, performance, and tokens.
+- `/pure-saas reference [URL]` — Reverse-engineer visual references via browser DevTools and recreate requested design language.
+- `/pure-saas responsive [request]` — Optimize layouts across mobile, tablet, laptop, and desktop viewports.
 
 ---
 
 ## 3. Working Rules for Coding Agents
 
-1. **Follow the 10 Universal Execution Behaviors:** Follow all rules in `SKILL.md` (inspect context, select relevant workflows, implement directly, preserve backend APIs, maintain `DESIGN.md`, test and refine, report honestly).
+1. **Follow the 10 Universal Execution Behaviors:** Follow all rules in `SKILL.md` (inspect context, coordinate capabilities automatically, execute directly for straightforward requests, preserve backend APIs, maintain `DESIGN.md`, test and refine, report honestly).
 2. **Never Fabricate Validation:** If a check fails, diagnose and resolve it. If an environment lacks browser inspection or screen-reader tooling, record the area as `untested`.
-3. **Preserve Architecture in Existing Apps:** Never rewrite backend APIs, auth flows, or database structures during UI refactors without explicit user authorization.
+3. **Preserve Architecture in Existing Apps:** Never rewrite backend APIs, auth flows, database structures, or automated test IDs during UI refactors without explicit user authorization.
 4. **Enforce Semantic Tokens:** Reject raw hex codes and arbitrary Tailwind numbers. Ensure all styling resolves to documented tokens in `DESIGN.md`.
-5. **Enforce Anti-Slop Discipline:** Halt and challenge generic purple/cyan gradient text, excessive glassmorphism blur, and repetitive 3-column feature cards.
+5. **Enforce Anti-Slop Discipline:** Halt and challenge generic purple/cyan gradient text, excessive glassmorphism blur, repetitive 3-column feature cards, and emoji UI icons.

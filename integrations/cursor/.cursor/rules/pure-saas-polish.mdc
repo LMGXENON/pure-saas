@@ -17,3 +17,4 @@ Type `@pure-saas-polish [request]` or `/pure-saas polish [request]` in Composer 
 3. Harmonize nested corner radii (outer radius = inner radius + padding).
 4. Add smooth tactile micro-interactions (150ms hover lift, active press scale, visible focus ring).
 5. Preserve 100% of working backend APIs, routes, and business logic.
+

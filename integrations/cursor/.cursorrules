@@ -3,7 +3,7 @@
 
 When creating or modifying frontend interfaces:
 1. Universal Command: Use `@pure-saas [request]` or `/pure-saas [request]` for any UI/UX design, implementation, or refactoring task.
-2. Specialized Rules: `@pure-saas-reference`, `@pure-saas-design`, `@pure-saas-build`, `@pure-saas-audit`, `@pure-saas-fix`, `@pure-saas-polish`, `@pure-saas-responsive`, `@pure-saas-accessible`, `@pure-saas-motion`, `@pure-saas-tokens`, `@pure-saas-component`, `@pure-saas-verify`, `@pure-saas-system`, `@pure-saas-migrate`.
+2. Specialist Rules: `@pure-saas-design`, `@pure-saas-polish`, `@pure-saas-review`, `@pure-saas-reference`, `@pure-saas-responsive`.
 3. Design System First: Adhere strictly to the project's DESIGN.md tokens for color, typography, spacing, and radii.
 4. Eliminate AI Slop: No unapproved purple/cyan gradient text, no glassmorphism abuse, no repetitive 3-column cards, no emoji as icons.
 5. Interactive States: Every interactive control must define the 8 states (default, hover, focus-visible, active, disabled, loading, empty, error/success).

@@ -1,43 +1,49 @@
 # Pure SaaS: Universal Command (`/pure-saas`)
 
-Universal entry point for any UI/UX design, implementation, refactoring, or audit task.
+The universal entry point and intelligent default for UI/UX design, implementation, refactoring, accessibility, motion, components, tokens, bug fixes, and verification.
 
 ## Usage
 
 ```bash
-/pure-saas [natural language request or subcommand]
+/pure-saas [any natural-language request or specialist command]
 ```
 
 **Request:** `$ARGUMENTS`
 
 ---
 
-## 1. Intent Analysis & Subcommand Dispatch
+## 1. Intent Understanding & Specialist Command Dispatch
 
 Inspect the request:
 
-### A. Subcommand Invocation
-If the request begins with a specialized subcommand, execute that specific workflow:
-- `reference [URL] [request]` → Reverse-engineer visual reference and recreate design language.
-- `design [request]` → Establish or update root-level `DESIGN.md` specification.
-- `build [request]` → Execute complete implementation from scratch or within existing project.
-- `audit [scope]` → Comprehensive quality audit across hierarchy, responsive, a11y, performance.
-- `fix [request]` → Diagnose and resolve visual, layout, token, or interaction defects.
-- `polish [request]` → Elevate visual hierarchy, micro-interactions, surfaces, and typography.
-- `responsive [request]` → Optimize desktop (1440px), tablet (768px), and mobile (375px) ergonomics.
-- `accessible [request]` → Enforce WCAG 2.2 AA, keyboard focus, semantic HTML, and ARIA patterns.
-- `motion [request]` → Design and implement purposeful transitions and animation curves.
-- `tokens [request]` → Manage, inspect, validate, and export design tokens.
-- `component [request]` → Build or refactor reusable components across the 8-state matrix.
-- `verify [request]` → Run end-to-end requirement checks, builds, tests, and token validation.
-- `system [request]` → Establish or evolve product-wide design foundations and guidelines.
-- `migrate [request]` → Modernize interfaces or tokens without breaking existing functionality.
+### A. Specialist Subcommands
+If the request begins with one of the 5 specialist commands, execute that focused workflow:
+- `design [request]` → Establish or update root-level `DESIGN.md` specification before implementation.
+- `polish [request]` → Elevate visual craft, typography, spacing, surface lighting, and micro-interactions without rebuilding working logic.
+- `review [request or scope]` → Rigorous, evidence-based quality audit across bugs, security, accessibility, performance, and tokens.
+- `reference [URL]` → Reverse-engineer visual reference via browser DevTools and recreate requested design language.
+- `responsive [request]` → Fix and optimize layouts across mobile, tablet, laptop, and desktop viewports.
 
-### B. Arbitrary Natural-Language Request
-If given a natural-language description (e.g., `/pure-saas create a premium 3D landing page for my hospital` or `/pure-saas make this interface feel significantly more premium`):
-1. **Understand Project Context:** Inspect repository files, frameworks, build tools, and backend contracts.
-2. **Orchestrate Workflows Automatically:** Dynamically chain the necessary subcommands (e.g., `design` → `build` → `responsive` → `motion` → `audit` → `verify`).
-3. **Build Complete Working Product:** Implement real code, components, and styling. Never stop at a static scaffold or preliminary mockup.
-4. **Preserve Architecture & APIs:** Never modify backend routes, database models, authentication, or unrelated logic without explicit instructions.
-5. **Enforce Shared Standards:** Follow `SKILL.md` rules against generic AI slop, binding all styling to `DESIGN.md`.
-6. **Verify & Report Honestly:** Run available validators and tests, refine discrepancies, and output an evidence-backed report.
+### B. Natural-Language Request (Default Execution Engine)
+For all other requests, `/pure-saas` is the default. It understands the user's intent, inspects the existing project context, determines the right capabilities, and completes the task autonomously without forcing the user to pick manual workflows or answer unnecessary questions.
+
+It automatically coordinates:
+- **Design & Specification:** Creates or updates `DESIGN.md` when the scope warrants it.
+- **Full Implementation:** Builds real components, routing, states, and functionality—never stopping at a static scaffold or preliminary mockup.
+- **Component Creation:** Builds reusable components following the 8-state matrix with accessible ARIA roles.
+- **Design Tokens:** Validates, scans, and exports semantic design tokens (colors, typography, spacing, radii).
+- **Animations & Motion:** Designs purposeful transitions with `@media (prefers-reduced-motion)` support.
+- **Accessibility (WCAG 2.2 AA):** Enforces high-contrast focus rings, semantic HTML, and keyboard navigability.
+- **Responsiveness:** Validates layout across mobile (375px), tablet (768px), and desktop (1440px).
+- **Bug Fixing & Diagnostics:** Diagnoses root causes and fixes defects directly while strictly preserving backend APIs.
+- **Performance & Security:** Checks for security weaknesses, prevents unnecessary rendering, and optimizes assets.
+- **Testing & Verification:** Runs tests, linters, production builds, and token checks before declaring work done.
+
+---
+
+## 2. Execution Discipline & User-Time Optimization
+
+1. **Direct Execution for Small Tasks:** Do not force a `design → build → polish → review` sequence for every small request. For straightforward changes, execute directly. For complex tasks, coordinate necessary steps automatically.
+2. **Do Not Ask Unnecessary Questions:** Infer answers from the request, project structure, framework, and existing conventions. Ask only when an unresolved ambiguity would materially change the outcome or cause a consequential mistake.
+3. **Preserve Architecture & APIs:** Never overwrite backend endpoints, database schemas, authentication, or automated test IDs without explicit instruction.
+4. **Evidence-Based Reporting:** Conclude with an honest report of what was changed, verified, and left unverified.

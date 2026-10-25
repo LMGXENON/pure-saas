@@ -27,3 +27,4 @@ Raise the visual and tactile craft quality of an existing implementation beyond 
    - **Preserve Working Logic:** Do not rewrite backend APIs, state stores, or business logic.
    - **Avoid Unnecessary Redesigns:** Do not add gratuitous decorative gradients or clutter simply to look elaborate. Elevate the existing identity.
 4. **Verify & Report:** Compare before/after appearance across viewports, run token validation, and report improvements made.
+

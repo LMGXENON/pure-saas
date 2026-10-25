@@ -7,21 +7,10 @@
   "keywords": ["ui-ux", "design-system", "anti-slop", "frontend", "claude-code"],
   "commands": [
     "./commands/pure-saas.md",
-    "./commands/reference.md",
     "./commands/design.md",
-    "./commands/build.md",
-    "./commands/audit.md",
-    "./commands/fix.md",
     "./commands/polish.md",
-    "./commands/responsive.md",
-    "./commands/accessible.md",
-    "./commands/motion.md",
-    "./commands/tokens.md",
-    "./commands/component.md",
-    "./commands/verify.md",
-    "./commands/system.md",
-    "./commands/migrate.md",
-    "./commands/init.md",
-    "./commands/review.md"
+    "./commands/review.md",
+    "./commands/reference.md",
+    "./commands/responsive.md"
   ]
 }

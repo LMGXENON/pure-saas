@@ -32,3 +32,4 @@ Your mission is to elevate the visual, tactile, and micro-interaction quality of
    - Inspect desktop and mobile viewports.
    - Run `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src`.
    - Conclude with an evidence-backed summary of polished elements and verified states.
+
