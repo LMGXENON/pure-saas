@@ -39,12 +39,13 @@ test('Agents: SKILL.md and AGENTS.md satisfy required operational sections', () 
   assert.ok(skillContent.includes('Anti-Slop'), 'SKILL.md must include Anti-Slop guidance');
 });
 
-test('Agents: All 4 example projects pass complete validation and token verification', () => {
+test('Agents: All 5 example projects pass complete validation and token verification', () => {
   const examples = [
     'developer-tool',
     'creative-product',
     'editorial-saas',
-    'existing-app-redesign'
+    'existing-app-redesign',
+    'convio-showcase'
   ];
 
   for (const ex of examples) {

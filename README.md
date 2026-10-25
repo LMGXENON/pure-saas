@@ -181,12 +181,13 @@ accessibility:
 
 ## Example Projects
 
-Pure SaaS includes four reference implementations demonstrating distinct visual directions:
+Pure SaaS includes reference implementations demonstrating distinct visual directions and craft analysis:
 
-1. **[Developer Tool (`examples/developer-tool`)](examples/developer-tool/)**: HyperTrace — Technical clarity, 60/40 hero split with live eBPF terminal runner, tabular benchmark tables, and dark mode.
-2. **[Creative Product (`examples/creative-product`)](examples/creative-product/)**: FrameCraft — Expressive display typography (Cabinet Grotesk), dynamic aspect-ratio canvas, and multi-track sequencer.
-3. **[Editorial SaaS (`examples/editorial-saas`)](examples/editorial-saas/)**: Monograph — Literary serif typography (Newsreader), warm archival canvas, generous whitespace, and zero card containers.
-4. **[Existing App Redesign (`examples/existing-app-redesign`)](examples/existing-app-redesign/)**: VaultGuard — Modernizes frontend UI into a high-density security console while strictly preserving Node/Express backend APIs, database models, and authentication contracts.
+1. **[Convio Reference Showcase (`examples/convio-showcase`)](examples/convio-showcase/)**: Operon — Autonomous engineering control plane. Deconstructs the craft, typography, and motion of [convio.dev](https://convio.dev/) into a 100% token-adherent, original implementation with live interactive console, 4-stage stepper, and Ed25519 cryptographic release gate. Includes comprehensive [Showcase Report](examples/convio-showcase/SHOWCASE_REPORT.md) and headless browser screenshots.
+2. **[Developer Tool (`examples/developer-tool`)](examples/developer-tool/)**: HyperTrace — Technical clarity, 60/40 hero split with live eBPF terminal runner, tabular benchmark tables, and dark mode.
+3. **[Creative Product (`examples/creative-product`)](examples/creative-product/)**: FrameCraft — Expressive display typography (Cabinet Grotesk), dynamic aspect-ratio canvas, and multi-track sequencer.
+4. **[Editorial SaaS (`examples/editorial-saas`)](examples/editorial-saas/)**: Monograph — Literary serif typography (Newsreader), warm archival canvas, generous whitespace, and zero card containers.
+5. **[Existing App Redesign (`examples/existing-app-redesign`)](examples/existing-app-redesign/)**: VaultGuard — Modernizes frontend UI into a high-density security console while strictly preserving Node/Express backend APIs, database models, and authentication contracts.
 
 ---
 
@@ -225,7 +226,7 @@ Zero external npm dependencies are required to run tests or the CLI.
 - [x] Zero-dependency Node.js CLI (`pure-saas.mjs` and wrapper scripts).
 - [x] Token verification, source scanner, and export to CSS / Tailwind / JSON.
 - [x] Integrations for Claude Code, Cursor, Codex, Windsurf, OpenCode, Gemini, and Generic.
-- [x] 4 distinct example projects (Developer, Creative, Editorial, Existing App).
+- [x] 5 distinct example projects (Developer, Creative, Editorial, Existing App, Convio Showcase).
 - [x] Automated test suite covering schemas, tokens, CLI, and agent conventions.
 
 ### Planned for Future Releases
