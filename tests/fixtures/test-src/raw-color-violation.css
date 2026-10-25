@@ -1,0 +1,5 @@
+.bad-card {
+  background-color: #ff00ff; /* unapproved raw hex */
+  color: #123456; /* unapproved raw hex */
+  padding: 12px;
+}

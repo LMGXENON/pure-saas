@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>VaultGuard — Team Secrets & Cryptographic Key Management</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <span class="vault-name">VaultGuard</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#secrets" class="nav-item active">Active Secrets</a>
+        <a href="#audit" class="nav-item">Decryption Audit</a>
+        <a href="#rotation" class="nav-item">Auto-Rotation</a>
+        <a href="#keys" class="nav-item">KMS Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="auth-status">
+          <span class="status-indicator"></span>
+          admin@vaultguard.internal
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-viewport">
+      <header class="view-header">
+        <div class="header-titles">
+          <h1 class="view-title">Production Environment Secrets</h1>
+          <p class="view-subtitle">Authenticated via Zero-Knowledge KMS Envelope Encryption (/api/v1/secrets)</p>
+        </div>
+        <div class="view-actions">
+          <button class="btn btn-secondary">Sync CLI</button>
+          <button class="btn btn-primary">+ Rotate Key</button>
+        </div>
+      </header>
+
+      <section class="content-body">
+        <div class="table-card">
+          <table class="secrets-table">
+            <thead>
+              <tr>
+                <th scope="col">Secret Key Identifier</th>
+                <th scope="col">Environment</th>
+                <th scope="col">Signed Hash Digest</th>
+                <th scope="col">Last Rotated</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="key-name"><code>DATABASE_URL_PRIMARY</code></div>
+                  <div class="key-scope">Postgres Pool • us-east-1</div>
+                </td>
+                <td><span class="env-tag env-prod">production</span></td>
+                <td><code class="hash-text">sha256:8f2a...91c</code></td>
+                <td class="tabular">2026-10-21 09:12 UTC</td>
+                <td>
+                  <button class="btn-action">Reveal</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="key-name"><code>STRIPE_WEBHOOK_SECRET</code></div>
+                  <div class="key-scope">Billing Gateway • Live</div>
+                </td>
+                <td><span class="env-tag env-prod">production</span></td>
+                <td><code class="hash-text">sha256:4b11...e20</code></td>
+                <td class="tabular">2026-09-14 18:44 UTC</td>
+                <td>
+                  <button class="btn-action">Reveal</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="key-name"><code>AWS_KMS_MASTER_KEY</code></div>
+                  <div class="key-scope">Root Hardware Module</div>
+                </td>
+                <td><span class="env-tag env-infra">infrastructure</span></td>
+                <td><code class="hash-text">sha256:77fa...10d</code></td>
+                <td class="tabular">2026-10-25 11:00 UTC</td>
+                <td>
+                  <button class="btn-action">Reveal</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

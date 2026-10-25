@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pure-saas.org/schemas/design-md.schema.json",
+  "title": "Pure SaaS DESIGN.md Schema",
+  "description": "Schema for the canonical persistent project design system document (DESIGN.md).",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "status",
+    "principles",
+    "tokens",
+    "components",
+    "accessibility"
+  ],
+  "properties": {
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "in-review", "approved"]
+    },
+    "principles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "brand": {
+      "type": "object",
+      "properties": {
+        "archetype": { "type": "string" },
+        "tone": { "type": "string" },
+        "visual_rules": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "tokens": {
+      "type": "object",
+      "required": ["colors", "typography", "spacing", "layout", "radii"],
+      "properties": {
+        "colors": {
+          "type": "object",
+          "required": [
+            "color-bg-canvas",
+            "color-bg-surface",
+            "color-text-primary",
+            "color-text-secondary",
+            "color-action-primary",
+            "color-border-subtle",
+            "color-border-focus",
+            "color-status-error",
+            "color-status-success"
+          ],
+          "additionalProperties": { "type": "string" }
+        },
+        "typography": {
+          "type": "object",
+          "required": ["font_families", "scale"],
+          "properties": {
+            "font_families": {
+              "type": "object",
+              "required": ["sans"],
+              "properties": {
+                "sans": { "type": "string" },
+                "mono": { "type": "string" },
+                "serif": { "type": "string" },
+                "display": { "type": "string" }
+              }
+            },
+            "scale": {
+              "type": "object",
+              "required": ["h1", "h2", "h3", "body", "body_small", "label"],
+              "additionalProperties": { "type": "string" }
+            },
+            "line_heights": {
+              "type": "object",
+              "additionalProperties": { "type": "string" }
+            },
+            "tracking": {
+              "type": "object",
+              "additionalProperties": { "type": "string" }
+            }
+          }
+        },
+        "spacing": {
+          "type": "object",
+          "required": ["space-1", "space-2", "space-4", "space-6", "space-8"],
+          "additionalProperties": { "type": "string" }
+        },
+        "layout": {
+          "type": "object",
+          "required": ["container_max_width", "content_max_width"],
+          "properties": {
+            "container_max_width": { "type": "string" },
+            "content_max_width": { "type": "string" },
+            "grid_columns": { "type": "integer" }
+          }
+        },
+        "radii": {
+          "type": "object",
+          "required": ["none", "sm", "md"],
+          "additionalProperties": { "type": "string" }
+        },
+        "shadows": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "transitions": {
+          "type": "object",
+          "properties": {
+            "durations": { "type": "object", "additionalProperties": { "type": "string" } },
+            "easings": { "type": "object", "additionalProperties": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "components": {
+      "type": "object",
+      "required": ["button"],
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "variants": { "type": "array", "items": { "type": "string" } },
+          "states": { "type": "array", "items": { "type": "string" } },
+          "geometry": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "interactions": {
+      "type": "object",
+      "properties": {
+        "required_states": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "focus_ring": { "type": "string" }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "required": ["tier", "contrast_text_primary", "reduced_motion"],
+      "properties": {
+        "tier": { "type": "string", "default": "WCAG 2.2 AA" },
+        "contrast_text_primary": { "type": "string" },
+        "contrast_text_secondary": { "type": "string" },
+        "reduced_motion": { "type": "string" }
+      }
+    },
+    "anti_slop_rules": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "scope", "rationale", "approved_by"],
+        "properties": {
+          "id": { "type": "string" },
+          "scope": { "type": "string" },
+          "rationale": { "type": "string" },
+          "approved_by": { "type": "string" }
+        }
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["token_or_rule", "origin"],
+        "properties": {
+          "token_or_rule": { "type": "string" },
+          "origin": { "type": "string", "enum": ["user-instruction", "established-system", "measured-reference", "agent-proposal"] },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "unresolved_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "question", "impact"],
+        "properties": {
+          "id": { "type": "string" },
+          "question": { "type": "string" },
+          "impact": { "type": "string" }
+        }
+      }
+    }
+  }
+}

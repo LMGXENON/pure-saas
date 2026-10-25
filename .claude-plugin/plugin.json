@@ -1,0 +1,8 @@
+{
+  "name": "pure-saas",
+  "version": "1.0.0",
+  "description": "Universal AI-agent skill and design enforcement toolkit for professional web design without AI slop.",
+  "author": "Pure SaaS Contributors",
+  "license": "MIT",
+  "keywords": ["ui-ux", "design-system", "anti-slop", "frontend", "claude-code"]
+}

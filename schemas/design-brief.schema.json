@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pure-saas.org/schemas/design-brief.schema.json",
+  "title": "Pure SaaS Design Brief Schema",
+  "description": "Schema for project design briefs defining problem scope, brand identity, decisions, and constraints.",
+  "type": "object",
+  "required": [
+    "product_name",
+    "purpose",
+    "target_audience",
+    "primary_tasks",
+    "brand_personality",
+    "approved_decisions",
+    "status"
+  ],
+  "properties": {
+    "product_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "in-review", "approved"]
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 10
+    },
+    "target_audience": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "primary_tasks": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "business_objectives": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "brand_personality": {
+      "type": "object",
+      "required": ["keywords", "tone"],
+      "properties": {
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "tone": { "type": "string" },
+        "visual_archetype": { "type": "string" }
+      }
+    },
+    "required_views": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "visual_references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "url", "insight"],
+        "properties": {
+          "name": { "type": "string" },
+          "url": { "type": "string" },
+          "insight": { "type": "string" }
+        }
+      }
+    },
+    "approved_decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "decision", "approved_by"],
+        "properties": {
+          "id": { "type": "string" },
+          "decision": { "type": "string" },
+          "rationale": { "type": "string" },
+          "approved_by": { "type": "string" }
+        }
+      }
+    },
+    "agent_proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "proposal", "rationale"],
+        "properties": {
+          "id": { "type": "string" },
+          "proposal": { "type": "string" },
+          "rationale": { "type": "string" },
+          "tradeoffs": { "type": "string" }
+        }
+      }
+    },
+    "unresolved_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "question", "impact"],
+        "properties": {
+          "id": { "type": "string" },
+          "question": { "type": "string" },
+          "impact": { "type": "string" },
+          "recommended_action": { "type": "string" }
+        }
+      }
+    },
+    "anti_slop_exclusions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "technical_constraints": {
+      "type": "object",
+      "properties": {
+        "framework": { "type": "string" },
+        "styling": { "type": "string" },
+        "target_browsers": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "accessibility_tier": {
+      "type": "string",
+      "default": "WCAG 2.2 AA",
+      "enum": ["WCAG 2.1 AA", "WCAG 2.2 AA", "WCAG 2.2 AAA"]
+    }
+  }
+}

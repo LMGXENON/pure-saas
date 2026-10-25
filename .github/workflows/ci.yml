@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run Test Suite
+        run: npm test
+
+      - name: Validate Example Projects
+        run: |
+          node scripts/pure-saas.mjs validate examples/developer-tool/DESIGN.md
+          node scripts/pure-saas.mjs validate examples/creative-product/DESIGN.md
+          node scripts/pure-saas.mjs validate examples/editorial-saas/DESIGN.md
+          node scripts/pure-saas.mjs validate examples/existing-app-redesign/DESIGN.md

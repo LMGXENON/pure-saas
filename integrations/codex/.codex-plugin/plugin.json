@@ -1,0 +1,7 @@
+{
+  "name": "pure-saas",
+  "version": "1.0.0",
+  "description": "Universal AI-agent design skill and anti-slop enforcement toolkit",
+  "skill": "./SKILL.md",
+  "rules": "./AGENTS.md"
+}

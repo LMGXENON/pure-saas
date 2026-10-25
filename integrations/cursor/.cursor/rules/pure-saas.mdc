@@ -1,0 +1,19 @@
+---
+description: Pure SaaS Design System and Anti-Slop Enforcement
+globs: ["**/*.{tsx,jsx,ts,js,html,css,vue,svelte}", "DESIGN.md", "design-brief.md"]
+alwaysApply: true
+---
+
+# Pure SaaS Rules for Cursor
+
+When designing or implementing user interfaces, web pages, or frontend components:
+
+1. **Check for `DESIGN.md`:** Always inspect the project's `DESIGN.md` for semantic color tokens, typography scales, and spacing scales before generating styles.
+2. **No Generic AI Slop:**
+   - Never use purple/cyan gradient text or blurred backdrop glows without explicit user authorization.
+   - Do not repeat the same 3-column card layout across the page.
+   - Use clean SVG icons (Lucide, Heroicons), never emojis.
+   - Constrain body text measure to 45–75 characters (`max-w-[65ch]`) and apply `text-wrap: balance` to headings.
+3. **Semantic Tokens Only:** Bind styling to tokens (`--color-bg-canvas`, `--color-action-primary`) rather than hardcoded hex codes.
+4. **Interactive States:** Provide hover, focus-visible, and active states for all interactive elements.
+5. **Enforcement:** Run `node scripts/pure-saas.mjs validate DESIGN.md` to ensure design system compliance.
