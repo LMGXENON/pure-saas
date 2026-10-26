@@ -168,8 +168,9 @@ runTest('CLI: Execution of the Six Independent Slash Commands', () => {
     fs.unlinkSync(path.join(rootDir, 'reference-record.md'));
   }
 
-  // Also test leading slash invocation (/puresaas:polish)
+  // Also test leading slash invocation (/puresaas:polish) and flat kebab-case alias (puresaas-design)
   const slashPolish = execCli(['/puresaas:polish']);
+  const kebabDesign = execCli(['puresaas-design', 'Kebab Command Invocation']);
 
   return orchestrator.status === 0 && orchestrator.stdout.includes('Principal Designer & Main Orchestrator') &&
          design.status === 0 && design.stdout.includes('Creative Director & Builder') &&
@@ -177,7 +178,8 @@ runTest('CLI: Execution of the Six Independent Slash Commands', () => {
          review.status === 0 && review.stdout.includes('Independent Design Critic') &&
          clone.status === 0 && clone.stdout.includes('Reference Analyst & Cloning Engineer') &&
          responsive.status === 0 && responsive.stdout.includes('Responsive Systems Engineer') &&
-         slashPolish.status === 0 && slashPolish.stdout.includes('Senior Visual Designer');
+         slashPolish.status === 0 && slashPolish.stdout.includes('Senior Visual Designer') &&
+         kebabDesign.status === 0 && kebabDesign.stdout.includes('Creative Director & Builder');
 });
 
 // 13. CLI: Help Flag Handling
@@ -252,6 +254,59 @@ runTest('Repository-Wide Markdown Link Resolution', () => {
   if (broken.length > 0) {
     throw new Error(`Found broken link targets: \n  - ${broken.join('\n  - ')}`);
   }
+  return true;
+});
+
+// 16. Security & Supply-Chain Audit (npm audit lockfile + static safety)
+runTest('Security & Supply-Chain Audit (npm audit + static code safety)', () => {
+  // 1. Check lockfile presence
+  const lockPath = path.join(rootDir, 'package-lock.json');
+  if (!fs.existsSync(lockPath)) {
+    throw new Error('Missing package-lock.json for deterministic supply-chain auditing');
+  }
+
+  // 2. Run npm audit
+  const auditRes = spawnSync('npm', ['audit', '--json'], { encoding: 'utf8', cwd: rootDir });
+  if (auditRes.status !== 0) {
+    try {
+      const parsed = JSON.parse(auditRes.stdout);
+      if (parsed.metadata && parsed.metadata.vulnerabilities && parsed.metadata.vulnerabilities.total > 0) {
+        throw new Error(`npm audit detected ${parsed.metadata.vulnerabilities.total} vulnerability(ies)`);
+      }
+    } catch (e) {
+      if (auditRes.stderr && !auditRes.stderr.includes('found 0 vulnerabilities')) {
+        throw new Error(`npm audit execution failed: ${auditRes.stderr}`);
+      }
+    }
+  }
+
+  // 3. Static code safety scan (eval, unescaped shell, secrets)
+  const scriptFiles = [
+    'scripts/pure-saas.mjs',
+    'scripts/build.mjs',
+    'scripts/run-tests.mjs',
+    'scripts/validate-references.mjs',
+    'cli/bin/pure-saas.js'
+  ];
+
+  for (const sf of scriptFiles) {
+    const full = path.join(rootDir, sf);
+    if (!fs.existsSync(full)) continue;
+    const content = fs.readFileSync(full, 'utf8');
+
+    // Forbidden unsafe dynamic execution (excluding test file inspecting itself)
+    if (sf !== 'scripts/run-tests.mjs') {
+      const evalPattern = new RegExp('\\b' + 'eval' + '\\s*\\(');
+      if (evalPattern.test(content)) {
+        throw new Error(`Unsafe eval() found in ${sf}`);
+      }
+    }
+    // Check for hardcoded API keys/passwords
+    if (/(['"])(AKIA|AIza|ghp_|glpat-|sk-)[a-zA-Z0-9_\-]{16,}\1/.test(content)) {
+      throw new Error(`Potential hardcoded credential found in ${sf}`);
+    }
+  }
+
   return true;
 });
 

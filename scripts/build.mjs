@@ -58,7 +58,7 @@ function copyDirRecursive(src, dest) {
   }
 }
 
-function syncCommandsWithRelativeLinks(srcDir, destDir) {
+function syncCommandsWithRelativeLinks(srcDir, destDir, writeFlatAliases = false) {
   if (!fs.existsSync(srcDir)) return;
   fs.mkdirSync(destDir, { recursive: true });
   const entries = fs.readdirSync(srcDir, { withFileTypes: true });
@@ -68,7 +68,26 @@ function syncCommandsWithRelativeLinks(srcDir, destDir) {
     const destPath = path.join(destDir, entry.name);
 
     if (entry.isDirectory()) {
-      syncCommandsWithRelativeLinks(srcPath, destPath);
+      syncCommandsWithRelativeLinks(srcPath, destPath, false);
+
+      // Write flat kebab-case aliases for hosts that do not recurse subdirectories (Cursor, Codex)
+      if (writeFlatAliases && entry.name === 'puresaas') {
+        const subEntries = fs.readdirSync(srcPath, { withFileTypes: true });
+        for (const sub of subEntries) {
+          if (sub.isFile() && sub.name.endsWith('.md')) {
+            const flatDest = path.join(destDir, `puresaas-${sub.name}`);
+            let content = fs.readFileSync(path.join(srcPath, sub.name), 'utf8');
+            const playbooks = ['workflow.md', 'design.md', 'polish.md', 'review.md', 'clone.md', 'responsive.md'];
+            for (const pb of playbooks) {
+              const canonicalPlaybookPath = path.join(skillSourceDir, 'reference', pb);
+              const relToPlaybook = path.relative(path.dirname(flatDest), canonicalPlaybookPath);
+              const pbRegex = new RegExp(`\\]\\(\\.\\.?/\\.\\.?/reference/${pb}\\)|\\]\\(\\.\\./reference/${pb}\\)`, 'g');
+              content = content.replace(pbRegex, `](${relToPlaybook})`);
+            }
+            fs.writeFileSync(flatDest, content, 'utf8');
+          }
+        }
+      }
     } else if (entry.isFile() && entry.name.endsWith('.md')) {
       let content = fs.readFileSync(srcPath, 'utf8');
 
@@ -137,17 +156,17 @@ export function buildProviders() {
   // 3. Synchronize Slash Commands to standard provider directories (.claude/commands, .cursor/commands, .agents/commands, commands)
   const canonicalCommandsDir = path.join(skillSourceDir, 'commands');
   const commandDestinations = [
-    path.join(rootDir, '.claude/commands'),
-    path.join(rootDir, '.cursor/commands'),
-    path.join(rootDir, '.agents/commands'),
-    path.join(rootDir, 'commands')
+    { dest: path.join(rootDir, '.claude/commands'), flat: false },
+    { dest: path.join(rootDir, '.cursor/commands'), flat: true },
+    { dest: path.join(rootDir, '.agents/commands'), flat: true },
+    { dest: path.join(rootDir, 'commands'), flat: true }
   ];
 
-  for (const dest of commandDestinations) {
+  for (const { dest, flat } of commandDestinations) {
     if (fs.existsSync(dest)) {
       fs.rmSync(dest, { recursive: true, force: true });
     }
-    syncCommandsWithRelativeLinks(canonicalCommandsDir, dest);
+    syncCommandsWithRelativeLinks(canonicalCommandsDir, dest, flat);
     console.log(`✓ Synchronized slash commands -> ${path.relative(rootDir, dest)}`);
   }
 

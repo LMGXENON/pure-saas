@@ -2289,7 +2289,10 @@ export function installAgentRules(target = 'all') {
 
 export async function runCli(args = process.argv.slice(2)) {
   const rawCommand = args[0] || '--help';
-  const command = rawCommand.startsWith('/') ? rawCommand.slice(1) : rawCommand;
+  let command = rawCommand.startsWith('/') ? rawCommand.slice(1) : rawCommand;
+  if (command.startsWith('puresaas-')) {
+    command = 'puresaas:' + command.slice('puresaas-'.length);
+  }
 
   if (command === '--help' || command === '-h' || command === 'help') {
     printHelp();
