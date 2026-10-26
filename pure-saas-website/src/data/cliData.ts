@@ -164,3 +164,4 @@ Don't: Trap users in infinite scroll loops without accessible footers`
 Run "npx pure-saas validate DESIGN.md" to verify.`
   }
 ];
+

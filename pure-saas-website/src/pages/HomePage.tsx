@@ -24,10 +24,10 @@ export const HomePage: React.FC = () => {
         <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
           {/* Eyebrow Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-surface-muted border border-border-subtle text-text-secondary mb-8 shadow-xs animate-fade-in">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="px-1.5 py-0.2 rounded bg-surface-base text-accent font-mono text-[10px] font-semibold border border-border-subtle">RELEASE</span>
             <span className="font-mono text-[11px]">Pure SaaS 1.0 Ready for Production</span>
             <span className="text-border-default">•</span>
-            <span className="text-accent font-semibold">260+ Guides Added</span>
+            <span className="text-text-primary font-semibold">260+ Guides Added</span>
           </div>
 
           {/* Primary Headline */}

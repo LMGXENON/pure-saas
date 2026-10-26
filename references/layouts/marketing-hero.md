@@ -22,7 +22,7 @@ The hero section establishes immediate value proposition, brand identity, and th
 <section className="relative w-full max-w-7xl mx-auto px-6 pt-20 pb-28 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
   <div className="flex-1 flex flex-col items-start text-left max-w-2xl">
     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[var(--color-surface-muted)] text-[var(--color-text-secondary)] border border-[var(--color-border-subtle)] mb-6">
-      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+      <span className="px-1.5 py-0.2 rounded bg-[var(--color-surface-base)] text-[var(--color-accent-primary)] font-mono text-[10px] font-semibold border border-[var(--color-border-subtle)]">NEW</span>
       <span>v2.4 Released with Rust Engine</span>
     </div>
     

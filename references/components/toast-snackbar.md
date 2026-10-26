@@ -19,7 +19,7 @@ Toasts provide brief, non-intrusive feedback on completed background operations 
 ```tsx
 <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none">
   <div role="status" aria-live="polite" className="pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--color-surface-overlay)] border border-[var(--color-border-subtle)] shadow-xl text-xs font-medium text-[var(--color-text-primary)] animate-slide-up">
-    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+    <span className="text-[var(--color-accent-primary)] font-semibold text-xs" aria-hidden="true">✓</span>
     <span>Deployment initiated successfully.</span>
     <button className="ml-2 text-[var(--color-accent-primary)] hover:underline font-semibold">View</button>
   </div>

@@ -118,7 +118,7 @@ npx pure-saas design-system --product "<type>" --variance <1-10> --motion <1-10>
 3. **Never Fabricate Validation:** If a check fails, diagnose and resolve it. If an environment lacks browser inspection or screen-reader tooling, record the area as `untested`. Never claim passing verification for uninspected code.
 4. **Preserve Architecture in Existing Apps:** Never rewrite backend APIs, auth flows, database structures, or automated test IDs during UI refactors without explicit user authorization.
 5. **Enforce Semantic Tokens:** Reject raw hex codes, color functions, and arbitrary Tailwind numbers. Ensure all styling resolves to documented tokens in `DESIGN.md`.
-6. **Enforce Anti-Slop Discipline:** Halt and challenge generic purple/cyan gradient text, excessive glassmorphism blur, repetitive 3-column feature cards, and emoji UI icons.
+6. **Enforce Anti-Slop Discipline:** Halt and challenge generic purple/cyan gradient text, excessive glassmorphism blur, repetitive 3-column feature cards, emoji UI icons, and green pulsing/pinging circular status dots.
 7. **Follow "Read Before You Cite":** Never review from memory or invent guidelines. Route to relevant guides in `references/`, open them, and cite exact files and sections.
 8. **Four-Part Review Findings:** Every reported review finding must provide Finding, Evidence (`file:line` or observed value), Impact (**Critical**, **Warning**, or **Info**), and Concrete Fix.
 9. **Maintain the Unresolved Decisions Ledger:** Record open questions requiring user confirmation in the `unresolved` frontmatter list of `DESIGN.md`.

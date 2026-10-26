@@ -73,8 +73,8 @@ export const showcaseData: ShowcaseItem[] = [
       <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">342 edge micro-regions active across 3 continents.</p>
     </div>
     <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--color-surface-base)] border border-[var(--color-border-subtle)] text-xs font-mono">
-      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-      <span>99.998% Uptime</span>
+      <span className="px-1.5 py-0.5 rounded bg-[var(--color-surface-muted)] text-[10px] font-mono text-[var(--color-text-secondary)] uppercase tracking-wider">Operational</span>
+      <span>99.998% SLA</span>
     </div>
   </div>
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
@@ -139,7 +139,7 @@ export const showcaseData: ShowcaseItem[] = [
       visualCode: `<section className="max-w-7xl mx-auto px-6 py-20 lg:py-28 flex flex-col lg:flex-row items-center gap-12">
   <div className="flex-1 text-left">
     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-[var(--color-surface-muted)] text-[var(--color-text-secondary)] border border-[var(--color-border-subtle)] mb-6">
-      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+      <span className="px-1.5 py-0.2 rounded bg-[var(--color-surface-base)] text-[var(--color-text-primary)] font-mono text-[10px] font-semibold border border-[var(--color-border-subtle)]">RELEASE</span>
       <span>v2.4 Rust Edge Engine</span>
     </div>
     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--color-text-primary)] leading-[1.08] mb-6">
@@ -165,3 +165,4 @@ export const showcaseData: ShowcaseItem[] = [
     ]
   }
 ];
+

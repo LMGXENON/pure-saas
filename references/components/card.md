@@ -21,7 +21,7 @@ Cards group related information and actions into bounded visual units. Pure SaaS
   <div>
     <div className="flex items-center justify-between mb-3">
       <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">Analytics</span>
-      <span className="w-2 h-2 rounded-full bg-emerald-500" />
+      <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--color-text-muted)]">Live</span>
     </div>
     <h3 className="text-base font-semibold text-[var(--color-text-primary)] mb-1">Weekly Active Workspaces</h3>
     <p className="text-xs text-[var(--color-text-secondary)]">Aggregated across production clusters.</p>

@@ -79,3 +79,4 @@ export const allReferenceGuides: ReferenceGuide[] = ${JSON.stringify(allEntries,
 
 fs.writeFileSync(targetFile, fileOutput, 'utf8');
 console.log(`Generated ${allEntries.length} reference records in ${targetFile}`);
+

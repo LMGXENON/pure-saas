@@ -180,7 +180,7 @@ The six canonical slash commands directly connect to specific reference domains:
 Pure SaaS enforces high-craft engineering across all project types:
 
 ### Visual Identity & Layout
-- **Anti-Slop Enforcement & Discipline:** Reject arbitrary purple/cyan gradient meshes, excessive glassmorphism blur, repetitive 3-column card grids, emoji as interface icons, and vague marketing clichés.
+- **Anti-Slop Enforcement & Discipline:** Reject arbitrary purple/cyan gradient meshes, excessive glassmorphism blur, repetitive 3-column card grids, emoji as interface icons, green pulsing/pinging dots and glowing live indicators, and vague marketing clichés.
 - **Content-Driven Composition:** Pair headlines with tangible proof (interactive code terminals, live data tables, asymmetrical splits).
 - **Surface Elevation:** Establish coherent depth using layered surfaces (`color-bg-canvas`, `color-bg-surface`, `color-bg-surface-elevated`) with subtle hairline borders (`1px solid var(--color-border-subtle)`).
 

@@ -19,7 +19,7 @@ Public status pages broadcast uptime, service health, and incident resolution pr
 ```tsx
 <div className="max-w-4xl mx-auto py-12 px-4 space-y-8">
   <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 font-medium text-sm flex items-center gap-3">
-    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+    <span className="px-2 py-0.5 rounded text-xs font-mono font-semibold bg-emerald-500/20 text-emerald-600 dark:text-emerald-400">LIVE</span>
     <span>All Systems Operational</span>
   </div>
   <div className="rounded-2xl bg-[var(--color-surface-base)] border border-[var(--color-border-subtle)] divide-y divide-[var(--color-border-subtle)]">
@@ -56,4 +56,5 @@ Public status pages broadcast uptime, service health, and incident resolution pr
 
 - Avoid generic centered layouts when asymmetric product-led framing communicates faster.
 - Never pad sections with meaningless decorative pills or fake squiggly line metrics.
+- Ban all green pulsing/pinging circular status dots; communicate uptime through clear typography and accessible badges.
 - Enforce strict responsive breakpoints across 375px, 768px, 1024px, and 1440px+.

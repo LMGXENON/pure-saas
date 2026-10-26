@@ -68,6 +68,11 @@ Pure SaaS defines strict anti-slop review triggers. When an agent detects any of
 - **The Slop:** Only styling the default state and assuming the job is finished. Missing hover, active/pressed, focus-visible rings, disabled states, and error handling.
 - **The Fix:** Every interactive element must define its complete state machine.
 
+### 13. Green Pulsing Dots & Faux-Live Indicators (Absolute Prohibition)
+- **The Slop:** Small, circular green elements with pulsing, pinging, breathing or glowing animations (`bg-emerald-500 animate-pulse`, `animate-ping`, glowing green radial shadows) placed beside text like "Online", "Live", "Connected", "Active", or "Uptime".
+- **The Fix:** Ban every small, circular, green element with pulsing or glowing animation across the entire product. Use clean typography, text labels, subtle static indicators (`[Operational]`), or non-distracting badge treatments when a genuine status needs to be communicated. Never use animated green dots for decorative purposes or generic SaaS conventions.
+- **Permitted Exception:** None. Absolute ban across all components, badges, cards, navigation items, and headers.
+
 ---
 
 ## Anti-Slop Verification Checklist
@@ -77,6 +82,7 @@ Before declaring any design task complete, the agent must verify:
 - [ ] Is background glassmorphism eliminated or strictly justified?
 - [ ] Have redundant 3-column card layouts been re-composed into varied layouts?
 - [ ] Are all icons professional SVGs from a single consistent family, not emojis?
+- [ ] Are all green circular pulsing/pinging dots and glowing live indicators strictly eliminated?
 - [ ] Are all corner radii systematically proportional to the brand geometry?
 - [ ] Does all copy describe real product capabilities rather than generic hype?
 - [ ] Is every color, space, and radius mapped to a semantic design token?

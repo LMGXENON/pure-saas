@@ -176,3 +176,4 @@ export const BeforeAfterSlider: React.FC<{ item: ShowcaseItem }> = ({ item }) =>
     </div>
   );
 };
+

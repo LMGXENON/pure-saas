@@ -29,7 +29,7 @@ When creating, reviewing, or improving UI/UX designs, follow the Pure SaaS desig
 5. Non-Negotiable Engineering Rules:
    - Follow the 5-Tier Precedence Model: 1) User & existing brand; 2) Platform (Apple HIG/Web) & WCAG 2.2 AA; 3) Approved DESIGN.md tokens; 4) Retrieved intelligence; 5) Explicitly identified proposals with unresolved items.
    - Zero raw hex colors or arbitrary values: all styling must resolve to semantic tokens in DESIGN.md.
-   - Anti-slop discipline: no generic purple/cyan gradient text, excessive glassmorphism blur, or emoji UI icons.
+   - Anti-slop discipline: no generic purple/cyan gradient text, excessive glassmorphism blur, emoji UI icons, or green pulsing/pinging circular status dots.
    - Non-regression: in existing applications, preserve 100% of backend APIs, authentication, and database schemas.
    - "Read Before You Cite": open reference files and cite exact file and section paths using `npx pure-saas ref` and `npx pure-saas query`.
    - Continuous Verification: verify tokens, contrast, and drift with `pure-saas contrast`, `pure-saas diff`, `pure-saas drift`, and `pure-saas check --known`.

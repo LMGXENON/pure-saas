@@ -44,3 +44,4 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language = 'bash', f
     </div>
   );
 };
+
