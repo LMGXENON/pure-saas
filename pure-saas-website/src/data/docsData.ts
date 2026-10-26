@@ -84,12 +84,12 @@ export const docsArticles: DocArticle[] = [
     ],
     "next": {
       "slug": "getting-started-installation",
-      "title": "Installation & Setup Guide"
+      "title": "Installation"
     }
   },
   {
     "slug": "getting-started-installation",
-    "title": "Installation & Setup Guide",
+    "title": "Installation",
     "category": "Getting Started",
     "readTime": "6 min read",
     "summary": "A step-by-step walkthrough covering environment verification, CLI installation, agent setup, DESIGN.md configuration, and your first task.",
@@ -329,7 +329,7 @@ export const docsArticles: DocArticle[] = [
     ],
     "prev": {
       "slug": "getting-started-installation",
-      "title": "Installation & Setup Guide"
+      "title": "Installation"
     },
     "next": {
       "slug": "getting-started-verifying",

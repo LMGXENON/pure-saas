@@ -55,7 +55,7 @@ const articles = [
   },
   {
     slug: 'getting-started-installation',
-    title: 'Installation & Setup Guide',
+    title: 'Installation',
     category: 'Getting Started',
     readTime: '6 min read',
     summary: 'A step-by-step walkthrough covering environment verification, CLI installation, agent setup, DESIGN.md configuration, and your first task.',

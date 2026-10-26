@@ -700,7 +700,7 @@ export const HomePage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => toggleFaq(idx)}
-                    className="w-full p-4 sm:p-5 flex items-center justify-between text-left gap-4 font-semibold text-sm text-text-primary hover:text-accent transition-colors"
+                    className="w-full p-4 sm:p-5 flex items-center justify-between text-left gap-4 font-semibold text-sm text-text-primary hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-1 focus-visible:ring-offset-canvas rounded-xl transition-colors"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown
@@ -710,7 +710,7 @@ export const HomePage: React.FC = () => {
                     />
                   </button>
                   {isOpen && (
-                    <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs text-text-secondary leading-relaxed border-t border-border-subtle/50 mt-1 space-y-2">
+                    <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs text-text-secondary leading-relaxed space-y-2.5">
                       <p>{faq.a}</p>
                       <div>
                         <Link

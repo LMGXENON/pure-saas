@@ -6,8 +6,6 @@ import { AgentPromptBanner } from '../components/AgentPromptBanner';
 import {
   Search,
   Clock,
-  ChevronDown,
-  ChevronRight,
   Menu,
   X,
   ArrowLeft,
@@ -47,16 +45,6 @@ export const DocsPage: React.FC = () => {
 
   const currentArticle: DocArticle = docsArticles.find(a => a.slug === activeSlug) || docsArticles[0];
   const categories = Array.from(new Set(docsArticles.map(a => a.category)));
-
-  // State to track collapsed categories in left sidebar
-  const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>({});
-
-  const toggleCategory = (cat: string) => {
-    setCollapsedCategories(prev => ({
-      ...prev,
-      [cat]: !prev[cat]
-    }));
-  };
 
   const handleSelectArticle = (slug: string) => {
     setActiveSlug(slug);
@@ -144,8 +132,8 @@ export const DocsPage: React.FC = () => {
               />
             </div>
 
-            {/* Navigation Category Groups */}
-            <nav className="space-y-4">
+            {/* Navigation Category Groups (Always visible headings and child links) */}
+            <nav className="space-y-6">
               {categories.map(cat => {
                 const items = docsArticles.filter(
                   a => a.category === cat &&
@@ -153,52 +141,41 @@ export const DocsPage: React.FC = () => {
                 );
                 if (items.length === 0) return null;
 
-                const isCollapsed = collapsedCategories[cat];
-
                 return (
-                  <div key={cat} className="space-y-1">
-                    <button
-                      onClick={() => toggleCategory(cat)}
-                      className="w-full flex items-center justify-between px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-text-muted hover:text-text-primary rounded-lg transition-colors group"
-                    >
-                      <div className="flex items-center gap-2 truncate">
-                        <span className="p-1 rounded-md bg-surface-muted/60 text-accent flex items-center justify-center shrink-0 border border-border-subtle">
-                          {getCategoryIcon(cat)}
-                        </span>
-                        <span className="truncate">{cat}</span>
-                      </div>
-                      {isCollapsed ? (
-                        <ChevronRight className="w-3.5 h-3.5 text-text-muted group-hover:text-text-primary shrink-0" />
-                      ) : (
-                        <ChevronDown className="w-3.5 h-3.5 text-text-muted group-hover:text-text-primary shrink-0" />
-                      )}
-                    </button>
+                  <div key={cat} className="space-y-1.5">
+                    {/* Visible Sidebar Heading (Never collapsed, never hidden) */}
+                    <div className="flex items-center gap-2 px-2 py-1 text-[11px] font-bold uppercase tracking-wider text-text-muted select-none">
+                      <span className="p-1 rounded-md bg-surface-muted/60 text-accent flex items-center justify-center shrink-0 border border-border-subtle">
+                        {getCategoryIcon(cat)}
+                      </span>
+                      <span className="truncate">{cat}</span>
+                    </div>
 
-                    {!isCollapsed && (
-                      <div className="space-y-0.5 pt-0.5">
-                        {items.map(art => {
-                          const isActive = art.slug === activeSlug;
-                          return (
-                            <button
-                              key={art.slug}
-                              onClick={() => handleSelectArticle(art.slug)}
-                              className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center justify-between outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-1 focus-visible:ring-offset-canvas ${
-                                isActive
-                                  ? 'bg-accent/10 dark:bg-accent/15 text-accent dark:text-accent font-semibold shadow-xs'
-                                  : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover/80 active:bg-surface-selected'
-                              }`}
-                            >
-                              <div className="flex items-center gap-2 truncate min-w-0">
-                                {isActive && (
-                                  <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-                                )}
-                                <span className="truncate">{art.title}</span>
-                              </div>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    )}
+                    {/* All Existing Child Links (Always visible and navigable) */}
+                    <div className="space-y-0.5 pt-0.5">
+                      {items.map(art => {
+                        const isActive = art.slug === activeSlug;
+                        return (
+                          <button
+                            key={art.slug}
+                            type="button"
+                            onClick={() => handleSelectArticle(art.slug)}
+                            className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center justify-between outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-1 focus-visible:ring-offset-canvas ${
+                              isActive
+                                ? 'bg-accent/10 dark:bg-accent/15 text-accent dark:text-accent font-semibold shadow-xs'
+                                : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover/80 active:bg-surface-selected'
+                            }`}
+                          >
+                            <div className="flex items-center gap-2 truncate min-w-0">
+                              {isActive && (
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                              )}
+                              <span className="truncate">{art.title}</span>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 );
               })}
@@ -236,7 +213,7 @@ export const DocsPage: React.FC = () => {
                   />
                 </div>
 
-                <nav className="space-y-4 flex-1">
+                <nav className="space-y-6 flex-1">
                   {categories.map(cat => {
                     const items = docsArticles.filter(
                       a => a.category === cat &&
@@ -245,9 +222,12 @@ export const DocsPage: React.FC = () => {
                     if (items.length === 0) return null;
 
                     return (
-                      <div key={cat} className="space-y-1">
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-text-muted px-2 py-1 flex items-center gap-1.5">
-                          <span>{cat}</span>
+                      <div key={cat} className="space-y-1.5">
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-text-muted px-2 py-1 flex items-center gap-2">
+                          <span className="p-1 rounded-md bg-surface-muted/60 text-accent flex items-center justify-center shrink-0 border border-border-subtle">
+                            {getCategoryIcon(cat)}
+                          </span>
+                          <span className="truncate">{cat}</span>
                         </div>
                         <div className="space-y-0.5">
                           {items.map(art => {
@@ -255,6 +235,7 @@ export const DocsPage: React.FC = () => {
                             return (
                               <button
                                 key={art.slug}
+                                type="button"
                                 onClick={() => handleSelectArticle(art.slug)}
                                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-2 ${
                                   isActive
