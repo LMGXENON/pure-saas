@@ -123,17 +123,47 @@ Examples:
 - `npx pure-saas query ux "smooth scroll"` -> retrieves UX heuristic with Do/Don't and good/bad code examples
 - `npx pure-saas query landing "b2b saas"` -> retrieves conversion-optimized section order and CTA placement
 
-### Reference Collections
-1. **Apple Human Interface Guidelines (`references/hig/` — 124 Documents):**
-   Full individual reference documents covering 57 UI components, interaction patterns (modality, sheets, notifications, widgets, Apple Pay), foundations (color, typography, layout, materials), inputs, and platform conventions (`designing-for-ios.md`, `designing-for-macos.md`, `liquid-glass.md`).
-2. **Framework Engineering Guides (`references/frameworks/` — 22 Frameworks):**
-   Actionable guidelines with Do/Don't patterns, severity ratings, and code examples for React, Next.js, Vue, Nuxt, Svelte, Tailwind, Shadcn, SwiftUI, React Native, Flutter, Electron, Angular, Astro, and more.
-3. **Curated Design Intelligence (`references/design-intelligence.json` & `design-styles-catalog.json`):**
-   88 visual styles, 192 product archetypes, 192 semantic color systems, 74 typography pairings, 34 landing page patterns, 119 UX heuristics, 25 chart guides, 17 motion patterns, and 32 app UI patterns.
-4. **Core Craft Guides (`references/*.md`):**
-   `design-principles.md`, `typography.md`, `color-and-tokens.md`, `layout-and-composition.md`, `anti-slop-rules.md`, `interaction-states.md`, `accessibility.md`, `responsive-design.md`, `cross-platform.md`, `code-audit.md`, `motion.md`, `platform-guidelines.md`, `design-review.md`.
-5. **Interactive Backgrounds & Shaders (`references/backgrounds/` — 15 Components & `backgrounds.md`):**
-   Full source code, CSS, props, WebGL/canvas shaders, and integration recipes from React Bits (`gradient-ascii.md`, `pattern-waves.md`, `prism.md`, `aurora.md`, `liquid-chrome.md`, `iridescence.md`, `plasma.md`, `particles.md`, `hyperspeed.md`, `dither.md`, `dot-grid.md`, `ballpit.md`, `waves.md`, `threads.md`, `topography.md`).
+### Reference Collections & Master Index (`references/reference-index.md`)
+Pure SaaS maintains a library of over **260+ structured architectural reference files** organized into dedicated subdirectories. Consult `references/reference-index.md` for the full topic manifest:
+1. **Component Architecture & Primitives (`references/components/` — 20 Guides):**
+   Full specifications, 8-state matrices, accessible code, and anti-slop rules for buttons, inputs, textareas, selects, checkboxes, switches, modals, sheets, popovers, dropdowns, tabs, accordions, cards, data tables, sidebars, top navs, breadcrumbs, pagination, command palettes, and toasts.
+2. **Layout & Page Composition Blueprints (`references/layouts/` — 12 Guides):**
+   Architectural blueprints for marketing heroes, SaaS landing pages, app dashboard shells, analytics boards, pricing matrices, documentation, settings, onboarding wizards, auth portals, e-commerce grids, checkout funnels, and status pages.
+3. **Design Systems & Token Architecture (`references/design-systems/` — 12 Guides):**
+   3-tier token hierarchies, naming taxonomy, OKLCH color construction, fluid typography formulas, 8pt spatial grids, multi-layer shadows, concentric border radius geometry, container queries, versioning, component contracts, DTCG export, and system governance.
+4. **UX & Interaction Patterns (`references/ux-patterns/` — 12 Guides):**
+   Keyboard shortcuts, focus management and trapping, loading skeletons, empty states, inline validation, form steppers, optimistic UI updates, undo patterns, accessible drag-and-drop, infinite scroll, autocomplete, and notification queues.
+5. **Visual Craft, Physics & Polish (`references/visual-craft/` — 10 Guides):**
+   Apple-inspired visual craft, materials and vibrancy blur, light/dark lighting models, sub-pixel hairline borders, multi-stop shadow bloom, fluid spring physics, staggered entrance motion, visual weight asymmetry, optical alignment, and micro-interactions.
+6. **Frontend Engineering & Performance (`references/frontend-engineering/` — 12 Guides):**
+   Compound component architecture, headless UI primitives, re-render optimization, DOM virtualization, CSS `@layer` token layering, RSC server-client boundaries, finite state machines, data fetching caches, error boundaries, custom hooks, `requestAnimationFrame` scheduling, and Core Web Vitals (INP/CLS/LCP).
+7. **Accessibility Standards (`references/accessibility/` — 10 Guides):**
+   WCAG 2.2 AA conformance matrix, APCA color contrast verification, ARIA live region announcements, accessible dialogs, accessible forms, data tables, reduced motion, minimum touch targets (WCAG 2.5.8), SVG iconography, and navigation menus.
+8. **Theming Architecture (`references/theming/` — 8 Guides):**
+   Dark mode color inversion, contrast preservation, system preference listeners, CSS custom properties runtime switching, Tailwind theme token integration, theme flash prevention (FOIT/FOUC), high-contrast modes, and multi-brand scoping.
+9. **Developer Tooling & Auditing (`references/developer-tooling/` — 8 Guides):**
+   Static token AST linting, Stylelint token enforcement, headless browser visual regression, automated contrast pipelines, Storybook component catalogs, Tailwind arbitrary class prevention, Lighthouse CI, and browser DevTools workflows.
+10. **Real-World Production Flows (`references/real-world-flows/` — 10 Guides):**
+    Authentication lifecycles, Polar/Stripe checkout billing, multi-tenant workspace switching, faceted search, async data export, RBAC team member invites, audit log timelines, API key management, notifications inbox, and profile account management.
+11. **Design Analysis & Reverse Engineering (`references/design-analysis/` — 6 Guides & `reference-analysis.md`):**
+    Screenshot reference decomposition, live DOM DevTools extraction, spacing scale reconstruction, typography matching, motion curve reverse engineering, and the 11-item visual drift completion gate.
+12. **Responsive Design & Mobile Ergonomics (`references/responsive/` — 6 Guides & `responsive-design.md`):**
+    Mobile-first breakpoint architecture, thumb zones and touch ergonomics, fluid typography `clamp()`, adaptive navigation transitions, data density modes, and mobile virtual keyboard optimizations.
+13. **Apple Human Interface Guidelines (`references/hig/` — 124 Documents):**
+    Comprehensive individual reference documents covering 57 UI components, interaction patterns (modality, sheets, notifications, widgets, Apple Pay), foundations (color, typography, layout, materials), inputs, and platform conventions (`designing-for-ios.md`, `designing-for-macos.md`, `liquid-glass.md`).
+14. **Framework Engineering Guides (`references/frameworks/` — 22 Frameworks):**
+    Actionable guidelines with Do/Don't patterns, severity ratings, and code examples for React, Next.js, Vue, Nuxt, Svelte, Tailwind, Shadcn, SwiftUI, React Native, Flutter, Electron, Angular, Astro, and more.
+15. **Interactive Backgrounds & Shaders (`references/backgrounds/` — 15 Components & `backgrounds.md`):**
+    Full source code, CSS, props, WebGL/canvas shaders, and integration recipes from React Bits (`gradient-ascii.md`, `pattern-waves.md`, `prism.md`, `aurora.md`, `liquid-chrome.md`, `iridescence.md`, `plasma.md`, `particles.md`, `hyperspeed.md`, `dither.md`, `dot-grid.md`, `ballpit.md`, `waves.md`, `threads.md`, `topography.md`).
+
+### Command to Reference Routing Matrix
+The six canonical slash commands directly connect to specific reference domains:
+- **`/pure-saas [request]`**: Coordinates across `references/reference-index.md`, `references/components/`, `references/design-systems/`, and target `references/frameworks/`.
+- **`/pure-saas design [request]`**: Consults `references/design-systems/` (tokens, typography, color, spacing), `references/layouts/`, and `references/theming/` to author or update `DESIGN.md`.
+- **`/pure-saas polish [request]`**: Consults `references/visual-craft/` (apple polish, spring physics, hairline borders, materials blur), `references/ux-patterns/` (micro-interactions), and `references/motion.md`.
+- **`/pure-saas review [request]`**: Consults `references/accessibility/` (WCAG 2.2 AA matrix, contrast), `references/developer-tooling/`, `references/code-audit.md`, and `references/anti-slop-rules.md`.
+- **`/pure-saas reference [URL]`**: Consults `references/design-analysis/` (screenshot analysis, DOM extraction, spacing reconstruction, 11-item completion gates) and `references/reference-analysis.md`.
+- **`/pure-saas responsive [request]`**: Consults `references/responsive/` (mobile-first breakpoints, touch ergonomics, fluid clamp, adaptive navigation) and `references/responsive-design.md`.
 
 ### The "Read Before You Cite" Rule
 - **Read before making claims:** Never invent guideline numbers, token values, or measurements from memory. Open the matching reference file in `references/` and cite both file and heading.

@@ -1306,6 +1306,18 @@ export function searchReferences(query = '', options = {}) {
       if (relPath.startsWith('hig/')) category = 'Apple HIG';
       else if (relPath.startsWith('frameworks/')) category = 'Framework Guideline';
       else if (relPath.startsWith('backgrounds/')) category = 'Background Component';
+      else if (relPath.startsWith('components/')) category = 'Component Guide';
+      else if (relPath.startsWith('layouts/')) category = 'Layout Pattern';
+      else if (relPath.startsWith('design-systems/')) category = 'Design System';
+      else if (relPath.startsWith('ux-patterns/')) category = 'UX & Interaction';
+      else if (relPath.startsWith('visual-craft/')) category = 'Visual Craft';
+      else if (relPath.startsWith('frontend-engineering/')) category = 'Frontend Engineering';
+      else if (relPath.startsWith('accessibility/')) category = 'Accessibility';
+      else if (relPath.startsWith('theming/')) category = 'Theming & Tokens';
+      else if (relPath.startsWith('developer-tooling/')) category = 'Developer Tooling';
+      else if (relPath.startsWith('real-world-flows/')) category = 'Real-World Flow';
+      else if (relPath.startsWith('design-analysis/')) category = 'Design Analysis';
+      else if (relPath.startsWith('responsive/')) category = 'Responsive Design';
 
       let score = 0;
       const lowerRel = relPath.toLowerCase();

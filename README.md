@@ -239,12 +239,19 @@ The Pure SaaS CLI provides design references, design-system generation, token va
 
 ### Search the Reference Library
 
+Pure SaaS includes a curated library of **260+ architectural reference guides, component specifications, Apple HIG documents, and framework manuals** catalogued in `references/reference-index.md`.
+
+Search any topic across components, layouts, design systems, UX patterns, visual craft, accessibility, theming, and real-world flows:
+
 ```bash
 npx pure-saas ref "modal"
 npx pure-saas ref "button"
-npx pure-saas ref "react"
+npx pure-saas ref "wcag 2.2"
+npx pure-saas ref "dark mode"
+npx pure-saas ref "dashboard"
+npx pure-saas ref "spring physics"
+npx pure-saas ref "virtualization"
 npx pure-saas ref "gradient ascii"
-npx pure-saas ref "pattern waves"
 ```
 
 ### Query Design Intelligence

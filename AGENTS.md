@@ -41,8 +41,23 @@ Pure SaaS operates via **one intelligent main command and five specialist comman
 | `.windsurfrules` | Root entry point for Windsurf | Yes |
 | `.github/copilot-instructions.md` | Repository custom instructions for GitHub Copilot | Yes |
 | `commands/*.md` | The 6 canonical user-facing slash command definitions (`pure-saas`, `design`, `polish`, `review`, `reference`, `responsive`) | Yes |
+| `references/reference-index.md` | Master manifest indexing 260+ architectural references, components, and HIG topics | Yes |
+| `references/components/*.md` | 20 component specifications with 8-state matrices, WCAG rules, and TSX/Tailwind code | Yes |
+| `references/layouts/*.md` | 12 architectural blueprints for dashboards, landing pages, heroes, pricing, and settings | Yes |
+| `references/design-systems/*.md` | 12 design system guides: tokens, naming, color ramps, fluid type, grids, geometry | Yes |
+| `references/ux-patterns/*.md` | 12 UX guides: shortcuts, focus traps, skeletons, empty states, validation, undo | Yes |
+| `references/visual-craft/*.md` | 10 visual craft guides: Apple polish, materials blur, lighting, hairline borders, physics | Yes |
+| `references/frontend-engineering/*.md` | 12 engineering guides: compound components, headless primitives, virtualization, vitals | Yes |
+| `references/accessibility/*.md` | 10 accessibility guides: WCAG 2.2 AA matrix, contrast, ARIA, touch targets, tables | Yes |
+| `references/theming/*.md` | 8 theming guides: dark mode inversion, runtime variables, system preference detection | Yes |
+| `references/developer-tooling/*.md` | 8 tooling guides: token linting, Stylelint, visual regression, contrast automation | Yes |
+| `references/real-world-flows/*.md` | 10 production flow guides: auth, billing, multi-tenancy, audit logs, API keys | Yes |
+| `references/design-analysis/*.md` | 6 reference analysis guides: screenshot breakdown, DOM extraction, completion gates | Yes |
+| `references/responsive/*.md` | 6 responsive guides: mobile-first breakpoints, touch ergonomics, fluid clamp | Yes |
 | `references/hig/*.md` | 124 substantive individual Apple HIG reference documents across components, foundations, and patterns | Yes |
 | `references/frameworks/*.md` | 22 framework engineering guides (React, Next.js, Vue, Svelte, Tailwind, SwiftUI, Flutter, etc.) | Yes |
+| `references/backgrounds/` | 15 interactive background shader and canvas component references from React Bits | Yes |
+| `references/backgrounds.md` | Master directory and integration guide for interactive shaders and canvas backgrounds | Yes |
 | `references/design-intelligence.json` | Compiled dataset: 88 styles, 192 product archetypes, 74 typography pairings, 25 chart guides, 17 motion patterns, 22 stack guidelines | Generated / Maintained |
 | `references/design-styles-catalog.json` | Curated tokenized design style archetypes with Tailwind and CSS mappings | Yes |
 | `references/hig-lookup.md` | Apple HIG 123-topic index and routing guide | Yes |
@@ -60,7 +75,6 @@ Pure SaaS operates via **one intelligent main command and five specialist comman
 | `references/responsive-design.md` | Viewport constraints, container queries, and fluid typography | Yes |
 | `references/typography.md` | Optical hierarchy, fluid scale formulas, line heights, and letter-spacing tracking | Yes |
 | `scripts/pure-saas.mjs` | Zero-dependency Node.js CLI, reference search engine, design intelligence query engine, token validator, and static code scanner | Yes |
-| `references/backgrounds/` | Interactive background shader and canvas component references from React Bits | Yes |
 
 ---
 

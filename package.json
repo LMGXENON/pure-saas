@@ -9,6 +9,7 @@
   },
   "scripts": {
     "validate": "node scripts/pure-saas.mjs validate",
+    "validate-refs": "node scripts/generators/validate-references.mjs",
     "contrast": "node scripts/pure-saas.mjs contrast",
     "check-tokens": "node scripts/pure-saas.mjs check-tokens"
   },

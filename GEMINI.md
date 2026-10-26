@@ -2,16 +2,22 @@ When creating, reviewing, or improving UI/UX designs, follow the Pure SaaS desig
 
 1. Read SKILL.md in full. It defines the stance, universal execution behaviors, the 6 core workflows,
    the 8-state component matrix, semantic token architecture, and honest verification reporting.
-2. Retrieve exact references for the task using `npx pure-saas ref "<component, framework, or topic>"`:
-   - Component patterns (57 UI components): references/hig/buttons.md, sheets.md, modality.md, tables.md, etc.
+2. Retrieve exact references for the task using `npx pure-saas ref "<component, framework, or topic>"` or consult the master index at `references/reference-index.md`:
+   - Component guides (20 primitives): references/components/*.md (button.md, modal-dialog.md, data-table.md, etc.)
+   - Layout blueprints (12 patterns): references/layouts/*.md (saas-dashboard.md, marketing-hero.md, pricing-matrix.md, etc.)
+   - Design systems & tokens: references/design-systems/*.md (tokens, naming, color palettes, fluid typography, grids)
+   - UX & interaction patterns: references/ux-patterns/*.md (shortcuts, focus traps, skeletons, empty states, validation)
+   - Visual craft & polish: references/visual-craft/*.md (apple polish, materials blur, lighting models, spring physics)
+   - Frontend engineering: references/frontend-engineering/*.md (compound components, virtualization, RSC boundaries, vitals)
+   - Accessibility (WCAG 2.2 AA): references/accessibility/*.md (conformance matrix, contrast, ARIA, target size 2.5.8)
+   - Theming: references/theming/*.md (dark mode inversion, runtime CSS variables, system preference detection)
+   - Developer tooling: references/developer-tooling/*.md (token linting, Stylelint, visual regression, contrast CI)
+   - Real-world flows: references/real-world-flows/*.md (auth lifecycle, billing checkouts, multi-tenancy, audit logs)
+   - Design analysis & reverse engineering: references/design-analysis/*.md & references/reference-analysis.md
+   - Responsive & ergonomics: references/responsive/*.md & references/responsive-design.md
+   - Apple HIG (124 topics): references/hig/*.md (buttons.md, sheets.md, modality.md, etc.)
    - Framework guidelines (22 stacks): references/frameworks/react.md, svelte.md, vue.md, tailwind.md, etc.
-   - Base context: references/design-principles.md, typography.md, color-and-tokens.md, layout-and-composition.md, anti-slop-rules.md.
-   - Quality audit & code checks: references/code-audit.md, design-review.md.
-   - Components & states: references/interaction-states.md, accessibility.md.
-   - Responsive & platforms: references/responsive-design.md, cross-platform.md, platform-guidelines.md.
-   - Motion & physics: references/motion.md.
-   - Interactive backgrounds & shaders: references/backgrounds.md, references/backgrounds/*.md.
-   - Reference URL recreation: references/reference-analysis.md.
+   - Interactive backgrounds & shaders (15 shaders): references/backgrounds.md, references/backgrounds/*.md.
 3. Universal Command: Use `/pure-saas [request]` as the default entry point. It autonomously coordinates
    design specification, component building, token enforcement, accessibility, motion, and verification.
 4. Specialist Commands:
