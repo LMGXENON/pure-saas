@@ -9,7 +9,6 @@
   },
   "scripts": {
     "test": "node --test tests/**/*.test.mjs",
-    "test:schemas": "node --test tests/schema-tests/*.test.mjs",
     "test:tokens": "node --test tests/token-tests/*.test.mjs",
     "test:enforcement": "node --test tests/enforcement-tests/*.test.mjs",
     "test:agents": "node --test tests/agent-workflow-tests/*.test.mjs",

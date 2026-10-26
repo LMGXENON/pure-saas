@@ -25,8 +25,7 @@ jobs:
       - name: Run Test Suite
         run: npm test
 
-      - name: Validate Starter Templates & Fixtures
+      - name: Validate Starter Fixtures
         run: |
-          node scripts/pure-saas.mjs validate references/templates/DESIGN.md
           node scripts/pure-saas.mjs validate tests/fixtures/valid-design.md
 

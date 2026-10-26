@@ -155,3 +155,11 @@ test('CLI: queryDesignIntelligence resolves extended domains (typography, charts
   assert.ok(motionResult.motion.length > 0, 'Must resolve motion patterns for micro query');
 });
 
+test('CLI: ref command searches reference library and supports --json', async () => {
+  const code = await runCli(['ref', 'button']);
+  assert.strictEqual(code, 0, 'Exit code must be 0 for valid ref query');
+
+  const codeJson = await runCli(['ref', 'modal', '--json']);
+  assert.strictEqual(codeJson, 0, 'Exit code must be 0 for --json ref query');
+});
+

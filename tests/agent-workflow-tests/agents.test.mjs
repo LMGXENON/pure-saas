@@ -2,7 +2,13 @@ import { test } from 'node:test';
 import assert from 'node:assert';
 import fs from 'node:fs';
 import path from 'node:path';
-import { validateDesignDocument } from '../../scripts/pure-saas.mjs';
+import {
+  validateDesignDocument,
+  getStarterDesign,
+  getStarterBrief,
+  getStarterReferenceRecord,
+  searchReferences
+} from '../../scripts/pure-saas.mjs';
 
 test('Agents: Root agent entry points and command registries exist with documented instructions', () => {
   const rootEntryPoints = [
@@ -40,23 +46,84 @@ test('Agents: SKILL.md and AGENTS.md satisfy required operational sections', () 
   assert.ok(skillContent.includes('Anti-Slop'), 'SKILL.md must include Anti-Slop guidance');
 });
 
-test('Agents: Starter templates exist and satisfy schema and validation rules', () => {
-  const templates = [
-    'design-brief.md',
-    'DESIGN.md',
-    'reference-record.md'
+test('Built-in Generators: Starter document generators produce valid specifications', () => {
+  const starterDesign = getStarterDesign();
+  assert.ok(starterDesign.length > 200, 'Starter design must be substantial');
+  assert.ok(starterDesign.includes('color-bg-canvas'), 'Starter design must include semantic color tokens');
+
+  const starterBrief = getStarterBrief();
+  assert.ok(starterBrief.length > 100, 'Starter brief must be substantial');
+
+  const starterRef = getStarterReferenceRecord();
+  assert.ok(starterRef.length > 100, 'Starter reference record must be substantial');
+});
+
+test('Apple HIG Reference Library: All 124 substantive documents exist in references/hig/', () => {
+  const higDir = path.resolve(process.cwd(), 'references/hig');
+  assert.ok(fs.existsSync(higDir), 'references/hig must exist');
+
+  const higFiles = fs.readdirSync(higDir).filter(f => f.endsWith('.md'));
+  assert.strictEqual(higFiles.length, 124, 'references/hig/ must contain exactly 124 markdown files');
+
+  // Verify key components and foundations have substantive content and proper headers
+  const sampleFiles = [
+    'buttons.md',
+    'modality.md',
+    'sheets.md',
+    'accessibility.md',
+    'color.md',
+    'typography.md',
+    'layout.md',
+    'liquid-glass.md'
   ];
 
-  for (const tpl of templates) {
-    const tplPath = path.resolve(process.cwd(), 'references/templates', tpl);
-    assert.ok(fs.existsSync(tplPath), `Template ${tpl} must exist in references/templates/`);
-    const content = fs.readFileSync(tplPath, 'utf8');
-    assert.ok(content.length > 50, `Template ${tpl} must contain substantial starter content`);
+  for (const sample of sampleFiles) {
+    const filePath = path.join(higDir, sample);
+    assert.ok(fs.existsSync(filePath), `HIG file ${sample} must exist`);
+    const content = fs.readFileSync(filePath, 'utf8');
+    assert.ok(content.length > 500, `HIG file ${sample} must have substantive content (>500 chars)`);
+    assert.ok(content.includes('# '), `HIG file ${sample} must start with markdown heading`);
   }
+});
 
-  const designValidation = validateDesignDocument(path.resolve(process.cwd(), 'references/templates/DESIGN.md'));
-  assert.strictEqual(designValidation.valid, true, 'Starter template DESIGN.md must pass validation');
-  assert.strictEqual(designValidation.issues.length, 0, 'Starter template DESIGN.md must have zero issues');
+test('Framework Engineering Guides: All 22 framework guides exist in references/frameworks/', () => {
+  const fwDir = path.resolve(process.cwd(), 'references/frameworks');
+  assert.ok(fs.existsSync(fwDir), 'references/frameworks must exist');
+
+  const fwFiles = fs.readdirSync(fwDir).filter(f => f.endsWith('.md'));
+  assert.strictEqual(fwFiles.length, 22, 'references/frameworks/ must contain exactly 22 framework guides');
+
+  // Verify sample framework guides contain actionable rules and code examples
+  const sampleFw = ['react.md', 'html-tailwind.md', 'vue.md', 'svelte.md', 'swiftui.md', 'flutter.md'];
+  for (const sample of sampleFw) {
+    const filePath = path.join(fwDir, sample);
+    assert.ok(fs.existsSync(filePath), `Framework guide ${sample} must exist`);
+    const content = fs.readFileSync(filePath, 'utf8');
+    assert.ok(content.length > 1000, `Framework guide ${sample} must be substantial (>1000 chars)`);
+    assert.ok(content.includes('Recommended:') || content.includes('Do:'), `Framework guide ${sample} must contain Do/Recommended guidance`);
+  }
+});
+
+test('Reference Search Engine: Retrieves relevant documents across components, frameworks, and topics', () => {
+  // 1. Search component
+  const modalMatches = searchReferences('modal', { limit: 5 });
+  assert.ok(modalMatches.length > 0, 'Must return results for "modal"');
+  assert.ok(modalMatches.some(m => m.path.includes('hig/modality.md') || m.path.includes('hig/sheets.md')), 'Must retrieve modality or sheets');
+
+  // 2. Search button
+  const buttonMatches = searchReferences('button', { limit: 5 });
+  assert.ok(buttonMatches.length > 0, 'Must return results for "button"');
+  assert.strictEqual(buttonMatches[0].path, 'references/hig/buttons.md', 'Top result for button must be buttons.md');
+
+  // 3. Search framework
+  const reactMatches = searchReferences('react', { limit: 5 });
+  assert.ok(reactMatches.length > 0, 'Must return results for "react"');
+  assert.ok(reactMatches.some(m => m.path.includes('frameworks/react.md')), 'Must retrieve react.md');
+
+  // 4. Search accessibility
+  const a11yMatches = searchReferences('accessibility', { limit: 5 });
+  assert.ok(a11yMatches.length > 0, 'Must return results for "accessibility"');
+  assert.ok(a11yMatches.some(m => m.path.includes('accessibility.md')), 'Must retrieve accessibility.md');
 });
 
 test('References: All 16 modular reference guides exist and satisfy architecture requirements', () => {

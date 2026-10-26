@@ -2,12 +2,13 @@ When creating, reviewing, or improving UI/UX designs, follow the Pure SaaS desig
 
 1. Read SKILL.md in full. It defines the stance, universal execution behaviors, the 6 core workflows,
    the 8-state component matrix, semantic token architecture, and honest verification reporting.
-2. Load references based on the task under references/:
+2. Retrieve exact references for the task using `npx pure-saas ref "<component, framework, or topic>"`:
+   - Component patterns (57 UI components): references/hig/buttons.md, sheets.md, modality.md, tables.md, etc.
+   - Framework guidelines (22 stacks): references/frameworks/react.md, svelte.md, vue.md, tailwind.md, etc.
    - Base context: references/design-principles.md, typography.md, color-and-tokens.md, layout-and-composition.md, anti-slop-rules.md.
-   - Design intelligence & taxonomy: references/design-intelligence.json, design-styles-catalog.json.
    - Quality audit & code checks: references/code-audit.md, design-review.md.
    - Components & states: references/interaction-states.md, accessibility.md.
-   - Responsive & platforms: references/responsive-design.md, cross-platform.md, hig-lookup.md, platform-guidelines.md.
+   - Responsive & platforms: references/responsive-design.md, cross-platform.md, platform-guidelines.md.
    - Motion & physics: references/motion.md.
    - Reference URL recreation: references/reference-analysis.md.
 3. Universal Command: Use `/pure-saas [request]` as the default entry point. It autonomously coordinates
@@ -23,3 +24,4 @@ When creating, reviewing, or improving UI/UX designs, follow the Pure SaaS desig
    - Anti-slop discipline: no generic purple/cyan gradient text, excessive glassmorphism blur, or emoji UI icons.
    - Non-regression: in existing applications, preserve 100% of backend APIs, authentication, and database schemas.
    - "Read Before You Cite": open reference files and cite exact file and section paths.
+

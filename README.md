@@ -147,6 +147,11 @@ npx pure-saas init
 The Pure SaaS CLI is zero-dependency and runs with Node.js >= 18:
 
 ```bash
+# Search reference library (Apple HIG, 22 frameworks, craft guidelines)
+npx pure-saas ref "modal"
+npx pure-saas ref "button"
+npx pure-saas ref "react"
+
 # Validate DESIGN.md or design-brief.md structure and required tokens
 npx pure-saas validate [path/to/DESIGN.md]
 

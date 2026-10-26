@@ -732,6 +732,214 @@ export function queryDesignIntelligence(options = {}) {
   };
 }
 
+// --- Reference Library Search Engine ---
+
+export function searchReferences(query = '', options = {}) {
+  const referencesDir = path.resolve(__dirname, '../references');
+  const results = [];
+  const qTerms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+
+  if (!fs.existsSync(referencesDir)) {
+    return results;
+  }
+
+  function walkDir(dir, baseDir = '') {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const ent of entries) {
+      const fullPath = path.join(dir, ent.name);
+      const relPath = baseDir ? path.join(baseDir, ent.name) : ent.name;
+      if (ent.isDirectory()) {
+        walkDir(fullPath, relPath);
+      } else if (ent.isFile() && ent.name.endsWith('.md')) {
+        indexFile(fullPath, relPath);
+      }
+    }
+  }
+
+  function indexFile(filePath, relPath) {
+    try {
+      const content = fs.readFileSync(filePath, 'utf8');
+      const lines = content.split('\n');
+      const titleLine = lines.find(l => l.startsWith('# ')) || `# ${path.basename(filePath, '.md')}`;
+      const title = titleLine.replace(/^#\s+/, '').trim();
+
+      let category = 'Craft Guideline';
+      if (relPath.startsWith('hig/')) category = 'Apple HIG';
+      else if (relPath.startsWith('frameworks/')) category = 'Framework Guideline';
+
+      let score = 0;
+      const lowerRel = relPath.toLowerCase();
+      const lowerTitle = title.toLowerCase();
+      const lowerContent = content.toLowerCase();
+
+      if (qTerms.length === 0) {
+        score = 1;
+      } else {
+        for (const term of qTerms) {
+          if (lowerRel.includes(term)) score += 50;
+          if (lowerTitle.includes(term)) score += 30;
+          for (const line of lines) {
+            if (line.startsWith('#') && line.toLowerCase().includes(term)) {
+              score += 15;
+            }
+          }
+          const termRegex = new RegExp(`\\b${term.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}\\b`, 'gi');
+          const matches = lowerContent.match(termRegex);
+          if (matches) score += Math.min(matches.length * 2, 25);
+        }
+      }
+
+      if (score > 0) {
+        let snippet = '';
+        if (qTerms.length > 0) {
+          const matchLine = lines.find(l => !l.startsWith('#') && !l.startsWith('>') && qTerms.some(t => l.toLowerCase().includes(t)) && l.trim().length > 15);
+          if (matchLine) snippet = matchLine.trim().slice(0, 160);
+        }
+        if (!snippet) {
+          const firstNonHeader = lines.find(l => !l.startsWith('#') && !l.startsWith('>') && l.trim().length > 20);
+          if (firstNonHeader) snippet = firstNonHeader.trim().slice(0, 160);
+        }
+
+        results.push({
+          path: path.join('references', relPath),
+          fullPath: filePath,
+          title,
+          category,
+          score,
+          snippet
+        });
+      }
+    } catch {
+      // ignore read error
+    }
+  }
+
+  walkDir(referencesDir);
+  results.sort((a, b) => b.score - a.score);
+  return options.limit ? results.slice(0, options.limit) : results;
+}
+
+export function getStarterDesign() {
+  return `---
+name: "Pure SaaS Design System"
+version: "1.0.0"
+status: "draft"
+tokens:
+  colors:
+    color-bg-canvas: "#ffffff"
+    color-bg-surface: "#f9fafb"
+    color-bg-surface-elevated: "#ffffff"
+    color-bg-surface-sunken: "#f3f4f6"
+    color-text-primary: "#09090b"
+    color-text-secondary: "#52525b"
+    color-text-muted: "#a1a1aa"
+    color-text-inverse: "#ffffff"
+    color-action-primary: "#18181b"
+    color-action-hover: "#27272a"
+    color-action-active: "#09090b"
+    color-border-subtle: "#e4e4e7"
+    color-border-strong: "#a1a1aa"
+    color-border-focus: "#18181b"
+    color-status-success: "#16a34a"
+    color-status-warning: "#d97706"
+    color-status-error: "#dc2626"
+    color-status-info: "#2563eb"
+  typography:
+    font_families:
+      sans: "Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+      mono: "JetBrains Mono, monospace"
+    scale:
+      h1: "2.5rem"
+      h2: "1.75rem"
+      h3: "1.25rem"
+      body: "1rem"
+      body_small: "0.875rem"
+      label: "0.75rem"
+  spacing:
+    space-1: "4px"
+    space-2: "8px"
+    space-4: "16px"
+    space-6: "24px"
+    space-8: "32px"
+  layout:
+    container_max_width: "1280px"
+    content_max_width: "65ch"
+  radii:
+    none: "0"
+    sm: "4px"
+    md: "8px"
+    lg: "12px"
+principles:
+  - "Purposeful clarity over decorative excess."
+  - "Direct manipulation and responsive optical feedback."
+  - "Strict anti-slop discipline: no generic gradient text or emoji UI icons."
+accessibility:
+  tier: "WCAG 2.2 AA"
+---
+
+# Pure SaaS Design Specification
+
+## Overview
+Establish production-quality interface standards, role-based tokens, and layout guidelines.
+`;
+}
+
+export function getStarterBrief() {
+  return `---
+type: "design-brief"
+version: "1.0.0"
+status: "draft"
+product_name: "Pure SaaS Product"
+domain: "developer-tool"
+target_audience: "Frontend engineers and product designers"
+---
+
+# Design Brief: Pure SaaS Product
+
+## Product Purpose
+Build a focused, high-craft product interface eliminating generic AI tropes.
+
+## Target Audience
+Frontend engineers and product designers seeking high-craft UI/UX.
+
+## Approved Design Decisions
+- Semantic tokens defined in DESIGN.md.
+- High-contrast accessible focus outlines.
+
+## Anti-Slop Exclusions
+- No generic purple/cyan gradient text.
+- No emoji icons in UI buttons.
+
+## Scope & Functional Requirements
+- Core workflows and user journeys
+- Responsive viewport targets (375px mobile to 1440px desktop)
+- WCAG 2.2 AA accessibility and full keyboard navigation
+`;
+}
+
+export function getStarterReferenceRecord() {
+  return `---
+type: "reference-record"
+version: "1.0.0"
+status: "draft"
+reference_url: "https://example.com"
+inspection_date: "${new Date().toISOString().slice(0, 10)}"
+---
+
+# Reference Observation Record
+
+## Overview
+Visual and technical observations gathered from reference inspection.
+
+### 1. Typography
+- Heading font: Geist, sans-serif
+- Body font: Inter, sans-serif
+
+### 2. Spacing & Rhythm
+- Base spatial grid: 8pt
+`;
+}
+
 // --- Command Dispatcher & CLI ---
 
 export async function runCli(args = process.argv.slice(2)) {
@@ -978,8 +1186,35 @@ export async function runCli(args = process.argv.slice(2)) {
     return 0;
   }
 
+  if (command === 'ref' || command === 'search-ref' || command === 'references') {
+    const jsonOutput = args.includes('--json');
+    const limitIdx = args.indexOf('--limit');
+    const limit = limitIdx !== -1 ? parseInt(args[limitIdx + 1], 10) : 10;
+    const query = args.slice(1).filter(a => !a.startsWith('--') && a !== String(limit)).join(' ');
+
+    const results = searchReferences(query, { limit });
+
+    if (jsonOutput) {
+      console.log(JSON.stringify(results, null, 2));
+      return 0;
+    }
+
+    if (results.length === 0) {
+      console.log(`No reference documents found matching "${query}".`);
+      return 0;
+    }
+
+    console.log(`=== Pure SaaS Reference Search: "${query}" (${results.length} results) ===\n`);
+    for (const r of results) {
+      console.log(`[${r.category}] ${r.title}`);
+      console.log(`  Path: ${r.path}`);
+      if (r.snippet) console.log(`  Preview: ${r.snippet}`);
+      console.log('');
+    }
+    return 0;
+  }
+
   if (command === 'init') {
-    const templateName = args[1] || 'developer';
     const briefDest = path.resolve(process.cwd(), 'design-brief.md');
     const designDest = path.resolve(process.cwd(), 'DESIGN.md');
 
@@ -988,35 +1223,17 @@ export async function runCli(args = process.argv.slice(2)) {
       return 1;
     }
 
-    const tplBriefPath = path.resolve(__dirname, '../references/templates/design-brief.md');
-    const tplDesignPath = path.resolve(__dirname, '../references/templates/DESIGN.md');
+    fs.writeFileSync(briefDest, getStarterBrief(), 'utf8');
+    fs.writeFileSync(designDest, getStarterDesign(), 'utf8');
 
-    if (fs.existsSync(tplBriefPath)) {
-      fs.copyFileSync(tplBriefPath, briefDest);
-    } else {
-      fs.writeFileSync(briefDest, getStarterBrief(), 'utf8');
-    }
-
-    if (fs.existsSync(tplDesignPath)) {
-      fs.copyFileSync(tplDesignPath, designDest);
-    } else {
-      fs.writeFileSync(designDest, getStarterDesign(), 'utf8');
-    }
-
-    console.log(`Initialized Pure SaaS project with starter templates:`);
+    console.log(`Initialized Pure SaaS project:`);
     console.log(`  -> ${path.relative(process.cwd(), briefDest)}`);
     console.log(`  -> ${path.relative(process.cwd(), designDest)}`);
 
     if (args.includes('--reference') || args.includes('-r')) {
       const refDest = path.resolve(process.cwd(), 'reference-record.md');
-      const tplRefPath = path.resolve(__dirname, '../references/templates/reference-record.md');
-      if (fs.existsSync(tplRefPath)) {
-        fs.copyFileSync(tplRefPath, refDest);
-        console.log(`  -> ${path.relative(process.cwd(), refDest)}`);
-      } else {
-        fs.writeFileSync(refDest, getStarterReferenceRecord(), 'utf8');
-        console.log(`  -> ${path.relative(process.cwd(), refDest)}`);
-      }
+      fs.writeFileSync(refDest, getStarterReferenceRecord(), 'utf8');
+      console.log(`  -> ${path.relative(process.cwd(), refDest)}`);
     }
     return 0;
   }
@@ -1061,6 +1278,7 @@ Commands:
   check-tokens, tokens [file]     Check design tokens and scan source code for raw styling or drift
   export-tokens [file] [--format] Export tokens from DESIGN.md to CSS, Tailwind, or JSON
   audit, review-report, verify    Generate an honest verification report with tested vs untested areas
+  ref, search-ref [query]         Search reference library (Apple HIG, frameworks, craft guidelines)
   style [query]                   Query curated design intelligence styles
   init [--reference]              Initialize starter design-brief.md and DESIGN.md in the current repo
 

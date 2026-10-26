@@ -39,6 +39,8 @@ Pure SaaS operates via **one intelligent main command and five specialist comman
 | `.cursorrules` | Root entry point for Cursor | Yes |
 | `GEMINI.md` | Root entry point for Gemini / Antigravity | Yes |
 | `commands/*.md` | The 6 canonical user-facing slash command definitions (`pure-saas`, `design`, `polish`, `review`, `reference`, `responsive`) | Yes |
+| `references/hig/*.md` | 124 substantive individual Apple HIG reference documents across components, foundations, and patterns | Yes |
+| `references/frameworks/*.md` | 22 framework engineering guides (React, Next.js, Vue, Svelte, Tailwind, SwiftUI, Flutter, etc.) | Yes |
 | `references/design-intelligence.json` | Compiled dataset: 88 styles, 192 product archetypes, 74 typography pairings, 25 chart guides, 17 motion patterns, 22 stack guidelines | Generated / Maintained |
 | `references/design-styles-catalog.json` | Curated tokenized design style archetypes with Tailwind and CSS mappings | Yes |
 | `references/hig-lookup.md` | Apple HIG 123-topic index and routing guide | Yes |
@@ -55,15 +57,30 @@ Pure SaaS operates via **one intelligent main command and five specialist comman
 | `references/reference-analysis.md` | Live reference reverse engineering and 16-section `DESIGN.md` protocol | Yes |
 | `references/responsive-design.md` | Viewport constraints, container queries, and fluid typography | Yes |
 | `references/typography.md` | Optical hierarchy, fluid scale formulas, line heights, and letter-spacing tracking | Yes |
-| `references/templates/` | Starter templates for `DESIGN.md`, `design-brief.md`, and `reference-record.md` | Yes |
-| `references/schemas/` | Formal JSON schemas for specification validation | Yes |
-| `scripts/pure-saas.mjs` | Zero-dependency Node.js CLI, design intelligence query engine, token validator, and static code scanner | Yes |
-| `tests/` | Automated test suite (CLI, tokens, enforcement, schemas, commands, real-world apps) | Yes |
+| `scripts/pure-saas.mjs` | Zero-dependency Node.js CLI, reference search engine, design intelligence query engine, token validator, and static code scanner | Yes |
+| `tests/` | Automated test suite (CLI, tokens, enforcement, commands, real-world apps, reference search) | Yes |
 | `THIRD_PARTY_NOTICES.md` | Third-party attribution, license texts, and provenance ledger | Yes |
 
 ---
 
-## 4. Operating Rules for Coding Agents
+## 4. Searching and Retrieving References
+
+Before performing design work, coding agents must retrieve and read the exact reference documents:
+
+```bash
+# Retrieve reference documents for the task
+npx pure-saas ref "<component, framework, or craft topic>"
+```
+
+### Retrieval Examples
+- **Component pattern:** `npx pure-saas ref "modal"` -> retrieves `references/hig/modality.md`, `references/hig/sheets.md`
+- **Button interaction:** `npx pure-saas ref "button"` -> retrieves `references/hig/buttons.md`, `references/interaction-states.md`
+- **Framework guidance:** `npx pure-saas ref "react"` -> retrieves `references/frameworks/react.md`, `references/cross-platform.md`
+- **Accessibility:** `npx pure-saas ref "accessibility"` -> retrieves `references/accessibility.md`, `references/hig/accessibility.md`
+
+---
+
+## 5. Operating Rules for Coding Agents
 
 1. **Follow the 10 Universal Execution Behaviors:** Follow all rules in `SKILL.md` (inspect context, coordinate capabilities automatically, execute directly for straightforward requests, preserve backend APIs, maintain `DESIGN.md`, test and refine, report honestly).
 2. **Never Fabricate Validation:** If a check fails, diagnose and resolve it. If an environment lacks browser inspection or screen-reader tooling, record the area as `untested`. Never claim passing verification for uninspected code.

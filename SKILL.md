@@ -96,23 +96,24 @@ All commands must follow these 10 mandatory operational rules:
 Pure SaaS separates high-level agent instructions from deep architectural craft guides.
 Always keep core instructions focused; route specific questions to the relevant reference guide in `references/`.
 
-### Always-Loaded Base Context (Loaded for all non-trivial tasks)
-- [`design-principles.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-principles.md): Core design heuristics (Clarity, Deference, Depth, Authenticity).
-- [`typography.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/typography.md): Typographic pairings, scale ratios, line heights, tracking.
-- [`color-and-tokens.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/color-and-tokens.md): Semantic color hierarchy (`canvas`, `surface`, `text`, `action`, `border`), light/dark modes.
-- [`layout-and-composition.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/layout-and-composition.md): Grid systems, asymmetric layout hierarchy, content-first composition.
-- [`anti-slop-rules.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/anti-slop-rules.md): Anti-generic design rules, eliminating repetitive cards and AI tropes.
+### The Reference Search Engine
+Before performing design or implementation work, retrieve exact reference documents for the topic:
+```bash
+npx pure-saas ref "<component, framework, platform, or topic>"
+```
+Examples:
+- `npx pure-saas ref "modal"` -> retrieves `references/hig/modality.md`, `references/hig/sheets.md`
+- `npx pure-saas ref "button"` -> retrieves `references/hig/buttons.md`, `references/frameworks/html-tailwind.md`
+- `npx pure-saas ref "react"` -> retrieves `references/frameworks/react.md`, `references/cross-platform.md`
+- `npx pure-saas ref "accessibility"` -> retrieves `references/accessibility.md`, `references/hig/accessibility.md`
 
-### On-Demand Reference Routing (Load 2 to 4 files based on task scope)
-| Task or Scope | Relevant References to Load |
-| :--- | :--- |
-| **Buttons, Inputs & Form States** | [`interaction-states.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/interaction-states.md), [`accessibility.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/accessibility.md) |
-| **Cross-Device Breakpoints & Fluidity** | [`responsive-design.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/responsive-design.md), [`cross-platform.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/cross-platform.md) |
-| **Code Audits & Review Reports** | [`code-audit.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/code-audit.md), [`design-review.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-review.md) |
-| **Mobile & Desktop Frameworks** (React Native, Flutter, Electron, SwiftUI) | [`cross-platform.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/cross-platform.md), [`platform-guidelines.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/platform-guidelines.md) |
-| **Animation, Motion & Transitions** | [`motion.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/motion.md) |
-| **Reference Website URL Analysis** | [`reference-analysis.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/reference-analysis.md) |
-| **Design Style & Product Archetypes** | [`design-styles-catalog.json`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-styles-catalog.json) |
+### Reference Collections
+1. **Apple Human Interface Guidelines (`references/hig/` — 124 Documents):**
+   Full individual reference documents covering 57 UI components, interaction patterns (modality, sheets, notifications, widgets, Apple Pay), foundations (color, typography, layout, materials), inputs, and platform conventions (`designing-for-ios.md`, `designing-for-macos.md`, `liquid-glass.md`).
+2. **Framework Engineering Guides (`references/frameworks/` — 22 Frameworks):**
+   Actionable guidelines with Do/Don't patterns, severity ratings, and code examples for React, Next.js, Vue, Nuxt, Svelte, Tailwind, Shadcn, SwiftUI, React Native, Flutter, Electron, Angular, Astro, and more.
+3. **Core Craft Guides (`references/*.md`):**
+   `design-principles.md`, `typography.md`, `color-and-tokens.md`, `layout-and-composition.md`, `anti-slop-rules.md`, `interaction-states.md`, `accessibility.md`, `responsive-design.md`, `cross-platform.md`, `code-audit.md`, `motion.md`, `platform-guidelines.md`, `design-review.md`.
 
 ### The "Read Before You Cite" Rule
 - **Read before making claims:** Never invent guideline numbers, token values, or measurements from memory. Open the matching reference file in `references/` and cite both file and heading.
