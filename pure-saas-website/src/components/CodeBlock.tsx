@@ -17,7 +17,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language = 'bash', f
   };
 
   return (
-    <div className="relative group rounded-xl bg-surface-base border border-border-subtle overflow-hidden my-4 shadow-sm">
+    <div className="relative group rounded-xl bg-canvas border border-border-subtle overflow-hidden my-4 shadow-sm">
       {filename && (
         <div className="flex items-center justify-between px-4 py-2 border-b border-border-subtle bg-surface-muted/50 text-xs font-mono text-text-muted">
           <span>{filename}</span>
