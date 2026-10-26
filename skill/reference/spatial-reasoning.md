@@ -131,3 +131,4 @@ Typography establishes 80% of an interface's perceived quality.
 3. **Reading Line Length (The 65ch Boundary):**
    - Body paragraphs must NEVER stretch full-width across wide monitors.
    - Constrain paragraph text with `max-w-prose` (`65ch` / ~680px). Long lines cause eye tracking fatigue.
+

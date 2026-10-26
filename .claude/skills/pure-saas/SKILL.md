@@ -14,13 +14,13 @@ license: MIT
 
 Pure SaaS gives AI coding assistants the architectural judgment, visual taste, spatial reasoning, and execution discipline of a senior product designer, art director, and lead frontend engineer.
 
-AI coding models default to "generic AI slop" because they lack spatial mental models—they guess arbitrary padding, center everything, stack identical 3-column cards, and misalign optical baselines. Pure SaaS replaces token guessing with a **deterministic spatial reasoning calculus, alignment laws, proximity mathematics, and six specialized slash commands**.
+AI coding models default to "generic AI slop" because they lack spatial mental models—they guess arbitrary padding, center everything, stack identical 3-column cards, and misalign optical baselines. Pure SaaS replaces token guessing with a **deterministic spatial reasoning calculus, alignment laws, proximity mathematics, an 8-state component matrix, and six specialized slash commands operating from one consolidated skill**.
 
 ---
 
 ## 1. The Core Spatial Reasoning Engine
 
-Before generating or modifying any UI code, the agent MUST run through this 5-point design reasoning calculus:
+Before generating or modifying any UI code, the agent MUST execute this 5-point spatial reasoning calculus:
 
 ### 1.1 The Single Gutter Line (Unified Alignment Axis)
 The human eye detects misalignments as small as 1–2 pixels along reading lines.
@@ -36,8 +36,8 @@ Geometric centering (`items-center` or bounding-box midpoints) produces visual d
 - **Button Icon + Label:**
   - Use `inline-flex items-center justify-center`. Ensure the SVG icon `viewBox` is square and its `stroke-width` matches the label's font weight.
 - **Form Label to Input Coupling:**
-  - A label belongs strictly to its input box. The gap between label and input must be $\le 6px$ (`space-y-1.5`).
-  - The gap *between* form fields (`space-y-4` to `space-y-6`) must be at least 3x greater than the label-to-input gap (`6px`) to prevent visual ambiguity.
+  - A label belongs strictly to its input box. The gap between label and input must be $\le 6\text{px}$ (`space-y-1.5`).
+  - The gap *between* form fields (`space-y-4` to `space-y-6`) must be at least $3\times$ greater than the label-to-input gap (`6px`) to prevent visual ambiguity.
 
 ### 1.3 Proximity Mathematics & Spacing Calculus
 Random padding (`p-6`, `gap-5`, `mb-3`) destroys visual rhythm. Spacing must express relational hierarchy:
@@ -67,8 +67,8 @@ Random padding (`p-6`, `gap-5`, `mb-3`) destroys visual rhythm. Spacing must exp
 
 ### 1.5 Typographic Tracking & Contrast Calculus
 Typography carries 80% of perceived quality:
-- **Display Headings ($\ge 24px$):** Apply negative tracking (`-0.025em` to `-0.035em` / Tailwind `tracking-tight` or `tracking-tighter`). Default browser tracking looks loose and amateurish.
-- **Micro Metadata ($\le 12px$):** Apply positive tracking (`+0.05em` to `+0.08em` / Tailwind `tracking-wider` or `tracking-widest`) combined with `uppercase` and `font-mono` or `font-semibold`.
+- **Display Headings ($\ge 24\text{px}$):** Apply negative tracking (`-0.025em` to `-0.035em` / Tailwind `tracking-tight` or `tracking-tighter`). Default browser tracking looks loose and amateurish.
+- **Micro Metadata ($\le 12\text{px}$):** Apply positive tracking (`+0.05em` to `+0.08em` / Tailwind `tracking-wider` or `tracking-widest`) combined with `uppercase` and `font-mono` or `font-semibold`.
 - **Line Length Boundary:** Constrain body paragraphs to `max-w-prose` (`65ch` / ~680px). Never allow body text to span full-width across wide monitors.
 
 Consult [`reference/spatial-reasoning.md`](reference/spatial-reasoning.md) for full proofs and examples.
@@ -93,7 +93,7 @@ Pure SaaS provides **one main orchestrator command and five specialist slash com
 ## 3. Specialist Execution Protocols
 
 ### 1. `/puresaas` — Principal Designer & Main Orchestrator
-1. **Surface Mode & Spatial Thesis:** Classify target surface as Persuade, Operate, Read, or Experience. Establish the primary alignment axis (`x = 0`) and choose an asymmetric composition (Anchor & Orbit).
+1. **Surface Mode & Spatial Thesis:** Classify target surface as Persuade (landing pages), Operate (dashboards/consoles), Read (documentation), or Experience (interactive/portfolio). Establish the primary alignment axis (`x = 0`) and choose an asymmetric composition (Anchor & Orbit).
 2. **Context Inspection:** Run `pure-saas context` to inspect styling, framework, and APIs. Preserve 100% of existing backend routes and schemas.
 3. **Orchestrate Specialist Commands:** Dispatch `/puresaas:design`, `/puresaas:polish`, `/puresaas:review`, `/puresaas:clone`, or `/puresaas:responsive` based on task needs.
 4. **Live Verification Loop:** Run local dev server, capture browser screenshots across 1440px, 768px, and 375px viewports, and verify zero horizontal overflow.
@@ -137,6 +137,7 @@ Pure SaaS provides **one main orchestrator command and five specialist slash com
   - NO green pulsing dots (`animate-ping`, `animate-pulse`, glowing radial shadows) for "live/online" status. Use solid accessible status pills with semantic icons.
 - **Themed Browser Surfaces:** Apply active palette tokens to `::selection`, `caret-color`, focus rings, and custom scrollbars.
 - **8-State Component Matrix:** Every interactive primitive must implement default, hover, active, focus-visible, disabled, loading, selected, and error states.
+- **Tactile Motion Physics:** Swift spring physics (`cubic-bezier(0.16, 1, 0.3, 1)`) with durations under 180ms. Respect `@media (prefers-reduced-motion: reduce)`.
 - **Never Fabricate Verification:** If browser tools are unavailable, report as `untested`. Never claim passing verification for uninspected code.
 
 Consult [`reference/spatial-reasoning.md`](reference/spatial-reasoning.md), [`reference/craft-floor.md`](reference/craft-floor.md), and [`reference/anti-slop-rules.md`](reference/anti-slop-rules.md) for full specifications.
