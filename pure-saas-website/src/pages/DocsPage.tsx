@@ -91,8 +91,8 @@ export const DocsPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-canvas text-text-primary">
       {/* Sub-header / GitBook breadcrumb bar */}
-      <div className="border-b border-border-subtle bg-canvas sticky top-14 z-30 px-4 sm:px-6 lg:px-8 py-2.5 w-full">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-4 text-xs w-full">
+      <div className="border-b border-border-subtle bg-canvas sticky top-14 z-30 w-full">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4 text-xs w-full">
           {/* Breadcrumbs & Mobile Drawer Trigger */}
           <div className="flex items-center gap-2 text-text-secondary truncate">
             <button
@@ -278,7 +278,7 @@ export const DocsPage: React.FC = () => {
           {/* ========================================================= */}
           {/* MAIN ARTICLE CONTENT                                      */}
           {/* ========================================================= */}
-          <main className="lg:col-span-6 xl:col-span-6 space-y-8 w-full min-w-0">
+          <main className="lg:col-span-9 xl:col-span-6 space-y-8 w-full min-w-0">
             {/* Header / Title block */}
             <header className="space-y-3 pb-6 border-b border-border-subtle">
               <div className="flex items-center gap-1.5 text-xs text-text-muted">
