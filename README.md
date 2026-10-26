@@ -209,6 +209,6 @@ npm test
 
 ---
 
-## License & Attribution
+## License
 
-Pure SaaS is open-source software licensed under the [MIT License](LICENSE). Third-party notices and attributions are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Pure SaaS is open-source software licensed under the [MIT License](LICENSE).

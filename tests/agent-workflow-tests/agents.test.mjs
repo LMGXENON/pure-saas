@@ -155,15 +155,6 @@ test('References: All 16 modular reference guides exist and satisfy architecture
     const content = fs.readFileSync(refPath, 'utf8');
     assert.ok(content.length > 100, `Reference ${ref} must contain substantive content`);
   }
-
-  // Verify THIRD_PARTY_NOTICES.md covers all 3 reference projects
-  const noticesFile = path.resolve(process.cwd(), 'THIRD_PARTY_NOTICES.md');
-  assert.ok(fs.existsSync(noticesFile), 'THIRD_PARTY_NOTICES.md must exist');
-  const noticesContent = fs.readFileSync(noticesFile, 'utf8');
-  assert.ok(noticesContent.includes('ui-ux-pro-max-skill'), 'Must attribute ui-ux-pro-max-skill');
-  assert.ok(noticesContent.includes('zero-slop-design-plugin'), 'Must attribute zero-slop-design-plugin');
-  assert.ok(noticesContent.includes('apple-design-skill'), 'Must attribute apple-design-skill');
-  assert.ok(noticesContent.includes('Provenance & Implementation Ledger'), 'Must include provenance ledger');
 });
 
 test('Design Intelligence: Full dataset exists and satisfies structural requirements', () => {

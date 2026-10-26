@@ -61,7 +61,6 @@ Pure SaaS operates via **one intelligent main command and five specialist comman
 | `references/typography.md` | Optical hierarchy, fluid scale formulas, line heights, and letter-spacing tracking | Yes |
 | `scripts/pure-saas.mjs` | Zero-dependency Node.js CLI, reference search engine, design intelligence query engine, token validator, and static code scanner | Yes |
 | `tests/` | Automated test suite (CLI, tokens, enforcement, commands, real-world apps, reference search) | Yes |
-| `THIRD_PARTY_NOTICES.md` | Third-party attribution, license texts, and provenance ledger | Yes |
 
 ---
 
