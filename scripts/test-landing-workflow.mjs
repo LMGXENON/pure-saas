@@ -216,3 +216,4 @@ export function LandingPage() {
   console.error(`\n✗ Landing workflow test FAILED: ${err.message}`);
   process.exit(1);
 }
+

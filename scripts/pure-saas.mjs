@@ -1902,22 +1902,26 @@ export function checkBrowserEnvironment() {
     ready: false
   };
 
-  try {
-    const res = spawnSync('playwright-cli', ['--version'], { encoding: 'utf8' });
-    if (res.status === 0) status.playwrightCli = true;
-  } catch {}
+  const localPlaywrightCli = path.join(process.cwd(), 'node_modules/.bin/playwright-cli');
+  const localPlaywright = path.join(process.cwd(), 'node_modules/.bin/playwright');
 
-  if (!status.playwrightCli) {
+  if (fs.existsSync(localPlaywrightCli)) {
+    status.playwrightCli = true;
+  } else {
     try {
-      const res = spawnSync('npx', ['--no-install', '@playwright/cli', '--version'], { encoding: 'utf8' });
+      const res = spawnSync('playwright-cli', ['--version'], { encoding: 'utf8', timeout: 1500 });
       if (res.status === 0) status.playwrightCli = true;
     } catch {}
   }
 
-  try {
-    const res = spawnSync('npx', ['--no-install', 'playwright', '--version'], { encoding: 'utf8' });
-    if (res.status === 0) status.playwright = true;
-  } catch {}
+  if (fs.existsSync(localPlaywright)) {
+    status.playwright = true;
+  } else {
+    try {
+      const res = spawnSync('playwright', ['--version'], { encoding: 'utf8', timeout: 1500 });
+      if (res.status === 0) status.playwright = true;
+    } catch {}
+  }
 
   const candidates = [
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
@@ -2037,13 +2041,19 @@ export function check3DPrerequisites() {
     ready: false
   };
 
-  try {
-    const tsc = spawnSync('npx', ['--no-install', 'tsc', '--version'], { encoding: 'utf8' });
-    if (tsc.status === 0 && tsc.stdout) {
-      results.typescript.pass = true;
-      results.typescript.version = tsc.stdout.trim();
-    }
-  } catch {}
+  const localTsc = path.join(process.cwd(), 'node_modules/.bin/tsc');
+  if (fs.existsSync(localTsc)) {
+    results.typescript.pass = true;
+    results.typescript.version = 'local';
+  } else {
+    try {
+      const tsc = spawnSync('tsc', ['--version'], { encoding: 'utf8', timeout: 1500 });
+      if (tsc.status === 0 && tsc.stdout) {
+        results.typescript.pass = true;
+        results.typescript.version = tsc.stdout.trim();
+      }
+    } catch {}
+  }
 
   const pkgPath = path.resolve(process.cwd(), 'package.json');
   if (fs.existsSync(pkgPath)) {

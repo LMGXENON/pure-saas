@@ -52,3 +52,4 @@ if (errors.length > 0) {
 
 console.log('✓ All reference documents passed validation with zero errors!');
 process.exit(0);
+
