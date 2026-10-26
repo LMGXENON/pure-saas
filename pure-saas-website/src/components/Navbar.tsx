@@ -18,7 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-surface-base/85 backdrop-blur-md border-b border-border-subtle transition-colors">
+    <header className="sticky top-0 z-40 w-full bg-surface-base border-b border-border-subtle transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
         {/* Brand */}
         <Link to="/" className="flex items-center gap-2.5 group">

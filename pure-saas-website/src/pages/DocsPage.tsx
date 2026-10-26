@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, useParams, Link } from 'react-router-dom';
 import { docsArticles, DocArticle, DocSection } from '../data/docsData';
 import { CodeBlock } from '../components/CodeBlock';
 import { AgentPromptBanner } from '../components/AgentPromptBanner';
@@ -28,18 +28,21 @@ import {
 } from 'lucide-react';
 
 export const DocsPage: React.FC = () => {
+  const { slug: routeSlug } = useParams<{ slug: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const slugParam = searchParams.get('slug');
+  const slugParam = routeSlug || searchParams.get('slug');
 
   const [activeSlug, setActiveSlug] = useState<string>(slugParam || docsArticles[0].slug);
   const [filterQuery, setFilterQuery] = useState<string>('');
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
 
-  // Sync state if URL search param changes
+  // Sync state if URL route or search param changes
   useEffect(() => {
     if (slugParam && slugParam !== activeSlug) {
       setActiveSlug(slugParam);
+    } else if (!slugParam && activeSlug !== docsArticles[0].slug) {
+      setActiveSlug(docsArticles[0].slug);
     }
   }, [slugParam]);
 
@@ -80,16 +83,18 @@ export const DocsPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-canvas text-text-primary overflow-x-hidden">
       {/* Sub-header / GitBook breadcrumb bar */}
-      <div className="border-b border-border-subtle bg-surface-base/80 backdrop-blur-md sticky top-14 z-30 px-4 sm:px-6 lg:px-8 py-2.5 w-full">
+      <div className="border-b border-border-subtle bg-surface-base sticky top-14 z-30 px-4 sm:px-6 lg:px-8 py-2.5 w-full transition-colors">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 text-xs w-full">
           {/* Breadcrumbs & Mobile Drawer Trigger */}
           <div className="flex items-center gap-2 text-text-secondary truncate min-w-0">
             <button
+              type="button"
               onClick={() => setMobileDrawerOpen(true)}
-              className="lg:hidden p-1.5 -ml-1 rounded-lg text-text-primary hover:bg-surface-hover transition-colors shrink-0"
+              className="md:hidden p-1.5 -ml-1 rounded-lg text-text-primary hover:bg-surface-hover transition-colors shrink-0 flex items-center gap-1.5 border border-border-subtle"
               aria-label="Open documentation navigation"
             >
-              <Menu className="w-4 h-4" />
+              <Menu className="w-4 h-4 text-accent" />
+              <span className="text-[11px] font-semibold text-text-primary">Docs Menu</span>
             </button>
             <Link to="/" className="hover:text-text-primary font-medium transition-colors shrink-0">Home</Link>
             <span className="text-text-muted shrink-0">/</span>
@@ -103,6 +108,7 @@ export const DocsPage: React.FC = () => {
           {/* Quick Actions (Share button with clean alignment, no redundant GitHub link) */}
           <div className="flex items-center gap-2 shrink-0">
             <button
+              type="button"
               onClick={handleCopyPageLink}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-muted border border-border-subtle text-text-secondary hover:text-text-primary text-[11px] font-medium transition-colors hover:bg-surface-hover"
               title="Copy link to current article"
@@ -115,11 +121,11 @@ export const DocsPage: React.FC = () => {
       </div>
 
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start w-full">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-start w-full">
           {/* ========================================================= */}
-          {/* LEFT SIDEBAR: Persistent & Collapsible GitBook Navigation */}
+          {/* LEFT SIDEBAR: Persistent & Responsive Navigation          */}
           {/* ========================================================= */}
-          <aside className="hidden lg:block lg:col-span-3 min-w-0 sticky top-28 space-y-4 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 custom-scrollbar">
+          <aside className="hidden md:block md:col-span-4 lg:col-span-3 min-w-0 sticky top-28 space-y-4 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 custom-scrollbar">
             {/* Filter Input */}
             <div className="relative">
               <Search className="w-3.5 h-3.5 text-text-muted absolute left-3 top-2.5" />
@@ -156,9 +162,9 @@ export const DocsPage: React.FC = () => {
                       {items.map(art => {
                         const isActive = art.slug === activeSlug;
                         return (
-                          <button
+                          <Link
                             key={art.slug}
-                            type="button"
+                            to={`/docs?slug=${art.slug}`}
                             onClick={() => handleSelectArticle(art.slug)}
                             className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center justify-between outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-1 focus-visible:ring-offset-canvas ${
                               isActive
@@ -172,7 +178,7 @@ export const DocsPage: React.FC = () => {
                               )}
                               <span className="truncate">{art.title}</span>
                             </div>
-                          </button>
+                          </Link>
                         );
                       })}
                     </div>
@@ -186,7 +192,7 @@ export const DocsPage: React.FC = () => {
           {/* MOBILE NAVIGATION DRAWER                                  */}
           {/* ========================================================= */}
           {mobileDrawerOpen && (
-            <div className="fixed inset-0 z-50 lg:hidden">
+            <div className="fixed inset-0 z-50 md:hidden">
               <div 
                 className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity" 
                 onClick={() => setMobileDrawerOpen(false)} 
@@ -195,6 +201,7 @@ export const DocsPage: React.FC = () => {
                 <div className="flex items-center justify-between border-b border-border-subtle pb-4">
                   <span className="font-bold text-sm text-text-primary">Documentation Menu</span>
                   <button
+                    type="button"
                     onClick={() => setMobileDrawerOpen(false)}
                     className="p-1 rounded-md text-text-secondary hover:text-text-primary"
                   >
@@ -233,9 +240,9 @@ export const DocsPage: React.FC = () => {
                           {items.map(art => {
                             const isActive = art.slug === activeSlug;
                             return (
-                              <button
+                              <Link
                                 key={art.slug}
-                                type="button"
+                                to={`/docs?slug=${art.slug}`}
                                 onClick={() => handleSelectArticle(art.slug)}
                                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-2 ${
                                   isActive
@@ -245,7 +252,7 @@ export const DocsPage: React.FC = () => {
                               >
                                 {isActive && <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />}
                                 <span className="truncate">{art.title}</span>
-                              </button>
+                              </Link>
                             );
                           })}
                         </div>
@@ -260,7 +267,7 @@ export const DocsPage: React.FC = () => {
           {/* ========================================================= */}
           {/* MAIN ARTICLE CONTENT (Responsive, shrinking properly)     */}
           {/* ========================================================= */}
-          <main className="min-w-0 w-full lg:col-span-9 xl:col-span-6 space-y-8">
+          <main className="min-w-0 w-full md:col-span-8 lg:col-span-9 xl:col-span-6 space-y-8">
             {/* Header / Title block */}
             <header className="space-y-3 pb-6 border-b border-border-subtle">
               <div className="flex items-center gap-3 text-xs text-text-muted">
