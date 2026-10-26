@@ -51,10 +51,10 @@ export const HomePage: React.FC = () => {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              to="/showcase"
+              to="/docs"
               className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 rounded-xl bg-surface-base border border-border-default text-text-primary font-medium text-sm hover:bg-surface-hover active:scale-98 transition-all shadow-subtle gap-2"
             >
-              <span>Explore Showcase</span>
+              <span>Read the Documentation</span>
             </Link>
           </div>
 
@@ -173,6 +173,49 @@ export const HomePage: React.FC = () => {
               <div className="mt-6 pt-3 border-t border-border-subtle text-[11px] font-mono text-amber-500">
                 SKILL.md § 3
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How the Skill Works (Concise 3-Step Architecture) */}
+      <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-base">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-xs font-semibold uppercase tracking-wider text-accent font-mono">
+              Operational Workflow
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
+              How Pure SaaS works inside your agent.
+            </h2>
+            <p className="text-xs sm:text-sm text-text-secondary mt-2">
+              From natural language request to verified, production-ready code in three autonomous phases.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="relative pl-6 border-l-2 border-accent/40 space-y-3">
+              <div className="text-xs font-mono font-bold text-accent">PHASE 01</div>
+              <h3 className="text-lg font-bold text-text-primary">Context & Reference Retrieval</h3>
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                The agent inspects your workspace, detects existing tokens, and retrieves exact architectural references from the 280+ file library before writing any code.
+              </p>
+            </div>
+
+            <div className="relative pl-6 border-l-2 border-purple-500/40 space-y-3">
+              <div className="text-xs font-mono font-bold text-purple-500">PHASE 02</div>
+              <h3 className="text-lg font-bold text-text-primary">Tokenized Implementation</h3>
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                Components are authored using semantic CSS variables and the complete 8-state matrix (hover, focus-visible, active scale, loading states) without touching backend APIs.
+              </p>
+            </div>
+
+            <div className="relative pl-6 border-l-2 border-emerald-500/40 space-y-3">
+              <div className="text-xs font-mono font-bold text-emerald-500">PHASE 03</div>
+              <h3 className="text-lg font-bold text-text-primary">Honest Evidence Verification</h3>
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                The CLI validates DESIGN.md, measures WCAG 2.2 AA contrast ratios, and outputs a 4-part evidence audit citing exact files, lines, and observed values.
+              </p>
             </div>
           </div>
         </div>
