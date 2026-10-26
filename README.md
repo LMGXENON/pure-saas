@@ -1,205 +1,323 @@
+
+<div align="center">
+
 # Pure SaaS
 
-> Universal AI-agent skill and design enforcement toolkit for professional web design and UI/UX without generic AI patterns.
+**Universal AI-agent skill and design-enforcement toolkit for professional web design and UI/UX.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-success.svg)](package.json)
-[![Node.js >= 18](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](package.json)
+Build distinctive, polished interfaces without generic AI design patterns.
 
----
+[Website](YOUR_ACTUAL_WEBSITE_URL) · [GitHub Repository](https://github.com/LMGXENON/pure-saas)
 
-## What is Pure SaaS?
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=nodedotjs&logoColor=white)](package.json)
+[![AI Agent Skill](https://img.shields.io/badge/AI_Agent-Skill-7C3AED)](SKILL.md)
+[![GitHub Stars](https://img.shields.io/github/stars/LMGXENON/pure-saas?style=flat&logo=github)](https://github.com/LMGXENON/pure-saas/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/LMGXENON/pure-saas?logo=github)](https://github.com/LMGXENON/pure-saas/issues)
 
-When asked to design websites or web applications, AI coding agents frequently fall into repetitive, generic design clichés:
-- Monotonous purple/cyan gradient text and blurred glassmorphism glows.
-- Identical three-column feature cards stacked repetitively down the page.
-- Arbitrary colors, unmapped spacing, and inconsistent geometry.
-- Emoji used as interface icons (`🚀`, `⚡`, `🔥`) instead of crisp SVGs.
-- Generic marketing jargon ("Unlock your potential", "Supercharge your workflow").
-- Desktop mockups lacking responsive mobile layouts, keyboard accessibility, or interaction states.
-
-**Pure SaaS** solves this at the agent level. It equips AI coding assistants with **one intelligent main command** and **five specialist commands** to design, build, polish, review, and optimize software products without generic templates or AI slop.
-
----
-
-## The Intelligent Main Command: `/pure-saas [any request]`
-
-The global command is the default entry point for almost everything:
-
-```bash
-# Creative product design & complete implementation
-/pure-saas create a premium 3D landing page for my hospital
-
-# Desktop & productivity apps
-/pure-saas build a native-feeling macOS productivity app
-
-# E-commerce with authentication & checkout
-/pure-saas build a complete e-commerce application with authentication and checkout
-
-# Targeted feature additions with animation
-/pure-saas add a beautiful animated pricing section
-
-# Visual elevation & craft
-/pure-saas make this interface feel significantly more premium
-
-# Bug diagnostics & direct fixes
-/pure-saas fix the mobile navigation
-
-# Accessibility remediation
-/pure-saas make this page more accessible
-
-# Security & code audit
-/pure-saas find security issues and fix them
-
-# Reusable component engineering
-/pure-saas create a reusable button component
-```
-
-### Autonomous Capability Coordination
-When given an arbitrary natural-language request, Pure SaaS automatically:
-1. **Understands Intent & Project Context:** Inspects the repository, framework, build tools, styling conventions, and backend contracts.
-2. **Integrates All Capabilities:** Automatically handles design, implementation, components, design tokens, animations/motion, accessibility, responsiveness, performance, security, and verification.
-3. **Executes Proportionately:** For a straightforward request, executes it directly. For complex work, coordinates necessary steps automatically without forcing a rigid multi-stage sequence.
-4. **Optimises for User Time:** Avoids redundant analysis, unnecessary planning documents, repeated confirmations, and excessive output. Does not ask questions when the answer can reasonably be inferred.
-5. **Verifies & Refines:** Compares against quality standards, runs token validation, and concludes with an honest report.
-
----
-
-## Five Specialist Commands
-
-When you need a focused workflow, use one of the 5 specialist commands. Each inherits canonical instructions from `SKILL.md` and the project's persistent `DESIGN.md`:
-
-| Command | Purpose | Cursor Command | Command Definition |
-| :--- | :--- | :--- | :--- |
-| **`/pure-saas design [request]`** | Establish or update the project's persistent design specification (`DESIGN.md`) before implementation. | `/pure-saas design` | [`commands/design.md`](commands/design.md) |
-| **`/pure-saas polish [request]`** | Improve visual hierarchy, spacing, typography, surface lighting, micro-interactions, and custom SVGs without rebuilding working logic. | `/pure-saas polish` | [`commands/polish.md`](commands/polish.md) |
-| **`/pure-saas review [request or scope]`** | Conduct a rigorous, evidence-based quality audit across concrete bugs, security weaknesses, accessibility problems, performance issues, and token drift. | `/pure-saas review` | [`commands/review.md`](commands/review.md) |
-| **`/pure-saas reference [URL]`** | Reverse-engineer a visual reference via browser DevTools (DOM, computed styles, assets, typography, motion) and recreate requested design language. | `/pure-saas reference` | [`commands/reference.md`](commands/reference.md) |
-| **`/pure-saas responsive [request]`** | Focus on responsive layouts across mobile, tablet, laptop, and desktop. Fix layout failures, horizontal overflow, touch targets, and navigation. | `/pure-saas responsive` | [`commands/responsive.md`](commands/responsive.md) |
-
----
-
-## Universal Execution Behaviour
-
-All Pure SaaS commands adhere to 10 strict operational principles:
-
-1. **Read Canonical Skill:** Read `SKILL.md` and relevant reference documents in `references/`.
-2. **Understand Context:** Parse current request and conversation history without asking questions that can reasonably be inferred.
-3. **Inspect Architecture:** Inspect existing frameworks, styling systems, and immutable backend contracts.
-4. **Select Only Relevant Workflows:** Coordinate only the capabilities required for the task.
-5. **Implement Directly:** Build the full working product rather than stopping at preliminary advice.
-6. **Preserve Architecture & APIs:** Never overwrite backend endpoints, database schemas, authentication, or test IDs.
-7. **Maintain `DESIGN.md`:** Establish and update the persistent design system before writing styles.
-8. **Check & Refine:** Run token scanners, viewport checks, and linters; correct discovered defects.
-9. **Report Honestly:** Produce an evidence-backed ledger of verified achievements, fixes, and untested areas.
-10. **Never Fabricate Validation:** Never claim tests, DevTools inspections, or screen-reader checks that were not run.
+</div>
 
 ---
 
 ## Installation
 
-### Install via the Skills CLI (Recommended)
+### Install with Skills CLI (Recommended)
 
-Install Pure SaaS into your repository using the standard Skills CLI:
+Install Pure SaaS into your project:
 
 ```bash
 npx skills add LMGXENON/pure-saas
 ```
 
-The Skills CLI automatically discovers `SKILL.md` at the repository root, installs the toolkit into `.agents/skills/pure-saas`, and configures symlinks for Claude Code (`.claude/skills/pure-saas`).
+Install globally:
 
-#### Options
 ```bash
-# Install globally for your machine
 npx skills add LMGXENON/pure-saas -g
+```
 
-# Install targeting specific agents
+Install for specific agents:
+
+```bash
 npx skills add LMGXENON/pure-saas --agent claude-code cursor
+```
 
-# List skills in repository without installing
+List available skills without installing:
+
+```bash
 npx skills add LMGXENON/pure-saas --list
 ```
 
-### Initialize a Project Design System (Separate CLI)
-To scaffold a starter design system in your project independently of agent skill installation:
+### Requirements
+
+- Node.js 18 or later for the Pure SaaS CLI.
+- An AI coding agent that supports skills, project instructions or custom commands.
+- A project repository where you want to apply Pure SaaS.
+
+### Initialize a Design System
+
+Skill installation and design-system initialization are separate operations. To generate starter design-system files in your current project:
 
 ```bash
 npx pure-saas init
 ```
+
+### Quick Start
+
+Use the main command for a complete design and implementation task:
+
+```text
+/pure-saas create a premium, responsive SaaS landing page
+```
+
+Or use specialist commands:
+
+```text
+/pure-saas design establish a design system for my application
+/pure-saas polish improve the visual quality of this interface
+/pure-saas review audit the application and fix issues
+```
+
+---
+
+## Before & After
+
+See the difference Pure SaaS aims to make to AI-generated interfaces.
+
+<table>
+  <tr>
+    <th align="center" width="50%">Before Pure SaaS</th>
+    <th align="center" width="50%">After Pure SaaS</th>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="images/before.png" alt="Interface before applying Pure SaaS" width="100%" />
+    </td>
+    <td width="50%">
+      <img src="images/after.png" alt="Interface after applying Pure SaaS" width="100%" />
+    </td>
+  </tr>
+</table>
+
+<sub>Replace the image placeholders with screenshots of the same interface before and after applying Pure SaaS.</sub>
+
+</div>
+
+---
+
+## What Is Pure SaaS?
+
+AI coding agents frequently produce repetitive, generic design patterns:
+
+- Purple and cyan gradients, excessive glows and unnecessary glassmorphism.
+- Repetitive three-column feature cards and predictable layouts.
+- Arbitrary colours, inconsistent spacing and poorly aligned elements.
+- Emoji used as interface icons instead of crisp SVGs.
+- Generic marketing jargon and unsupported product claims.
+- Desktop-first interfaces that neglect mobile layouts, keyboard accessibility and interaction states.
+- Inconsistent animations, transitions and component behaviour.
+
+**Pure SaaS addresses these problems at the agent level.** It provides one intelligent main command and five specialist commands to help AI coding agents design, build, refine, review and optimise professional software interfaces.
+
+Its goal is to produce distinctive, polished, production-quality experiences instead of generic AI-generated templates.
+
+## The Intelligent Main Command
+
+### `/pure-saas [request]`
+
+The main command is the default entry point for design and development tasks. It interprets the request and coordinates the relevant workflows automatically.
+
+```text
+/pure-saas create a premium 3D landing page for my hospital
+/pure-saas build a native-feeling macOS productivity app
+/pure-saas build an e-commerce application with authentication and checkout
+/pure-saas add a polished, animated pricing section
+/pure-saas make this interface feel significantly more premium
+/pure-saas fix the mobile navigation
+/pure-saas improve accessibility across this page
+/pure-saas find security issues and fix them
+/pure-saas create a reusable button component
+```
+
+### How It Works
+
+1. **Understand the project:** Inspect the repository, framework, build tools, styling conventions and relevant backend contracts.
+2. **Coordinate capabilities:** Handle design, implementation, components, design tokens, motion, accessibility, responsiveness, performance and security as needed.
+3. **Execute proportionately:** Complete straightforward tasks directly and coordinate complex work without unnecessary stages.
+4. **Preserve functionality:** Respect existing architecture, APIs, database schemas, authentication and test identifiers.
+5. **Verify and refine:** Run relevant checks, inspect rendered output when possible, correct issues and report what was actually verified.
+
+Pure SaaS aims to minimise redundant analysis, unnecessary planning documents and avoidable confirmation requests.
+
+---
+
+## Specialist Commands
+
+Use one of the five specialist commands when you need a focused workflow. Each inherits the canonical instructions from `SKILL.md` and should follow the project's persistent `DESIGN.md` where applicable.
+
+| Command | Purpose | Definition |
+|---|---|---|
+| `/pure-saas design [request]` | Establish or update the project's persistent design specification before implementation. | [`commands/design.md`](commands/design.md) |
+| `/pure-saas polish [request]` | Improve visual hierarchy, spacing, typography, surfaces, micro-interactions and SVGs without unnecessarily rebuilding working logic. | [`commands/polish.md`](commands/polish.md) |
+| `/pure-saas review [scope]` | Audit bugs, security weaknesses, accessibility, performance and design-token consistency. | [`commands/review.md`](commands/review.md) |
+| `/pure-saas reference [URL]` | Analyse a website reference and recreate its relevant design language and behaviour. | [`commands/reference.md`](commands/reference.md) |
+| `/pure-saas responsive [request]` | Improve mobile, tablet, laptop and desktop layouts, including overflow, touch targets and navigation. | [`commands/responsive.md`](commands/responsive.md) |
+
+---
+
+## Website Reference Analysis and Visual Verification
+
+When a user provides a website URL as a design reference, Pure SaaS should inspect the accessible, relevant website before implementation.
+
+### Reference Inspection
+
+- Discover relevant pages linked through navigation, footers, menus and internal links.
+- Inspect every relevant section from the top of each page to the bottom.
+- Analyse layouts, typography, colours, spacing, imagery, borders, shadows and component positioning.
+- Inspect navigation, menus, buttons, forms, hover states, modals, tabs and other interactive elements.
+- Examine initial loads, reloads, route transitions, scroll-triggered animations and other motion.
+
+### Complete Screenshot Capture
+
+- Capture full-page screenshots of every relevant page.
+- Capture viewport screenshots for each section, using overlapping captures when necessary.
+- Record overall page lengths, section order, approximate heights and scroll positions.
+- Capture relevant animation frames or video where the available tools support it.
+- Repeat relevant captures at representative desktop, tablet and mobile sizes.
+- Record inaccessible pages and states that could not be inspected.
+
+### Implementation and Comparison
+
+- Capture the local implementation at matching viewport dimensions and corresponding scroll positions.
+- Compare screenshots page by page and section by section.
+- Check layout, proportions, spacing, typography, colours, imagery, component placement and visual hierarchy.
+- Verify motion separately through interaction testing, video or frame comparison where supported.
+- Correct significant discrepancies, recapture and repeat the comparison.
+- Report what was verified and what remains untested.
+
+Do not claim complete inspection, screenshot comparison or animation verification without evidence. Static screenshots alone cannot prove animation fidelity.
+
+---
+
+## Universal Execution Principles
+
+All Pure SaaS commands follow these operational principles:
+
+1. **Read the canonical skill:** Consult `SKILL.md` and relevant reference documents in `references/`.
+2. **Understand context:** Use the request and available project context without unnecessary questions.
+3. **Inspect architecture:** Understand existing frameworks, styling systems and backend contracts.
+4. **Select relevant workflows:** Coordinate only the capabilities required for the task.
+5. **Implement directly:** Build working solutions rather than stopping at preliminary advice.
+6. **Preserve architecture and APIs:** Avoid breaking backend endpoints, database schemas, authentication and test identifiers.
+7. **Maintain `DESIGN.md`:** Establish or update the persistent design specification where applicable.
+8. **Check and refine:** Run relevant validators, viewport checks, linters and tests.
+9. **Report honestly:** Distinguish verified results from incomplete or untested work.
+10. **Never fabricate validation:** Do not claim tests, browser inspections, screenshot comparisons or accessibility checks that were not performed.
 
 ---
 
 ## Supported Agent Integrations
 
-| Platform / Agent | Integration Mechanism | Entry Point File | How to Operate |
-| :--- | :--- | :--- | :--- |
-| **Claude Code** | **Native Skill & Commands** | `SKILL.md`, `commands/` | `/pure-saas [request]` or specialist commands (`/pure-saas design`, etc.). |
-| **Cursor** | **Root Rules Architecture** | `.cursorrules`, `SKILL.md` | `/pure-saas` or specialist commands in Chat / Composer. |
-| **Gemini / Antigravity** | **Root Skill Entry Point** | `GEMINI.md`, `SKILL.md` | Context instructions or native `/pure-saas` invocation. |
-| **Windsurf** | **Native Root Rules** | `.windsurfrules`, `SKILL.md` | Native rules at project root (`.windsurfrules`) or slash commands. |
-| **GitHub Copilot** | **Custom Instructions** | `.github/copilot-instructions.md`, `SKILL.md` | Repository instructions file or direct slash triggers. |
-| **OpenCode** | **Native Commands** | `SKILL.md`, `commands/` | Native slash commands (`/pure-saas`, `/pure-saas polish`, etc.). |
-| **Codex / Generic** | **Skill System Prompt** | `SKILL.md`, `commands/` | Load `SKILL.md` into workspace or invoke commands directly. |
+Pure SaaS is intended for AI coding environments that support skills, project instructions or custom commands.
+
+| Platform / Agent | Integration mechanism | Relevant files |
+|---|---|---|
+| Claude Code | Skills and commands | `SKILL.md`, `commands/` |
+| Cursor | Project rules and skill instructions | `.cursorrules`, `SKILL.md` |
+| Gemini / Antigravity | Root instructions and skill entry point | `GEMINI.md`, `SKILL.md` |
+| Windsurf | Project rules | `.windsurfrules`, `SKILL.md` |
+| GitHub Copilot | Repository custom instructions | `.github/copilot-instructions.md`, `SKILL.md` |
+| OpenCode | Native commands and skill instructions | `SKILL.md`, `commands/` |
+| Codex / compatible agents | Skill instructions or system context | `SKILL.md`, `commands/` |
+
+The exact invocation and automatic discovery behaviour depend on the agent, its version and configuration.
 
 ---
 
-## Deterministic CLI Reference
+## CLI Reference
 
-The Pure SaaS CLI is zero-dependency and runs with Node.js >= 18:
+The Pure SaaS CLI provides design references, design-system generation, token validation and quality checks. It requires Node.js 18 or later.
+
+### Search the Reference Library
 
 ```bash
-# Search reference library (Apple HIG, 22 frameworks, craft guidelines)
 npx pure-saas ref "modal"
 npx pure-saas ref "button"
 npx pure-saas ref "react"
+```
 
-# Query multi-domain design intelligence (colors, UX heuristics, landing patterns, charts, typography, motion)
+### Query Design Intelligence
+
+```bash
 npx pure-saas query color "fintech"
 npx pure-saas query ux "scroll"
 npx pure-saas query landing "saas hero"
 npx pure-saas style "developer tool dark mode"
+```
 
-# Generate complete DESIGN.md based on product archetype and design dials
+### Generate a Design System
+
+```bash
 npx pure-saas design-system --product fintech --variance 8 --motion 9 --density 8 --out DESIGN.md
+```
 
-# Validate DESIGN.md structure, required tokens, and open unresolved questions
-npx pure-saas validate [path/to/DESIGN.md]
+### Validate Design Specifications
 
-# Audit color contrast against WCAG 2.2 AA (4.5:1 text, 3.0:1 UI) and AAA (7.0:1)
-npx pure-saas contrast [path/to/DESIGN.md]
-
-# Diff design tokens across revisions or commits
+```bash
+npx pure-saas validate DESIGN.md
+npx pure-saas contrast DESIGN.md
 npx pure-saas diff DESIGN.before.md DESIGN.md
-
-# Detect design drift between expected tokens and live measured observations
 npx pure-saas drift DESIGN.md observations.json
-
-# Scan source code for raw styling violations with known technical debt baseline
 npx pure-saas check DESIGN.md --source src --known known-defects.json
+```
 
-# Export tokens to CSS Custom Properties, Tailwind v3/v4, DTCG 2025.10, or JSON
+- `validate` checks design-system structure, required tokens and unresolved questions.
+- `contrast` audits colour contrast.
+- `diff` compares design-token specifications.
+- `drift` detects differences between expected tokens and measured observations.
+- `check` scans source code for styling violations against the design specification.
+
+### Export Design Tokens
+
+```bash
 npx pure-saas export-tokens DESIGN.md --format css --out styles/tokens.css
 npx pure-saas export-tokens DESIGN.md --format tailwind-v4 --out styles/theme.css
 npx pure-saas export-tokens DESIGN.md --format tailwind --out tailwind.tokens.js
 npx pure-saas export-tokens DESIGN.md --format dtcg --out tokens.json
+```
 
-# Run comprehensive quality audit & verification report
+### Generate a Quality Report
+
+```bash
 npx pure-saas review-report --json
+```
 
-# Initialize starter specifications in current repository
+### Initialize a Project
+
+```bash
 npx pure-saas init
 ```
+
+Use `npx pure-saas --help` to inspect the commands and options supported by the installed CLI version.
 
 ---
 
 ## Limitations
 
-- **Browser-less Sandboxes:** In environments without a headless browser or screen-reader runtime, Pure SaaS performs static code analysis and token verification. Visual rendering, fluid animation fidelity, and screen-reader keyboard traps are recorded as `untested` rather than fabricated as verified.
-- **Dynamic CSS-in-JS:** The static source scanner parses CSS, Tailwind utility classes, HTML, JSX, TSX, Svelte, and Vue files. Dynamic runtime style calculations (e.g., `style={{ color: dynamicHex }}`) should use token mappings or be marked with `/* pure-saas-ignore rule: reason */`.
+### Browser and Screenshot Availability
+
+In environments without a suitable browser, screenshot capture or screen-reader runtime, Pure SaaS may be limited to static code analysis and design-token verification.
+
+Visual rendering, animation fidelity and screen-reader behaviour must be reported as untested when they cannot be verified.
+
+### Dynamic Styling
+
+The static source scanner supports common styling patterns across CSS, Tailwind utilities, HTML, JSX, TSX, Svelte and Vue. Runtime-generated styles, such as dynamically calculated inline colours, may require token mappings or intentional exceptions.
+
+Consult the CLI implementation for the exact syntax and supported behaviour.
 
 ---
 
-## Testing & Quality Assurance
+## Testing and Quality Assurance
 
 Run the automated test suite:
 
@@ -207,7 +325,15 @@ Run the automated test suite:
 npm test
 ```
 
+Run the relevant build, lint, validation and test commands documented by the project before releasing changes.
+
 ---
+
+## Contributing
+
+Contributions that improve design quality, agent compatibility, verification, accessibility or the CLI are welcome.
+
+Keep documentation aligned with the actual implementation and avoid claiming support for integrations or capabilities that have not been tested.
 
 ## License
 
