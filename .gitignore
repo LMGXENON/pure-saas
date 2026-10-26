@@ -15,5 +15,6 @@ evals/
 # Chrome profiles
 **/.profile-*
 screenshots/
-!demo-comparison/screenshots/
+!demo-without-puresaas/screenshots/
+!demo-with-puresaas/screenshots/
 

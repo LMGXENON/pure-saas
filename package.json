@@ -10,8 +10,9 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "build:site": "cd pure-saas-website && npm run build",
-    "build:demo": "cd demo-comparison && npm run build",
-    "demo": "cd demo-comparison && npm run dev",
+    "build:demos": "cd demo-without-puresaas && npm run build && cd ../demo-with-puresaas && npm run build",
+    "demo:without": "cd demo-without-puresaas && npm run dev",
+    "demo:with": "cd demo-with-puresaas && npm run dev",
     "export:refs": "node scripts/export-website-references.mjs",
     "generate:docs": "node scripts/generators/generate-docs-data.mjs",
     "test": "node scripts/run-tests.mjs",
