@@ -342,6 +342,7 @@ export function scanSourceDirectory(srcDir, designTokens = {}) {
     unresolvedTokenRefs: [],
     colorFunctionViolations: [],
     focusSuppressionWarnings: [],
+    exceptionReasonViolations: [],
     antiSlopWarnings: []
   };
 
@@ -398,6 +399,19 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
     // Check for inline exception bypass (e.g. /* pure-saas-ignore rule: reason */)
     const hasIgnore = rawLine.includes('pure-saas-ignore') || rawLine.includes('design-check-ignore') || rawLine.includes('EXC-');
     if (hasIgnore) {
+      if (rawLine.includes('pure-saas-ignore') || rawLine.includes('design-check-ignore')) {
+        const match = rawLine.match(/(?:pure-saas-ignore|design-check-ignore)(?:-next-line)?(?:\s+([a-z-]+))?(?:\s*:\s*(\S.*?))?\s*(?:\*\/|-->|\}|$)/);
+        if (match) {
+          const reason = match[2];
+          if (!reason || reason.trim() === '') {
+            results.exceptionReasonViolations.push({
+              file: filePath,
+              line: lineNum,
+              message: 'Exception bypass comment has no explanatory reason.'
+            });
+          }
+        }
+      }
       const trimmed = rawLine.trim();
       if (trimmed.startsWith('/*') || trimmed.startsWith('//') || trimmed.includes('-next-line')) {
         ignoreNextLine = true;
@@ -609,68 +623,112 @@ export function exportTokens(designData, format = 'css') {
 // --- Design Style Intelligence Engine ---
 
 export function queryDesignIntelligence(options = {}) {
+  const intelPath = path.resolve(__dirname, '../data/design-intelligence.json');
   const catalogPath = path.resolve(__dirname, '../references/design-styles-catalog.json');
-  if (!fs.existsSync(catalogPath)) {
-    return { styles: [], products: {}, stacks: {} };
+
+  let intel = null;
+  if (fs.existsSync(intelPath)) {
+    try {
+      intel = JSON.parse(fs.readFileSync(intelPath, 'utf8'));
+    } catch {
+      intel = null;
+    }
   }
 
-  const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-  const styles = catalog.styles || [];
-  const products = catalog.product_archetypes || {};
-  const stacks = catalog.stack_guidance || {};
+  const catalog = fs.existsSync(catalogPath)
+    ? JSON.parse(fs.readFileSync(catalogPath, 'utf8'))
+    : { styles: [], product_archetypes: {}, stack_guidance: {} };
+
+  const catalogStyles = catalog.styles || [];
+  const intelStyles = (intel && intel.styles) || [];
+  const catalogIds = new Set(catalogStyles.map(s => s.id));
+  const allStyles = [...catalogStyles, ...intelStyles.filter(s => !catalogIds.has(s.id))];
+  const productsObj = catalog.product_archetypes || {};
+  const stacksObj = catalog.stack_guidance || {};
 
   const query = (options.query || '').toLowerCase().trim();
+  const domain = (options.domain || '').toLowerCase().trim();
   const productFilter = (options.product || '').toLowerCase().trim();
   const stackFilter = (options.stack || '').toLowerCase().trim();
 
-  let matchedStyles = styles;
-  if (query && query !== '--json') {
-    matchedStyles = styles.filter(s =>
+  let matchedStyles = allStyles;
+  if (query && query !== '--json' && (!domain || domain === 'style' || domain === 'styles')) {
+    matchedStyles = allStyles.filter(s =>
       s.name.toLowerCase().includes(query) ||
-      s.category.toLowerCase().includes(query) ||
-      s.keywords.some(k => k.toLowerCase().includes(query)) ||
-      s.best_for.some(b => b.toLowerCase().includes(query))
+      (s.category && s.category.toLowerCase().includes(query)) ||
+      (s.keywords && (Array.isArray(s.keywords) ? s.keywords.some(k => k.toLowerCase().includes(query)) : String(s.keywords).toLowerCase().includes(query))) ||
+      (s.best_for && (Array.isArray(s.best_for) ? s.best_for.some(b => b.toLowerCase().includes(query)) : String(s.best_for).toLowerCase().includes(query)))
     );
   }
 
   let matchedProduct = null;
-  if (productFilter) {
-    const key = Object.keys(products).find(k =>
-      k.toLowerCase().includes(productFilter) ||
-      products[k].name.toLowerCase().includes(productFilter) ||
-      products[k].keywords.some(kw => kw.toLowerCase().includes(productFilter))
+  const pTarget = productFilter || (domain === 'product' ? query : '');
+  if (pTarget) {
+    const key = Object.keys(productsObj).find(k =>
+      k.toLowerCase().includes(pTarget) ||
+      productsObj[k].name.toLowerCase().includes(pTarget) ||
+      (productsObj[k].keywords && productsObj[k].keywords.some(kw => kw.toLowerCase().includes(pTarget)))
     );
-    if (key) matchedProduct = { id: key, ...products[key] };
+    if (key) {
+      matchedProduct = { id: key, ...productsObj[key] };
+    } else if (intel && intel.products) {
+      const p = intel.products.find(pr =>
+        pr.id.toLowerCase().includes(pTarget) ||
+        pr.name.toLowerCase().includes(pTarget) ||
+        (pr.keywords && pr.keywords.some(kw => kw.toLowerCase().includes(pTarget)))
+      );
+      if (p) matchedProduct = { id: p.id, ...p };
+    }
   } else if (query && query !== '--json') {
-    const key = Object.keys(products).find(k =>
+    const key = Object.keys(productsObj).find(k =>
       k.toLowerCase().includes(query) ||
-      products[k].name.toLowerCase().includes(query) ||
-      products[k].keywords.some(kw => kw.toLowerCase().includes(query))
+      productsObj[k].name.toLowerCase().includes(query) ||
+      (productsObj[k].keywords && productsObj[k].keywords.some(kw => kw.toLowerCase().includes(query)))
     );
-    if (key) matchedProduct = { id: key, ...products[key] };
+    if (key) matchedProduct = { id: key, ...productsObj[key] };
   }
 
   let matchedStack = null;
-  if (stackFilter) {
-    const key = Object.keys(stacks).find(k =>
-      k.toLowerCase().includes(stackFilter) ||
-      stacks[k].name.toLowerCase().includes(stackFilter)
+  const sTarget = stackFilter || (domain === 'stack' ? query : '');
+  if (sTarget) {
+    const key = Object.keys(stacksObj).find(k =>
+      k.toLowerCase().includes(sTarget) ||
+      (stacksObj[k].name && stacksObj[k].name.toLowerCase().includes(sTarget))
     );
-    if (key) matchedStack = { id: key, ...stacks[key] };
+    if (key) {
+      matchedStack = { id: key, ...stacksObj[key] };
+    } else if (intel && intel.stacks && intel.stacks[sTarget]) {
+      matchedStack = { id: sTarget, name: sTarget, rules: intel.stacks[sTarget] };
+    }
   } else if (query && query !== '--json') {
-    const key = Object.keys(stacks).find(k =>
+    const key = Object.keys(stacksObj).find(k =>
       k.toLowerCase().includes(query) ||
-      stacks[k].name.toLowerCase().includes(query)
+      (stacksObj[k].name && stacksObj[k].name.toLowerCase().includes(query))
     );
-    if (key) matchedStack = { id: key, ...stacks[key] };
+    if (key) matchedStack = { id: key, ...stacksObj[key] };
   }
+
+  // Additional design intelligence domains from UI UX Pro Max
+  const matchedTypography = (intel && intel.typography)
+    ? (query ? intel.typography.filter(t => t.name.toLowerCase().includes(query) || t.heading_font.toLowerCase().includes(query) || t.mood.toLowerCase().includes(query)) : intel.typography)
+    : [];
+  const matchedCharts = (intel && intel.charts)
+    ? (query ? intel.charts.filter(c => c.data_type.toLowerCase().includes(query) || c.best_chart_type.toLowerCase().includes(query)) : intel.charts)
+    : [];
+  const matchedMotion = (intel && intel.motion)
+    ? (query ? intel.motion.filter(m => m.category.toLowerCase().includes(query) || m.intensity_tier.toLowerCase().includes(query)) : intel.motion)
+    : [];
 
   return {
     styles: matchedStyles,
     product: matchedProduct,
     stack: matchedStack,
-    allProducts: products,
-    allStacks: stacks
+    typography: matchedTypography,
+    charts: matchedCharts,
+    motion: matchedMotion,
+    allProducts: productsObj,
+    allStacks: stacksObj,
+    datasetSummary: intel ? intel.summary : { styles_count: catalog.styles?.length || 0 }
   };
 }
 
@@ -702,7 +760,7 @@ export async function runCli(args = process.argv.slice(2)) {
     return result.valid ? 0 : 1;
   }
 
-  if (command === 'check-tokens' || command === 'tokens') {
+  if (command === 'check-tokens' || command === 'tokens' || command === 'check-code') {
     const designFile = path.resolve(process.cwd(), args[1] && !args[1].startsWith('--') ? args[1] : 'DESIGN.md');
     const jsonOutput = args.includes('--json');
     const srcIndex = args.indexOf('--source');
@@ -839,16 +897,25 @@ export async function runCli(args = process.argv.slice(2)) {
     return report.summary.violations_count === 0 ? 0 : 1;
   }
 
-  if (command === 'style' || command === 'styles') {
+  if (command === 'style' || command === 'styles' || command === 'query') {
     const prodIdx = args.indexOf('--product');
     const productArg = prodIdx !== -1 ? args[prodIdx + 1] : '';
     const stackIdx = args.indexOf('--stack');
     const stackArg = stackIdx !== -1 ? args[stackIdx + 1] : '';
-    const queryArg = args.slice(1).filter(a => !a.startsWith('--') && a !== productArg && a !== stackArg).join(' ');
+    let domainArg = '';
+    let queryArg = '';
+
+    if (command === 'query' && args[1] && !args[1].startsWith('--')) {
+      domainArg = args[1];
+      queryArg = args.slice(2).filter(a => !a.startsWith('--') && a !== productArg && a !== stackArg).join(' ');
+    } else {
+      queryArg = args.slice(1).filter(a => !a.startsWith('--') && a !== productArg && a !== stackArg).join(' ');
+    }
     const jsonOutput = args.includes('--json');
 
     const result = queryDesignIntelligence({
       query: queryArg,
+      domain: domainArg,
       product: productArg,
       stack: stackArg
     });
@@ -860,18 +927,23 @@ export async function runCli(args = process.argv.slice(2)) {
 
     if (result.product) {
       console.log(`=== Product Archetype: ${result.product.name} ===`);
-      console.log(`  Keywords: ${result.product.keywords.join(', ')}`);
-      console.log(`  Primary Style: ${result.product.primary_style}`);
-      console.log(`  Secondary Style: ${result.product.secondary_style}`);
-      console.log(`  Landing Page Pattern: ${result.product.landing_pattern}`);
-      console.log(`  Dashboard Style: ${result.product.dashboard_style}`);
-      console.log(`  Color Focus: ${result.product.color_focus}`);
-      console.log(`  Key Considerations: ${result.product.key_considerations}\n`);
+      const kw = Array.isArray(result.product.keywords) ? result.product.keywords.join(', ') : (result.product.keywords || '');
+      if (kw) console.log(`  Keywords: ${kw}`);
+      if (result.product.primary_style) console.log(`  Primary Style: ${result.product.primary_style}`);
+      const secStyle = result.product.secondary_style || result.product.secondary_styles;
+      if (secStyle) console.log(`  Secondary Style: ${secStyle}`);
+      if (result.product.landing_pattern) console.log(`  Landing Page Pattern: ${result.product.landing_pattern}`);
+      if (result.product.dashboard_style) console.log(`  Dashboard Style: ${result.product.dashboard_style}`);
+      if (result.product.color_focus) console.log(`  Color Focus: ${result.product.color_focus}`);
+      if (result.product.key_considerations) console.log(`  Key Considerations: ${result.product.key_considerations}\n`);
     }
 
     if (result.stack) {
       console.log(`=== Stack Guidance: ${result.stack.name} ===`);
-      for (const p of result.stack.patterns) {
+      const patterns = Array.isArray(result.stack.patterns)
+        ? result.stack.patterns
+        : (Array.isArray(result.stack.rules) ? result.stack.rules : (result.stack.patterns || result.stack.rules ? [result.stack.patterns || result.stack.rules] : []));
+      for (const p of patterns) {
         console.log(`  • ${p}`);
       }
       console.log('');
@@ -879,13 +951,29 @@ export async function runCli(args = process.argv.slice(2)) {
 
     console.log(`=== Pure SaaS Design Style Intelligence (${result.styles.length} matching styles) ===\n`);
     for (const style of result.styles) {
-      console.log(`[${style.name}] (${style.category})`);
-      console.log(`  Keywords: ${style.keywords.join(', ')}`);
-      console.log(`  Best For: ${style.best_for.join(', ')}`);
-      console.log(`  Avoid For: ${style.do_not_use_for.join(', ')}`);
-      console.log(`  Typography: ${style.typography.heading_family} (headings) | ${style.typography.body_family} (body)`);
-      console.log(`  Palette: Canvas ${style.colors.canvas} | Surface ${style.colors.surface} | Accent ${style.colors.accent}`);
-      console.log(`  Anti-Slop: ${style.anti_slop_notes}\n`);
+      console.log(`[${style.name}] (${style.category || 'General'})`);
+      const kw = Array.isArray(style.keywords) ? style.keywords.join(', ') : (style.keywords || '');
+      if (kw) console.log(`  Keywords: ${kw}`);
+      const best = Array.isArray(style.best_for) ? style.best_for.join(', ') : (style.best_for || '');
+      if (best) console.log(`  Best For: ${best}`);
+      const avoid = Array.isArray(style.do_not_use_for)
+        ? style.do_not_use_for.join(', ')
+        : (Array.isArray(style.avoid_for) ? style.avoid_for.join(', ') : (style.do_not_use_for || style.avoid_for || ''));
+      if (avoid) console.log(`  Avoid For: ${avoid}`);
+      if (style.typography) {
+        if (typeof style.typography === 'object') {
+          console.log(`  Typography: ${style.typography.heading_family || ''} (headings) | ${style.typography.body_family || ''} (body)`);
+        } else {
+          console.log(`  Typography: ${style.typography}`);
+        }
+      }
+      if (style.colors) {
+        console.log(`  Palette: Canvas ${style.colors.canvas || ''} | Surface ${style.colors.surface || ''} | Accent ${style.colors.accent || ''}`);
+      } else if (style.primary_colors || style.accent_colors) {
+        console.log(`  Palette: Primary ${style.primary_colors || ''} | Accent ${style.accent_colors || ''}`);
+      }
+      if (style.anti_slop_notes) console.log(`  Anti-Slop: ${style.anti_slop_notes}\n`);
+      else console.log('');
     }
     return 0;
   }

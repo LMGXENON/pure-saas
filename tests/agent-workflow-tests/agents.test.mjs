@@ -59,7 +59,7 @@ test('Agents: Starter templates exist and satisfy schema and validation rules', 
   assert.strictEqual(designValidation.issues.length, 0, 'Starter template DESIGN.md must have zero issues');
 });
 
-test('References: All 15 modular reference guides exist and satisfy architecture requirements', () => {
+test('References: All 16 modular reference guides exist and satisfy architecture requirements', () => {
   const references = [
     'README.md',
     'accessibility.md',
@@ -70,6 +70,7 @@ test('References: All 15 modular reference guides exist and satisfy architecture
     'design-principles.md',
     'design-review.md',
     'design-styles-catalog.json',
+    'hig-lookup.md',
     'interaction-states.md',
     'layout-and-composition.md',
     'motion.md',
@@ -94,5 +95,18 @@ test('References: All 15 modular reference guides exist and satisfy architecture
   assert.ok(noticesContent.includes('zero-slop-design-plugin'), 'Must attribute zero-slop-design-plugin');
   assert.ok(noticesContent.includes('apple-design-skill'), 'Must attribute apple-design-skill');
   assert.ok(noticesContent.includes('Provenance & Implementation Ledger'), 'Must include provenance ledger');
+});
+
+test('Design Intelligence: Full dataset exists and satisfies structural requirements', () => {
+  const dataPath = path.resolve(process.cwd(), 'data/design-intelligence.json');
+  assert.ok(fs.existsSync(dataPath), 'data/design-intelligence.json must exist');
+
+  const content = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+  assert.ok(content.styles && content.styles.length >= 88, 'Must contain 88+ design styles');
+  assert.ok(content.products && content.products.length >= 190, 'Must contain 190+ product archetypes');
+  assert.ok(content.typography && content.typography.length >= 70, 'Must contain 70+ typography pairings');
+  assert.ok(content.charts && content.charts.length >= 25, 'Must contain 25 chart guides');
+  assert.ok(content.motion && content.motion.length >= 17, 'Must contain 17 motion patterns');
+  assert.ok(content.stacks && Object.keys(content.stacks).length >= 20, 'Must contain 20+ stack guidelines');
 });
 

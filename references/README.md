@@ -24,8 +24,10 @@ Pure SaaS follows the **"Read Before You Cite"** architecture. Core agent instru
 | **[`code-audit.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/code-audit.md)** | Static Code Audit & Anti-Patterns | **Review command / Pull Requests** | Grep patterns, guideline citations, severity levels, and stack-specific replacement code. |
 | **[`motion.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/motion.md)** | Motion, Transitions & Micro-interactions | **Animation / Transitions** | Purposeful motion, spring physics, duration guidelines (150ms-300ms), reduced-motion overrides. |
 | **[`platform-guidelines.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/platform-guidelines.md)** | Host Platform Conventions | **Web / macOS / iOS / Mobile** | Platform idiomatic navigation, window controls, menus, and system surfaces. |
+| **[`hig-lookup.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/hig-lookup.md)** | Apple HIG Topic Index & Routing | **Apple platforms / HIG routing** | 123 Apple Human Interface Guidelines mapped across Foundations, Patterns, Components, and Inputs. |
 | **[`reference-analysis.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/reference-analysis.md)** | Live Reference Reverse Engineering | **Reference command** | DevTools inspection protocol, computed style extraction, 16-section `DESIGN.md` specification. |
 | **[`design-review.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-review.md)** | Quality Review Methodology | **Review command** | Evidence-based audit protocol, test vs untested tracking, verification reporting. |
+| **[`../data/design-intelligence.json`](file:///Users/lmgxenon/Downloads/pure%20saas/data/design-intelligence.json)** | Comprehensive Design Intelligence Dataset | **Design / Query CLI / Archetypes** | 88 design styles, 192 product types, 74 font pairings, 25 chart guides, 17 motion patterns, 22 stacks. |
 
 ---
 

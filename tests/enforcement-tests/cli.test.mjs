@@ -124,3 +124,34 @@ test('CLI: Init command creates complete starter project and supports --referenc
   }
 });
 
+test('CLI: Exception comments require non-empty reason and format', () => {
+  const tmpDir = path.resolve(process.cwd(), 'tests/fixtures/.tmp-exception-test');
+  if (fs.existsSync(tmpDir)) fs.rmSync(tmpDir, { recursive: true, force: true });
+  fs.mkdirSync(tmpDir, { recursive: true });
+
+  try {
+    const validFile = path.join(tmpDir, 'valid.css');
+    fs.writeFileSync(validFile, '/* pure-saas-ignore color-value: Brand logo requirement */\n.logo { color: #ff0055; }\n', 'utf8');
+
+    const invalidFile = path.join(tmpDir, 'invalid.css');
+    fs.writeFileSync(invalidFile, '/* pure-saas-ignore color-value */\n.bad { color: #ff00aa; }\n', 'utf8');
+
+    const scan = scanSourceDirectory(tmpDir, {});
+    assert.strictEqual(scan.exceptionReasonViolations.length, 1, 'Must flag bare ignore comment lacking reason');
+    assert.ok(scan.exceptionReasonViolations[0].file.includes('invalid.css'));
+  } finally {
+    if (fs.existsSync(tmpDir)) fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test('CLI: queryDesignIntelligence resolves extended domains (typography, charts, motion)', () => {
+  const typographyResult = queryDesignIntelligence({ query: 'editorial' });
+  assert.ok(typographyResult.typography.length > 0, 'Must resolve typography pairings for editorial query');
+
+  const chartResult = queryDesignIntelligence({ query: 'comparison' });
+  assert.ok(chartResult.charts.length > 0, 'Must resolve chart guides for comparison query');
+
+  const motionResult = queryDesignIntelligence({ query: 'micro' });
+  assert.ok(motionResult.motion.length > 0, 'Must resolve motion patterns for micro query');
+});
+
