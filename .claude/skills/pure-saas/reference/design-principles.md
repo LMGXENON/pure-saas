@@ -62,7 +62,7 @@ When reconciling requirements or proposing new design patterns, follow this stri
 1. **User Requirements & Established Brand System:** Explicit user instructions, existing brand assets, active typography rules, and existing tokens take absolute priority.
 2. **Platform Conventions & Accessibility Standards:** Native platform requirements (Apple HIG on macOS/iOS, Web standards on browsers) and WCAG 2.2 AA accessibility requirements (contrast, focus indicators, minimum touch targets).
 3. **Verified Project Decisions & Approved Tokens:** The immutable tokens and rules recorded in the root `DESIGN.md`.
-4. **Retrieved Reference Intelligence:** Guidance retrieved from `references/hig/`, `references/frameworks/`, and `references/design-intelligence.json`.
+4. **Retrieved Reference Intelligence:** Guidance retrieved from `reference/hig/`, `reference/frameworks/`, and `data/design-intelligence.json`.
 5. **New Proposals:** Suggestions not previously approved, explicitly marked as proposals with open items tracked in the `unresolved` ledger.
 
 ### The Decision Lifecycle:

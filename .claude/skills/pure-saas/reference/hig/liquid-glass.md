@@ -101,7 +101,7 @@ Properties to replicate:
 - UIKit: `UIGlassEffect` and `UIGlassContainerEffect` in a `UIVisualEffectView`; `UIButton.Configuration.glass()` and `.prominentGlass()`.
 - AppKit: `NSGlassEffectView` and `NSGlassEffectContainerView`.
 - `UIDesignRequiresCompatibility` in `Info.plist` runs the app in a compatibility mode with the previous design. Apple documents it as temporary, and the system ignores it when you build for iOS, iPadOS, Mac Catalyst, or macOS 27 or later.
-- `references/code-audit.md` lists the code patterns that signal misuse.
+- `reference/code-audit.md` lists the code patterns that signal misuse.
 
 ### Flutter
 

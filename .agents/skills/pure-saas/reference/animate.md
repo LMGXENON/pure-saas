@@ -12,13 +12,21 @@ Use `/pure-saas animate [target]` to implement physics-based spring motion, micr
 2. **Physics-Based Spring Curves:**
    - Avoid linear or generic ease-in-out timing functions. Use Apple/Linear-style exponential spring curves:
    ```css
-   /* Standard Snappy Spring */
+   /* Standard Snappy Spring (Enter / Deceleration) */
    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
    
    /* Gentle Deceleration */
    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+   /* Swift Exit (Acceleration) */
+   --ease-in-swift: cubic-bezier(0.7, 0, 0.84, 0);
    ```
-3. **Respect `prefers-reduced-motion`:**
+3. **Snappy Durations:**
+   - Micro-interactions (button press, toggle, checkbox): **100ms – 150ms**.
+   - UI Transitions (dropdown open, tooltip appear, tab switch): **150ms – 250ms**.
+   - Large Surface Transitions (modal fade-in, drawer slide): **250ms – 350ms**.
+   - Never exceed 400ms for routine interface feedback.
+4. **Respect `prefers-reduced-motion`:**
    - Always wrap motion in accessibility media queries:
    ```css
    @media (prefers-reduced-motion: reduce) {
@@ -29,16 +37,24 @@ Use `/pure-saas animate [target]` to implement physics-based spring motion, micr
      }
    }
    ```
-4. **Hardware Acceleration & GPU Constraints:**
-   - Only animate `transform` and `opacity`.
+5. **Hardware Acceleration & GPU Constraints:**
+   - Only animate `transform` (scale, translate) and `opacity`.
    - Never animate `width`, `height`, `margin`, `padding`, or `top`/`left`, which trigger costly layout reflows and frame drops.
 
 ---
 
-## 2. Micro-Interaction Library
+## 2. Motion Anti-Patterns to Ban
+
+- **No Perpetual Movement:** Avoid continuously pulsing badges, looping glowing gradients, or hovering elements that distract the reader from content.
+- **No Staggered Scroll Delays:** Avoid hiding all text below the fold until the user scrolls, then fading each paragraph in with a 200ms delay. Users read faster than slow staggered animations allow.
+- **No Cursor Parallax:** Do not tilt cards or bend headers based on mouse cursor position unless building an interactive 3D media viewer.
+
+---
+
+## 3. Micro-Interaction Library
 
 - **Button Press:** `active:scale-[0.985] active:translate-y-[0.5px]` with 120ms spring curve.
-- **Card Hover:** Subtle upward translation `hover:-translate-y-1` accompanied by ambient shadow bloom.
+- **Card Hover:** Subtle upward translation `hover:-translate-y-1` accompanied by ambient shadow bloom and hairline border shift (`border-border-strong`).
 - **Accordion FAQ Expansion:** CSS grid animation technique:
   ```css
   .accordion-content {
@@ -53,4 +69,4 @@ Use `/pure-saas animate [target]` to implement physics-based spring motion, micr
     overflow: hidden;
   }
   ```
-
+- **Drawer / Sheet Entrance:** Slide along primary axis (`transform: translateY(0)` from `translateY(100%)`) over 280ms with `--ease-spring`.

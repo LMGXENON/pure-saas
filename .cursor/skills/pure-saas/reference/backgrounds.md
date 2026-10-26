@@ -21,21 +21,21 @@ This reference guide catalogues high-craft, interactive WebGL, Canvas, and shade
 
 | Component | Tech / Deps | Best Fit Archetype | Visual Description | Reference File |
 | :--- | :--- | :--- | :--- | :--- |
-| **`<GradientASCII />`** | WebGL2 (0 deps) | Terminal, DevTool, Cyber | Soft gradient glows rendered with ASCII characters that scramble under cursor | [`references/backgrounds/gradient-ascii.md`](backgrounds/gradient-ascii.md) |
-| **`<PatternWaves />`** | WebGL2 (`ogl`) | Editorial, Swiss, Agency | Lit halftone surface of dots, lines, or glyphs moving like draped silk | [`references/backgrounds/pattern-waves.md`](backgrounds/pattern-waves.md) |
-| **`<Prism />`** | WebGL2 (0 deps) | Creative, Optical, Optics | Rotating 3D prism of glowing spectral light with configurable hue, shape, and physics | [`references/backgrounds/prism.md`](backgrounds/prism.md) |
-| **`<Aurora />`** | WebGL2 (0 deps) | Minimal SaaS, Cloud, AI | Soft, calm aurora borealis flowing across header and drifting toward cursor | [`references/backgrounds/aurora.md`](backgrounds/aurora.md) |
-| **`<LiquidChrome />`** | WebGL2 (0 deps) | Luxury, FinTech, Modern | Soft ribbons of molten liquid chrome swirling in a pool and catching light | [`references/backgrounds/liquid-chrome.md`](backgrounds/liquid-chrome.md) |
-| **`<Iridescence />`** | WebGL2 (0 deps) | Web3, Creative, Studio | Liquid iridescent surface with shifting folds stirred by cursor | [`references/backgrounds/iridescence.md`](backgrounds/iridescence.md) |
-| **`<Plasma />`** | WebGL2 (0 deps) | Deep Tech, AI, Dark Mode | Folds of satin light twisting slowly through the dark, turning with cursor | [`references/backgrounds/plasma.md`](backgrounds/plasma.md) |
-| **`<Particles />`** | WebGL2 (0 deps) | Developer, Data, Systems | Drifting 3D field of particles with glow, twinkle, and constellation lines | [`references/backgrounds/particles.md`](backgrounds/particles.md) |
-| **`<Hyperspeed />`** | Three.js | High-Speed, Infra, Speed | Night highway of light trails on a winding road that warps on interaction | [`references/backgrounds/hyperspeed.md`](backgrounds/hyperspeed.md) |
-| **`<Dither />`** | WebGL2 (0 deps) | Retro, Hacker, Indie | Retro dithered waves with Bayer, halftone, line, and noise patterns | [`references/backgrounds/dither.md`](backgrounds/dither.md) |
-| **`<DotGrid />`** | Canvas 2D (0 deps) | Productivity, Grid, Mac | Springy dot grid that flicks and drags through like jelly with shockwaves | [`references/backgrounds/dot-grid.md`](backgrounds/dot-grid.md) |
-| **`<Ballpit />`** | Canvas 2D (0 deps) | Playful, Consumer, Fun | Soft-lit pit of physics balls you can shove, throw, and bounce | [`references/backgrounds/ballpit.md`](backgrounds/ballpit.md) |
-| **`<Waves />`** | Canvas 2D (0 deps) | Fluid, Sound, Meditation | Dense flowing lines that sway like silk and bend around cursor | [`references/backgrounds/waves.md`](backgrounds/waves.md) |
-| **`<Threads />`** | WebGL2 (0 deps) | Neural, Bio, Network | Flowing threads that fray apart and part around the cursor | [`references/backgrounds/threads.md`](backgrounds/threads.md) |
-| **`<Topography />`** | WebGL2 (0 deps) | Geo, Maps, Spatial | 3D landscape drawn in glowing contour lines rising under cursor | [`references/backgrounds/topography.md`](backgrounds/topography.md) |
+| **`<GradientASCII />`** | WebGL2 (0 deps) | Terminal, DevTool, Cyber | Soft gradient glows rendered with ASCII characters that scramble under cursor | [`backgrounds/gradient-ascii.md`](backgrounds/gradient-ascii.md) |
+| **`<PatternWaves />`** | WebGL2 (`ogl`) | Editorial, Swiss, Agency | Lit halftone surface of dots, lines, or glyphs moving like draped silk | [`backgrounds/pattern-waves.md`](backgrounds/pattern-waves.md) |
+| **`<Prism />`** | WebGL2 (0 deps) | Creative, Optical, Optics | Rotating 3D prism of glowing spectral light with configurable hue, shape, and physics | [`backgrounds/prism.md`](backgrounds/prism.md) |
+| **`<Aurora />`** | WebGL2 (0 deps) | Minimal SaaS, Cloud, AI | Soft, calm aurora borealis flowing across header and drifting toward cursor | [`backgrounds/aurora.md`](backgrounds/aurora.md) |
+| **`<LiquidChrome />`** | WebGL2 (0 deps) | Luxury, FinTech, Modern | Soft ribbons of molten liquid chrome swirling in a pool and catching light | [`backgrounds/liquid-chrome.md`](backgrounds/liquid-chrome.md) |
+| **`<Iridescence />`** | WebGL2 (0 deps) | Web3, Creative, Studio | Liquid iridescent surface with shifting folds stirred by cursor | [`backgrounds/iridescence.md`](backgrounds/iridescence.md) |
+| **`<Plasma />`** | WebGL2 (0 deps) | Deep Tech, AI, Dark Mode | Folds of satin light twisting slowly through the dark, turning with cursor | [`backgrounds/plasma.md`](backgrounds/plasma.md) |
+| **`<Particles />`** | WebGL2 (0 deps) | Developer, Data, Systems | Drifting 3D field of particles with glow, twinkle, and constellation lines | [`backgrounds/particles.md`](backgrounds/particles.md) |
+| **`<Hyperspeed />`** | Three.js | High-Speed, Infra, Speed | Night highway of light trails on a winding road that warps on interaction | [`backgrounds/hyperspeed.md`](backgrounds/hyperspeed.md) |
+| **`<Dither />`** | WebGL2 (0 deps) | Retro, Hacker, Indie | Retro dithered waves with Bayer, halftone, line, and noise patterns | [`backgrounds/dither.md`](backgrounds/dither.md) |
+| **`<DotGrid />`** | Canvas 2D (0 deps) | Productivity, Grid, Mac | Springy dot grid that flicks and drags through like jelly with shockwaves | [`backgrounds/dot-grid.md`](backgrounds/dot-grid.md) |
+| **`<Ballpit />`** | Canvas 2D (0 deps) | Playful, Consumer, Fun | Soft-lit pit of physics balls you can shove, throw, and bounce | [`backgrounds/ballpit.md`](backgrounds/ballpit.md) |
+| **`<Waves />`** | Canvas 2D (0 deps) | Fluid, Sound, Meditation | Dense flowing lines that sway like silk and bend around cursor | [`backgrounds/waves.md`](backgrounds/waves.md) |
+| **`<Threads />`** | WebGL2 (0 deps) | Neural, Bio, Network | Flowing threads that fray apart and part around the cursor | [`backgrounds/threads.md`](backgrounds/threads.md) |
+| **`<Topography />`** | WebGL2 (0 deps) | Geo, Maps, Spatial | 3D landscape drawn in glowing contour lines rising under cursor | [`backgrounds/topography.md`](backgrounds/topography.md) |
 
 ---
 

@@ -23,7 +23,7 @@ When the user enters `/pure-saas [request]`:
   - UX copy/errors -> load `skill/reference/clarify.md`.
   - Performance/CWV -> load `skill/reference/optimize.md`.
   - Quality audit -> load `skill/reference/audit.md`.
-  - Reference URL -> load `references/design-analysis/dom-devtools-extraction.md`.
+  - Reference URL -> load `design-analysis/dom-devtools-extraction.md`.
   - Browser testing -> load `skill/reference/browser.md`.
   - 3D models -> load `skill/reference/3d.md`.
 - If request is general: Execute the 8-step build & verification loop (`skill/reference/workflow.md`).

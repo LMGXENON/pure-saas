@@ -23,11 +23,14 @@ npx pure-saas style select "minimalism-swiss" --out DESIGN.md
 
 ---
 
-## 2. Style Index Overview
+## 2. Curated Style Archetype Catalog
 
-1. **`minimalism-swiss`:** High typographic structure, neutral slate/zinc canvas, hairline grid dividers. Best for general SaaS, enterprise workflows.
-2. **`developer-technical`:** Pitch obsidian canvas (`#0c0d0e`), monospaced code, warm amber/orange accent (`#fa5d29`). Best for cloud consoles, devtools, APIs.
-3. **`data-dense-dashboard`:** Deep slate (`#0f172a`), cyan accent (`#38bdf8`), compact rows, tabular numbers. Best for analytics, BI, trading.
-4. **`editorial-literary`:** Warm paper (`#faf9f5`), serif display (`Newsreader`), racing green accent (`#14532d`). Best for publishing, technical essays.
-5. **`creative-studio`:** Deep charcoal (`#121214`), amber accent (`#f59e0b`), floating toolbars. Best for media, audio, 3D editors.
-
+| Style ID | Name | Primary Fonts | Canvas / Accent | Best For | Avoid For |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `minimalism-swiss` | Swiss Modernism | Geist, Inter | `#ffffff` / `#09090b` | Enterprise SaaS, Documentation, APIs | Playful consumer apps, gaming |
+| `developer-technical` | Technical Precision | Geist Mono, JetBrains Mono | `#0c0d0e` / `#fa5d29` | Observability, Cloud Infra, CLI Tools | Lifestyle, Fashion, Beauty |
+| `data-dense-dashboard`| FinTech Precision | Inter (tabular-nums), Roboto | `#0f172a` / `#38bdf8` | Trading consoles, Banking, Analytics | Whimsical blogs, Kids apps |
+| `editorial-literary` | Editorial Literary | Newsreader, Georgia | `#faf9f5` / `#14532d` | Research, Essays, Publishing, Long-form | Fast-paced SaaS dashboards |
+| `creative-studio` | Creative Studio | Syne, Outfit | `#121214` / `#f59e0b` | Media apps, Portfolios, Design tools | Corporate enterprise, Accounting |
+| `high-tech-cyberpunk` | Dark Cyberpunk | Orbitron, Share Tech Mono | `#050508` / `#06b6d4` | Gaming hardware, Sci-Fi, Crypto events | Banking, Healthcare |
+| `tactile-neumorphic` | Tactile Clean | Plus Jakarta Sans | `#f1f5f9` / `#475569` | Audio hardware, Physical controls | Dense data tables |

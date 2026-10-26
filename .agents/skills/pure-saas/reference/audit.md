@@ -74,3 +74,13 @@ When reporting audit findings, use this structured schema:
 3. **Impact:** Priority rating ([P0], [P1], [P2], [P3]) and user consequence.
 4. **Concrete Fix:** Exact code replacement diff or token mapping.
 
+---
+
+## 4. Visual & Code Review Checklist
+
+- [ ] **Focal Point:** Is there an unambiguous primary visual anchor on the page?
+- [ ] **Typographic Balance:** Do headlines use `text-wrap: balance` to eliminate orphans?
+- [ ] **Line Measure:** Is body copy constrained to 60–75 characters per line (`max-w-prose`)?
+- [ ] **Tabular Numerals:** Are numbers, currency, and counters rendered with `tabular-nums`?
+- [ ] **Hairline Dividers:** Are borders defined as subtle 1px hairlines rather than thick dark frames?
+- [ ] **Contrast Verification:** Run `npx pure-saas contrast DESIGN.md` to mathematically confirm AA thresholds.
