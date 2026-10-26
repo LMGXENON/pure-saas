@@ -110,3 +110,4 @@ npx pure-saas 3d scaffold DeviceConsole --out ./src/components/DeviceConsole3D.t
 
 Portions of this staged sculpting pipeline, image suitability contract, and quality gate methodology are adapted from [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs), released under the **MIT License**.  
 Copyright (c) 2025-2026 img2threejs contributors.
+

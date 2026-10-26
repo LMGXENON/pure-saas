@@ -1702,6 +1702,167 @@ export function runDeterministicAudit(options = {}) {
   };
 }
 
+// --- Project Context & Health Diagnostics (Impeccable Reference) ---
+
+export function inspectProjectContext(options = {}) {
+  const root = process.cwd();
+  const pkgPath = path.join(root, 'package.json');
+  let pkg = {};
+  if (fs.existsSync(pkgPath)) {
+    try { pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8')); } catch {}
+  }
+
+  const allDeps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
+
+  // 1. Framework detection
+  let framework = 'HTML/Vanilla';
+  if (allDeps['next']) framework = 'Next.js';
+  else if (allDeps['react']) framework = allDeps['vite'] ? 'React (Vite)' : 'React';
+  else if (allDeps['vue']) framework = allDeps['vite'] ? 'Vue (Vite)' : 'Vue';
+  else if (allDeps['svelte']) framework = 'Svelte';
+  else if (allDeps['astro']) framework = 'Astro';
+  else if (allDeps['@remix-run/react']) framework = 'Remix';
+  else if (allDeps['@angular/core']) framework = 'Angular';
+
+  // 2. Styling system
+  let styling = 'CSS';
+  if (allDeps['tailwindcss']) {
+    const rawVersion = String(allDeps['tailwindcss']).replace(/^[\^~v]/, '');
+    styling = (rawVersion.startsWith('4') || fs.existsSync(path.join(root, 'src/theme.css')))
+      ? 'Tailwind CSS v4'
+      : 'Tailwind CSS v3';
+  } else if (allDeps['styled-components']) {
+    styling = 'Styled Components';
+  } else if (allDeps['@emotion/react']) {
+    styling = 'Emotion';
+  }
+
+  // 3. DESIGN.md check
+  const designPath = path.join(root, 'DESIGN.md');
+  const hasDesign = fs.existsSync(designPath);
+  let designData = null;
+  if (hasDesign) {
+    try {
+      const raw = fs.readFileSync(designPath, 'utf8');
+      const { data } = parseFrontmatter(raw);
+      designData = {
+        title: data.title || 'Untitled',
+        status: data.status || 'draft',
+        product: data.product || 'saas',
+        style: data.style || 'custom',
+        tokensCount: (data.colors && typeof data.colors === 'object') ? Object.keys(data.colors).length : 0,
+        unresolvedCount: Array.isArray(data.unresolved) ? data.unresolved.length : 0
+      };
+    } catch {}
+  }
+
+  // 4. Mode detection
+  const target = options.target || '';
+  let mode = 'Persuade';
+  const lowerTarget = target.toLowerCase();
+  if (lowerTarget.includes('dashboard') || lowerTarget.includes('admin') || lowerTarget.includes('console') || lowerTarget.includes('table') || lowerTarget.includes('settings')) {
+    mode = 'Operate';
+  } else if (lowerTarget.includes('docs') || lowerTarget.includes('blog') || lowerTarget.includes('article') || lowerTarget.includes('guide')) {
+    mode = 'Read';
+  } else if (lowerTarget.includes('canvas') || lowerTarget.includes('3d') || lowerTarget.includes('editor') || lowerTarget.includes('game')) {
+    mode = 'Experience';
+  } else {
+    if (fs.existsSync(path.join(root, 'src/pages/dashboard')) || fs.existsSync(path.join(root, 'app/dashboard'))) {
+      mode = 'Operate';
+    } else {
+      mode = 'Persuade';
+    }
+  }
+
+  // 5. Backend & Testing contracts
+  const hasApiRoutes = fs.existsSync(path.join(root, 'pages/api')) || fs.existsSync(path.join(root, 'app/api')) || fs.existsSync(path.join(root, 'src/api')) || fs.existsSync(path.join(root, 'server'));
+  const testFramework = allDeps['vitest'] ? 'Vitest' : (allDeps['jest'] ? 'Jest' : (allDeps['playwright'] ? 'Playwright' : null));
+
+  return {
+    root,
+    framework,
+    styling,
+    hasDesign,
+    designData,
+    mode,
+    hasApiRoutes,
+    testFramework,
+    packageManager: fs.existsSync(path.join(root, 'pnpm-lock.yaml')) ? 'pnpm' : (fs.existsSync(path.join(root, 'yarn.lock')) ? 'yarn' : (fs.existsSync(path.join(root, 'bun.lockb')) || fs.existsSync(path.join(root, 'bun.lock')) ? 'bun' : 'npm'))
+  };
+}
+
+export function runProjectDoctor(options = {}) {
+  const root = process.cwd();
+  const checks = [];
+
+  // Check 1: DESIGN.md
+  const designPath = path.join(root, 'DESIGN.md');
+  if (fs.existsSync(designPath)) {
+    checks.push({ name: 'DESIGN.md Specification', pass: true, detail: 'Present at repository root' });
+  } else {
+    checks.push({ name: 'DESIGN.md Specification', pass: false, detail: 'Missing. Run "pure-saas init" or "pure-saas design-system"' });
+  }
+
+  // Check 2: Contrast validation
+  if (fs.existsSync(designPath)) {
+    try {
+      const val = validateDesignDocument(designPath);
+      if (val && val.contrastAudit) {
+        const pass = val.contrastAudit.failedAA === 0;
+        checks.push({
+          name: 'Token Contrast (WCAG 2.2 AA)',
+          pass,
+          detail: pass ? `${val.contrastAudit.passedAA}/${val.contrastAudit.auditedPairs} pairs passed AA` : `${val.contrastAudit.failedAA} contrast failure(s)`
+        });
+      } else {
+        checks.push({ name: 'Token Contrast (WCAG 2.2 AA)', pass: false, detail: 'Could not run contrast audit' });
+      }
+    } catch {
+      checks.push({ name: 'Token Contrast (WCAG 2.2 AA)', pass: false, detail: 'Could not parse DESIGN.md' });
+    }
+  }
+
+  // Check 3: Agent instructions sync
+  const cursorRules = fs.existsSync(path.join(root, '.cursorrules'));
+  const windsurfRules = fs.existsSync(path.join(root, '.windsurfrules'));
+  const geminiRules = fs.existsSync(path.join(root, 'GEMINI.md'));
+  const agentsMd = fs.existsSync(path.join(root, 'AGENTS.md'));
+  const claudeSkill = fs.existsSync(path.join(root, '.claude/skills/pure-saas/SKILL.md'));
+
+  const allRulesSynced = cursorRules && windsurfRules && geminiRules && agentsMd && claudeSkill;
+  checks.push({
+    name: 'AI Agent Rules Sync',
+    pass: allRulesSynced,
+    detail: allRulesSynced ? 'All providers synchronized' : 'Some provider configs missing (run pure-saas install all)'
+  });
+
+  // Check 4: Browser Automation
+  const browser = checkBrowserEnvironment();
+  checks.push({
+    name: 'Browser Automation (Playwright / Chrome)',
+    pass: browser.ready,
+    detail: browser.ready ? `Ready (${browser.systemChrome ? 'Chrome' : 'Playwright'})` : 'No browser found (run pure-saas browser setup)'
+  });
+
+  // Check 5: Three.js 3D Pipeline
+  const three = check3DPrerequisites();
+  checks.push({
+    name: 'Procedural 3D Scaffolding (Three.js)',
+    pass: three.three.pass,
+    detail: three.three.pass ? `Installed (${three.three.version})` : 'Optional (npm i three @types/three)'
+  });
+
+  if (options.fix && !allRulesSynced) {
+    installAgentRules('all');
+  }
+
+  return {
+    timestamp: new Date().toISOString(),
+    checks,
+    allPassed: checks.every(c => c.pass || c.name.includes('3D'))
+  };
+}
+
 // --- Browser Testing & Automation via Playwright CLI / Chrome Fallback ---
 
 export function checkBrowserEnvironment() {
@@ -2287,6 +2448,62 @@ export async function runCli(args = process.argv.slice(2)) {
     return hasFailure ? 1 : 0;
   }
 
+  // --- Project Context & Health Diagnostics (Impeccable Reference) ---
+  if (command === 'context') {
+    const targetIdx = args.indexOf('--target');
+    const target = targetIdx !== -1 ? args[targetIdx + 1] : (args[1] && !args[1].startsWith('--') ? args[1] : '');
+    const jsonOutput = args.includes('--json');
+
+    const ctx = inspectProjectContext({ target });
+
+    if (jsonOutput) {
+      console.log(JSON.stringify(ctx, null, 2));
+      return 0;
+    }
+
+    console.log(`=== Pure SaaS Context Inspection ===`);
+    console.log(`Project Root:    ${ctx.root}`);
+    console.log(`Framework:       ${ctx.framework}`);
+    console.log(`Styling System:  ${ctx.styling}`);
+    console.log(`Active Mode:     ${ctx.mode} (Surface Type)`);
+    console.log(`Package Manager: ${ctx.packageManager}`);
+    if (ctx.hasDesign && ctx.designData) {
+      console.log(`DESIGN.md:       ✓ Present (Product: ${ctx.designData.product}, Style: ${ctx.designData.style}, ${ctx.designData.tokensCount} tokens, ${ctx.designData.unresolvedCount} unresolved)`);
+    } else {
+      console.log(`DESIGN.md:       ✗ Not found (run "pure-saas init" or "pure-saas design-system")`);
+    }
+    if (ctx.hasApiRoutes) console.log(`Backend APIs:    ✓ Detected backend API routes; preserve contracts during UI refactors.`);
+    if (ctx.testFramework) console.log(`Test Framework:  ✓ ${ctx.testFramework} detected; preserve test identifiers.`);
+    console.log('');
+    return 0;
+  }
+
+  if (command === 'doctor') {
+    const jsonOutput = args.includes('--json');
+    const fix = args.includes('--fix');
+
+    const doc = runProjectDoctor({ fix });
+
+    if (jsonOutput) {
+      console.log(JSON.stringify(doc, null, 2));
+      return doc.allPassed ? 0 : 1;
+    }
+
+    console.log(`=== Pure SaaS Project Health & Doctor ===`);
+    console.log(`Timestamp: ${doc.timestamp}\n`);
+    for (const c of doc.checks) {
+      const mark = c.pass ? '✓' : '✗';
+      console.log(`  ${mark} ${c.name}: ${c.detail}`);
+    }
+    console.log('');
+    if (fix) {
+      console.log('✓ Automatic repair completed for fixable issues.');
+    } else if (!doc.allPassed) {
+      console.log('Run "pure-saas doctor --fix" to automatically repair missing provider rules.');
+    }
+    return doc.allPassed ? 0 : 1;
+  }
+
   if (command === 'export-tokens') {
     const designFile = path.resolve(process.cwd(), args[1] && !args[1].startsWith('--') ? args[1] : 'DESIGN.md');
     const fmtIndex = args.indexOf('--format');
@@ -2672,19 +2889,102 @@ export async function runCli(args = process.argv.slice(2)) {
     return 0;
   }
 
-  if (command === 'polish' || command === 'critique' || command === 'bolder' || command === 'quieter' || command === 'typeset' || command === 'layout' || command === 'harden') {
-    console.log(`=== Pure SaaS /pure-saas ${command} ===`);
+  const specialistVerbs = [
+    'polish', 'critique', 'bolder', 'quieter', 'typeset', 'layout',
+    'distill', 'harden', 'animate', 'colorize', 'delight', 'adapt',
+    'clarify', 'optimize', 'landing'
+  ];
+
+  if (specialistVerbs.includes(command)) {
+    console.log(`=== Pure SaaS Specialist Action: ${command.toUpperCase()} ===`);
     const designFile = path.resolve(process.cwd(), 'DESIGN.md');
     if (!fs.existsSync(designFile)) {
-      console.warn(`Warning: DESIGN.md not found. Generating default design system...`);
+      console.warn(`Note: DESIGN.md not found. Generating baseline design system...`);
       fs.writeFileSync(designFile, generateDesignSystem({ product: 'saas' }), 'utf8');
     }
+
     const audit = runDeterministicAudit({ design: designFile, source: fs.existsSync('src') ? 'src' : null });
-    console.log(`Current Craft Quality Score: ${audit.totalScore} / 20 (${audit.band.toUpperCase()})`);
-    console.log('Recommended Polish Actions:');
-    console.log('  1. Typeset: Check font tracking (-0.02em on headings) and tabular-nums on metrics.');
-    console.log('  2. Surfaces: Apply 1px hairline borders (border-border-subtle) and ambient shadows.');
-    console.log('  3. Motion: Keep hover transitions under 150ms ease-out; respect prefers-reduced-motion.');
+    console.log(`Current Quality Baseline: ${audit.totalScore} / 20 (${audit.band.toUpperCase()})\n`);
+
+    const verbGuidance = {
+      polish: [
+        'Hairline Borders: Ensure 1px solid hairline borders with border-border-subtle.',
+        'Surface Lighting: Combine ambient occluding floor with directional overhead light.',
+        'Micro-Interactions: Apply active:scale-[0.985] on buttons; keep transitions snappy.'
+      ],
+      bolder: [
+        'Typographic Scale: Increase contrast between display headline and body copy.',
+        'Asymmetrical Form: Replace uniform 3-card grids with 60/40 spotlights.',
+        'Deep Contrast: Commit to high-contrast canvas without washed-out grays.'
+      ],
+      quieter: [
+        'De-Colorize: Return secondary cards and borders to neutral tokens.',
+        'Whitespace: Replace boxed borders with 24-32px spatial rhythm gaps.',
+        'Glow Pruning: Remove multi-colored drop shadows and noisy gradients.'
+      ],
+      typeset: [
+        'Tracking: Tighten display headings to -0.025em; loosen small caps to +0.05em.',
+        'Measure: Constrain body text to 60-75 characters (max-w-prose / 68ch).',
+        'Tabular Numbers: Apply font-variant-numeric: tabular-nums to all data columns.'
+      ],
+      layout: [
+        '8pt Grid: Align margins, padding, and gaps to 4, 8, 12, 16, 24, 32, 48px.',
+        'Container Consistency: Align hero, features, pricing, and footer to shared container.',
+        'Vertical Rhythm: Guarantee strictly more whitespace above headings than below them.'
+      ],
+      distill: [
+        'Prune Visual Debt: Delete redundant decorative lines, floating shapes, and cards.',
+        'Active Verbs: Cut marketing boilerplate in half; use direct action verbs.',
+        'Un-nest Containers: Remove cards inside cards.'
+      ],
+      harden: [
+        'Defensive CSS: Add min-w-0 to flex children containing text.',
+        'Error States: Render explicit recovery actions and retry buttons.',
+        'Empty States: Include contextual illustration and primary create action.'
+      ],
+      animate: [
+        'Authored Moment: Focus on one primary hero reveal moment per surface.',
+        'Spring Physics: Use cubic-bezier(0.16, 1, 0.3, 1) or physical springs.',
+        'Reduced Motion: Wrap all animation in prefers-reduced-motion media queries.'
+      ],
+      colorize: [
+        'WCAG Contrast: Guarantee >= 4.5:1 on body text; >= 3.0:1 on UI elements.',
+        'Light/Dark Parity: Model dark mode depth with raised surface layers and hairline borders.',
+        'Zero Raw Hex: Ensure all colors resolve to semantic tokens in DESIGN.md.'
+      ],
+      delight: [
+        'Tactile Micro-haptics: Add snap physics to toggle switches and tab bars.',
+        'Reactive Canvasses: Subtle background shader or procedural noise.',
+        'Copy Feedback: Animated checkmark morph on prompt and code snippet copy.'
+      ],
+      adapt: [
+        'Zero Overflow: Guarantee zero horizontal scrollbar down to 320px viewport.',
+        'Touch Ergonomics: Ensure mobile interactive targets are at least 44x44px.',
+        'Navigation Drawer: Collapse horizontal desktop headers into mobile drawers.'
+      ],
+      clarify: [
+        'Active Voice: Label buttons with specific actions (e.g. "Deploy to Production").',
+        'Error Messages: State the problem, reason, and recovery path clearly.',
+        'Domain Terminology: Use authentic professional terms rather than consumer placeholders.'
+      ],
+      optimize: [
+        'Zero CLS: Reserve aspect ratio boxes for all images and 3D canvasses.',
+        'Virtualization: Window large tables or lists exceeding 100 items.',
+        'GPU Restraint: Avoid static will-change; animate only transform and opacity.'
+      ],
+      landing: [
+        'Hero Centerpiece: Build live interactive UI preview or 3D canvas instead of mockups.',
+        'Narrative Sequence: Problem/solution split -> feature spotlight -> pricing -> FAQ.',
+        'Anti-Slop: Refuse gradient text, refuse eyebrows on every card, refuse fake logos.'
+      ]
+    };
+
+    const guidance = verbGuidance[command] || verbGuidance.polish;
+    console.log(`Core Guidance (${command}):`);
+    for (const g of guidance) {
+      console.log(`  • ${g}`);
+    }
+    console.log(`\nPlaybook: skill/reference/${command === 'landing' ? 'landing-pages' : command}.md`);
     return 0;
   }
 

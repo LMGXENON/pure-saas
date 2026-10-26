@@ -5,14 +5,19 @@
   "type": "module",
   "main": "scripts/pure-saas.mjs",
   "bin": {
-    "pure-saas": "./scripts/pure-saas.mjs"
+    "pure-saas": "./cli/bin/pure-saas.js"
   },
   "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/run-tests.mjs",
+    "test:sample": "node scripts/test-sample-project.mjs",
     "validate": "node scripts/pure-saas.mjs validate",
     "validate-refs": "node scripts/generators/validate-references.mjs",
     "contrast": "node scripts/pure-saas.mjs contrast",
     "check-tokens": "node scripts/pure-saas.mjs check-tokens",
     "audit": "node scripts/pure-saas.mjs audit",
+    "context": "node scripts/pure-saas.mjs context",
+    "doctor": "node scripts/pure-saas.mjs doctor",
     "browser": "node scripts/pure-saas.mjs browser",
     "3d": "node scripts/pure-saas.mjs 3d",
     "style": "node scripts/pure-saas.mjs style"

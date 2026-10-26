@@ -68,3 +68,4 @@ When applying a style to your application:
 
 Portions of this selectable design-system registry and style archetypes are adapted from [jdsadminllc/awesome-design-skills](https://github.com/jdsadminllc/awesome-design-skills) and [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills), released under the **MIT License**.  
 Copyright (c) 2025-2026 Awesome Design Skills Contributors.
+

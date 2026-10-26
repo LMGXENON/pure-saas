@@ -6,131 +6,54 @@ Operating manual for AI agents working in this repository, or using Pure SaaS to
 
 ## 1. What This Repository Is
 
-Pure SaaS is an open-source, universal AI-agent skill and design enforcement toolkit. Its purpose is to guide AI coding assistants in generating original, production-quality UI/UX designs while eliminating AI slop across websites, web applications, dashboards, mobile apps, desktop apps, e-commerce, portfolios, design systems, and components.
+Pure SaaS is an open-source, universal AI-agent skill and frontend engineering toolkit. Its mission is to guide AI coding assistants in generating original, production-quality UI/UX designs while eliminating AI slop across websites, web applications, dashboards, mobile apps, desktop apps, and component libraries.
 
 ---
 
 ## 2. Command Architecture
 
-Pure SaaS operates via **one intelligent main command and seven specialist commands**:
+Pure SaaS operates via **one intelligent main command and 18 specialized verbs**:
 
-1. **`/pure-saas [any request]`**  
-   The universal entry point. Autonomously inspects context, establishes or updates `DESIGN.md`, executes frontend code, enforces tokens, integrates motion and accessibility, fixes bugs while preserving backend APIs, and reports verification honestly.
-2. **`/pure-saas design [request]`**  
-   Establish or update the root-level `DESIGN.md` specification before implementation with selectable style archetypes.
-3. **`/pure-saas polish [request]`**  
-   Elevate visual craft, typography tracking, surface lighting, and micro-interactions without rebuilding working logic.
-4. **`/pure-saas review [request or scope]`**  
-   5-dimension deterministic quality audit (A11y, Performance, Theming, Responsive, Integrity) scored 0–20 points with P0–P3 defect triage.
-5. **`/pure-saas reference [URL]`**  
-   Reverse-engineer visual references via browser DevTools and recreate requested design language into a 16-section `DESIGN.md`.
-6. **`/pure-saas responsive [request]`**  
-   Optimize layouts across mobile (375-430px), tablet (768-834px), laptop (1024-1280px), and desktop (1440px+).
-7. **`/pure-saas browser [action] [url]`**  
-   Execute token-conscious browser testing, visual screenshot capture, and responsive verification via Playwright CLI.
-8. **`/pure-saas 3d [action]`**  
-   Synthesize procedural, code-only Three.js 3D models in TypeScript from 2D images or scaffold parametric 3D components (img2threejs).
-
----
-
-## 3. File Map
-
-| Path | Role | Edit by Hand? |
-| :--- | :--- | :--- |
-| `SKILL.md` | Main skill instructions: stance, principles, 6 workflows, 8-state matrix, and quality standards | Yes |
-| `AGENTS.md` | Operating manual and architectural rules (this file) | Yes |
-| `README.md` | Concise overview, installation, usage, and commands | Yes |
-| `.cursorrules` | Root entry point for Cursor | Yes |
-| `GEMINI.md` | Root entry point for Gemini / Antigravity | Yes |
-| `.windsurfrules` | Root entry point for Windsurf | Yes |
-| `.github/copilot-instructions.md` | Repository custom instructions for GitHub Copilot | Yes |
-| `commands/*.md` | The 6 canonical user-facing slash command definitions (`pure-saas`, `design`, `polish`, `review`, `reference`, `responsive`) | Yes |
-| `references/reference-index.md` | Master manifest indexing 260+ architectural references, components, and HIG topics | Yes |
-| `references/components/*.md` | 20 component specifications with 8-state matrices, WCAG rules, and TSX/Tailwind code | Yes |
-| `references/layouts/*.md` | 12 architectural blueprints for dashboards, landing pages, heroes, pricing, and settings | Yes |
-| `references/design-systems/*.md` | 12 design system guides: tokens, naming, color ramps, fluid type, grids, geometry | Yes |
-| `references/ux-patterns/*.md` | 12 UX guides: shortcuts, focus traps, skeletons, empty states, validation, undo | Yes |
-| `references/visual-craft/*.md` | 10 visual craft guides: Apple polish, materials blur, lighting, hairline borders, physics | Yes |
-| `references/frontend-engineering/*.md` | 12 engineering guides: compound components, headless primitives, virtualization, vitals | Yes |
-| `references/accessibility/*.md` | 10 accessibility guides: WCAG 2.2 AA matrix, contrast, ARIA, touch targets, tables | Yes |
-| `references/theming/*.md` | 8 theming guides: dark mode inversion, runtime variables, system preference detection | Yes |
-| `references/developer-tooling/*.md` | 8 tooling guides: token linting, Stylelint, visual regression, contrast automation | Yes |
-| `references/real-world-flows/*.md` | 10 production flow guides: auth, billing, multi-tenancy, audit logs, API keys | Yes |
-| `references/design-analysis/*.md` | 6 reference analysis guides: screenshot breakdown, DOM extraction, completion gates | Yes |
-| `references/responsive/*.md` | 6 responsive guides: mobile-first breakpoints, touch ergonomics, fluid clamp | Yes |
-| `references/hig/*.md` | 124 substantive individual Apple HIG reference documents across components, foundations, and patterns | Yes |
-| `references/frameworks/*.md` | 22 framework engineering guides (React, Next.js, Vue, Svelte, Tailwind, SwiftUI, Flutter, etc.) | Yes |
-| `references/backgrounds/` | 15 interactive background shader and canvas component references from React Bits | Yes |
-| `references/backgrounds.md` | Master directory and integration guide for interactive shaders and canvas backgrounds | Yes |
-| `references/design-intelligence.json` | Compiled dataset: 88 styles, 192 product archetypes, 74 typography pairings, 25 chart guides, 17 motion patterns, 22 stack guidelines | Generated / Maintained |
-| `references/design-styles-catalog.json` | Curated tokenized design style archetypes with Tailwind and CSS mappings | Yes |
-| `references/hig-lookup.md` | Apple HIG 123-topic index and routing guide | Yes |
-| `references/anti-slop-rules.md` | Concrete anti-generic design critique methodology and 7 deadly patterns | Yes |
-| `references/code-audit.md` | Static code inspection search patterns, token grep checks, and replacement ledger | Yes |
-| `references/color-and-tokens.md` | Semantic color hierarchy, WCAG contrast tiers, light/dark mode pairs | Yes |
-| `references/cross-platform.md` | Platform translation between Apple HIG, Android Material, and Web | Yes |
-| `references/design-principles.md` | Core design philosophy: Clarity, Deference, Depth, Authenticity | Yes |
-| `references/design-review.md` | Evidence-based audit protocol and verification reporting | Yes |
-| `references/interaction-states.md` | Complete 8-state component matrix (default, hover, focus, active, disabled, loading, error, success) | Yes |
-| `references/layout-and-composition.md` | 8pt spatial grid, asymmetric visual weight, and content containment | Yes |
-| `references/motion.md` | Purposeful physics-based spring motion and cubic-bezier curves | Yes |
-| `references/platform-guidelines.md` | Host platform conventions for Web, macOS, iOS, and Mobile | Yes |
-| `references/reference-analysis.md` | Live reference reverse engineering and 16-section `DESIGN.md` protocol | Yes |
-| `references/responsive-design.md` | Viewport constraints, container queries, and fluid typography | Yes |
-| `references/typography.md` | Optical hierarchy, fluid scale formulas, line heights, and letter-spacing tracking | Yes |
-| `scripts/pure-saas.mjs` | Zero-dependency Node.js CLI, reference search engine, design intelligence query engine, token validator, and static code scanner | Yes |
+1. **`/pure-saas [request]`**: Universal entry point. Autonomously inspects context, establishes `DESIGN.md`, executes frontend code, binds tokens, integrates motion and accessibility, and verifies output.
+2. **Specialized Verbs**:
+   - `design`: Establish/update `DESIGN.md` tokens and contracts.
+   - `landing`: High-conversion SaaS landing page with hero, proof, and pricing.
+   - `review`: 5-dimension deterministic quality audit (0–20 points) with P0–P3 defect triage.
+   - `polish`: Elevate visual craft, typography tracking, surface lighting, and micro-interactions.
+   - `bolder`: Amplify safe, flat, or bland UI into distinctive, high-conviction creative work.
+   - `quieter`: Calm aggressive, noisy, or overstimulated layouts into serene clarity.
+   - `typeset`: Editorial typography hierarchy, optical tracking, and fluid clamps.
+   - `layout`: Fix spatial rhythm, asymmetric balance, and 8pt grid containment.
+   - `distill`: Strip visual debt and simplify complex screens to their essential core.
+   - `harden`: Production robustness (empty states, edge cases, error recovery, i18n).
+   - `animate`: Purposeful spring physics (`cubic-bezier(0.16, 1, 0.3, 1)`).
+   - `colorize`: Strategic 5-tier color ramps and mathematical WCAG 2.2 AA contrast.
+   - `delight`: Shaders, reactive canvasses, and tactile micro-surprises.
+   - `adapt` / `responsive`: Multi-viewport responsive mastery (375px mobile to 1440px desktop).
+   - `clarify`: UX microcopy, active button verbs, and actionable error messages.
+   - `optimize`: Core Web Vitals, virtualization, and sub-frame layout stability.
+   - `browser`: Playwright CLI headless browser automation and multi-viewport screenshots.
+   - `3d`: Procedural Three.js 3D models (img2threejs pipeline).
+   - `style`: Modular style archetype registry (Swiss, Technical, Editorial, Modern Enterprise).
 
 ---
 
-## 4. Searching and Retrieving References & Design Intelligence
+## 3. The 8-Step Build & Verification Loop
 
-Before performing design work, coding agents must retrieve and read the exact reference documents and intelligence:
-
-```bash
-# Retrieve reference documents across Apple HIG, frameworks, and craft guides
-npx pure-saas ref "<component, framework, or craft topic>"
-
-# Query multi-domain design intelligence (styles, products, colors, typography, UX heuristics, landing, charts, motion)
-npx pure-saas query [domain] "<keyword or query>"
-npx pure-saas style "<query>" --product "<type>" --stack "<stack>"
-
-# Programmatically generate an approved DESIGN.md tailored to product archetype and design dials
-npx pure-saas design-system --product "<type>" --variance <1-10> --motion <1-10> --density <1-10> --out DESIGN.md
-```
-
-### Retrieval Examples
-- **Component pattern:** `npx pure-saas ref "modal"` -> retrieves `references/hig/modality.md`, `references/hig/sheets.md`
-- **Button interaction:** `npx pure-saas ref "button"` -> retrieves `references/hig/buttons.md`, `references/interaction-states.md`
-- **Background shaders:** `npx pure-saas ref "gradient ascii"` -> retrieves `references/backgrounds/gradient-ascii.md`, `references/backgrounds.md`
-- **Framework guidance:** `npx pure-saas ref "react"` -> retrieves `references/frameworks/react.md`, `references/cross-platform.md`
-- **Accessibility:** `npx pure-saas ref "accessibility"` -> retrieves `references/accessibility.md`, `references/hig/accessibility.md`
-- **Product colors:** `npx pure-saas query color "fintech"` -> retrieves verified financial color palettes
-- **UX heuristics:** `npx pure-saas query ux "scroll"` -> retrieves smooth scroll Do/Don't and good/bad code examples
-- **Landing patterns:** `npx pure-saas query landing "b2b saas"` -> retrieves conversion-optimized section order
+1. **Understand Requirements & Mode:** Determine whether surface is Persuade, Operate, Read, or Experience.
+2. **Inspect Context:** Check dependencies, styling system, existing tokens, and backend APIs.
+3. **Select Style Archetype:** Pick from curated archetypes in `pure-saas style list`.
+4. **Author DESIGN.md:** Define 3-tier semantic tokens and verify WCAG contrast math.
+5. **Implement Components:** Build with 8-state interaction matrix and zero raw hex codes.
+6. **Capture Real Browser Screenshots:** Test across 1440px, 768px, and 375px viewports.
+7. **Forensic Audit:** Measure code against 5 dimensions (0–20 score).
+8. **Fix Defects & Verify Finish:** Triage P0–P3 defects and complete deliverable.
 
 ---
 
-## 5. Operating Rules for Coding Agents
+## 4. Hardware-Grade Craft Floor
 
-1. **Follow the 10 Universal Execution Behaviors:** Follow all rules in `SKILL.md` (inspect context, coordinate capabilities automatically, execute directly for straightforward requests, preserve backend APIs, maintain `DESIGN.md`, test and refine, report honestly).
-2. **Adhere to the 5-Tier Precedence Model:**
-   - 1. User explicit requirements and established product brand system.
-   - 2. Platform conventions (Apple HIG / Web standards) and WCAG 2.2 AA.
-   - 3. Verified project decisions and approved tokens in `DESIGN.md`.
-   - 4. Retrieved guidance from Apple HIG, UI/UX Pro Max, and Zero Slop Design.
-   - 5. New proposals (must be explicitly identified as proposals, never silently assumed approved).
-3. **Never Fabricate Validation:** If a check fails, diagnose and resolve it. If an environment lacks browser inspection or screen-reader tooling, record the area as `untested`. Never claim passing verification for uninspected code.
-4. **Preserve Architecture in Existing Apps:** Never rewrite backend APIs, auth flows, database structures, or automated test IDs during UI refactors without explicit user authorization.
-5. **Enforce Semantic Tokens:** Reject raw hex codes, color functions, and arbitrary Tailwind numbers. Ensure all styling resolves to documented tokens in `DESIGN.md`.
-6. **Enforce Anti-Slop Discipline:** Halt and challenge generic purple/cyan gradient text, excessive glassmorphism blur, repetitive 3-column feature cards, emoji UI icons, and green pulsing/pinging circular status dots.
-7. **Follow "Read Before You Cite":** Never review from memory or invent guidelines. Route to relevant guides in `references/`, open them, and cite exact files and sections.
-8. **Four-Part Review Findings:** Every reported review finding must provide Finding, Evidence (`file:line` or observed value), Impact (**Critical**, **Warning**, or **Info**), and Concrete Fix.
-9. **Maintain the Unresolved Decisions Ledger:** Record open questions requiring user confirmation in the `unresolved` frontmatter list of `DESIGN.md`.
-10. **Use Verification & Drift Tooling:**
-   - Contrast check: `npx pure-saas contrast DESIGN.md`
-   - Token diff: `npx pure-saas diff DESIGN.before.md DESIGN.md`
-   - Drift detection: `npx pure-saas drift DESIGN.md observations.json`
-   - Tech debt scan: `npx pure-saas check DESIGN.md --source src --known known-defects.json`
-   - Token export: `npx pure-saas export-tokens DESIGN.md --format dtcg|tailwind|css`
-11. **Enforce Website Reference Analysis & Complete Visual Verification:**
-   - Whenever recreating or analyzing a reference URL across any command or workflow, coding agents must discover all accessible pages, capture full-page and section screenshots, inspect computed styles and motion dynamics, author the mandatory 16-section `DESIGN.md`, implement purposeful motion (`IntersectionObserver` reveals and physics-based curves), capture local screenshots at matching viewports (1440px, 768px, 375px), perform side-by-side visual comparison, and satisfy the 11-item completion gate before claiming completion (see `references/reference-analysis.md` and `commands/reference.md`).
+- **Zero Raw Hex Colors:** All colors must resolve to semantic tokens in `DESIGN.md`.
+- **Zero AI Template Slop:** No purple/cyan gradient text, no identical 3-column feature cards, no repetitive kickers/eyebrows on every heading, no decorative side-stripe borders, no fake status dots, and no emoji UI icons.
+- **Themed Browser Surfaces:** Apply active palette tokens to text selection (`::selection`), caret color (`caret-color`), focus rings, and custom scrollbars.
+- **Never Fabricate Verification:** If an environment lacks browser inspection tools, report it as `untested`. Never claim passing verification for uninspected code.

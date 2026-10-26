@@ -43,3 +43,4 @@ Execute token-conscious browser testing, visual screenshot capture, and responsi
    Inspect captured screenshots directly. Never claim passing responsive or visual verification without examining the rendered image outputs.
 
 Consult [`references/developer-tooling/playwright-browser-testing.md`](../references/developer-tooling/playwright-browser-testing.md) for direct Playwright CLI usage patterns and advanced evaluation scripts.
+

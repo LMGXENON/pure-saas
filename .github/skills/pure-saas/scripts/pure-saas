@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+# Pure SaaS fast launcher script
+# Resolves CLI entry point relative to skill directory or installed node_modules
+
+BASE_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+
+if [ -f "$BASE_DIR/scripts/pure-saas.mjs" ]; then
+  exec node "$BASE_DIR/scripts/pure-saas.mjs" "$@"
+elif [ -f "$BASE_DIR/cli/bin/pure-saas.js" ]; then
+  exec node "$BASE_DIR/cli/bin/pure-saas.js" "$@"
+else
+  exec npx pure-saas "$@"
+fi

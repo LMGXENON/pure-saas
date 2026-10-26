@@ -202,3 +202,4 @@ export const ProceduralModelCanvas: React.FC = () => {
 
 Portions of this procedural Three.js component architecture, lifecycle hooks, and TypeScript patterns are adapted from [img2threejs/img2threejs](https://github.com/img2threejs/img2threejs), released under the **MIT License**.  
 Copyright (c) 2025-2026 img2threejs contributors.
+

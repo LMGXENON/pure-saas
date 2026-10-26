@@ -97,3 +97,4 @@ The deterministic review protocol supports specialized action verbs:
 
 Portions of this 5-dimension scoring architecture, defect severity classification, and specialized action vocabulary are adapted from [pbakaus/impeccable](https://github.com/pbakaus/impeccable), released under the **Apache-2.0 / MIT License**.  
 Copyright (c) 2025-2026 Paul Bakaus.
+

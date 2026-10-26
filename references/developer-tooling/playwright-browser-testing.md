@@ -113,3 +113,4 @@ Before declaring any frontend UI or responsive task complete:
 
 Portions of this browser automation workflow and command syntax are adapted from [microsoft/playwright-cli](https://github.com/microsoft/playwright-cli), released under the **Apache-2.0 License**.  
 Copyright (c) Microsoft Corporation.
+

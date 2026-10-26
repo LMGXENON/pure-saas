@@ -119,9 +119,20 @@ AI coding agents frequently produce repetitive, generic design patterns:
 - Desktop-first interfaces that neglect mobile layouts, keyboard accessibility and interaction states.
 - Inconsistent animations, transitions and component behaviour.
 
-**Pure SaaS addresses these problems at the agent level.** It provides one intelligent main command and seven specialist commands to help AI coding agents design, build, refine, review and optimise professional software interfaces.
+**Pure SaaS addresses these problems at the agent level.** Re-engineered with the modularity and engineering excellence of [Impeccable](https://github.com/pbakaus/impeccable), it provides one intelligent main command, 18 specialized verbs, 4 calibrated surface modes, 5 specialized agents, and a deterministic 5-dimension audit engine to help AI coding agents design, build, refine, review and optimise professional software interfaces.
 
 Its goal is to produce distinctive, polished, production-quality experiences instead of generic AI-generated templates.
+
+## Surface Modes
+
+Pure SaaS scales ambition to the surface's purpose:
+
+- **Persuade (Landing & Marketing):** Bold, high-conviction creative direction, distinctive asymmetric layouts, real interactive previews or 3D canvasses, and high emotional resonance.
+- **Operate (Dashboards & Consoles):** Precision, spatial density, low visual noise, restrained color accents, sub-millisecond perceived latency, and keyboard ergonomics.
+- **Read (Docs & Publishing):** Typographic calm, comfortable reading rhythm (65–75ch), high readability, and effortless wayfinding.
+- **Experience (3D & Interactive):** Tactile physics, procedural WebGL/Three.js models, and direct manipulation.
+
+---
 
 ## The Intelligent Main Command
 
@@ -130,7 +141,7 @@ Its goal is to produce distinctive, polished, production-quality experiences ins
 The main command is the default entry point for design and development tasks. It interprets the request and coordinates the relevant workflows automatically.
 
 ```text
-/pure-saas create a premium 3D landing page for my hospital
+/pure-saas create a premium 3D landing page for my product
 /pure-saas build a native-feeling macOS productivity app
 /pure-saas build an e-commerce application with authentication and checkout
 /pure-saas add a polished, animated pricing section
@@ -143,31 +154,47 @@ The main command is the default entry point for design and development tasks. It
 /pure-saas scaffold a 3D procedural hero canvas
 ```
 
-### How It Works
+### How It Works (The 8-Step Build Loop)
 
-1. **Understand the project:** Inspect the repository, framework, build tools, styling conventions and relevant backend contracts.
-2. **Coordinate capabilities:** Handle design, implementation, components, design tokens, motion, accessibility, responsiveness, performance and security as needed.
-3. **Execute proportionately:** Complete straightforward tasks directly and coordinate complex work without unnecessary stages.
-4. **Preserve functionality:** Respect existing architecture, APIs, database schemas, authentication and test identifiers.
-5. **Verify and refine:** Run relevant checks, inspect rendered output when possible, correct issues and report what was actually verified.
+1. **Understand requirements & mode:** Identify the surface mode (Persuade, Operate, Read, Experience) and target audience.
+2. **Inspect project context:** Run `pure-saas context` to inspect dependencies, framework, styling system, existing tokens, and backend contracts.
+3. **Select visual direction:** Choose a curated style archetype from `pure-saas style list` (Swiss, Technical, Editorial, Modern Enterprise, etc.).
+4. **Author design contracts:** Establish or update `DESIGN.md` tokens and verify mathematical contrast with `pure-saas contrast`.
+5. **Implement components:** Build modular, typed components implementing the complete 8-state interaction matrix and hairline craft.
+6. **Capture real browser screenshots:** Verify rendered output at 1440px (Desktop), 768px (Tablet), and 375px (Mobile).
+7. **Forensic quality audit:** Run `pure-saas audit` for an objective 0–20 score across A11y, Performance, Theming, Responsive, and Integrity.
+8. **Fix defects & finish:** Triage defects into P0–P3 and report honest verification.
 
 Pure SaaS aims to minimise redundant analysis, unnecessary planning documents and avoidable confirmation requests.
 
 ---
 
-## Specialist Commands
+## Specialist Verbs & Playbooks
 
-Use one of the seven specialist commands when you need a focused workflow. Each inherits the canonical instructions from `SKILL.md` and should follow the project's persistent `DESIGN.md` where applicable.
+Use specialist commands when you need a focused workflow. Each playbook resides in [`skill/reference/`](skill/reference/):
 
-| Command | Purpose | Definition |
-|---|---|---|
-| `/pure-saas design [request]` | Establish or update the project's persistent design specification before implementation with selectable style archetypes. | [`commands/design.md`](commands/design.md) |
-| `/pure-saas polish [request]` | Improve visual hierarchy, spacing, typography, surfaces, micro-interactions and SVGs without unnecessarily rebuilding working logic. | [`commands/polish.md`](commands/polish.md) |
-| `/pure-saas review [scope]` | 5-dimension deterministic quality audit (A11y, Performance, Theming, Responsive, Integrity) scored 0–20 with P0–P3 defect triage. | [`commands/review.md`](commands/review.md) |
-| `/pure-saas reference [URL]` | Analyse a website reference and recreate its relevant design language and behaviour into a 16-section `DESIGN.md`. | [`commands/reference.md`](commands/reference.md) |
-| `/pure-saas responsive [request]` | Improve mobile, tablet, laptop and desktop layouts, including overflow, touch targets and navigation. | [`commands/responsive.md`](commands/responsive.md) |
-| `/pure-saas browser [action]` | Execute token-conscious browser testing, visual screenshot capture, and responsive verification via Playwright CLI. | [`commands/browser.md`](commands/browser.md) |
-| `/pure-saas 3d [action]` | Synthesize procedural, code-only Three.js 3D models in TypeScript from 2D images or scaffold parametric 3D components (img2threejs). | [`commands/3d.md`](commands/3d.md) |
+| Command | Category | Purpose | Definition |
+|---|---|---|---|
+| `/pure-saas design [request]` | Architecture | Establish or update `DESIGN.md` specification before implementation. | [`skill/reference/design-systems.md`](skill/reference/design-systems.md) |
+| `/pure-saas landing [request]` | Persuade | High-conversion SaaS landing page with hero, proof, and pricing. | [`skill/reference/landing-pages.md`](skill/reference/landing-pages.md) |
+| `/pure-saas polish [request]` | Refine | Improve visual hierarchy, hairline borders, surface lighting, and micro-interactions. | [`skill/reference/polish.md`](skill/reference/polish.md) |
+| `/pure-saas bolder [target]` | Refine | Amplify safe, flat, or bland UI into distinctive, high-conviction creative work. | [`skill/reference/bolder.md`](skill/reference/bolder.md) |
+| `/pure-saas quieter [target]` | Refine | Calm aggressive, noisy, or overstimulated layouts into serene clarity. | [`skill/reference/quieter.md`](skill/reference/quieter.md) |
+| `/pure-saas distill [target]` | Refine | Strip visual debt and simplify complex screens to their essential core. | [`skill/reference/distill.md`](skill/reference/distill.md) |
+| `/pure-saas harden [target]` | Refine | Production robustness (empty states, edge cases, error recovery, i18n). | [`skill/reference/harden.md`](skill/reference/harden.md) |
+| `/pure-saas typeset [target]` | Enhance | Editorial typography hierarchy, optical tracking, and fluid clamps. | [`skill/reference/typeset.md`](skill/reference/typeset.md) |
+| `/pure-saas layout [target]` | Enhance | Fix spatial rhythm, asymmetric balance, and 8pt grid containment. | [`skill/reference/layout.md`](skill/reference/layout.md) |
+| `/pure-saas animate [target]` | Enhance | Purposeful spring physics (`cubic-bezier(0.16, 1, 0.3, 1)`). | [`skill/reference/animate.md`](skill/reference/animate.md) |
+| `/pure-saas colorize [target]` | Enhance | Strategic 5-tier color ramps and mathematical WCAG 2.2 AA contrast. | [`skill/reference/colorize.md`](skill/reference/colorize.md) |
+| `/pure-saas delight [target]` | Enhance | Shaders, reactive canvasses, and tactile micro-surprises. | [`skill/reference/delight.md`](skill/reference/delight.md) |
+| `/pure-saas adapt [target]` | Fix | Multi-viewport responsive mastery (375px mobile to 1440px desktop). | [`skill/reference/adapt.md`](skill/reference/adapt.md) |
+| `/pure-saas clarify [target]` | Fix | Improve UX copy, active button verbs, and actionable error messages. | [`skill/reference/clarify.md`](skill/reference/clarify.md) |
+| `/pure-saas optimize [target]` | Fix | Core Web Vitals, virtualization, and sub-frame layout stability. | [`skill/reference/optimize.md`](skill/reference/optimize.md) |
+| `/pure-saas review [scope]` | Evaluate | 5-dimension deterministic audit (0–20 score) with P0–P3 defect triage. | [`skill/reference/audit.md`](skill/reference/audit.md) |
+| `/pure-saas reference [URL]` | Analyze | Reverse-engineer visual reference sites into a 16-section `DESIGN.md`. | [`references/reference-analysis.md`](references/reference-analysis.md) |
+| `/pure-saas browser [action]` | Verify | Playwright CLI headless browser automation and screenshot capture. | [`skill/reference/browser.md`](skill/reference/browser.md) |
+| `/pure-saas 3d [action]` | Experience | Procedural Three.js 3D models and img2threejs pipeline. | [`skill/reference/3d.md`](skill/reference/3d.md) |
+| `/pure-saas style [action]` | System | Selectable modular design style archetypes from Awesome Design Skills. | [`skill/reference/style-registry.md`](skill/reference/style-registry.md) |
 
 ---
 

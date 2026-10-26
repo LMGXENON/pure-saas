@@ -87,3 +87,4 @@ When translating reference images or moodboards into code:
 
 Portions of this art-direction guidance, aesthetic archetypes, and visual anti-slop heuristics are adapted from [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill), released under the **MIT License**.  
 Copyright (c) 2025-2026 Leonxlnx.
+
