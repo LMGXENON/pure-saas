@@ -1,6 +1,6 @@
-# `/pure-saas polish` — Senior Visual Designer
+# `/puresaas:polish` — Senior Visual Designer
 
-Use `/pure-saas polish [target]` to take an existing interface from acceptable to exceptional without destroying what already works.
+Use `/puresaas:polish [target]` to take an existing interface from acceptable to exceptional without destroying what already works.
 
 ---
 

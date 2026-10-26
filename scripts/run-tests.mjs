@@ -118,30 +118,69 @@ runTest('CLI: "pure-saas style list" & "pure-saas style info"', () => {
   return list.status === 0 && info.status === 0 && info.stdout.includes('Minimalism & Swiss');
 });
 
-// 11. CLI: Six Specialist Commands
-runTest('CLI: Six Specialist Commands (design, polish, review, reference, responsive, context)', () => {
-  const design = execCli(['design', 'minimalism-swiss test']);
-  const polish = execCli(['polish']);
-  const review = execCli(['review']);
-  const refRecord = path.join(rootDir, '.test-tmp', 'test-ref.md');
-  const reference = execCli(['reference', 'https://example.com']);
-  const responsive = execCli(['responsive']);
-  const context = execCli(['context']);
+// 11. Command Discovery & Architecture
+runTest('Command Discovery (.claude/commands, .cursor/commands, commands)', () => {
+  const requiredCommands = [
+    'puresaas.md',
+    'puresaas/design.md',
+    'puresaas/polish.md',
+    'puresaas/review.md',
+    'puresaas/clone.md',
+    'puresaas/responsive.md'
+  ];
+
+  const searchRoots = [
+    path.join(rootDir, '.claude/commands'),
+    path.join(rootDir, '.cursor/commands'),
+    path.join(rootDir, 'commands'),
+    path.join(rootDir, 'skill/commands')
+  ];
+
+  for (const root of searchRoots) {
+    for (const cmd of requiredCommands) {
+      const full = path.join(root, cmd);
+      if (!fs.existsSync(full)) {
+        throw new Error(`Missing command file: ${path.relative(rootDir, full)}`);
+      }
+      const content = fs.readFileSync(full, 'utf8');
+      if (!content.includes('description:')) {
+        throw new Error(`Missing frontmatter description in ${path.relative(rootDir, full)}`);
+      }
+      if (!content.includes('skill/reference/')) {
+        throw new Error(`Command does not reference shared playbooks: ${path.relative(rootDir, full)}`);
+      }
+    }
+  }
+  return true;
+});
+
+// 12. CLI: Six Independent Slash Commands (puresaas, puresaas:design, puresaas:polish, puresaas:review, puresaas:clone, puresaas:responsive)
+runTest('CLI: Execution of the Six Independent Slash Commands', () => {
+  const orchestrator = execCli(['puresaas', 'Full product landing page']);
+  const design = execCli(['puresaas:design', 'Minimalism Swiss SaaS Brief']);
+  const polish = execCli(['puresaas:polish', 'Hero section']);
+  const review = execCli(['puresaas:review', 'src/components']);
+  const clone = execCli(['puresaas:clone', 'https://example.com']);
+  const responsive = execCli(['puresaas:responsive', 'Mobile breakpoint 375px']);
 
   // Clean up any test reference record
   if (fs.existsSync(path.join(rootDir, 'reference-record.md'))) {
     fs.unlinkSync(path.join(rootDir, 'reference-record.md'));
   }
 
-  return design.status === 0 &&
-         polish.status === 0 &&
-         review.status === 0 &&
-         reference.status === 0 &&
-         responsive.status === 0 &&
-         context.status === 0;
+  // Also test leading slash invocation (/puresaas:polish)
+  const slashPolish = execCli(['/puresaas:polish']);
+
+  return orchestrator.status === 0 && orchestrator.stdout.includes('Principal Designer & Main Orchestrator') &&
+         design.status === 0 && design.stdout.includes('Creative Director & Builder') &&
+         polish.status === 0 && polish.stdout.includes('Senior Visual Designer') &&
+         review.status === 0 && review.stdout.includes('Independent Design Critic') &&
+         clone.status === 0 && clone.stdout.includes('Reference Analyst & Cloning Engineer') &&
+         responsive.status === 0 && responsive.stdout.includes('Responsive Systems Engineer') &&
+         slashPolish.status === 0 && slashPolish.stdout.includes('Senior Visual Designer');
 });
 
-// 12. CLI: Help Flag Handling
+// 13. CLI: Help Flag Handling
 runTest('CLI: Subcommand --help flags print guidance without failing', () => {
   const subcommands = ['init', 'audit', 'browser', '3d', 'style', 'context', 'doctor'];
   for (const sub of subcommands) {

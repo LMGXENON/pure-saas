@@ -446,14 +446,14 @@ npx pure-saas ref "dashboard"       # SaaS dashboard shell layout
 
 ## The Six Specialist Command Playbooks
 
-| Playbook | Command | Role & Scope |
+| Playbook | Slash Command | Role & Scope |
 | :--- | :--- | :--- |
-| [workflow.md](./workflow.md) | `/pure-saas [request]` | **Principal Designer**: Owns complete outcome from brief to production |
-| [design.md](./design.md) | `/pure-saas design [brief]` | **Creative Director & Builder**: Turns brief into distinctive implemented interface |
-| [polish.md](./polish.md) | `/pure-saas polish [target]` | **Senior Visual Designer**: Elevates typography tracking, hairlines & micro-craft |
-| [review.md](./review.md) | `/pure-saas review [scope]` | **Independent Design Critic**: 10-dimension audit and P0-P3 defect triage |
-| [reference.md](./reference.md) | `/pure-saas reference [URL]` | **Reference Analyst**: Extracts deep design intelligence and translates to project |
-| [responsive.md](./responsive.md) | `/pure-saas responsive [target]` | **Responsive Systems Engineer**: Multi-viewport mastery (375px to 1440px) |
+| [workflow.md](./workflow.md) | `/puresaas [request]` | **Principal Designer**: Owns complete outcome from brief to production |
+| [design.md](./design.md) | `/puresaas:design [brief]` | **Creative Director & Builder**: Turns brief into distinctive implemented interface |
+| [polish.md](./polish.md) | `/puresaas:polish [target]` | **Senior Visual Designer**: Elevates typography tracking, hairlines & micro-craft |
+| [review.md](./review.md) | `/puresaas:review [scope]` | **Independent Design Critic**: 10-dimension audit and P0-P3 defect triage |
+| [clone.md](./clone.md) | `/puresaas:clone [URL/Image]` | **Reference Analyst & Cloning Engineer**: Recreates layout, typography & styling accurately |
+| [responsive.md](./responsive.md) | `/puresaas:responsive [target]` | **Responsive Systems Engineer**: Multi-viewport mastery (375px to 1440px) |
 
 ---
 

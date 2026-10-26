@@ -1,6 +1,6 @@
-# `/pure-saas design` — Creative Director & Builder
+# `/puresaas:design` — Creative Director & Builder
 
-Use `/pure-saas design [brief]` to turn a product brief into a distinctive, fully implemented, production-ready interface from scratch.
+Use `/puresaas:design [brief]` to turn a product brief into a distinctive, fully implemented, production-ready interface from scratch.
 
 ---
 

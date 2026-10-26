@@ -96,10 +96,30 @@ export function buildProviders() {
     // Copy launcher scripts
     copyDirRecursive(path.join(skillSourceDir, 'scripts'), path.join(target.dir, 'scripts'));
 
+    // Copy command definitions
+    copyDirRecursive(path.join(skillSourceDir, 'commands'), path.join(target.dir, 'commands'));
+
     console.log(`✓ Built ${target.name} provider package -> ${path.relative(rootDir, target.dir)}`);
   }
 
-  // 3. Synchronize Root Rules (.cursorrules, .windsurfrules, GEMINI.md, AGENTS.md, CLAUDE.md)
+  // 3. Synchronize Slash Commands to standard provider directories (.claude/commands, .cursor/commands, .agents/commands, commands)
+  const canonicalCommandsDir = path.join(skillSourceDir, 'commands');
+  const commandDestinations = [
+    path.join(rootDir, '.claude/commands'),
+    path.join(rootDir, '.cursor/commands'),
+    path.join(rootDir, '.agents/commands'),
+    path.join(rootDir, 'commands')
+  ];
+
+  for (const dest of commandDestinations) {
+    if (fs.existsSync(dest)) {
+      fs.rmSync(dest, { recursive: true, force: true });
+    }
+    copyDirRecursive(canonicalCommandsDir, dest);
+    console.log(`✓ Synchronized slash commands -> ${path.relative(rootDir, dest)}`);
+  }
+
+  // 4. Synchronize Root Rules (.cursorrules, .windsurfrules, GEMINI.md, AGENTS.md, CLAUDE.md)
   const agentManual = `# AGENTS.md
 
 Operating manual for AI agents working in this repository, or using Pure SaaS to design, build, and review software.
@@ -114,14 +134,14 @@ Pure SaaS is an open-source, universal AI-agent skill and frontend engineering t
 
 ## 2. Command Architecture
 
-Pure SaaS operates via **one principal command and five specialist workflows**:
+Pure SaaS operates via **six independent, namespaced slash commands**:
 
-1. **\`/pure-saas [request]\`** — **Principal Designer**: Owns the complete outcome from understanding the brief, audience, and constraints to delivering a finished, production-ready interface.
-2. **\`/pure-saas design [brief]\`** — **Creative Director & Builder**: Turns a product brief into a distinctive, fully implemented interface with strong visual hierarchy and authentic content.
-3. **\`/pure-saas polish [target]\`** — **Senior Visual Designer**: Elevates visual craft, typography tracking, surface lighting, and micro-interactions without breaking working behavior.
-4. **\`/pure-saas review [scope]\`** — **Independent Design Critic**: Judges the interface honestly across 10 dimensions, prioritizing defects from P0 to P3 and driving verified fixes.
-5. **\`/pure-saas reference [URL/Image]\`** — **Reference Analyst & Art Director**: Extracts deep design intelligence from references and translates it into an original, domain-tailored implementation.
-6. **\`/pure-saas responsive [target]\`** — **Responsive Systems Engineer**: Makes the interface feel purposefully designed across all viewports (375px mobile to 1440px desktop) with zero overflow.
+1. **\`/puresaas [request]\`** — **Principal Designer & Main Orchestrator**: Understands the request, inspects the project, chooses the appropriate workflow, implements the solution, and verifies the result.
+2. **\`/puresaas:design [brief]\`** — **Creative Director & Builder**: Turns a product brief into a distinctive, fully implemented interface and landing page with strong visual hierarchy and authentic content.
+3. **\`/puresaas:polish [target]\`** — **Senior Visual Designer**: Elevates visual craft, typography tracking, surface lighting, and micro-interactions without breaking working behavior.
+4. **\`/puresaas:review [scope]\`** — **Independent Design Critic**: Judges the interface honestly across 10 dimensions, prioritizing defects from P0 to P3 and driving verified fixes.
+5. **\`/puresaas:clone [URL/Image]\`** — **Reference Analyst & Cloning Engineer**: Analyses a supplied website or screenshot and recreates its relevant layout, typography, styling, and interactions accurately within the user's project.
+6. **\`/puresaas:responsive [target]\`** — **Responsive Systems Engineer**: Makes the interface feel purposefully designed across all viewports (375px mobile to 1440px desktop) with zero overflow.
 
 ---
 
@@ -148,13 +168,13 @@ Pure SaaS operates via **one principal command and five specialist workflows**:
 
 Claude Code project instructions for Pure SaaS.
 
-## Invoking Pure SaaS Workflows
-- **Principal Designer (Main):** \`/pure-saas [request]\`
-- **Creative Director & Builder:** \`/pure-saas design [brief]\`
-- **Senior Visual Designer:** \`/pure-saas polish [target]\`
-- **Independent Design Critic:** \`/pure-saas review [scope]\`
-- **Reference Analyst:** \`/pure-saas reference <url>\`
-- **Responsive Systems Engineer:** \`/pure-saas responsive [target]\`
+## Independent Slash Commands
+- **Main Orchestrator:** \`/puresaas [request]\`
+- **Creative Director & Builder:** \`/puresaas:design [brief]\`
+- **Senior Visual Designer:** \`/puresaas:polish [target]\`
+- **Independent Design Critic:** \`/puresaas:review [scope]\`
+- **Reference Analyst & Cloning Engineer:** \`/puresaas:clone <url-or-image>\`
+- **Responsive Systems Engineer:** \`/puresaas:responsive [target]\`
 
 ## Supporting Tooling
 - Review & audit: \`pure-saas audit --source src\`
@@ -172,17 +192,15 @@ Claude Code project instructions for Pure SaaS.
 
   const rootRule = `When creating, reviewing, or improving UI/UX designs, follow the Pure SaaS design system:
 
-1. Read SKILL.md in full. It defines the six specialist command workflows: Principal Designer,
-   Creative Director, Senior Visual Designer, Independent Critic, Reference Analyst, and Responsive Engineer.
+1. Read SKILL.md in full. It defines the six independent, namespaced slash commands:
+   - \`/puresaas [request]\`: Main orchestrator. Understands request, inspects project, chooses workflow, implements, and verifies.
+   - \`/puresaas:design [brief]\`: Creative Director. Turns product brief into distinctive, fully implemented interface.
+   - \`/puresaas:polish [target]\`: Senior Visual Designer. Elevates typography tracking, hairlines, micro-interactions.
+   - \`/puresaas:review [scope]\`: Independent Critic. 10-dimension audit and prioritized P0-P3 defect triage.
+   - \`/puresaas:clone [URL/Image]\`: Reference Analyst. Recreates layout, typography, and styling accurately.
+   - \`/puresaas:responsive [target]\`: Responsive Systems Engineer. Multi-viewport mastery (375px to 1440px).
 2. Retrieve exact references for the task using \`npx pure-saas ref "<component, framework, or topic>"\`.
-3. Principal Command: Use \`/pure-saas [request]\` as the default entry point.
-4. Specialist Commands:
-   - \`/pure-saas design [brief]\`: Turn product brief into a distinctive, fully implemented interface.
-   - \`/pure-saas polish [target]\`: Elevate typography tracking, surface lighting, micro-interactions.
-   - \`/pure-saas review [scope]\`: Judge interface honestly across 10 dimensions with P0-P3 defect triage.
-   - \`/pure-saas reference [URL/Image]\`: Extract design intelligence from references and adapt to target project.
-   - \`/pure-saas responsive [target]\`: Viewport mastery from 375px mobile to 1440px desktop with zero overflow.
-5. Non-Negotiable Engineering Rules:
+3. Non-Negotiable Engineering Rules:
    - Zero raw hex colors or arbitrary styling: resolve to semantic tokens in DESIGN.md.
    - Zero generic AI slop: no purple/cyan gradient text, excessive glassmorphism blur, repetitive 3-column cards, or green pulsing dots.
    - Preserve 100% of backend APIs, authentication, and database schemas.

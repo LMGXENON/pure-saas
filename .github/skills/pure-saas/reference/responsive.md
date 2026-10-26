@@ -1,6 +1,6 @@
-# `/pure-saas responsive` — Responsive Systems Engineer
+# `/puresaas:responsive` — Responsive Systems Engineer
 
-Use `/pure-saas responsive [target]` to make an interface feel intentionally designed, ergonomically sound, and visually stable across every relevant screen size.
+Use `/puresaas:responsive [target]` to make an interface feel intentionally designed, ergonomically sound, and visually stable across every relevant screen size.
 
 ---
 

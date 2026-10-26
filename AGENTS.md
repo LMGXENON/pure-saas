@@ -12,14 +12,14 @@ Pure SaaS is an open-source, universal AI-agent skill and frontend engineering t
 
 ## 2. Command Architecture
 
-Pure SaaS operates via **one principal command and five specialist workflows**:
+Pure SaaS operates via **six independent, namespaced slash commands**:
 
-1. **`/pure-saas [request]`** — **Principal Designer**: Owns the complete outcome from understanding the brief, audience, and constraints to delivering a finished, production-ready interface.
-2. **`/pure-saas design [brief]`** — **Creative Director & Builder**: Turns a product brief into a distinctive, fully implemented interface with strong visual hierarchy and authentic content.
-3. **`/pure-saas polish [target]`** — **Senior Visual Designer**: Elevates visual craft, typography tracking, surface lighting, and micro-interactions without breaking working behavior.
-4. **`/pure-saas review [scope]`** — **Independent Design Critic**: Judges the interface honestly across 10 dimensions, prioritizing defects from P0 to P3 and driving verified fixes.
-5. **`/pure-saas reference [URL/Image]`** — **Reference Analyst & Art Director**: Extracts deep design intelligence from references and translates it into an original, domain-tailored implementation.
-6. **`/pure-saas responsive [target]`** — **Responsive Systems Engineer**: Makes the interface feel purposefully designed across all viewports (375px mobile to 1440px desktop) with zero overflow.
+1. **`/puresaas [request]`** — **Principal Designer & Main Orchestrator**: Understands the request, inspects the project, chooses the appropriate workflow, implements the solution, and verifies the result.
+2. **`/puresaas:design [brief]`** — **Creative Director & Builder**: Turns a product brief into a distinctive, fully implemented interface and landing page with strong visual hierarchy and authentic content.
+3. **`/puresaas:polish [target]`** — **Senior Visual Designer**: Elevates visual craft, typography tracking, surface lighting, and micro-interactions without breaking working behavior.
+4. **`/puresaas:review [scope]`** — **Independent Design Critic**: Judges the interface honestly across 10 dimensions, prioritizing defects from P0 to P3 and driving verified fixes.
+5. **`/puresaas:clone [URL/Image]`** — **Reference Analyst & Cloning Engineer**: Analyses a supplied website or screenshot and recreates its relevant layout, typography, styling, and interactions accurately within the user's project.
+6. **`/puresaas:responsive [target]`** — **Responsive Systems Engineer**: Makes the interface feel purposefully designed across all viewports (375px mobile to 1440px desktop) with zero overflow.
 
 ---
 

@@ -1,75 +1,65 @@
-# `/pure-saas reference` — Reference Analyst & Art Director
+# `/puresaas:clone` — Reference Analysis & Cloning Playbook
 
-Use `/pure-saas reference [URL or Screenshot]` to extract deep design intelligence from reference sites or visual artifacts and translate it into an appropriate, original implementation.
+> [!NOTE]
+> The reference analysis and recreation workflow is officially accessed via the **`/puresaas:clone`** slash command. See [`clone.md`](clone.md) for the complete reference engineering playbook.
+
+Use `/puresaas:clone [URL or Screenshot]` to extract deep design intelligence from reference sites or visual artifacts and accurately recreate their layout, typography, styling, and interactions within the user's project codebase.
 
 ---
 
 ## 1. Role & Stance
 
-As **Reference Analyst and Art Director**, you perform reverse engineering with creative integrity:
-- You extract the deep design principles that make a reference exceptional—not its brand assets, trademarks, or surface styling.
-- You separate reusable principles (whitespace discipline, typographic rhythm, spatial density, asymmetric staging) from proprietary details that must not be copied.
-- You translate findings into an original design direction that uniquely serves your product's audience, goals, and technical stack.
-- You maintain total honesty: if a URL or interaction cannot be accessed, you state the limitation and work strictly from verified evidence.
+As **Reference Analyst & Cloning Engineer**, you perform evidence-based visual deconstruction and engineering:
+- You analyze supplied reference sites or visual artifacts across multiple accessible pages and responsive states.
+- You extract the deep design architecture—spatial geometry, typographic hierarchy, surface lighting, color relationships, and micro-interactions.
+- You recreate the interface faithfully within the target codebase using the project's existing framework and styling system.
+- **Strict Anti-Fabrication Rule:** You maintain total honesty. If a URL, sub-page, or interaction cannot be accessed (e.g. blocked by Cloudflare, behind an authentication gate, or returning HTTP errors), you state the limitation explicitly and report it as `inaccessible`. You never claim or pretend that uninspected content was verified.
 
 ---
 
 ## 2. Decision-Making Process
 
-### Phase 1: Deep Reference Inspection
-When browser access or visual artifacts are available, study beyond the above-the-fold viewport:
-1. **Multi-Page Exploration:** Examine navigation flow, sub-pages, documentation, and pricing structures where accessible.
-2. **Scrolling & Reveal Behavior:** How do elements enter? Is motion subtle and physics-based, or loud and distracting?
-3. **Typography & Measure:** Identify the typographic scale, font contrast, headline tracking, and reading line length.
-4. **Composition & Spatial Density:** How does the reference balance whitespace against content density? Are sections full-width or strictly bounded?
-5. **Interactive Controls:** How do buttons, inputs, tabs, and menus behave across hover, active, and focus states?
-
-### Phase 2: Principle Extraction & Deconstruction
-Deconstruct the reference into abstract architectural principles:
-- **Spatial Rhythm:** What is the underlying grid? (e.g., 8pt grid, 60/40 hero split, asymmetrical spotlight cards).
-- **Lighting & Material Model:** How is depth communicated? (Hairline borders, ambient occlusion shadows, dark mode elevation).
-- **Hierarchy Drivers:** What draws the eye first, second, and third? (Scale jumps, color accents, spatial isolation).
-- **Content Staging:** How are complex ideas explained? (Live interactive widgets, concrete code comparisons, concise diagrams).
-
-### Phase 3: Separation of Principles from Brand Identity
-Strictly separate what to adapt from what to reject:
+### Phase 1: Real Browser Inspection
+Inspect the reference across 1440px, 768px, and 375px viewports using Playwright CLI or browser screenshot tooling:
+```bash
+npx pure-saas browser screenshot https://reference-site.com --out-dir .ref-screens
 ```
-Adapt (Universal Principles):          Reject (Brand-Specific / Inappropriate):
-• Typographic hierarchy & optical tracking  • Direct logo, iconography, or asset copies
-• Asymmetric spotlight compositions        • Proprietary color hex values without translation
-• 8-state interactive feedback             • Cloned copy, marketing claims, or testimonials
-• Fluid clamp responsive scaling           • Features irrelevant to target product audience
-```
+Inspect all accessible sub-pages and interactive states. Document which pages were inspected and which were inaccessible.
 
-### Phase 4: Translation to Target Project
-Translate the extracted principles into the target project's design system:
-1. **Map to Semantic Tokens:** Translate the reference's color relationships into your project's 5-tier tokens in `DESIGN.md`. Verify mathematical contrast.
-2. **Adapt Typography:** Choose fonts that fit your product's domain while adopting the reference's proportional scale and tracking rules.
-3. **Preserve Originality:** The result must feel authentic to your product, not a clone of the reference.
+### Phase 2: Design Architecture Deconstruction
+Deconstruct the inspected reference into five core layers:
+1. **Layout & Spatial Geometry:** Container widths, grid columns, asymmetric splits, vertical section padding.
+2. **Typography & Hierarchy:** Display font optical tracking, proportional scale ratios, reading line measure.
+3. **Color & Surface Palette:** Canvas background, surface layer elevation, hairline border contrast, accent roles.
+4. **Depth & Lighting Model:** Ambient occlusion shadows vs directional lighting, dark mode elevation.
+5. **Micro-Interactions & Physics:** Cubic-bezier spring curves, active press feedback.
 
-### Phase 5: Implementation & Verification
-1. Implement the translated layout and components using your project's existing framework and styling stack.
-2. Run the application and capture multi-viewport screenshots.
-3. Compare the rendered output against the original design principles:
-   - Does it convey the intended authority, clarity, and refinement?
-   - Does it function independently without visual imitation?
+### Phase 3: Translation into Target Project Tokens
+Map extracted values to semantic tokens in the project's root [`DESIGN.md`](file:///Users/lmgxenon/Downloads/pure%20saas/DESIGN.md) and verify mathematical contrast with `npx pure-saas contrast DESIGN.md`.
+
+### Phase 4: Faithful Component Re-Engineering
+Recreate the interface components within the user's project framework (Next.js, React, Tailwind, Vue, etc.) while preserving 100% of existing backend APIs and authentication routes.
+
+### Phase 5: Side-by-Side Verification
+Capture live screenshots of the user's application (`npx pure-saas browser screenshot http://localhost:3000`) and compare side-by-side against the reference across desktop, tablet, and mobile.
 
 ---
 
 ## 3. Practical Execution Steps
 
 ```bash
-# 1. Initialize reference deconstruction record
-npx pure-saas reference https://example-saas.com
+# 1. Initialize reference observation record
+npx pure-saas puresaas:clone https://reference-site.com
 
-# 2. Inspect reference in headless browser (if URL is accessible)
-npx pure-saas browser screenshot https://example-saas.com --out-dir .ref-screens
+# 2. Inspect reference in browser (if accessible)
+npx pure-saas browser screenshot https://reference-site.com --out-dir .ref-screens
 
-# 3. Translate extracted principles into project DESIGN.md
-npx pure-saas style select "minimalism-swiss" --out DESIGN.md
+# 3. Author / update project DESIGN.md with extracted tokens
 npx pure-saas contrast DESIGN.md
 
-# 4. Implement components in target codebase and verify live render
+# 4. Implement components in target codebase
+
+# 5. Capture live render and verify side-by-side
 npx pure-saas browser screenshot http://localhost:3000 --out-dir .screens
 ```
 
@@ -77,8 +67,8 @@ npx pure-saas browser screenshot http://localhost:3000 --out-dir .screens
 
 ## 4. Judging Success
 
-Your reference analysis is successful when:
-- **Intelligence Extracted:** The underlying principles of hierarchy, rhythm, and layout are clearly articulated.
-- **Originality Preserved:** An outside observer would never mistake your interface for an unauthorized clone of the reference.
-- **Product Alignment:** The adapted patterns directly serve your product's specific audience and conversion goals.
-- **Transparent Honesty:** Any unobservable pages, interactions, or blocked URLs are clearly reported as limitations.
+Your recreation is successful when:
+- **Layout & Typographic Fidelity:** The recreated interface accurately captures the layout rhythm, typographic hierarchy, and visual weight of the reference.
+- **Engineering Quality:** The code uses semantic tokens in `DESIGN.md`, 8-state interactive components, zero raw hex values, and zero AI template slop.
+- **Responsive Stability:** The recreated interface adapts seamlessly across 1440px desktop, 768px tablet, and 375px mobile with zero horizontal scrollbar.
+- **Honest Boundary Reporting:** All accessible pages are verified in real screenshots; any inaccessible or blocked elements are explicitly noted.

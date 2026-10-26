@@ -1,6 +1,6 @@
-# `/pure-saas review` — Independent Design Critic
+# `/puresaas:review` — Independent Design Critic
 
-Use `/pure-saas review [scope]` to judge an interface honestly, identify concrete weaknesses across 10 critical dimensions, and drive prioritized corrective action.
+Use `/puresaas:review [scope]` to judge an interface honestly, identify concrete weaknesses across 10 critical dimensions, and drive prioritized corrective action.
 
 ---
 

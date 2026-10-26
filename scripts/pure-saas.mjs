@@ -2288,7 +2288,8 @@ export function installAgentRules(target = 'all') {
 // --- Command Dispatcher & CLI ---
 
 export async function runCli(args = process.argv.slice(2)) {
-  const command = args[0] || '--help';
+  const rawCommand = args[0] || '--help';
+  const command = rawCommand.startsWith('/') ? rawCommand.slice(1) : rawCommand;
 
   if (command === '--help' || command === '-h' || command === 'help') {
     printHelp();
@@ -2916,23 +2917,179 @@ export async function runCli(args = process.argv.slice(2)) {
     return 0;
   }
 
-  // --- Specialist Command Implementations: design, polish, responsive, reference ---
+  // --- The Six Independent Slash Commands ---
 
-  if (command === 'design') {
+  if (command === 'puresaas' || command === 'workflow') {
     const request = args.slice(1).join(' ');
-    console.log(`=== Pure SaaS /pure-saas design ===`);
-    console.log(`Request: "${request || 'Default Design Specification'}"`);
+    console.log(`=== Pure SaaS /puresaas — Principal Designer & Main Orchestrator ===`);
+    if (request) console.log(`Request: "${request}"\n`);
+
+    // Context detection
+    const ctx = inspectProjectContext({ target: process.cwd() });
+    console.log(`Project Inspection:`);
+    console.log(`  • Framework: ${ctx.framework} (${ctx.router || 'standard'})`);
+    console.log(`  • Styling:   ${ctx.styling}`);
+    console.log(`  • Surface:   ${ctx.mode.toUpperCase()}`);
+    console.log(`  • Stack:     ${ctx.language} | TypeScript: ${ctx.hasTypeScript ? 'Yes' : 'No'}\n`);
+
+    const designFile = path.resolve(process.cwd(), 'DESIGN.md');
+    if (fs.existsSync(designFile)) {
+      const val = validateDesignDocument(designFile);
+      console.log(`Design Specification: DESIGN.md detected (${val.valid ? 'Valid Tokens' : 'Token Warnings Detected'})`);
+      if (val.contrastAudit) {
+        console.log(`WCAG 2.2 AA Contrast: ${val.contrastAudit.passedAA} passed, ${val.contrastAudit.failedAA} failed.`);
+      }
+    } else {
+      console.log(`Design Specification: DESIGN.md not found. Run "/puresaas:design" to establish.`);
+    }
+
+    console.log(`\nIndependent Slash Commands:`);
+    console.log(`  • /puresaas [request]           -> Principal Designer (Main Orchestrator)`);
+    console.log(`  • /puresaas:design [brief]      -> Creative Director & Builder (Landing Pages & Interfaces)`);
+    console.log(`  • /puresaas:polish [target]     -> Senior Visual Designer (Typography Tracking, Spacing & Lighting)`);
+    console.log(`  • /puresaas:review [scope]      -> Independent Design Critic (10-Dimension Audit & P0-P3 Triage)`);
+    console.log(`  • /puresaas:clone <url|img>     -> Reference Analyst & Cloning Engineer (Faithful Recreation)`);
+    console.log(`  • /puresaas:responsive [scope]  -> Responsive Systems Engineer (Multi-Viewport Mastery)`);
+    console.log(`\nAuthoritative Playbook: skill/reference/workflow.md`);
+    return 0;
+  }
+
+  if (command === 'puresaas:design' || command === 'design') {
+    const request = args.slice(1).join(' ');
+    console.log(`=== Pure SaaS /puresaas:design — Creative Director & Builder ===`);
+    console.log(`Brief: "${request || 'Default Design Specification'}"`);
 
     const outFile = path.resolve(process.cwd(), 'DESIGN.md');
-    const content = generateDesignSystem({ product: 'saas', variance: 6, motion: 5, density: 6 });
-    fs.writeFileSync(outFile, content, 'utf8');
-    console.log(`✓ Established root-level DESIGN.md specification at ${outFile}`);
-    console.log('Run "pure-saas validate DESIGN.md" to verify token completeness.');
+    if (!fs.existsSync(outFile)) {
+      const content = generateDesignSystem({ product: 'saas', variance: 6, motion: 5, density: 6 });
+      fs.writeFileSync(outFile, content, 'utf8');
+      console.log(`✓ Established root-level DESIGN.md specification at ${outFile}`);
+    } else {
+      console.log(`✓ Found existing DESIGN.md at ${outFile}`);
+    }
+    const val = validateDesignDocument(outFile);
+    printValidationResult(val);
+    console.log(`\nAuthoritative Playbook: skill/reference/design.md`);
+    return 0;
+  }
+
+  if (command === 'puresaas:polish' || command === 'polish') {
+    const target = args.slice(1).join(' ');
+    console.log(`=== Pure SaaS /puresaas:polish — Senior Visual Designer ===`);
+    if (target) console.log(`Target: "${target}"\n`);
+
+    const designFile = path.resolve(process.cwd(), 'DESIGN.md');
+    if (!fs.existsSync(designFile)) {
+      console.warn(`Note: DESIGN.md not found. Generating baseline design system...`);
+      fs.writeFileSync(designFile, generateDesignSystem({ product: 'saas' }), 'utf8');
+    }
+
+    const audit = runDeterministicAudit({ design: designFile, source: fs.existsSync('src') ? 'src' : null });
+    console.log(`Current Quality Baseline: ${audit.totalScore} / 20 (${audit.band.toUpperCase()})\n`);
+
+    console.log(`Core Polish Guidance:`);
+    console.log(`  • Optical Tracking: Tighten display headings to -0.025em; loosen small caps to +0.05em.`);
+    console.log(`  • Hairline Borders: Enforce 1px solid hairline borders with border-border-subtle.`);
+    console.log(`  • Surface Lighting: Combine ambient occluding floor shadow with directional overhead light.`);
+    console.log(`  • Tabular Numbers: Apply font-variant-numeric: tabular-nums to all metrics, tables & prices.`);
+    console.log(`  • Micro-Interactions: Apply active:scale-[0.985] on buttons; keep spring transitions under 180ms.`);
+    console.log(`\nAuthoritative Playbook: skill/reference/polish.md`);
+    return 0;
+  }
+
+  if (command === 'puresaas:review' || command === 'review') {
+    const scope = args.slice(1).join(' ');
+    console.log(`=== Pure SaaS /puresaas:review — Independent Design Critic ===`);
+    if (scope) console.log(`Scope: "${scope}"\n`);
+
+    const designFile = path.resolve(process.cwd(), 'DESIGN.md');
+    const audit = runDeterministicAudit({ design: fs.existsSync(designFile) ? designFile : null, source: fs.existsSync('src') ? 'src' : null });
+
+    console.log(`Deterministic Quality Score: ${audit.totalScore} / 20 (${audit.band.toUpperCase()})\n`);
+    console.log(`Dimension Breakdown:`);
+    for (const [dim, info] of Object.entries(audit.dimensions)) {
+      const mark = info.score === info.max ? '✓' : '✗';
+      console.log(`  ${mark} ${dim.toUpperCase()}: ${info.score} / ${info.max}`);
+    }
+
+    if (audit.defects && audit.defects.length > 0) {
+      console.log(`\nDetected Baseline Defects (${audit.defects.length}):`);
+      for (const d of audit.defects.slice(0, 5)) {
+        console.log(`  [${d.severity}] [${d.dimension}] ${d.message}`);
+      }
+    }
+
+    console.log(`\nDefect Triage Standard:`);
+    console.log(`  • P0 (Blocker): Broken layout, overflow-x horizontal scroll, severe contrast failure (<3.0:1)`);
+    console.log(`  • P1 (High): Missing focus indicators, unconstrained line measure (>80ch), raw hex codes`);
+    console.log(`  • P2 (Medium): Untracked headings, missing tabular numbers, harsh box-shadows`);
+    console.log(`  • P3 (Low): Minor micro-interaction polish, transition timing adjustments`);
+    console.log(`\nAuthoritative Playbook: skill/reference/review.md`);
+    return 0;
+  }
+
+  if (command === 'puresaas:clone' || command === 'clone' || command === 'puresaas:reference' || command === 'reference') {
+    const target = args[1];
+    if (!target) {
+      console.error('Error: Please provide a reference URL or screenshot image path.');
+      console.error('Example: pure-saas puresaas:clone https://example.com');
+      console.error('Example: pure-saas puresaas:clone ./screenshots/dashboard.png');
+      return 1;
+    }
+
+    console.log(`=== Pure SaaS /puresaas:clone — Reference Analyst & Cloning Engineer ===`);
+    console.log(`Target: "${target}"`);
+
+    const isUrl = target.startsWith('http://') || target.startsWith('https://');
+    const isImage = /\.(png|jpe?g|webp|gif|svg)$/i.test(target);
+
+    if (isImage) {
+      const fullPath = path.resolve(process.cwd(), target);
+      if (!fs.existsSync(fullPath)) {
+        console.error(`Error: Screenshot image not found at ${fullPath}`);
+        return 1;
+      }
+      console.log(`✓ Verified local screenshot artifact: ${fullPath}`);
+    } else if (isUrl) {
+      console.log(`✓ Reference URL registered: ${target}`);
+      const env = checkBrowserEnvironment();
+      if (env.ready) {
+        console.log(`  Browser engine ready. Capture reference across viewports:`);
+        console.log(`  -> pure-saas browser screenshot ${target} --out-dir .ref-screens`);
+      } else {
+        console.log(`  Note: Install Playwright CLI via "pure-saas browser setup" for real browser screenshot verification.`);
+      }
+    }
+
+    const refFile = path.resolve(process.cwd(), 'reference-record.md');
+    fs.writeFileSync(refFile, getStarterReferenceRecord().replace('https://example.com', target), 'utf8');
+    console.log(`✓ Initialized reference observation record at ${refFile}`);
+    console.log(`\nAuthoritative Playbook: skill/reference/clone.md`);
+    return 0;
+  }
+
+  if (command === 'puresaas:responsive' || command === 'responsive') {
+    const request = args.slice(1).join(' ');
+    console.log(`=== Pure SaaS /puresaas:responsive — Responsive Systems Engineer ===`);
+    console.log(`Target: "${request || 'Responsive Breakpoint Verification (375px, 768px, 1440px)'}"`);
+    console.log('Running responsive layout checks across viewports:');
+    console.log('  • Desktop: 1440px (Full widescreen spatial composition)');
+    console.log('  • Tablet:  768px  (Navigation collapse & 2-column wrapping)');
+    console.log('  • Mobile:  375px  (Single-column stack, zero horizontal overflow, 44px touch targets)');
+
+    const env = checkBrowserEnvironment();
+    if (env.ready) {
+      console.log('\n✓ Browser engine ready for multi-viewport screenshot verification.');
+      console.log('Capture local render: pure-saas browser screenshot http://localhost:3000 --out-dir .screens');
+    } else {
+      console.log('\nNote: To capture live screenshots, install Playwright CLI via: pure-saas browser setup');
+    }
+    console.log(`\nAuthoritative Playbook: skill/reference/responsive.md`);
     return 0;
   }
 
   const specialistVerbs = [
-    'polish', 'critique', 'bolder', 'quieter', 'typeset', 'layout',
+    'critique', 'bolder', 'quieter', 'typeset', 'layout',
     'distill', 'harden', 'animate', 'colorize', 'delight', 'adapt',
     'clarify', 'optimize', 'landing'
   ];
@@ -3027,35 +3184,6 @@ export async function runCli(args = process.argv.slice(2)) {
       console.log(`  • ${g}`);
     }
     console.log(`\nPlaybook: skill/reference/${command === 'landing' ? 'landing-pages' : command}.md`);
-    return 0;
-  }
-
-  if (command === 'responsive') {
-    const request = args.slice(1).join(' ');
-    console.log(`=== Pure SaaS /pure-saas responsive ===`);
-    console.log(`Target: "${request || 'Responsive Breakpoint Verification (375px, 768px, 1440px)'}"`);
-    console.log('Running responsive layout checks across viewports...');
-    const env = checkBrowserEnvironment();
-    if (env.ready) {
-      console.log('Browser engine ready for multi-viewport screenshot verification.');
-      console.log('To capture live screenshots: pure-saas browser screenshot <url>');
-    } else {
-      console.log('Note: To capture live screenshots, install Playwright CLI via: pure-saas browser setup');
-    }
-    return 0;
-  }
-
-  if (command === 'reference') {
-    const url = args[1];
-    if (!url) {
-      console.error('Error: Please provide a reference URL. Example: pure-saas reference https://example.com');
-      return 1;
-    }
-    console.log(`=== Pure SaaS /pure-saas reference ===`);
-    console.log(`Analyzing reference URL: ${url}`);
-    const refFile = path.resolve(process.cwd(), 'reference-record.md');
-    fs.writeFileSync(refFile, getStarterReferenceRecord().replace('https://example.com', url), 'utf8');
-    console.log(`✓ Reference observation record initialized at ${refFile}`);
     return 0;
   }
 
@@ -3176,13 +3304,13 @@ Pure SaaS CLI - AI Agent Design Enforcement Toolkit
 Usage:
   pure-saas <command> [options]
 
-The Six Specialist Workflows:
-  /pure-saas [request]            Principal Designer: Own complete outcome from brief to production
-  design [brief]                  Creative Director & Builder: Turn brief into distinctive implemented interface
-  polish [target]                 Senior Visual Designer: Elevate typography tracking, lighting & micro-craft
-  review [scope]                  Independent Design Critic: 10-dimension audit and P0-P3 defect triage
-  reference <url>                 Reference Analyst: Extract deep design intelligence and translate to project
-  responsive [target]             Responsive Systems Engineer: Multi-viewport mastery (375px to 1440px)
+The Six Independent Slash Commands:
+  /puresaas [request]             Principal Designer: Own complete outcome from brief to production
+  /puresaas:design [brief]        Creative Director & Builder: Turn brief into distinctive interface & landing page
+  /puresaas:polish [target]       Senior Visual Designer: Elevate typography tracking, lighting & micro-craft
+  /puresaas:review [scope]        Independent Design Critic: 10-dimension audit and P0-P3 defect triage
+  /puresaas:clone <url|img>       Reference Analyst & Cloning Engineer: Recreate layout, typography & styling accurately
+  /puresaas:responsive [target]   Responsive Systems Engineer: Multi-viewport mastery (375px to 1440px)
 
 Supporting Tooling & Verification:
   validate [file]                 Validate DESIGN.md structure, tokens & WCAG contrast
