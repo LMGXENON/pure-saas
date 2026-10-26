@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
 import path from 'node:path';
-import { runCli, scanSourceDirectory, parseFrontmatter } from '../../scripts/pure-saas.mjs';
+import { runCli, scanSourceDirectory, parseFrontmatter, queryDesignIntelligence } from '../../scripts/pure-saas.mjs';
 import fs from 'node:fs';
 
 test('CLI: Validate command exits 0 on valid design file', async () => {
@@ -51,6 +51,24 @@ test('CLI: Source scan handles complex TypeScript syntax without errors', () => 
 test('CLI: Style command returns matching design styles', async () => {
   const code = await runCli(['style', 'developer']);
   assert.strictEqual(code, 0, 'Exit code must be 0 for valid style query');
+
+  const codeProduct = await runCli(['style', '--product', 'saas']);
+  assert.strictEqual(codeProduct, 0, 'Exit code must be 0 for --product query');
+
+  const codeStack = await runCli(['style', '--stack', 'react']);
+  assert.strictEqual(codeStack, 0, 'Exit code must be 0 for --stack query');
+
+  const codeJson = await runCli(['style', '--json']);
+  assert.strictEqual(codeJson, 0, 'Exit code must be 0 for --json query');
+});
+
+test('CLI: queryDesignIntelligence API resolves styles, products, and stacks', () => {
+  const result = queryDesignIntelligence({ product: 'fintech', stack: 'tailwind' });
+  assert.ok(result.styles.length > 0, 'Must return available design styles');
+  assert.ok(result.product !== null, 'Must resolve fintech product archetype');
+  assert.strictEqual(result.product.id, 'fintech');
+  assert.ok(result.stack !== null, 'Must resolve tailwind stack guidance');
+  assert.strictEqual(result.stack.id, 'tailwind');
 });
 
 test('CLI: Source scan detects raw color violations and anti-slop patterns', () => {

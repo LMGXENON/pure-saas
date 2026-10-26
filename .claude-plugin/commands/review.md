@@ -14,20 +14,28 @@ Conduct a rigorous, evidence-based quality review of the requested implementatio
 
 ## Operational Instructions
 
-1. **Conduct Evidence-Based Audit Across Dimensions:**
-   - **Bugs & Defect Identification:** Detect broken interactions, layout errors, unhandled edge cases, and missing states.
+1. **Load Relevant References ("Read Before You Cite"):**
+   - Open [`references/code-audit.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/code-audit.md) for concrete grep patterns, guideline citations, and stack replacements.
+   - Open [`references/cross-platform.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/cross-platform.md) for platform vocabulary and conventions.
+   - Open [`references/accessibility.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/accessibility.md) for WCAG 2.2 AA requirements.
+   - Open [`references/anti-slop-rules.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/anti-slop-rules.md) for anti-generic design checks.
+
+2. **Conduct Evidence-Based Audit Across Dimensions:**
+   - **Bugs & Defect Identification:** Detect broken interactions, layout errors, unhandled edge cases, and missing component states across the 8-state matrix.
    - **Security Weaknesses:** Identify vulnerable dependencies, improper input sanitization, insecure cookies/storage, or leaked sensitive attributes.
-   - **Accessibility (WCAG 2.2 AA):** Evaluate color contrast ratios (≥4.5:1 text, ≥3:1 UI), visible focus indicators, keyboard trapping, semantic HTML landmarks, and ARIA attributes (`references/accessibility.md`).
+   - **Accessibility (WCAG 2.2 AA):** Evaluate color contrast ratios (≥4.5:1 text, ≥3:1 UI), visible focus indicators (SC 2.4.7), minimum 44px touch targets (SC 2.5.8), keyboard navigation, semantic HTML landmarks, and ARIA attributes.
    - **Performance Issues:** Detect unnecessary rendering, uncompressed assets, layout shifts (CLS), and inefficient DOM hierarchies.
-   - **Visual Consistency & Anti-Slop:** Audit against the Top 12 AI Slop patterns (`references/anti-slop-rules.md`). Flag generic purple/cyan gradient text, monotonous 3-column cards, and emoji icons.
+   - **Visual Consistency & Anti-Slop:** Audit against AI Slop patterns: reject generic purple/cyan gradient text, monotonous 3-column cards, floating blur blobs, and emoji UI icons.
    - **Design Token Alignment:** Run `node scripts/pure-saas.mjs check-tokens DESIGN.md --source src` to detect unmapped styles and raw styling drift.
    - **Missing Requirements:** Compare implementation against user specifications and `DESIGN.md`.
 
-2. **Strict Review Discipline:**
+3. **Strict Review Discipline:**
    - **Do not modify files by default.** Implement fixes only when explicitly requested by the user.
-   - Separate verified defects from potential risks or unverified areas.
+   - Separate verified defects from inferred risks or unverified areas.
 
-3. **Output Report:**
-   - Prioritize findings by severity (**Critical**, **High**, **Medium**, **Low**).
-   - Provide exact file references, line numbers, or reproducible evidence for each finding.
-   - Supply actionable remediation recommendations.
+4. **Output Report (Four-Part Actionable Findings):**
+   Every actionable finding must follow this structure:
+   - **Finding:** Specific defect and classification.
+   - **Evidence:** Concrete file path and line (`path/file.tsx:42`), plus code snippet or measured value.
+   - **Impact:** User impact and severity rating (**Critical**, **Warning**, or **Info**).
+   - **Fix:** Concrete, framework-idiomatic code replacement.

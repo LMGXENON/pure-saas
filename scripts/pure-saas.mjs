@@ -340,6 +340,8 @@ export function scanSourceDirectory(srcDir, designTokens = {}) {
     paletteClassViolations: [],
     arbitraryDimensionViolations: [],
     unresolvedTokenRefs: [],
+    colorFunctionViolations: [],
+    focusSuppressionWarnings: [],
     antiSlopWarnings: []
   };
 
@@ -471,6 +473,31 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
       }
     }
 
+    // Check color functions (rgb, rgba, hsl, hsla, oklch) outside of CSS custom property definitions
+    if (!line.includes('--') && !line.includes('var(')) {
+      const colorFuncMatches = line.match(COLOR_FUNCTION);
+      if (colorFuncMatches) {
+        for (const func of colorFuncMatches) {
+          results.colorFunctionViolations.push({
+            file: filePath,
+            line: lineNum,
+            value: func,
+            message: `Color function "${func}" in source styling bypasses semantic design tokens.`
+          });
+        }
+      }
+    }
+
+    // Check focus outline suppression without focus-visible replacement
+    if (/(?:outline-none|focus:outline-none|outline:\s*0|outline:\s*none)/i.test(line) && !line.includes('focus-visible')) {
+      results.focusSuppressionWarnings.push({
+        file: filePath,
+        line: lineNum,
+        pattern: 'focus-suppression',
+        message: 'Focus outline suppressed without visible focus replacement (WCAG 2.2 SC 2.4.7 violation).'
+      });
+    }
+
     // Check Anti-Slop patterns
     if (/bg-gradient-to-(r|br|bl|t)\s+from-(purple|indigo|pink)-/i.test(line)) {
       results.antiSlopWarnings.push({
@@ -478,6 +505,15 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
         line: lineNum,
         pattern: 'generic-gradient-mesh',
         message: 'Generic purple/indigo hero gradient detected without documented brand justification.'
+      });
+    }
+
+    if (/bg-clip-text\s+text-transparent/i.test(line)) {
+      results.antiSlopWarnings.push({
+        file: filePath,
+        line: lineNum,
+        pattern: 'gradient-text-slop',
+        message: 'Transparent gradient text detected; verify text contrast against background (WCAG 1.4.3).'
       });
     }
 
@@ -568,6 +604,74 @@ export function exportTokens(designData, format = 'css') {
   }
 
   throw new Error(`Unsupported export format: ${format}. Use 'css', 'tailwind', or 'json'.`);
+}
+
+// --- Design Style Intelligence Engine ---
+
+export function queryDesignIntelligence(options = {}) {
+  const catalogPath = path.resolve(__dirname, '../references/design-styles-catalog.json');
+  if (!fs.existsSync(catalogPath)) {
+    return { styles: [], products: {}, stacks: {} };
+  }
+
+  const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+  const styles = catalog.styles || [];
+  const products = catalog.product_archetypes || {};
+  const stacks = catalog.stack_guidance || {};
+
+  const query = (options.query || '').toLowerCase().trim();
+  const productFilter = (options.product || '').toLowerCase().trim();
+  const stackFilter = (options.stack || '').toLowerCase().trim();
+
+  let matchedStyles = styles;
+  if (query && query !== '--json') {
+    matchedStyles = styles.filter(s =>
+      s.name.toLowerCase().includes(query) ||
+      s.category.toLowerCase().includes(query) ||
+      s.keywords.some(k => k.toLowerCase().includes(query)) ||
+      s.best_for.some(b => b.toLowerCase().includes(query))
+    );
+  }
+
+  let matchedProduct = null;
+  if (productFilter) {
+    const key = Object.keys(products).find(k =>
+      k.toLowerCase().includes(productFilter) ||
+      products[k].name.toLowerCase().includes(productFilter) ||
+      products[k].keywords.some(kw => kw.toLowerCase().includes(productFilter))
+    );
+    if (key) matchedProduct = { id: key, ...products[key] };
+  } else if (query && query !== '--json') {
+    const key = Object.keys(products).find(k =>
+      k.toLowerCase().includes(query) ||
+      products[k].name.toLowerCase().includes(query) ||
+      products[k].keywords.some(kw => kw.toLowerCase().includes(query))
+    );
+    if (key) matchedProduct = { id: key, ...products[key] };
+  }
+
+  let matchedStack = null;
+  if (stackFilter) {
+    const key = Object.keys(stacks).find(k =>
+      k.toLowerCase().includes(stackFilter) ||
+      stacks[k].name.toLowerCase().includes(stackFilter)
+    );
+    if (key) matchedStack = { id: key, ...stacks[key] };
+  } else if (query && query !== '--json') {
+    const key = Object.keys(stacks).find(k =>
+      k.toLowerCase().includes(query) ||
+      stacks[k].name.toLowerCase().includes(query)
+    );
+    if (key) matchedStack = { id: key, ...stacks[key] };
+  }
+
+  return {
+    styles: matchedStyles,
+    product: matchedProduct,
+    stack: matchedStack,
+    allProducts: products,
+    allStacks: stacks
+  };
 }
 
 // --- Command Dispatcher & CLI ---
@@ -736,33 +840,45 @@ export async function runCli(args = process.argv.slice(2)) {
   }
 
   if (command === 'style' || command === 'styles') {
-    const query = (args[1] || '').toLowerCase().trim();
+    const prodIdx = args.indexOf('--product');
+    const productArg = prodIdx !== -1 ? args[prodIdx + 1] : '';
+    const stackIdx = args.indexOf('--stack');
+    const stackArg = stackIdx !== -1 ? args[stackIdx + 1] : '';
+    const queryArg = args.slice(1).filter(a => !a.startsWith('--') && a !== productArg && a !== stackArg).join(' ');
     const jsonOutput = args.includes('--json');
-    const catalogPath = path.resolve(__dirname, '../references/design-styles-catalog.json');
 
-    if (!fs.existsSync(catalogPath)) {
-      console.error('Error: Design styles catalog not found at ' + catalogPath);
-      return 1;
-    }
-
-    const { styles } = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-    let matches = styles;
-    if (query && query !== '--json') {
-      matches = styles.filter(s =>
-        s.name.toLowerCase().includes(query) ||
-        s.category.toLowerCase().includes(query) ||
-        s.keywords.some(k => k.toLowerCase().includes(query)) ||
-        s.best_for.some(b => b.toLowerCase().includes(query))
-      );
-    }
+    const result = queryDesignIntelligence({
+      query: queryArg,
+      product: productArg,
+      stack: stackArg
+    });
 
     if (jsonOutput) {
-      console.log(JSON.stringify(matches, null, 2));
+      console.log(JSON.stringify(result, null, 2));
       return 0;
     }
 
-    console.log(`=== Pure SaaS Design Style Intelligence (${matches.length} matching styles) ===\n`);
-    for (const style of matches) {
+    if (result.product) {
+      console.log(`=== Product Archetype: ${result.product.name} ===`);
+      console.log(`  Keywords: ${result.product.keywords.join(', ')}`);
+      console.log(`  Primary Style: ${result.product.primary_style}`);
+      console.log(`  Secondary Style: ${result.product.secondary_style}`);
+      console.log(`  Landing Page Pattern: ${result.product.landing_pattern}`);
+      console.log(`  Dashboard Style: ${result.product.dashboard_style}`);
+      console.log(`  Color Focus: ${result.product.color_focus}`);
+      console.log(`  Key Considerations: ${result.product.key_considerations}\n`);
+    }
+
+    if (result.stack) {
+      console.log(`=== Stack Guidance: ${result.stack.name} ===`);
+      for (const p of result.stack.patterns) {
+        console.log(`  • ${p}`);
+      }
+      console.log('');
+    }
+
+    console.log(`=== Pure SaaS Design Style Intelligence (${result.styles.length} matching styles) ===\n`);
+    for (const style of result.styles) {
       console.log(`[${style.name}] (${style.category})`);
       console.log(`  Keywords: ${style.keywords.join(', ')}`);
       console.log(`  Best For: ${style.best_for.join(', ')}`);

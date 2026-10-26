@@ -56,5 +56,7 @@ The default entry point for almost everything. Accepts arbitrary natural-languag
 1. **Follow the 10 Universal Execution Behaviors:** Follow all rules in `SKILL.md` (inspect context, coordinate capabilities automatically, execute directly for straightforward requests, preserve backend APIs, maintain `DESIGN.md`, test and refine, report honestly).
 2. **Never Fabricate Validation:** If a check fails, diagnose and resolve it. If an environment lacks browser inspection or screen-reader tooling, record the area as `untested`.
 3. **Preserve Architecture in Existing Apps:** Never rewrite backend APIs, auth flows, database structures, or automated test IDs during UI refactors without explicit user authorization.
-4. **Enforce Semantic Tokens:** Reject raw hex codes and arbitrary Tailwind numbers. Ensure all styling resolves to documented tokens in `DESIGN.md`.
+4. **Enforce Semantic Tokens:** Reject raw hex codes, color functions, and arbitrary Tailwind numbers. Ensure all styling resolves to documented tokens in `DESIGN.md`.
 5. **Enforce Anti-Slop Discipline:** Halt and challenge generic purple/cyan gradient text, excessive glassmorphism blur, repetitive 3-column feature cards, and emoji UI icons.
+6. **Follow "Read Before You Cite":** Never review from memory or invent guidelines. Route to relevant guides in `references/` (`cross-platform.md`, `code-audit.md`, `accessibility.md`, `typography.md`, etc.), open them, and cite exact files and sections.
+7. **Four-Part Review Findings:** Every reported review finding must provide Finding, Evidence (`file:line` or observed value), Impact (**Critical**, **Warning**, or **Info**), and Concrete Fix.

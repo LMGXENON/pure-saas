@@ -1,27 +1,34 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Pure SaaS Design Styles Catalog",
-  "description": "Curated catalog of UI/UX design archetypes adapted from ui-ux-pro-max-skill (MIT License, Copyright (c) 2024 Next Level Builder).",
+  "description": "Curated catalog of UI/UX design archetypes, product taxonomies, and stack guidance adapted from ui-ux-pro-max-skill (MIT License, Copyright (c) 2024 Next Level Builder).",
   "styles": [
     {
       "id": "minimalism-swiss",
       "name": "Minimalism & Swiss Style",
-      "category": "General",
+      "category": "General / SaaS",
       "keywords": ["clean", "spacious", "functional", "whitespace", "high-contrast", "geometric", "sans-serif", "grid-based"],
       "best_for": ["Enterprise apps", "dashboards", "documentation sites", "SaaS platforms", "developer tools"],
       "do_not_use_for": ["Creative portfolios", "playful consumer brands", "gaming websites"],
       "colors": {
         "canvas": "#ffffff",
         "surface": "#f8fafc",
+        "surface_raised": "#ffffff",
         "text_primary": "#09090b",
         "text_secondary": "#52525b",
-        "accent": "#09090b"
+        "text_muted": "#a1a1aa",
+        "accent": "#09090b",
+        "border": "#e4e4e7",
+        "status_error": "#ef4444",
+        "status_success": "#10b981",
+        "status_warning": "#f59e0b"
       },
       "typography": {
         "heading_family": "Geist, Inter, Helvetica Neue, sans-serif",
         "body_family": "Geist, Inter, sans-serif",
         "scale_ratio": "1.25 (Major Third)",
-        "reading_measure": "60ch to 65ch"
+        "reading_measure": "60ch to 65ch",
+        "tracking": "tight on headings (-0.02em to -0.03em), normal on body"
       },
       "geometry": {
         "radii": "0px to 4px",
@@ -40,16 +47,24 @@
       "colors": {
         "canvas": "#0c0d0e",
         "surface": "#151719",
+        "surface_raised": "#1d2023",
         "surface_sunken": "#050607",
         "text_primary": "#f9fafb",
         "text_secondary": "#9ca3af",
-        "accent": "#fa5d29"
+        "text_muted": "#6b7280",
+        "accent": "#fa5d29",
+        "border": "#26282c",
+        "status_error": "#f87171",
+        "status_success": "#34d399",
+        "status_warning": "#fbbf24"
       },
       "typography": {
         "heading_family": "Geist, -apple-system, sans-serif",
         "body_family": "Geist, sans-serif",
         "code_family": "JetBrains Mono, ui-monospace, SFMono-Regular, monospace",
-        "reading_measure": "65ch"
+        "scale_ratio": "1.2 (Minor Third)",
+        "reading_measure": "65ch",
+        "tracking": "tighter on headings (-0.025em), monospaced on numbers and code"
       },
       "geometry": {
         "radii": "4px to 6px",
@@ -68,14 +83,22 @@
       "colors": {
         "canvas": "#0f172a",
         "surface": "#1e293b",
+        "surface_raised": "#334155",
         "text_primary": "#f8fafc",
         "text_secondary": "#94a3b8",
-        "accent": "#38bdf8"
+        "text_muted": "#64748b",
+        "accent": "#38bdf8",
+        "border": "#334155",
+        "status_error": "#f43f5e",
+        "status_success": "#10b981",
+        "status_warning": "#f59e0b"
       },
       "typography": {
         "heading_family": "Inter, -apple-system, sans-serif",
         "body_family": "Inter, sans-serif",
-        "code_family": "JetBrains Mono, monospace"
+        "code_family": "JetBrains Mono, monospace",
+        "scale_ratio": "1.15 (Minor Second/Compact)",
+        "reading_measure": "compact tabular"
       },
       "geometry": {
         "radii": "4px to 6px",
@@ -94,15 +117,23 @@
       "colors": {
         "canvas": "#faf9f5",
         "surface": "#f4f1ea",
+        "surface_raised": "#ffffff",
         "text_primary": "#1c1917",
         "text_secondary": "#57534e",
-        "accent": "#14532d"
+        "text_muted": "#8c827a",
+        "accent": "#14532d",
+        "border": "#e7e2d6",
+        "status_error": "#b91c1c",
+        "status_success": "#15803d",
+        "status_warning": "#b45309"
       },
       "typography": {
         "heading_family": "Newsreader, Georgia, serif",
         "body_family": "Newsreader, Georgia, serif",
-        "ui_family": "Instrument Sans, sans-serif",
-        "reading_measure": "62ch to 68ch"
+        "ui_family": "Instrument Sans, -apple-system, sans-serif",
+        "scale_ratio": "1.333 (Perfect Fourth)",
+        "reading_measure": "62ch to 68ch",
+        "tracking": "normal to loose on body, optical serif weights"
       },
       "geometry": {
         "radii": "2px to 4px",
@@ -121,14 +152,22 @@
       "colors": {
         "canvas": "#121214",
         "surface": "#1a1a1e",
+        "surface_raised": "#26262b",
         "text_primary": "#ffffff",
         "text_secondary": "#a1a1aa",
-        "accent": "#f59e0b"
+        "text_muted": "#71717a",
+        "accent": "#f59e0b",
+        "border": "#27272e",
+        "status_error": "#ef4444",
+        "status_success": "#10b981",
+        "status_warning": "#f59e0b"
       },
       "typography": {
         "heading_family": "Cabinet Grotesk, Clash Display, sans-serif",
         "body_family": "Inter, sans-serif",
-        "code_family": "JetBrains Mono, monospace"
+        "code_family": "JetBrains Mono, monospace",
+        "scale_ratio": "1.25 (Major Third)",
+        "reading_measure": "60ch"
       },
       "geometry": {
         "radii": "6px to 8px",
@@ -146,20 +185,387 @@
       "colors": {
         "canvas": "#ffffff",
         "surface": "#f8fafc",
+        "surface_raised": "#ffffff",
         "text_primary": "#0f172a",
         "text_secondary": "#475569",
-        "accent": "#2563eb"
+        "text_muted": "#94a3b8",
+        "accent": "#2563eb",
+        "border": "#e2e8f0",
+        "status_error": "#dc2626",
+        "status_success": "#16a34a",
+        "status_warning": "#d97706"
       },
       "typography": {
         "heading_family": "General Sans, Inter, sans-serif",
-        "body_family": "Inter, sans-serif"
+        "body_family": "Inter, sans-serif",
+        "scale_ratio": "1.25 (Major Third)",
+        "reading_measure": "65ch"
       },
       "geometry": {
         "radii": "6px to 8px",
         "borders": "1px solid #e2e8f0"
       },
       "anti_slop_notes": "Support full keyboard shortcuts (Cmd+K). Avoid floating pill navigation bars and repetitive 3-column feature cards."
+    },
+    {
+      "id": "bento-box-grid",
+      "name": "Bento Box Grid & Visual Showcase",
+      "category": "Marketing / Product",
+      "keywords": ["bento-grid", "modular", "asymmetric-cards", "high-polish", "rich-media", "feature-tiles"],
+      "best_for": ["Product landing pages", "hardware announcements", "feature showcases", "flagship software launches"],
+      "do_not_use_for": ["High-frequency trading", "long-form reading", "dense data entry"],
+      "colors": {
+        "canvas": "#09090b",
+        "surface": "#18181b",
+        "surface_raised": "#27272a",
+        "text_primary": "#fafafa",
+        "text_secondary": "#a1a1aa",
+        "text_muted": "#71717a",
+        "accent": "#6366f1",
+        "border": "#27272a",
+        "status_error": "#f87171",
+        "status_success": "#4ade80",
+        "status_warning": "#facc15"
+      },
+      "typography": {
+        "heading_family": "Plus Jakarta Sans, Geist, sans-serif",
+        "body_family": "Inter, sans-serif",
+        "scale_ratio": "1.25 (Major Third)",
+        "reading_measure": "55ch to 60ch"
+      },
+      "geometry": {
+        "radii": "16px to 24px",
+        "borders": "1px solid rgba(255, 255, 255, 0.1)",
+        "shadows": "0 10px 30px -10px rgba(0, 0, 0, 0.5)"
+      },
+      "anti_slop_notes": "Every bento tile must have unique aspect ratios and content types (code demo, interactive preview, stat graphic). Never build identical 3-column boxes."
+    },
+    {
+      "id": "clean-consumer-ecommerce",
+      "name": "Clean Consumer & E-Commerce",
+      "category": "E-Commerce / Consumer",
+      "keywords": ["product-first", "high-clarity", "editorial-photography", "crisp-ctas", "frictionless-checkout"],
+      "best_for": ["Direct-to-consumer stores", "retail marketplaces", "subscription boxes", "boutique commerce"],
+      "do_not_use_for": ["Developer APIs", "system administration consoles"],
+      "colors": {
+        "canvas": "#ffffff",
+        "surface": "#fbfbfb",
+        "surface_raised": "#ffffff",
+        "text_primary": "#18181b",
+        "text_secondary": "#71717a",
+        "text_muted": "#a1a1aa",
+        "accent": "#000000",
+        "border": "#e4e4e7",
+        "status_error": "#e11d48",
+        "status_success": "#059669",
+        "status_warning": "#d97706"
+      },
+      "typography": {
+        "heading_family": "Outfit, General Sans, sans-serif",
+        "body_family": "Inter, sans-serif",
+        "scale_ratio": "1.25 (Major Third)",
+        "reading_measure": "55ch"
+      },
+      "geometry": {
+        "radii": "8px to 12px",
+        "borders": "1px solid #f4f4f5",
+        "shadows": "0 4px 12px rgba(0,0,0,0.04)"
+      },
+      "anti_slop_notes": "CTAs must have unambiguous contrast. Do not hide product imagery behind colored gradient overlays."
+    },
+    {
+      "id": "fintech-high-contrast",
+      "name": "High-Contrast FinTech & Capital Markets",
+      "category": "FinTech / Markets",
+      "keywords": ["institutional-trust", "precision", "high-contrast", "real-time-data", "risk-clarity"],
+      "best_for": ["Neobanks", "wealth management", "crypto exchanges", "institutional custody", "treasury software"],
+      "do_not_use_for": ["Children's games", "casual creative portfolios"],
+      "colors": {
+        "canvas": "#07090e",
+        "surface": "#0e131f",
+        "surface_raised": "#161d2e",
+        "text_primary": "#f1f5f9",
+        "text_secondary": "#94a3b8",
+        "text_muted": "#64748b",
+        "accent": "#0ea5e9",
+        "border": "#1e293b",
+        "status_error": "#ef4444",
+        "status_success": "#22c55e",
+        "status_warning": "#eab308"
+      },
+      "typography": {
+        "heading_family": "Inter, -apple-system, sans-serif",
+        "body_family": "Inter, sans-serif",
+        "code_family": "JetBrains Mono, monospace",
+        "scale_ratio": "1.2 (Minor Third)",
+        "reading_measure": "tabular"
+      },
+      "geometry": {
+        "radii": "4px to 6px",
+        "borders": "1px solid #1e293b"
+      },
+      "anti_slop_notes": "Use unambiguous status colors (green = positive return, red = negative return). Always align tabular numbers right."
+    },
+    {
+      "id": "healthcare-clinical",
+      "name": "Healthcare & Clinical Trust",
+      "category": "Healthcare / Medical",
+      "keywords": ["accessible-aaa", "calm", "clinical-clarity", "reassuring", "high-legibility", "zero-distraction"],
+      "best_for": ["EHR platforms", "telehealth", "patient portals", "clinical trials", "diagnostic tools"],
+      "do_not_use_for": ["Nightclub promotions", "hype consumer drops"],
+      "colors": {
+        "canvas": "#ffffff",
+        "surface": "#f0fdf4",
+        "surface_raised": "#ffffff",
+        "text_primary": "#064e3b",
+        "text_secondary": "#065f46",
+        "text_muted": "#047857",
+        "accent": "#059669",
+        "border": "#a7f3d0",
+        "status_error": "#dc2626",
+        "status_success": "#16a34a",
+        "status_warning": "#ca8a04"
+      },
+      "typography": {
+        "heading_family": "Plus Jakarta Sans, -apple-system, sans-serif",
+        "body_family": "Inter, sans-serif",
+        "scale_ratio": "1.25 (Major Third)",
+        "reading_measure": "60ch"
+      },
+      "geometry": {
+        "radii": "8px to 12px",
+        "borders": "1px solid #e2e8f0"
+      },
+      "anti_slop_notes": "Accessibility is mandatory (WCAG AAA contrast on critical text). Avoid anxiety-inducing flashing animations or micro-copy."
+    },
+    {
+      "id": "spatial-tactile-glass",
+      "name": "Spatial & Tactile Glass",
+      "category": "Modern OS / Native Feel",
+      "keywords": ["liquid-glass", "system-vibrancy", "optical-materials", "tactile-depth", "native-feeling"],
+      "best_for": ["macOS & iPadOS apps", "native desktop utilities", "Tauri & Electron apps", "modern spatial tools"],
+      "do_not_use_for": ["Text-heavy documentation", "low-end mobile web", "extreme battery saver modes"],
+      "colors": {
+        "canvas": "#0f172a",
+        "surface": "rgba(30, 41, 59, 0.75)",
+        "surface_raised": "rgba(51, 65, 85, 0.85)",
+        "text_primary": "#f8fafc",
+        "text_secondary": "#cbd5e1",
+        "text_muted": "#94a3b8",
+        "accent": "#38bdf8",
+        "border": "rgba(255, 255, 255, 0.12)",
+        "status_error": "#f87171",
+        "status_success": "#4ade80",
+        "status_warning": "#facc15"
+      },
+      "typography": {
+        "heading_family": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif",
+        "body_family": "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+        "scale_ratio": "1.25 (Major Third)",
+        "reading_measure": "60ch"
+      },
+      "geometry": {
+        "radii": "12px to 18px",
+        "borders": "1px solid rgba(255, 255, 255, 0.15)",
+        "shadows": "0 8px 32px 0 rgba(0, 0, 0, 0.37)"
+      },
+      "anti_slop_notes": "Glass must function as a translucent depth separator with backdrop-filter, not a gratuitous decorative blob. Never sacrifice WCAG contrast."
+    },
+    {
+      "id": "neo-brutalist",
+      "name": "Neo-Brutalist & High-Energy",
+      "category": "Creative / Indie",
+      "keywords": ["bold-borders", "hard-shadows", "raw-geometry", "high-contrast", "anti-trend", "playful-utility"],
+      "best_for": ["Indie hacker tools", "creative communities", "developer newsletters", "tech conferences"],
+      "do_not_use_for": ["Corporate banking", "medical devices", "legal compliance"],
+      "colors": {
+        "canvas": "#fffdfa",
+        "surface": "#ffffff",
+        "surface_raised": "#fffa65",
+        "text_primary": "#000000",
+        "text_secondary": "#262626",
+        "text_muted": "#525252",
+        "accent": "#ff3366",
+        "border": "#000000",
+        "status_error": "#ff2d55",
+        "status_success": "#00d084",
+        "status_warning": "#ffc107"
+      },
+      "typography": {
+        "heading_family": "Space Grotesk, Syne, sans-serif",
+        "body_family": "Public Sans, Inter, sans-serif",
+        "code_family": "Space Mono, monospace",
+        "scale_ratio": "1.333 (Perfect Fourth)",
+        "reading_measure": "55ch to 60ch"
+      },
+      "geometry": {
+        "radii": "0px to 4px",
+        "borders": "2px solid #000000",
+        "shadows": "4px 4px 0px #000000"
+      },
+      "anti_slop_notes": "Use hard, un-blurred offset box shadows (4px 4px 0px #000). Avoid soft gradients or rounded squircle pills."
     }
-  ]
+  ],
+  "product_archetypes": {
+    "saas_general": {
+      "name": "SaaS (General B2B / Cloud)",
+      "keywords": ["app", "b2b", "cloud", "general", "saas", "software", "subscription"],
+      "primary_style": "minimalism-swiss",
+      "secondary_style": "modern-enterprise-saas",
+      "landing_pattern": "Hero + Live Interactive Preview + Proof + Pricing",
+      "dashboard_style": "Data-Dense Operations Console",
+      "color_focus": "Trust neutral canvas (#ffffff) with high-contrast accent",
+      "key_considerations": "Clarity of value proposition, instantaneous demo, zero fluff."
+    },
+    "micro_saas": {
+      "name": "Micro SaaS & Indie Products",
+      "keywords": ["indie", "micro-saas", "niche", "solo", "bootstrap", "product-hunt"],
+      "primary_style": "bento-box-grid",
+      "secondary_style": "minimalism-swiss",
+      "landing_pattern": "Minimal & Direct + Interactive Demo",
+      "dashboard_style": "Executive Compact Dashboard",
+      "color_focus": "Punchy primary accent + clean negative space",
+      "key_considerations": "Fast page weight, immediate video/interactive preview."
+    },
+    "developer_tools": {
+      "name": "Developer Tools & Infrastructure",
+      "keywords": ["cli", "api", "infrastructure", "devops", "cloud", "terminal", "sdk", "observability"],
+      "primary_style": "developer-technical",
+      "secondary_style": "minimalism-swiss",
+      "landing_pattern": "Interactive Terminal / Code Walkthrough + Quickstart",
+      "dashboard_style": "High-density log viewer and metrics console",
+      "color_focus": "Dark mode canvas (#0c0d0e) with terminal highlight accent",
+      "key_considerations": "Real code snippets, copyable curl commands, keyboard shortcuts."
+    },
+    "ecommerce": {
+      "name": "E-Commerce & Retail",
+      "keywords": ["shop", "store", "buy", "retail", "products", "checkout", "commerce"],
+      "primary_style": "clean-consumer-ecommerce",
+      "secondary_style": "minimalism-swiss",
+      "landing_pattern": "Editorial product showcase with direct add-to-cart",
+      "dashboard_style": "Sales and order management table",
+      "color_focus": "Neutral canvas letting product photography lead",
+      "key_considerations": "Fast image loading, large touch targets, frictionless checkout."
+    },
+    "fintech": {
+      "name": "FinTech, Banking & Capital Markets",
+      "keywords": ["finance", "fintech", "banking", "crypto", "trading", "investment", "portfolio"],
+      "primary_style": "fintech-high-contrast",
+      "secondary_style": "data-dense-dashboard",
+      "landing_pattern": "Security-focused proof + real-time rates demo",
+      "dashboard_style": "Tabular real-time positions and PnL monitor",
+      "color_focus": "Dark navy or pure white with strict green/red return indicators",
+      "key_considerations": "Tabular numbers mandatory, explicit fee transparency, high security feel."
+    },
+    "analytics_bi": {
+      "name": "Analytics, BI & Observability",
+      "keywords": ["analytics", "metrics", "kpi", "telemetry", "reporting", "dashboard", "funnel"],
+      "primary_style": "data-dense-dashboard",
+      "secondary_style": "developer-technical",
+      "landing_pattern": "Live interactive metric sandbox",
+      "dashboard_style": "Modular KPI grid with drill-down tables",
+      "color_focus": "Neutral slate canvas with categorical chart colors",
+      "key_considerations": "Zero fake data visualization; compact padding; sticky headers."
+    },
+    "healthcare": {
+      "name": "Healthcare, Clinic & Medical",
+      "keywords": ["health", "healthcare", "medical", "clinic", "patient", "ehr", "doctor"],
+      "primary_style": "healthcare-clinical",
+      "secondary_style": "minimalism-swiss",
+      "landing_pattern": "Provider trust + patient appointment booking",
+      "dashboard_style": "High-clarity patient timeline and vitals record",
+      "color_focus": "Calm emerald/blue with WCAG AAA contrast",
+      "key_considerations": "Screen reader support, zero cognitive overload, accessible error messaging."
+    },
+    "portfolio_creative": {
+      "name": "Creative Agency & Portfolio",
+      "keywords": ["agency", "portfolio", "creative", "design", "studio", "showcase", "artist"],
+      "primary_style": "creative-studio",
+      "secondary_style": "neo-brutalist",
+      "landing_pattern": "Project case study narrative with full-bleed media",
+      "dashboard_style": "Asset timeline and client deliverables manager",
+      "color_focus": "Deep studio grey or crisp archival paper",
+      "key_considerations": "Typographic distinctiveness, fluid transitions, no cookie-cutter cards."
+    },
+    "productivity": {
+      "name": "Productivity & Collaboration",
+      "keywords": ["productivity", "task", "project", "kanban", "notes", "calendar", "team"],
+      "primary_style": "modern-enterprise-saas",
+      "secondary_style": "minimalism-swiss",
+      "landing_pattern": "Interactive board demo with instant action",
+      "dashboard_style": "Split-view navigation + keyboard-first task list",
+      "color_focus": "Subtle border hierarchy with intentional action blue",
+      "key_considerations": "Complete keyboard navigation (Cmd+K, j/k cursor), optimistic updates."
+    },
+    "mobile_app": {
+      "name": "Native Mobile & Multi-Platform Application",
+      "keywords": ["ios", "android", "mobile", "flutter", "react-native", "swiftui", "app"],
+      "primary_style": "spatial-tactile-glass",
+      "secondary_style": "minimalism-swiss",
+      "landing_pattern": "App store preview with dynamic device mockups",
+      "dashboard_style": "Bottom tab bar + sheet modal navigation",
+      "color_focus": "Platform dynamic system colors adapting to light and dark mode",
+      "key_considerations": "Minimum 44pt touch targets, safe area insets, swipe gestures."
+    }
+  },
+  "stack_guidance": {
+    "react_nextjs": {
+      "name": "React / Next.js (App Router)",
+      "patterns": [
+        "Use CSS Modules or Tailwind CSS with semantic token CSS variables (--color-bg-surface, etc.)",
+        "Extract interactive logic to Client Components ('use client'), keep layouts and server data fetching in Server Components",
+        "Implement accessible Radix UI or React Aria primitives for dialogs, dropdowns, and comboboxes",
+        "Support keyboard focus management and autofocus on modal open"
+      ]
+    },
+    "tailwind": {
+      "name": "Tailwind CSS (v3 / v4)",
+      "patterns": [
+        "Map all utility classes to semantic CSS variables in tailwind.config: bg-surface, text-primary, text-secondary, border-subtle",
+        "Reject arbitrary bracket dimensions (e.g. p-[17px]) in favor of standard 4px/8px spacing scale",
+        "Never use unmapped raw palette classes (e.g. bg-blue-500) directly in UI components",
+        "Use focus-visible:ring-2 focus-visible:ring-accent instead of bare outline-none"
+      ]
+    },
+    "vue_nuxt": {
+      "name": "Vue 3 / Nuxt",
+      "patterns": [
+        "Use Composition API with <script setup>",
+        "Leverage Headless UI or Radix Vue for accessible keyboard interactions",
+        "Bind semantic CSS custom properties in scoped <style> blocks"
+      ]
+    },
+    "svelte_kit": {
+      "name": "Svelte 5 / SvelteKit",
+      "patterns": [
+        "Use Svelte 5 Runes ($state, $derived, $effect) for reactive state",
+        "Use Bits UI or Melt UI for headless accessible components",
+        "Encapsulate styles with scoped CSS and semantic custom properties"
+      ]
+    },
+    "vanilla_web": {
+      "name": "Modern HTML5 & CSS",
+      "patterns": [
+        "Define all tokens as CSS custom properties under :root and [data-theme='dark']",
+        "Use native <dialog> element with showModal() for accessible modal behavior",
+        "Use CSS Container Queries (@container) and clamp() for fluid typography"
+      ]
+    },
+    "react_native": {
+      "name": "React Native & Expo",
+      "patterns": [
+        "Use useColorScheme() for dynamic dark/light appearance adaptation",
+        "Enforce minimum 44x44pt hitSlop or size on all Pressable components",
+        "Wrap views with SafeAreaView and handle KeyboardAvoidingView"
+      ]
+    },
+    "swiftui": {
+      "name": "SwiftUI (Apple Platforms)",
+      "patterns": [
+        "Use Color(uiColor: .systemBackground) and semantic system styles",
+        "Adopt Dynamic Type via .font(.body), .font(.title3)",
+        "Adopt SF Symbols with .symbolRenderingMode(.hierarchical)"
+      ]
+    }
+  }
 }
-

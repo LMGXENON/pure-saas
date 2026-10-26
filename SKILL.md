@@ -91,7 +91,40 @@ All commands must follow these 10 mandatory operational rules:
 
 ---
 
-## 4. Shared Quality Standards
+## 4. Reference Routing Architecture & The "Read Before You Cite" Rule
+
+Pure SaaS separates high-level agent instructions from deep architectural craft guides.
+Always keep core instructions focused; route specific questions to the relevant reference guide in `references/`.
+
+### Always-Loaded Base Context (Loaded for all non-trivial tasks)
+- [`design-principles.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-principles.md): Core design heuristics (Clarity, Deference, Depth, Authenticity).
+- [`typography.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/typography.md): Typographic pairings, scale ratios, line heights, tracking.
+- [`color-and-tokens.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/color-and-tokens.md): Semantic color hierarchy (`canvas`, `surface`, `text`, `action`, `border`), light/dark modes.
+- [`layout-and-composition.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/layout-and-composition.md): Grid systems, asymmetric layout hierarchy, content-first composition.
+- [`anti-slop-rules.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/anti-slop-rules.md): Anti-generic design rules, eliminating repetitive cards and AI tropes.
+
+### On-Demand Reference Routing (Load 2 to 4 files based on task scope)
+| Task or Scope | Relevant References to Load |
+| :--- | :--- |
+| **Buttons, Inputs & Form States** | [`interaction-states.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/interaction-states.md), [`accessibility.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/accessibility.md) |
+| **Cross-Device Breakpoints & Fluidity** | [`responsive-design.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/responsive-design.md), [`cross-platform.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/cross-platform.md) |
+| **Code Audits & Review Reports** | [`code-audit.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/code-audit.md), [`design-review.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-review.md) |
+| **Mobile & Desktop Frameworks** (React Native, Flutter, Electron, SwiftUI) | [`cross-platform.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/cross-platform.md), [`platform-guidelines.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/platform-guidelines.md) |
+| **Animation, Motion & Transitions** | [`motion.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/motion.md) |
+| **Reference Website URL Analysis** | [`reference-analysis.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/reference-analysis.md) |
+| **Design Style & Product Archetypes** | [`design-styles-catalog.json`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-styles-catalog.json) |
+
+### The "Read Before You Cite" Rule
+- **Read before making claims:** Never invent guideline numbers, token values, or measurements from memory. Open the matching reference file in `references/` and cite both file and heading.
+- **Actionable Findings Format:** Every review finding must include:
+  1. **Finding:** The concrete defect.
+  2. **Evidence:** Exact file and line (`path/file.tsx:42`), plus code snippet or measured value.
+  3. **Impact:** Severity (**Critical**, **Warning**, or **Info**) and user impact.
+  4. **Fix:** Framework-appropriate replacement code.
+
+---
+
+## 5. Shared Quality Standards
 
 Pure SaaS enforces high-craft engineering across all project types:
 
@@ -125,7 +158,7 @@ Every interactive element must explicitly account for:
 
 ---
 
-## 5. Instruction and Context Priority
+## 6. Instruction and Context Priority
 
 When resolving instructions or conflicting requirements, adhere to this strict hierarchy:
 
@@ -140,7 +173,7 @@ When resolving instructions or conflicting requirements, adhere to this strict h
 
 ---
 
-## 6. Reference Deconstruction Protocol (`/pure-saas reference`)
+## 7. Reference Deconstruction Protocol (`/pure-saas reference`)
 
 When reverse-engineering a visual reference:
 1. **Inspect:** Use real browser automation and DevTools to inspect DOM hierarchy, computed styles, CSS custom properties, animation curves, loaded assets, and responsive viewports.
@@ -165,7 +198,7 @@ When reverse-engineering a visual reference:
 
 ---
 
-## 7. The 9-Stage Design Engineering Lifecycle
+## 8. The 9-Stage Design Engineering Lifecycle
 
 When executing major design or redesign tasks via `/pure-saas` or `/pure-saas design`, coding agents execute these 9 disciplined stages:
 
