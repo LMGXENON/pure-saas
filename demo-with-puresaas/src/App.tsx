@@ -174,7 +174,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-canvas text-text-primary flex flex-col font-sans transition-colors">
       {/* 1. Senior Engineering Console App Bar (NO boilerplate sidebar) */}
-      <header className="sticky top-0 z-30 bg-surface-base/90 backdrop-blur-md border-b border-border-subtle px-4 sm:px-6 py-2.5 transition-colors">
+      <header className="sticky top-0 z-30 bg-surface-base/90 backdrop-blur-md border-b border-border-subtle px-4 sm:px-6 lg:px-8 py-2.5 transition-colors">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           {/* Brand + Context Switcher */}
           <div className="flex items-center gap-3">
@@ -225,9 +225,9 @@ export default function App() {
               Pure SaaS Enabled
             </span>
 
-            {/* Live Streaming Indicator */}
+            {/* Live Streaming Indicator (Solid Static Pill, Zero Pulsing Dot) */}
             <div className="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-muted border border-border-subtle text-xs font-mono text-text-secondary">
-              <span className="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-success"></span>
               <span>2,420 req/s</span>
             </div>
 
@@ -244,7 +244,7 @@ export default function App() {
       </header>
 
       {/* 2. Main High-Density Operational Canvas */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Context Header Strip & Time Window Scrubber */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-2 border-b border-border-subtle">
           <div>
@@ -277,7 +277,7 @@ export default function App() {
         {/* 3. Asymmetric Hero Telemetry Grid (66% Hero Chart / 34% Secondary Operational Console) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Hero Card: Live Volume & Interactive Telemetry (8 Cols) */}
-          <div className="lg:col-span-8 bg-surface-base rounded-xl border border-border-subtle p-5 shadow-subtle flex flex-col justify-between">
+          <div className="lg:col-span-8 bg-surface-base rounded-xl border border-border-subtle p-6 sm:p-7 shadow-subtle flex flex-col justify-between">
             <div>
               {/* Header with Metric Segmented Switcher */}
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
