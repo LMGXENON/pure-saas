@@ -69,13 +69,13 @@ When given an arbitrary natural-language request, Pure SaaS automatically:
 
 When you need a focused workflow, use one of the 5 specialist commands. Each inherits canonical instructions from `SKILL.md` and the project's persistent `DESIGN.md`:
 
-| Command | Purpose | Cursor Mention | Portable Prompt |
+| Command | Purpose | Cursor Command | Command Definition |
 | :--- | :--- | :--- | :--- |
-| **`/pure-saas design [request]`** | Establish or update the project's persistent design specification (`DESIGN.md`) before implementation. | `@pure-saas-design` | [`prompts/design.md`](prompts/design.md) |
-| **`/pure-saas polish [request]`** | Improve visual hierarchy, spacing, typography, surface lighting, micro-interactions, and custom SVGs without rebuilding working logic. | `@pure-saas-polish` | [`prompts/polish.md`](prompts/polish.md) |
-| **`/pure-saas review [request or scope]`** | Conduct a rigorous, evidence-based quality audit across concrete bugs, security weaknesses, accessibility problems, performance issues, and token drift. | `@pure-saas-review` | [`prompts/review.md`](prompts/review.md) |
-| **`/pure-saas reference [URL]`** | Reverse-engineer a visual reference via browser DevTools (DOM, computed styles, assets, typography, motion) and recreate requested design language. | `@pure-saas-reference` | [`prompts/reference.md`](prompts/reference.md) |
-| **`/pure-saas responsive [request]`** | Focus on responsive layouts across mobile, tablet, laptop, and desktop. Fix layout failures, horizontal overflow, touch targets, and navigation. | `@pure-saas-responsive` | [`prompts/responsive.md`](prompts/responsive.md) |
+| **`/pure-saas design [request]`** | Establish or update the project's persistent design specification (`DESIGN.md`) before implementation. | `/pure-saas design` | [`commands/design.md`](commands/design.md) |
+| **`/pure-saas polish [request]`** | Improve visual hierarchy, spacing, typography, surface lighting, micro-interactions, and custom SVGs without rebuilding working logic. | `/pure-saas polish` | [`commands/polish.md`](commands/polish.md) |
+| **`/pure-saas review [request or scope]`** | Conduct a rigorous, evidence-based quality audit across concrete bugs, security weaknesses, accessibility problems, performance issues, and token drift. | `/pure-saas review` | [`commands/review.md`](commands/review.md) |
+| **`/pure-saas reference [URL]`** | Reverse-engineer a visual reference via browser DevTools (DOM, computed styles, assets, typography, motion) and recreate requested design language. | `/pure-saas reference` | [`commands/reference.md`](commands/reference.md) |
+| **`/pure-saas responsive [request]`** | Focus on responsive layouts across mobile, tablet, laptop, and desktop. Fix layout failures, horizontal overflow, touch targets, and navigation. | `/pure-saas responsive` | [`commands/responsive.md`](commands/responsive.md) |
 
 ---
 
@@ -131,15 +131,14 @@ npx pure-saas init
 
 ## Supported Agent Integrations
 
-| Platform / Agent | Integration Type | Native Path / Mechanism | How to Operate |
+| Platform / Agent | Integration Mechanism | Entry Point File | How to Operate |
 | :--- | :--- | :--- | :--- |
-| **Claude Code** | **Verified Native Skill** | `.claude/skills/pure-saas`, `commands/` | `/pure-saas [request]` or specialist commands (`/pure-saas design`, etc.). |
-| **Cursor** | **Verified Native Rules** | `.cursor/rules/pure-saas*.mdc` | Type `@pure-saas` or `@pure-saas-<command>` in Composer. |
-| **OpenCode** | **Verified Native Skill** | `.agents/skills/pure-saas`, `.opencode/commands/` | Native slash commands (`/pure-saas`, `/pure-saas polish`, etc.). |
-| **Codex** | **Verified Native Plugin** | `.codex-plugin/plugin.json` | Plugin actions or portable prompts from `prompts/`. |
-| **Gemini / Antigravity** | **Verified Native Skill** | `GEMINI.md` / `skills/pure-saas` | Context instructions or native skill invocation. |
-| **Windsurf** | **Instruction-File Compatibility** | `.windsurfrules` | Rules file at project root or portable prompts from `prompts/`. |
-| **Generic / Others** | **Instruction-File Compatibility** | `SYSTEM_PROMPT.md` | Add instructions to system prompt or paste from `prompts/`. |
+| **Claude Code** | **Native Skill & Commands** | `SKILL.md`, `commands/` | `/pure-saas [request]` or specialist commands (`/pure-saas design`, etc.). |
+| **Cursor** | **Root Rules Architecture** | `.cursorrules`, `SKILL.md` | `/pure-saas` or specialist commands in Chat / Composer. |
+| **Gemini / Antigravity** | **Root Skill Entry Point** | `GEMINI.md`, `SKILL.md` | Context instructions or native `/pure-saas` invocation. |
+| **OpenCode** | **Native Commands** | `SKILL.md`, `commands/` | Native slash commands (`/pure-saas`, `/pure-saas polish`, etc.). |
+| **Windsurf** | **Root Rules Compatibility** | `.cursorrules`, `SKILL.md` | Rules file at project root or slash commands. |
+| **Codex / Generic** | **Skill System Prompt** | `SKILL.md`, `commands/` | Load `SKILL.md` into workspace or invoke commands directly. |
 
 ---
 

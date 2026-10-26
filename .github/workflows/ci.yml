@@ -27,6 +27,6 @@ jobs:
 
       - name: Validate Starter Templates & Fixtures
         run: |
-          node scripts/pure-saas.mjs validate templates/DESIGN.md
+          node scripts/pure-saas.mjs validate references/templates/DESIGN.md
           node scripts/pure-saas.mjs validate tests/fixtures/valid-design.md
 

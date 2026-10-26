@@ -6,4 +6,8 @@ Thumbs.db
 dist/
 coverage/
 .test-tmp/
-
+.cache/
+*.tgz
+*.skill
+evals/
+.omc/

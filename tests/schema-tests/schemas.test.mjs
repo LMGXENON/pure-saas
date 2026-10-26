@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 test('JSON Schemas: Syntax and Structure Verification', () => {
-  const schemasDir = path.resolve(process.cwd(), 'schemas');
+  const schemasDir = path.resolve(process.cwd(), 'references/schemas');
   const files = ['design-brief.schema.json', 'design-md.schema.json', 'reference-record.schema.json'];
 
   for (const file of files) {

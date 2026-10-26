@@ -4,26 +4,26 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { validateDesignDocument } from '../../scripts/pure-saas.mjs';
 
-test('Agents: All 7 agent integration adapters exist and contain documented instructions', () => {
-  const integrations = [
-    'claude-code',
-    'cursor',
-    'codex',
-    'windsurf',
-    'opencode',
-    'gemini',
-    'generic'
+test('Agents: Root agent entry points and command registries exist with documented instructions', () => {
+  const rootEntryPoints = [
+    '.cursorrules',
+    'GEMINI.md',
+    'SKILL.md',
+    'AGENTS.md'
   ];
 
-  for (const agent of integrations) {
-    const dir = path.resolve(process.cwd(), 'integrations', agent);
-    assert.ok(fs.existsSync(dir), `Integration directory must exist for ${agent}`);
-
-    const readme = path.join(dir, 'README.md');
-    assert.ok(fs.existsSync(readme), `README.md must exist in integrations/${agent}`);
-    const content = fs.readFileSync(readme, 'utf8');
-    assert.ok(content.length > 50, `README for ${agent} must contain substantive instructions`);
+  for (const file of rootEntryPoints) {
+    const fullPath = path.resolve(process.cwd(), file);
+    assert.ok(fs.existsSync(fullPath), `Root entry point ${file} must exist`);
+    const content = fs.readFileSync(fullPath, 'utf8');
+    assert.ok(content.length > 50, `${file} must contain substantive instructions`);
   }
+
+  // Check commands directory
+  const cmdDir = path.resolve(process.cwd(), 'commands');
+  assert.ok(fs.existsSync(cmdDir), 'commands directory must exist');
+  const commands = fs.readdirSync(cmdDir).filter(f => f.endsWith('.md'));
+  assert.strictEqual(commands.length, 6, 'Must contain exactly 6 command definitions in commands/');
 });
 
 test('Agents: SKILL.md and AGENTS.md satisfy required operational sections', () => {
@@ -48,13 +48,13 @@ test('Agents: Starter templates exist and satisfy schema and validation rules', 
   ];
 
   for (const tpl of templates) {
-    const tplPath = path.resolve(process.cwd(), 'templates', tpl);
-    assert.ok(fs.existsSync(tplPath), `Template ${tpl} must exist in templates/`);
+    const tplPath = path.resolve(process.cwd(), 'references/templates', tpl);
+    assert.ok(fs.existsSync(tplPath), `Template ${tpl} must exist in references/templates/`);
     const content = fs.readFileSync(tplPath, 'utf8');
     assert.ok(content.length > 50, `Template ${tpl} must contain substantial starter content`);
   }
 
-  const designValidation = validateDesignDocument(path.resolve(process.cwd(), 'templates/DESIGN.md'));
+  const designValidation = validateDesignDocument(path.resolve(process.cwd(), 'references/templates/DESIGN.md'));
   assert.strictEqual(designValidation.valid, true, 'Starter template DESIGN.md must pass validation');
   assert.strictEqual(designValidation.issues.length, 0, 'Starter template DESIGN.md must have zero issues');
 });
@@ -98,8 +98,8 @@ test('References: All 16 modular reference guides exist and satisfy architecture
 });
 
 test('Design Intelligence: Full dataset exists and satisfies structural requirements', () => {
-  const dataPath = path.resolve(process.cwd(), 'data/design-intelligence.json');
-  assert.ok(fs.existsSync(dataPath), 'data/design-intelligence.json must exist');
+  const dataPath = path.resolve(process.cwd(), 'references/design-intelligence.json');
+  assert.ok(fs.existsSync(dataPath), 'references/design-intelligence.json must exist');
 
   const content = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
   assert.ok(content.styles && content.styles.length >= 88, 'Must contain 88+ design styles');

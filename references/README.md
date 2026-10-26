@@ -27,7 +27,9 @@ Pure SaaS follows the **"Read Before You Cite"** architecture. Core agent instru
 | **[`hig-lookup.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/hig-lookup.md)** | Apple HIG Topic Index & Routing | **Apple platforms / HIG routing** | 123 Apple Human Interface Guidelines mapped across Foundations, Patterns, Components, and Inputs. |
 | **[`reference-analysis.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/reference-analysis.md)** | Live Reference Reverse Engineering | **Reference command** | DevTools inspection protocol, computed style extraction, 16-section `DESIGN.md` specification. |
 | **[`design-review.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-review.md)** | Quality Review Methodology | **Review command** | Evidence-based audit protocol, test vs untested tracking, verification reporting. |
-| **[`../data/design-intelligence.json`](file:///Users/lmgxenon/Downloads/pure%20saas/data/design-intelligence.json)** | Comprehensive Design Intelligence Dataset | **Design / Query CLI / Archetypes** | 88 design styles, 192 product types, 74 font pairings, 25 chart guides, 17 motion patterns, 22 stacks. |
+| **[`design-intelligence.json`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-intelligence.json)** | Comprehensive Design Intelligence Dataset | **Design / Query CLI / Archetypes** | 88 design styles, 192 product types, 74 font pairings, 25 chart guides, 17 motion patterns, 22 stacks. |
+| **[`templates/`](file:///Users/lmgxenon/Downloads/pure%20saas/references/templates)** | Starter Design Specification Templates | **Init / Design command** | Canonical starter templates for `DESIGN.md`, `design-brief.md`, and `reference-record.md`. |
+| **[`schemas/`](file:///Users/lmgxenon/Downloads/pure%20saas/references/schemas)** | JSON Schemas for Specification Validation | **Validation / Tooling** | Formal JSON schemas for `DESIGN.md`, `design-brief.md`, and `reference-record.md`. |
 
 ---
 

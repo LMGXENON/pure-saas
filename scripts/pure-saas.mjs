@@ -623,7 +623,7 @@ export function exportTokens(designData, format = 'css') {
 // --- Design Style Intelligence Engine ---
 
 export function queryDesignIntelligence(options = {}) {
-  const intelPath = path.resolve(__dirname, '../data/design-intelligence.json');
+  const intelPath = path.resolve(__dirname, '../references/design-intelligence.json');
   const catalogPath = path.resolve(__dirname, '../references/design-styles-catalog.json');
 
   let intel = null;
@@ -988,20 +988,33 @@ export async function runCli(args = process.argv.slice(2)) {
       return 1;
     }
 
-    const tplBriefPath = path.resolve(__dirname, '../templates/design-brief.md');
-    const tplDesignPath = path.resolve(__dirname, '../templates/DESIGN.md');
+    const tplBriefPath = path.resolve(__dirname, '../references/templates/design-brief.md');
+    const tplDesignPath = path.resolve(__dirname, '../references/templates/DESIGN.md');
 
-    fs.copyFileSync(tplBriefPath, briefDest);
-    fs.copyFileSync(tplDesignPath, designDest);
+    if (fs.existsSync(tplBriefPath)) {
+      fs.copyFileSync(tplBriefPath, briefDest);
+    } else {
+      fs.writeFileSync(briefDest, getStarterBrief(), 'utf8');
+    }
+
+    if (fs.existsSync(tplDesignPath)) {
+      fs.copyFileSync(tplDesignPath, designDest);
+    } else {
+      fs.writeFileSync(designDest, getStarterDesign(), 'utf8');
+    }
+
     console.log(`Initialized Pure SaaS project with starter templates:`);
     console.log(`  -> ${path.relative(process.cwd(), briefDest)}`);
     console.log(`  -> ${path.relative(process.cwd(), designDest)}`);
 
     if (args.includes('--reference') || args.includes('-r')) {
       const refDest = path.resolve(process.cwd(), 'reference-record.md');
-      const tplRefPath = path.resolve(__dirname, '../templates/reference-record.md');
+      const tplRefPath = path.resolve(__dirname, '../references/templates/reference-record.md');
       if (fs.existsSync(tplRefPath)) {
         fs.copyFileSync(tplRefPath, refDest);
+        console.log(`  -> ${path.relative(process.cwd(), refDest)}`);
+      } else {
+        fs.writeFileSync(refDest, getStarterReferenceRecord(), 'utf8');
         console.log(`  -> ${path.relative(process.cwd(), refDest)}`);
       }
     }
