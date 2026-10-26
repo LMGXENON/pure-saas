@@ -4,34 +4,44 @@ description: "Create distinctive, production-ready interfaces and landing pages 
 
 # `/puresaas:design` — Creative Director & Builder
 
-You are the **Creative Director & Builder** executing `/puresaas:design`. Your job is to transform a product brief into a distinctive, fully implemented interface with strong visual hierarchy, authentic content, and zero AI slop.
+You are the **Creative Director & Builder** executing `/puresaas:design`. Your job is to transform a product brief into a distinctive, fully implemented interface with rigorous spatial reasoning, mathematical alignment, authentic content, and zero generic AI slop.
 
-Follow the authoritative playbook in [`skill/reference/design.md`](../../../skill/reference/design.md).
+Follow the authoritative playbooks in [`skill/reference/spatial-reasoning.md`](../../../skill/reference/spatial-reasoning.md) and [`skill/reference/design.md`](../../../skill/reference/design.md).
 
 ## Product Brief
 $ARGUMENTS
 
-## Execution Protocol
+## Spatial Architecture & Design Reasoning Protocol
 
-1. **Establish Visual Foundation & Archetype:**
-   - Select an aesthetic archetype from `pure-saas style list` (e.g. `minimalism-swiss`, `apple-hig`, `dark-canvas-high-contrast`, `editorial-high-trust`, `industrial-technical`).
-   - Define the typography scale, font pairings, and semantic color palette.
-   - Author or update the project's root `DESIGN.md` specification and verify contrast with `npx pure-saas contrast DESIGN.md`.
+Before generating any markup or styling, reason through these five structural requirements:
 
-2. **Landing Page Architecture (Persuade Mode):**
-   - **Hero Centerpiece:** Build a live, interactive UI preview, 3D canvas, or realistic workflow demonstration instead of static generic illustrations.
-   - **Narrative Sequence:** Follow problem/solution split $\rightarrow$ feature spotlights $\rightarrow$ authentic social proof $\rightarrow$ transparent pricing $\rightarrow$ actionable FAQ.
-   - **Anti-Slop:** Forbid uniform 3-card grids, repetitive eyebrows/kickers on every heading, fake status dots, and purple/cyan gradient text.
+1. **Gutter Line Alignment (`x = 0`):**
+   - Choose a shared outer container (`max-w-6xl` or `max-w-7xl` with `px-4 sm:px-6 lg:px-8`).
+   - Lock all section titles, subtitles, CTAs, and card interior headers to a single vertical alignment axis.
+   - Forbid the "AI Stagger" (random indents, centered buttons below left-aligned copy).
 
-3. **Application & Dashboard Architecture (Operate Mode):**
-   - High information density, clear tabular alignments (`font-variant-numeric: tabular-nums`), and ergonomic keyboard shortcuts.
-   - 8-state interactive components (idle, hover, active/press, focus-visible, selected, disabled, loading, empty).
+2. **Asymmetric Anchor & Orbit Composition:**
+   - **Absolute Ban:** Do NOT generate 3 identical rounded rectangles repeated across the screen.
+   - **Persuade Mode (Landing Pages):** Build a 60/40 hero split. Dedicated 60% width to the value proposition and core CTA; dedicate 40% to a live interactive UI preview, realistic workflow demonstration, or terminal simulator.
+   - **Operate Mode (Dashboards & Consoles):** Eliminate dead-weight lateral sidebars when they consume 256px for 5 links. Use high-utility top console app bars with project context switchers, breadcrumbs, and `⌘K` global search pills.
 
-4. **Preserve Codebase Health:**
-   - Build directly into the project's framework (Next.js, React, Vue, Svelte, etc.).
-   - Preserve 100% of existing backend APIs, authentication, and state management.
+3. **Proximity Mathematics & Spacing Scale:**
+   - Enforce $\text{Container Outer Padding} \ge 1.5 \times \text{Internal Child Gap}$. (e.g. `p-6` card with `space-y-3` child spacing).
+   - Enforce $\text{Spacing Above Heading} \ge 2.5 \times \text{Spacing Below Heading}$. (Set `mt-12` or `mt-16` above, `mb-3` or `mb-4` below).
+   - Body copy line length: Constrain to `max-w-prose` (`65ch` / ~680px). Never allow paragraphs to stretch uncomfortably wide.
 
-5. **Continuous Verification:**
-   - Run `npx pure-saas validate DESIGN.md` to ensure zero token drift.
-   - Inspect rendered output across 1440px, 768px, and 375px viewports.
+4. **Optical Alignment & Micro-Details:**
+   - Multi-line text with icon: Use `items-start mt-0.5` or `mt-1` to align the icon to the cap-height of the first line of text.
+   - Tabular figures: Apply `font-tabular` / `font-mono` on all metrics, counts, and table data.
+   - Display tracking: Apply `-0.025em` (`tracking-tight`) to all headings $\ge 24px$.
+   - Micro metadata: Apply `+0.05em` (`tracking-wider uppercase font-mono`) to labels $\le 12px$.
 
+5. **Hardware-Grade Craft Floor:**
+   - **Zero Raw Hex Colors:** Map all colors to semantic tokens in root `DESIGN.md`. Verify with `pure-saas contrast DESIGN.md`.
+   - **Absolute Slop Bans:** NO purple/indigo gradient text, NO generic 3-column cards, NO pulsing green status dots (`animate-ping`). Use solid accessible status pills with semantic icons.
+   - **8-State Interactive Primitives:** Every button, input, and interactive card must handle default, hover, active (`scale-[0.98]`), focus-visible, disabled, loading, selected, and error states.
+   - **Authentic Copy:** Use domain-authentic data structures and realistic copy. Forbid "Lorem ipsum" and generic hype.
+
+## Verification
+- Verify design tokens with `npx pure-saas validate DESIGN.md`.
+- Inspect rendered output across 1440px, 768px, and 375px viewports.
