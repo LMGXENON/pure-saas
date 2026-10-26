@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useParams, Link } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { docsArticles, DocArticle, DocSection } from '../data/docsData';
 import { CodeBlock } from '../components/CodeBlock';
-import { AgentPromptBanner } from '../components/AgentPromptBanner';
 import {
   Search,
   Clock,
+  ChevronDown,
+  ChevronRight,
   Menu,
   X,
   ArrowLeft,
@@ -18,36 +19,46 @@ import {
   Hash,
   Share2,
   Check,
+  Copy,
   Rocket,
   Compass,
   Terminal,
   Sliders,
   HelpCircle,
   BookOpen,
+  Sparkles,
   ExternalLink
 } from 'lucide-react';
 
 export const DocsPage: React.FC = () => {
-  const { slug: routeSlug } = useParams<{ slug: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const slugParam = routeSlug || searchParams.get('slug');
+  const slugParam = searchParams.get('slug');
 
   const [activeSlug, setActiveSlug] = useState<string>(slugParam || docsArticles[0].slug);
   const [filterQuery, setFilterQuery] = useState<string>('');
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
+  const [copiedPrompt, setCopiedPrompt] = useState<boolean>(false);
 
-  // Sync state if URL route or search param changes
+  // Sync state if URL search param changes
   useEffect(() => {
     if (slugParam && slugParam !== activeSlug) {
       setActiveSlug(slugParam);
-    } else if (!slugParam && activeSlug !== docsArticles[0].slug) {
-      setActiveSlug(docsArticles[0].slug);
     }
   }, [slugParam]);
 
   const currentArticle: DocArticle = docsArticles.find(a => a.slug === activeSlug) || docsArticles[0];
   const categories = Array.from(new Set(docsArticles.map(a => a.category)));
+
+  // State to track collapsed categories in left sidebar
+  const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>({});
+
+  const toggleCategory = (cat: string) => {
+    setCollapsedCategories(prev => ({
+      ...prev,
+      [cat]: !prev[cat]
+    }));
+  };
 
   const handleSelectArticle = (slug: string) => {
     setActiveSlug(slug);
@@ -61,6 +72,12 @@ export const DocsPage: React.FC = () => {
     navigator.clipboard.writeText(url);
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 2000);
+  };
+
+  const handleCopyPrompt = (promptText: string) => {
+    navigator.clipboard.writeText(promptText);
+    setCopiedPrompt(true);
+    setTimeout(() => setCopiedPrompt(false), 2000);
   };
 
   const getCategoryIcon = (category: string) => {
@@ -81,34 +98,31 @@ export const DocsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-canvas text-text-primary overflow-x-hidden">
+    <div className="min-h-screen bg-canvas text-text-primary">
       {/* Sub-header / GitBook breadcrumb bar */}
-      <div className="border-b border-border-subtle bg-surface-base sticky top-14 z-30 px-4 sm:px-6 lg:px-8 py-2.5 w-full transition-colors">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 text-xs w-full">
+      <div className="border-b border-border-subtle bg-surface-base/80 backdrop-blur-md sticky top-14 z-30 px-4 sm:px-6 py-2.5">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 text-xs">
           {/* Breadcrumbs & Mobile Drawer Trigger */}
-          <div className="flex items-center gap-2 text-text-secondary truncate min-w-0">
+          <div className="flex items-center gap-2 text-text-secondary truncate">
             <button
-              type="button"
               onClick={() => setMobileDrawerOpen(true)}
-              className="md:hidden p-1.5 -ml-1 rounded-lg text-text-primary hover:bg-surface-hover transition-colors shrink-0 flex items-center gap-1.5 border border-border-subtle"
+              className="lg:hidden p-1.5 -ml-1 rounded-lg text-text-primary hover:bg-surface-hover transition-colors"
               aria-label="Open documentation navigation"
             >
-              <Menu className="w-4 h-4 text-accent" />
-              <span className="text-[11px] font-semibold text-text-primary">Docs Menu</span>
+              <Menu className="w-4 h-4" />
             </button>
-            <Link to="/" className="hover:text-text-primary font-medium transition-colors shrink-0">Home</Link>
-            <span className="text-text-muted shrink-0">/</span>
-            <Link to="/docs" className="hover:text-text-primary font-medium transition-colors shrink-0">Docs</Link>
-            <span className="text-text-muted shrink-0">/</span>
-            <span className="text-text-muted truncate hidden sm:inline">{currentArticle.category}</span>
-            <span className="text-text-muted hidden sm:inline">/</span>
+            <Link to="/" className="hover:text-text-primary font-medium transition-colors">Home</Link>
+            <span className="text-text-muted">/</span>
+            <Link to="/docs" className="hover:text-text-primary font-medium transition-colors">Docs</Link>
+            <span className="text-text-muted">/</span>
+            <span className="text-text-muted">{currentArticle.category}</span>
+            <span className="text-text-muted">/</span>
             <span className="text-text-primary font-semibold truncate">{currentArticle.title}</span>
           </div>
 
           {/* Quick Actions (Share button with clean alignment, no redundant GitHub link) */}
           <div className="flex items-center gap-2 shrink-0">
             <button
-              type="button"
               onClick={handleCopyPageLink}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-muted border border-border-subtle text-text-secondary hover:text-text-primary text-[11px] font-medium transition-colors hover:bg-surface-hover"
               title="Copy link to current article"
@@ -120,12 +134,12 @@ export const DocsPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-start w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* ========================================================= */}
-          {/* LEFT SIDEBAR: Persistent & Responsive Navigation          */}
+          {/* LEFT SIDEBAR: Persistent & Collapsible GitBook Navigation */}
           {/* ========================================================= */}
-          <aside className="hidden md:block md:col-span-4 lg:col-span-3 min-w-0 sticky top-28 space-y-4 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 custom-scrollbar">
+          <aside className="hidden lg:block lg:col-span-3 sticky top-28 space-y-4 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 custom-scrollbar">
             {/* Filter Input */}
             <div className="relative">
               <Search className="w-3.5 h-3.5 text-text-muted absolute left-3 top-2.5" />
@@ -138,8 +152,8 @@ export const DocsPage: React.FC = () => {
               />
             </div>
 
-            {/* Navigation Category Groups (Always visible headings and child links) */}
-            <nav className="space-y-6">
+            {/* Navigation Category Groups */}
+            <nav className="space-y-4">
               {categories.map(cat => {
                 const items = docsArticles.filter(
                   a => a.category === cat &&
@@ -147,41 +161,52 @@ export const DocsPage: React.FC = () => {
                 );
                 if (items.length === 0) return null;
 
-                return (
-                  <div key={cat} className="space-y-1.5">
-                    {/* Visible Sidebar Heading (Never collapsed, never hidden) */}
-                    <div className="flex items-center gap-2 px-2 py-1 text-[11px] font-bold uppercase tracking-wider text-text-muted select-none">
-                      <span className="p-1 rounded-md bg-surface-muted/60 text-accent flex items-center justify-center shrink-0 border border-border-subtle">
-                        {getCategoryIcon(cat)}
-                      </span>
-                      <span className="truncate">{cat}</span>
-                    </div>
+                const isCollapsed = collapsedCategories[cat];
 
-                    {/* All Existing Child Links (Always visible and navigable) */}
-                    <div className="space-y-0.5 pt-0.5">
-                      {items.map(art => {
-                        const isActive = art.slug === activeSlug;
-                        return (
-                          <Link
-                            key={art.slug}
-                            to={`/docs?slug=${art.slug}`}
-                            onClick={() => handleSelectArticle(art.slug)}
-                            className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center justify-between outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-1 focus-visible:ring-offset-canvas ${
-                              isActive
-                                ? 'bg-accent/10 dark:bg-accent/15 text-accent dark:text-accent font-semibold shadow-xs'
-                                : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover/80 active:bg-surface-selected'
-                            }`}
-                          >
-                            <div className="flex items-center gap-2 truncate min-w-0">
-                              {isActive && (
-                                <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-                              )}
-                              <span className="truncate">{art.title}</span>
-                            </div>
-                          </Link>
-                        );
-                      })}
-                    </div>
+                return (
+                  <div key={cat} className="space-y-1">
+                    <button
+                      onClick={() => toggleCategory(cat)}
+                      className="w-full flex items-center justify-between px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-text-muted hover:text-text-primary rounded-lg transition-colors group"
+                    >
+                      <div className="flex items-center gap-2 truncate">
+                        <span className="p-1 rounded-md bg-surface-muted/60 text-accent flex items-center justify-center shrink-0 border border-border-subtle">
+                          {getCategoryIcon(cat)}
+                        </span>
+                        <span className="truncate">{cat}</span>
+                      </div>
+                      {isCollapsed ? (
+                        <ChevronRight className="w-3.5 h-3.5 text-text-muted group-hover:text-text-primary shrink-0" />
+                      ) : (
+                        <ChevronDown className="w-3.5 h-3.5 text-text-muted group-hover:text-text-primary shrink-0" />
+                      )}
+                    </button>
+
+                    {!isCollapsed && (
+                      <div className="space-y-0.5 pt-0.5">
+                        {items.map(art => {
+                          const isActive = art.slug === activeSlug;
+                          return (
+                            <button
+                              key={art.slug}
+                              onClick={() => handleSelectArticle(art.slug)}
+                              className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center justify-between outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-1 focus-visible:ring-offset-canvas ${
+                                isActive
+                                  ? 'bg-accent/10 dark:bg-accent/15 text-accent dark:text-accent font-semibold shadow-xs'
+                                  : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover/80 active:bg-surface-selected'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2 truncate">
+                                {isActive && (
+                                  <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                                )}
+                                <span className="truncate">{art.title}</span>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -192,7 +217,7 @@ export const DocsPage: React.FC = () => {
           {/* MOBILE NAVIGATION DRAWER                                  */}
           {/* ========================================================= */}
           {mobileDrawerOpen && (
-            <div className="fixed inset-0 z-50 md:hidden">
+            <div className="fixed inset-0 z-50 lg:hidden">
               <div 
                 className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity" 
                 onClick={() => setMobileDrawerOpen(false)} 
@@ -201,7 +226,6 @@ export const DocsPage: React.FC = () => {
                 <div className="flex items-center justify-between border-b border-border-subtle pb-4">
                   <span className="font-bold text-sm text-text-primary">Documentation Menu</span>
                   <button
-                    type="button"
                     onClick={() => setMobileDrawerOpen(false)}
                     className="p-1 rounded-md text-text-secondary hover:text-text-primary"
                   >
@@ -220,7 +244,7 @@ export const DocsPage: React.FC = () => {
                   />
                 </div>
 
-                <nav className="space-y-6 flex-1">
+                <nav className="space-y-4 flex-1">
                   {categories.map(cat => {
                     const items = docsArticles.filter(
                       a => a.category === cat &&
@@ -229,20 +253,16 @@ export const DocsPage: React.FC = () => {
                     if (items.length === 0) return null;
 
                     return (
-                      <div key={cat} className="space-y-1.5">
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-text-muted px-2 py-1 flex items-center gap-2">
-                          <span className="p-1 rounded-md bg-surface-muted/60 text-accent flex items-center justify-center shrink-0 border border-border-subtle">
-                            {getCategoryIcon(cat)}
-                          </span>
-                          <span className="truncate">{cat}</span>
+                      <div key={cat} className="space-y-1">
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-text-muted px-2 py-1 flex items-center gap-1.5">
+                          <span>{cat}</span>
                         </div>
                         <div className="space-y-0.5">
                           {items.map(art => {
                             const isActive = art.slug === activeSlug;
                             return (
-                              <Link
+                              <button
                                 key={art.slug}
-                                to={`/docs?slug=${art.slug}`}
                                 onClick={() => handleSelectArticle(art.slug)}
                                 className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-2 ${
                                   isActive
@@ -252,7 +272,7 @@ export const DocsPage: React.FC = () => {
                               >
                                 {isActive && <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />}
                                 <span className="truncate">{art.title}</span>
-                              </Link>
+                              </button>
                             );
                           })}
                         </div>
@@ -265,9 +285,9 @@ export const DocsPage: React.FC = () => {
           )}
 
           {/* ========================================================= */}
-          {/* MAIN ARTICLE CONTENT (Responsive, shrinking properly)     */}
+          {/* MAIN ARTICLE CONTENT                                      */}
           {/* ========================================================= */}
-          <main className="min-w-0 w-full md:col-span-8 lg:col-span-9 xl:col-span-6 space-y-8">
+          <main className="lg:col-span-6 xl:col-span-6 space-y-8 max-w-3xl">
             {/* Header / Title block */}
             <header className="space-y-3 pb-6 border-b border-border-subtle">
               <div className="flex items-center gap-3 text-xs text-text-muted">
@@ -288,19 +308,37 @@ export const DocsPage: React.FC = () => {
               </p>
             </header>
 
-            {/* Compact Installation Prompt Banner (Prompt text completely hidden by default) */}
+            {/* Prominent Copyable AI Agent Setup Prompt (if configured) */}
             {currentArticle.agentPrompt && (
-              <AgentPromptBanner
-                promptText={currentArticle.agentPrompt}
-                className="w-full my-2"
-                description="Copy the installation instructions into your AI coding agent."
-              />
+              <div className="p-4 sm:p-5 rounded-2xl bg-surface-muted/60 border border-accent/20 space-y-3 shadow-xs">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-lg bg-accent text-white flex items-center justify-center shrink-0">
+                      <Sparkles className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-bold text-text-primary">Coding Agent Setup Prompt</h3>
+                      <p className="text-[11px] text-text-secondary">Copy and paste directly into Cursor, Windsurf, Claude Code, or Copilot</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleCopyPrompt(currentArticle.agentPrompt!)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-base border border-border-default text-text-primary hover:border-accent text-xs font-semibold transition-all shrink-0 shadow-2xs"
+                  >
+                    {copiedPrompt ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedPrompt ? 'Copied Prompt' : 'Copy Prompt'}</span>
+                  </button>
+                </div>
+                <div className="p-3 rounded-xl bg-canvas border border-border-subtle text-xs text-text-secondary font-mono leading-relaxed whitespace-pre-wrap select-all">
+                  {currentArticle.agentPrompt}
+                </div>
+              </div>
             )}
 
             {/* Sections Loop */}
-            <div className="space-y-12 min-w-0 w-full">
+            <div className="space-y-12">
               {currentArticle.sections.map((section: DocSection) => (
-                <section key={section.id} id={section.id} className="space-y-4 scroll-mt-32 min-w-0 w-full">
+                <section key={section.id} id={section.id} className="space-y-4 scroll-mt-32">
                   <div className="group flex items-center gap-2">
                     <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-text-primary">
                       {section.title}
@@ -353,12 +391,12 @@ export const DocsPage: React.FC = () => {
 
                   {/* Table */}
                   {section.table && (
-                    <div className="overflow-x-auto w-full max-w-full rounded-xl border border-border-subtle my-4">
-                      <table className="w-full text-left text-xs min-w-full">
+                    <div className="overflow-x-auto rounded-xl border border-border-subtle my-4">
+                      <table className="w-full text-left text-xs">
                         <thead className="bg-surface-muted/60 text-text-primary font-semibold border-b border-border-subtle">
                           <tr>
                             {section.table.headers.map((h, hIdx) => (
-                              <th key={hIdx} className="px-3.5 py-2.5 whitespace-nowrap">{h}</th>
+                              <th key={hIdx} className="px-3.5 py-2.5">{h}</th>
                             ))}
                           </tr>
                         </thead>
@@ -379,17 +417,17 @@ export const DocsPage: React.FC = () => {
 
                   {/* Steps List */}
                   {section.steps && (
-                    <div className="space-y-4 my-4 min-w-0 w-full">
+                    <div className="space-y-4 my-4">
                       {section.steps.map((st) => (
-                        <div key={st.step} className="p-4 rounded-xl bg-surface-base border border-border-subtle flex gap-4 min-w-0">
+                        <div key={st.step} className="p-4 rounded-xl bg-surface-base border border-border-subtle flex gap-4">
                           <div className="w-6 h-6 rounded-full bg-accent text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                             {st.step}
                           </div>
-                          <div className="space-y-1.5 flex-1 min-w-0">
+                          <div className="space-y-1.5 flex-1">
                             <h4 className="text-sm font-semibold text-text-primary">{st.title}</h4>
                             <p className="text-xs text-text-secondary leading-relaxed">{st.description}</p>
                             {st.code && (
-                              <div className="mt-2 min-w-0 w-full">
+                              <div className="mt-2">
                                 <CodeBlock code={st.code} language={st.language || 'bash'} />
                               </div>
                             )}
@@ -410,7 +448,7 @@ export const DocsPage: React.FC = () => {
 
                   {/* Code Sample */}
                   {section.codeSample && (
-                    <div className="my-4 min-w-0 w-full">
+                    <div className="my-4">
                       <CodeBlock
                         code={section.codeSample.code}
                         language={section.codeSample.language}
@@ -492,8 +530,8 @@ export const DocsPage: React.FC = () => {
           {/* ========================================================= */}
           {/* RIGHT SIDEBAR: "ON THIS PAGE" Outline & Quick Meta        */}
           {/* ========================================================= */}
-          <aside className="hidden xl:block xl:col-span-3 min-w-0 sticky top-28 space-y-6">
-            <div className="p-4 rounded-2xl bg-surface-base border border-border-subtle shadow-xs space-y-4 w-full overflow-hidden">
+          <aside className="hidden xl:block xl:col-span-3 sticky top-28 space-y-6">
+            <div className="p-4 rounded-2xl bg-surface-base border border-border-subtle shadow-xs space-y-4">
               <h3 className="text-[11px] font-bold uppercase tracking-wider text-text-muted">
                 On This Page
               </h3>
