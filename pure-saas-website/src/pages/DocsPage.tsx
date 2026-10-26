@@ -92,7 +92,7 @@ export const DocsPage: React.FC = () => {
     <div className="min-h-screen bg-canvas text-text-primary">
       {/* Sub-header / GitBook breadcrumb bar */}
       <div className="border-b border-border-subtle bg-canvas sticky top-14 z-30 w-full">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4 text-xs w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4 text-xs w-full">
           {/* Breadcrumbs & Mobile Drawer Trigger */}
           <div className="flex items-center gap-2 text-text-secondary truncate">
             <button
@@ -125,7 +125,7 @@ export const DocsPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full">
           {/* ========================================================= */}
           {/* LEFT SIDEBAR: Persistent & Collapsible GitBook Navigation */}
