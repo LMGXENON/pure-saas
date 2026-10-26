@@ -41,10 +41,14 @@ test('Command Architecture: Exactly 6 commands exist in commands/', () => {
   // Verify root agent entry points register all 6 commands
   const cursorRules = fs.readFileSync(path.resolve(process.cwd(), '.cursorrules'), 'utf8');
   const geminiRules = fs.readFileSync(path.resolve(process.cwd(), 'GEMINI.md'), 'utf8');
+  const windsurfRules = fs.readFileSync(path.resolve(process.cwd(), '.windsurfrules'), 'utf8');
+  const copilotRules = fs.readFileSync(path.resolve(process.cwd(), '.github/copilot-instructions.md'), 'utf8');
 
   for (const cmd of ALL_SIX_COMMANDS) {
     assert.ok(cursorRules.includes(cmd), `.cursorrules must document command: ${cmd}`);
     assert.ok(geminiRules.includes(cmd), `GEMINI.md must document command: ${cmd}`);
+    assert.ok(windsurfRules.includes(cmd), `.windsurfrules must document command: ${cmd}`);
+    assert.ok(copilotRules.includes(cmd), `.github/copilot-instructions.md must document command: ${cmd}`);
   }
 });
 

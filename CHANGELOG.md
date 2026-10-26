@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.1] - 2026-10-26
+
+### Verified & Improved
+- **Six Commands Architecture Audit:** Verified all 6 commands (`/pure-saas`, `design`, `polish`, `review`, `reference`, `responsive`) end-to-end with complete CLI and reference routing.
+- **Agent Platform Compatibility:** Added native root entry points `.windsurfrules` (Windsurf) and `.github/copilot-instructions.md` (GitHub Copilot), complementing `.cursorrules` and `GEMINI.md`.
+- **Agent Skills Standard Compliance:** Updated `SKILL.md` frontmatter with required `license`, `compatibility`, `metadata` (version, author), and complete slash triggers.
+- **Link Portability:** Eliminated local absolute file URIs in command definitions in favor of portable relative markdown links.
+- **Real-World Regression Suite:** Added real-world test targets for Marketing Landing Page and Native macOS Desktop interface with native headless Chrome verification.
+
+---
+
 ## [1.1.0] - 2026-10-26
 
 ### Added

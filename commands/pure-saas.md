@@ -27,6 +27,17 @@ If the request begins with one of the 5 specialist commands, execute that focuse
 ### B. Natural-Language Request (Default Execution Engine)
 For all other requests, `/pure-saas` is the default. It understands the user's intent, inspects the existing project context, determines the right capabilities, and completes the task autonomously without forcing the user to pick manual workflows or answer unnecessary questions.
 
+### C. Reference Retrieval & Design Intelligence Routing
+Before performing design or implementation work, retrieve exact reference documents and intelligence:
+```bash
+# Retrieve reference documents across Apple HIG, 22 frameworks, and craft guides
+npx pure-saas ref "<component, framework, platform, or topic>"
+
+# Query multi-domain design intelligence (styles, products, colors, typography, UX heuristics, landing, charts, motion)
+npx pure-saas query [domain] "<keyword or query>"
+npx pure-saas style "<query>" --product "<type>" --stack "<stack>"
+```
+
 It automatically coordinates:
 - **Design & Specification:** Creates or updates `DESIGN.md` when the scope warrants it.
 - **Full Implementation:** Builds real components, routing, states, and functionality—never stopping at a static scaffold or preliminary mockup.

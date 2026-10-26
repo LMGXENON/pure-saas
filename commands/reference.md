@@ -16,7 +16,7 @@ Analyse the supplied website as a visual and technical reference, then recreate 
 
 ## 1. Deep Reference Inspection: Browser DevTools
 
-When a URL is provided, perform a thorough technical and visual inspection of the reference website before implementing anything:
+When a URL is provided, perform a thorough technical and visual inspection of the reference website before implementing anything. Open [`references/reference-analysis.md`](../references/reference-analysis.md) for the complete reverse-engineering protocol:
 
 1. **Open the website in a real browser:** Use available browser automation or computer-use tools. Open DevTools and inspect the rendered page, DOM, Styles, Computed Styles, loaded stylesheets, scripts, network requests, and console output.
 2. **Inspect the HTML and DOM structure:** Identify page hierarchy, semantic elements, section boundaries, reusable components, navigation, layout containers, responsive wrappers, and content structure. Inspect relevant elements individually rather than relying only on initial HTML.
@@ -78,7 +78,7 @@ The document must capture all 16 required sections:
 ## 5. Required Execution Order
 
 1. **Inspect:** Inspect the reference website using available browser and DevTools capabilities.
-2. **Specify:** Create the complete 16-section `DESIGN.md`. Validate: `node scripts/pure-saas.mjs validate DESIGN.md`.
+2. **Specify:** Create the complete 16-section `DESIGN.md`. Validate: `npx pure-saas validate DESIGN.md` (or `node scripts/pure-saas.mjs validate DESIGN.md`).
 3. **Plan:** Establish design tokens and implementation architecture from that specification.
 4. **Build:** Build the full website using the specification, adapting content and branding to the user's product.
 5. **Compare:** Run the implementation locally and inspect it beside the reference at matching viewport sizes (1440px, 768px, 375px).

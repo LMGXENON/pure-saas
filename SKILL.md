@@ -1,6 +1,11 @@
 ---
 name: pure-saas
 description: Universal AI-agent skill and design enforcement toolkit for professional web design and UI/UX without generic AI patterns. Install via `npx skills add LMGXENON/pure-saas`.
+license: MIT
+compatibility: "Requires Node.js >= 18.0.0. Compatible with Claude Code, Cursor, Gemini, Antigravity, Windsurf, OpenCode, and GitHub Copilot."
+metadata:
+  version: "1.0.0"
+  author: "Pure SaaS Contributors"
 triggers:
   - "/pure-saas"
   - "/pure-saas design"

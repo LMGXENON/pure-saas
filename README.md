@@ -136,8 +136,9 @@ npx pure-saas init
 | **Claude Code** | **Native Skill & Commands** | `SKILL.md`, `commands/` | `/pure-saas [request]` or specialist commands (`/pure-saas design`, etc.). |
 | **Cursor** | **Root Rules Architecture** | `.cursorrules`, `SKILL.md` | `/pure-saas` or specialist commands in Chat / Composer. |
 | **Gemini / Antigravity** | **Root Skill Entry Point** | `GEMINI.md`, `SKILL.md` | Context instructions or native `/pure-saas` invocation. |
+| **Windsurf** | **Native Root Rules** | `.windsurfrules`, `SKILL.md` | Native rules at project root (`.windsurfrules`) or slash commands. |
+| **GitHub Copilot** | **Custom Instructions** | `.github/copilot-instructions.md`, `SKILL.md` | Repository instructions file or direct slash triggers. |
 | **OpenCode** | **Native Commands** | `SKILL.md`, `commands/` | Native slash commands (`/pure-saas`, `/pure-saas polish`, etc.). |
-| **Windsurf** | **Root Rules Compatibility** | `.cursorrules`, `SKILL.md` | Rules file at project root or slash commands. |
 | **Codex / Generic** | **Skill System Prompt** | `SKILL.md`, `commands/` | Load `SKILL.md` into workspace or invoke commands directly. |
 
 ---

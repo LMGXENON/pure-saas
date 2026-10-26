@@ -38,6 +38,8 @@ Pure SaaS operates via **one intelligent main command and five specialist comman
 | `README.md` | Concise overview, installation, usage, and commands | Yes |
 | `.cursorrules` | Root entry point for Cursor | Yes |
 | `GEMINI.md` | Root entry point for Gemini / Antigravity | Yes |
+| `.windsurfrules` | Root entry point for Windsurf | Yes |
+| `.github/copilot-instructions.md` | Repository custom instructions for GitHub Copilot | Yes |
 | `commands/*.md` | The 6 canonical user-facing slash command definitions (`pure-saas`, `design`, `polish`, `review`, `reference`, `responsive`) | Yes |
 | `references/hig/*.md` | 124 substantive individual Apple HIG reference documents across components, foundations, and patterns | Yes |
 | `references/frameworks/*.md` | 22 framework engineering guides (React, Next.js, Vue, Svelte, Tailwind, SwiftUI, Flutter, etc.) | Yes |

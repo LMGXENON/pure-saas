@@ -16,8 +16,16 @@ Establish or update the project's persistent design specification (`DESIGN.md`) 
 
 ## Operational Instructions
 
-1. **Establish Root-Level `DESIGN.md`:**
-   Create or update a comprehensive, implementation-ready `DESIGN.md` before coding when the task requires a new or substantially revised design. Document:
+1. **Retrieve Design Intelligence & Scaffold System:**
+   - Search matching design archetypes: `npx pure-saas style "<query>" --product "<type>" --stack "<stack>"`
+   - Query verified color palettes: `npx pure-saas query color "<type>"`
+   - Programmatically scaffold `DESIGN.md`:
+     ```bash
+     npx pure-saas design-system --product "<type>" --variance <1-10> --motion <1-10> --density <1-10> --out DESIGN.md
+     ```
+
+2. **Establish Root-Level `DESIGN.md`:**
+   Create or update a comprehensive, implementation-ready `DESIGN.md` before coding when the task requires a new or substantially revised design. Consult [`references/color-and-tokens.md`](../references/color-and-tokens.md), [`references/typography.md`](../references/typography.md), and [`references/layout-and-composition.md`](../references/layout-and-composition.md). Document:
    - **Design direction:** Aesthetic archetype, visual identity, brand personality, and design principles.
    - **Page architecture & IA:** Complete page or application structure, section sequence, content hierarchy, dimensions, and spacing.
    - **Layout system:** Container widths, max widths, margins, grids, flex layouts, sticky positioning, and overflow behavior.
@@ -30,11 +38,15 @@ Establish or update the project's persistent design specification (`DESIGN.md`) 
    - **Responsive behaviour:** Breakpoints and cross-device adaptations.
    - **Accessibility & Constraints:** Contrast targets (WCAG 2.2 AA), focus rings, semantic HTML, and technical constraints.
    - **Implementation Architecture:** Component tree, file structure, implementation checklist, and verification criteria.
-2. **Scope Discipline:**
+
+3. **Scope Discipline:**
    - Clearly distinguish observed facts, inferred values, and unknowns.
    - For small changes, update only the relevant specification instead of needlessly regenerating the entire document.
-3. **Validate:**
+
+4. **Validate & Audit:**
    ```bash
-   node scripts/pure-saas.mjs validate DESIGN.md
+   npx pure-saas validate DESIGN.md
+   npx pure-saas contrast DESIGN.md
    ```
-4. **Report:** Output a concise summary of the established or updated design specification.
+
+5. **Report:** Output a concise summary of the established or updated design specification.

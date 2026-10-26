@@ -14,6 +14,8 @@ test('Agents: Root agent entry points and command registries exist with document
   const rootEntryPoints = [
     '.cursorrules',
     'GEMINI.md',
+    '.windsurfrules',
+    '.github/copilot-instructions.md',
     'SKILL.md',
     'AGENTS.md'
   ];
@@ -175,5 +177,38 @@ test('Design Intelligence: Full dataset exists and satisfies structural requirem
   assert.ok(content.charts && content.charts.length >= 25, 'Must contain 25 chart guides');
   assert.ok(content.motion && content.motion.length >= 17, 'Must contain 17 motion patterns');
   assert.ok(content.stacks && Object.keys(content.stacks).length >= 20, 'Must contain 20+ stack guidelines');
+});
+
+test('Agent Skills Standard: SKILL.md adheres to open specification', () => {
+  const skillPath = path.resolve(process.cwd(), 'SKILL.md');
+  const content = fs.readFileSync(skillPath, 'utf8');
+
+  // Verify YAML frontmatter delimiters
+  assert.ok(content.startsWith('---\n'), 'SKILL.md must begin with YAML frontmatter delimiter');
+  const secondDash = content.indexOf('\n---\n', 4);
+  assert.ok(secondDash > 0, 'SKILL.md must have closing frontmatter delimiter');
+
+  const frontmatterStr = content.slice(4, secondDash);
+
+  // Parse key fields
+  assert.ok(/name:\s*pure-saas/.test(frontmatterStr), 'Must have valid skill name');
+  assert.ok(/description:\s*.+/.test(frontmatterStr), 'Must have non-empty description');
+  assert.ok(/license:\s*MIT/.test(frontmatterStr), 'Must declare license');
+  assert.ok(/compatibility:\s*.+/.test(frontmatterStr), 'Must declare compatibility');
+  assert.ok(/version:\s*"1\.0\.0"/.test(frontmatterStr), 'Must declare version in metadata');
+
+  // Verify all 6 slash triggers are declared
+  const expectedTriggers = [
+    '/pure-saas',
+    '/pure-saas design',
+    '/pure-saas polish',
+    '/pure-saas review',
+    '/pure-saas reference',
+    '/pure-saas responsive'
+  ];
+
+  for (const trigger of expectedTriggers) {
+    assert.ok(frontmatterStr.includes(trigger), `Frontmatter triggers must include: ${trigger}`);
+  }
 });
 
