@@ -561,9 +561,21 @@ export function scanSourceDirectory(srcDir, designTokens = {}, options = {}) {
     ...Object.keys(designTokens.colors || {}),
     ...Object.keys(designTokens.spacing || {}),
     ...Object.keys(designTokens.radii || {}).map(r => `radius-${r}`),
+    ...Object.keys(designTokens.radii || {}),
     ...Object.keys(designTokens.typography?.font_families || {}).map(f => `font-${f}`),
+    ...Object.keys(designTokens.typography?.font_families || {}).map(f => `font-family-${f}`),
     ...Object.keys(designTokens.typography?.scale || {}).map(s => `font-size-${s}`),
-    ...Object.keys(designTokens.layout || {}).map(l => `layout-${l}`)
+    ...Object.keys(designTokens.typography?.scale || {}).map(s => `font-size-${s.replace(/_/g, '-')}`),
+    ...Object.keys(designTokens.typography?.scale || {}).map(s => `font-${s}`),
+    ...Object.keys(designTokens.typography?.scale || {}).map(s => `font-${s.replace(/_/g, '-')}`),
+    ...Object.keys(designTokens.typography?.line_heights || {}).map(l => `line-height-${l}`),
+    ...Object.keys(designTokens.typography?.letter_spacings || {}).map(l => `letter-spacing-${l}`),
+    ...Object.keys(designTokens.motion || {}),
+    ...Object.keys(designTokens.shadows || {}).map(s => `shadow-${s}`),
+    ...Object.keys(designTokens.layout || {}).map(l => `layout-${l}`),
+    ...Object.keys(designTokens.layout || {}).map(l => l.replace(/_/g, '-')),
+    ...Object.keys(flattenObject(designTokens)).map(k => k.replace(/[\._]/g, '-')),
+    ...Object.keys(flattenObject(designTokens)).map(k => k.split(/[\._]/).pop())
   ]);
 
   function walk(dir) {

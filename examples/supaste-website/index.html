@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supaste — Clipboard History Manager for Mac</title>
+  <meta name="description" content="Supaste is a local-first clipboard and screenshot history app for Mac. Save copied text, links, images, files, code, colors, and screenshots in a beautiful searchable timeline.">
+  <link rel="icon" type="image/png" href="assets/app-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Interactive MacBook Notch Shelf Simulator -->
+  <aside class="notch-shelf-simulator" aria-label="MacBook Notch Shelf Simulator">
+    <button class="notch-hardware" type="button" aria-label="Toggle MacBook notch shelf drawer">
+      <div class="notch-lens"></div>
+      <span class="notch-hint">Hover / Click Notch</span>
+      <div class="notch-sensor"></div>
+    </button>
+    <div class="notch-drawer" role="region" aria-label="Notch Shelf Drawer">
+      <div class="notch-drawer-header">
+        <span class="notch-drawer-title">Top Notch Shelf</span>
+        <span class="notch-drawer-subtitle">Drag or Click to Copy</span>
+      </div>
+      <div class="notch-clips-grid">
+        <button class="notch-clip-item" type="button">
+          <div class="notch-clip-type">Color</div>
+          <div class="notch-clip-text">#0071E3</div>
+        </button>
+        <button class="notch-clip-item" type="button">
+          <div class="notch-clip-type">Snippet</div>
+          <div class="notch-clip-text">git rebase -i</div>
+        </button>
+        <button class="notch-clip-item" type="button">
+          <div class="notch-clip-type">Asset</div>
+          <div class="notch-clip-text">icon-logo.svg</div>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sticky Site Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo" aria-label="Supaste Home">
+        <img src="assets/app-icon.png" alt="Supaste App Icon" class="brand-icon" width="32" height="32">
+        <span>Supaste</span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+          <li><a href="#spotlight" class="nav-link">Cooldock</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#pricing" class="btn-pill-dark">Download for Mac</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="eyebrow-badge">Clipboard history</div>
+        
+        <h1 class="hero-title">
+          Copy once. <em>Reuse anytime.</em>
+        </h1>
+        
+        <p class="hero-description">
+          Supaste saves your clipboard and screenshots in a beautiful visual history, automatically grouped by type, app, and custom collections.
+        </p>
+
+        <div class="hero-meta">
+          <span>Fully offline and privacy-first</span>
+          <span>•</span>
+          <span>macOS Sonoma 14.0 or later</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#pricing" class="btn-pill-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download for macOS
+          </a>
+          <span class="award-badge">#4 on Product Hunt</span>
+          <span class="award-badge">Honorable Mention</span>
+        </div>
+
+        <!-- Interactive macOS Window Mockup -->
+        <div class="window-mockup-wrapper">
+          <div class="macos-window">
+            <div class="window-titlebar">
+              <div class="window-traffic-lights">
+                <span class="traffic-light red"></span>
+                <span class="traffic-light yellow"></span>
+                <span class="traffic-light green"></span>
+              </div>
+
+              <div class="window-search-bar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="window-search-input" class="window-search-input" placeholder="Search clips (try 'color', 'git', 'design')..." aria-label="Search clipboard history">
+              </div>
+
+              <div class="window-category-tabs" role="tablist">
+                <button type="button" class="category-tab is-active" data-category="all" role="tab" aria-selected="true">All</button>
+                <button type="button" class="category-tab" data-category="text" role="tab" aria-selected="false">Text</button>
+                <button type="button" class="category-tab" data-category="images" role="tab" aria-selected="false">Images</button>
+                <button type="button" class="category-tab" data-category="code" role="tab" aria-selected="false">Code</button>
+                <button type="button" class="category-tab" data-category="colors" role="tab" aria-selected="false">Colors</button>
+              </div>
+            </div>
+
+            <div class="window-body">
+              <div class="clipboard-cards-grid" id="cards-grid">
+                <!-- Card 1: Text -->
+                <article class="clip-card" data-type="text" tabindex="0" role="button" aria-label="Copy design brief snippet">
+                  <div class="clip-card-header">
+                    <span class="clip-badge text">Text</span>
+                    <span class="clip-time">2m ago</span>
+                  </div>
+                  <div class="clip-content">
+                    "Minimal editorial product landing page with macOS-inspired polish."
+                  </div>
+                  <div class="clip-card-footer">
+                    <span>Figma</span>
+                    <span>14 words</span>
+                  </div>
+                </article>
+
+                <!-- Card 2: Color -->
+                <article class="clip-card" data-type="colors" tabindex="0" role="button" aria-label="Copy hex color 0071E3">
+                  <div class="clip-card-header">
+                    <span class="clip-badge color">Color</span>
+                    <span class="clip-time">14m ago</span>
+                  </div>
+                  <div class="clip-color-preview">
+                    <div class="color-swatch" style="background-color: var(--color-action-primary);"></div>
+                    <div>
+                      <div class="color-hex">#0071E3</div>
+                      <span class="clip-time">Apple System Blue</span>
+                    </div>
+                  </div>
+                  <div class="clip-card-footer">
+                    <span>Color Picker</span>
+                    <span>HEX / sRGB</span>
+                  </div>
+                </article>
+
+                <!-- Card 3: Code -->
+                <article class="clip-card" data-type="code" tabindex="0" role="button" aria-label="Copy terminal command">
+                  <div class="clip-card-header">
+                    <span class="clip-badge code">Code</span>
+                    <span class="clip-time">28m ago</span>
+                  </div>
+                  <div class="clip-content code-snippet">
+                    git commit -m "feat: zero slop design tokens"
+                  </div>
+                  <div class="clip-card-footer">
+                    <span>Terminal</span>
+                    <span>zsh</span>
+                  </div>
+                </article>
+
+                <!-- Card 4: Image -->
+                <article class="clip-card" data-type="images" tabindex="0" role="button" aria-label="Copy app icon preview">
+                  <div class="clip-card-header">
+                    <span class="clip-badge image">Image</span>
+                    <span class="clip-time">1h ago</span>
+                  </div>
+                  <div class="clip-content">
+                    <img src="assets/app-icon.png" alt="Supaste Icon Thumbnail" style="width: 48px; height: 48px; border-radius: 8px;">
+                  </div>
+                  <div class="clip-card-footer">
+                    <span>Finder</span>
+                    <span>1024 × 1024 PNG</span>
+                  </div>
+                </article>
+
+                <!-- Card 5: Text -->
+                <article class="clip-card" data-type="text" tabindex="0" role="button" aria-label="Copy release notes">
+                  <div class="clip-card-header">
+                    <span class="clip-badge text">Text</span>
+                    <span class="clip-time">2h ago</span>
+                  </div>
+                  <div class="clip-content">
+                    https://buy.polar.sh/polar_cl_YQNMbLCObEeox7yoSmkQdPZ0dPzKE9Vfc2paR3Z4IWl
+                  </div>
+                  <div class="clip-card-footer">
+                    <span>Safari</span>
+                    <span>Polar URL</span>
+                  </div>
+                </article>
+
+                <!-- Card 6: Code -->
+                <article class="clip-card" data-type="code" tabindex="0" role="button" aria-label="Copy CSS rule">
+                  <div class="clip-card-header">
+                    <span class="clip-badge code">Code</span>
+                    <span class="clip-time">3h ago</span>
+                  </div>
+                  <div class="clip-content code-snippet">
+                    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                  </div>
+                  <div class="clip-card-footer">
+                    <span>VS Code</span>
+                    <span>CSS</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Value Showcase -->
+    <section id="features" class="container">
+      <div class="section-headline-block">
+        <h2 class="section-title">Your clipboard, wherever you need it</h2>
+        <p class="section-subtitle">
+          Use the notch shelf, quick search, inline paste, drag and drop, and the full Library view to find, reuse, and organize anything you've copied.
+        </p>
+      </div>
+
+      <!-- Feature 1: Smarter, Faster -->
+      <div class="feature-editorial-row">
+        <div class="feature-info">
+          <span class="feature-tag">Ecosystem</span>
+          <h3 class="feature-title">Smarter, Faster, and Connected Across Your Mac</h3>
+          <p class="feature-description">
+            Keep your clipboard synced with iCloud, automatically organize clips with Smart Auto-Filter, and share files instantly through AirDrop without friction.
+          </p>
+        </div>
+        <div class="feature-media-frame">
+          <img src="assets/hero-screenshot.jpeg" alt="Supaste connected across your Mac interface" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Feature 2: Library -->
+      <div class="feature-editorial-row reverse">
+        <div class="feature-info">
+          <span class="feature-tag">Organization</span>
+          <h3 class="feature-title">One Beautiful Place for Everything You Save</h3>
+          <p class="feature-description">
+            Keep your clipboard history, colors, icons, assets, images, text, and important saves beautifully organized in one unified visual database.
+          </p>
+        </div>
+        <div class="feature-media-frame">
+          <img src="assets/library-feature.png" alt="Supaste Clipboard Library full screen view" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Testimonial Quote -->
+      <div class="testimonial-block">
+        <blockquote class="testimonial-quote">
+          "I've been using Supaste now for a week and I LOVE It. I've been looking for this my entire career. I've tried other clipboard managers but none feel as smooth or well designed."
+        </blockquote>
+        <div class="testimonial-author">
+          <img src="assets/solt-wagner.png" alt="Solt Wagner" class="author-avatar" width="48" height="48">
+          <div>
+            <div class="author-name">Solt Wagner</div>
+            <div class="author-role">Lead Designer & Developer</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3: Notch Shelf -->
+      <div class="feature-editorial-row">
+        <div class="feature-info">
+          <span class="feature-tag">Innovation</span>
+          <h3 class="feature-title">Reuse Anything Without Switching Apps</h3>
+          <p class="feature-description">
+            Keep your most useful clips right at the top of your Mac. Drag images, assets, text, colors, SVGs, and files directly to and from your notch without disrupting focus.
+          </p>
+        </div>
+        <div class="feature-media-frame">
+          <img src="assets/notch-shelf.webp" alt="Notch shelf interface showing clip items pinned to the MacBook notch" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Grid (6 Cards) -->
+    <section class="feature-grid-section container">
+      <div class="section-headline-block">
+        <h2 class="section-title">Built for speed, craft, and privacy</h2>
+        <p class="section-subtitle">Designed from the ground up to feel like an essential part of macOS.</p>
+      </div>
+
+      <div class="feature-cards-grid">
+        <!-- 1. OCR -->
+        <article class="feature-tile">
+          <div class="feature-tile-media">
+            <img src="assets/feature-ocr.webp" alt="Screenshot OCR text recognition" loading="lazy">
+          </div>
+          <div>
+            <h3 class="feature-tile-title">Screenshot & Image OCR</h3>
+            <p class="feature-tile-desc">Extract text from screenshots, photos, and scanned documents instantly with on-device Apple Vision OCR.</p>
+          </div>
+        </article>
+
+        <!-- 2. Multi-Clip -->
+        <article class="feature-tile">
+          <div class="feature-tile-media">
+            <img src="assets/feature-multiclip.webp" alt="Multi clip sequential copy" loading="lazy">
+          </div>
+          <div>
+            <h3 class="feature-tile-title">Multi-Clip Copy</h3>
+            <p class="feature-tile-desc">Copy multiple items in sequence and paste them all together, or pick which one to insert into your document.</p>
+          </div>
+        </article>
+
+        <!-- 3. Shortcuts -->
+        <article class="feature-tile">
+          <div class="feature-tile-media">
+            <img src="assets/feature-shortcuts.webp" alt="Global keyboard shortcuts" loading="lazy">
+          </div>
+          <div>
+            <h3 class="feature-tile-title">Inline Shortcuts</h3>
+            <p class="feature-tile-desc">Quick keystrokes (Cmd+Shift+V or custom) summon the popup without taking your fingers off the keyboard.</p>
+          </div>
+        </article>
+
+        <!-- 4. Reminders -->
+        <article class="feature-tile">
+          <div class="feature-tile-media">
+            <img src="assets/feature-reminders.webp" alt="Clip reminders" loading="lazy">
+          </div>
+          <div>
+            <h3 class="feature-tile-title">Clip Reminders</h3>
+            <p class="feature-tile-desc">Pin important research, links, and customer quotes, and schedule reminders to revisit them later.</p>
+          </div>
+        </article>
+
+        <!-- 5. Quick Paste -->
+        <article class="feature-tile">
+          <div class="feature-tile-media">
+            <img src="assets/feature-quickpaste.webp" alt="Quick paste popup modal" loading="lazy">
+          </div>
+          <div>
+            <h3 class="feature-tile-title">Quick Paste Anywhere</h3>
+            <p class="feature-tile-desc">Instant floating paste modal right at your cursor position with fast keyboard arrow navigation.</p>
+          </div>
+        </article>
+
+        <!-- 6. Library -->
+        <article class="feature-tile">
+          <div class="feature-tile-media">
+            <img src="assets/app-window.webp" alt="Full library archive view" loading="lazy">
+          </div>
+          <div>
+            <h3 class="feature-tile-title">Your Clipboard Library</h3>
+            <p class="feature-tile-desc">Full-screen visual archive with custom tags, source application filters, and instant fuzzy search.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Personas ("Built for everything you copy") -->
+    <section class="personas-section container">
+      <div class="section-headline-block">
+        <h2 class="section-title">Built for everything you copy</h2>
+        <p class="section-subtitle">Tailored workflows for professionals who live on their Macs.</p>
+      </div>
+
+      <div class="personas-grid">
+        <div class="persona-card">
+          <h3 class="persona-role">Designers</h3>
+          <p class="persona-text">Keep SVGs, gradients, visual references, hex codes, and icon assets close at hand in a beautiful searchable timeline.</p>
+        </div>
+
+        <div class="persona-card">
+          <h3 class="persona-role">Developers</h3>
+          <p class="persona-text">Save code snippets, terminal commands, stack traces, JSON, API responses, and GitHub URLs automatically.</p>
+        </div>
+
+        <div class="persona-card">
+          <h3 class="persona-role">Content & Marketing</h3>
+          <p class="persona-text">Capture hooks, taglines, SEO keywords, drafts, research links, and campaign screenshots before they disappear.</p>
+        </div>
+
+        <div class="persona-card">
+          <h3 class="persona-role">Customer Support</h3>
+          <p class="persona-text">Reuse your best canned replies, email templates, product links, customer notes, and troubleshooting screenshots.</p>
+        </div>
+
+        <div class="persona-card">
+          <h3 class="persona-role">Founders & Operators</h3>
+          <p class="persona-text">Organize investor notes, competitor screenshots, pricing pages, URLs, and daily diligence in one visual archive.</p>
+        </div>
+
+        <div class="persona-card">
+          <h3 class="persona-role">Everyday Mac Users</h3>
+          <p class="persona-text">Find copied links, addresses, tracking numbers, recipes, quotes, and screenshots whenever you need them again.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Pricing Section -->
+    <section id="pricing" class="pricing-section">
+      <div class="container">
+        <div class="section-headline-block">
+          <h2 class="section-title">One price. Lifetime access.</h2>
+          <p class="section-subtitle">
+            One-time payment. No subscription.<br>Get lifetime access to Supaste on your Mac.
+          </p>
+        </div>
+
+        <div class="pricing-card-wrapper">
+          <div class="pricing-card-topbar">
+            <div class="pricing-topbar-left">
+              <img src="assets/app-icon.png" alt="Supaste Icon" class="pricing-topbar-icon" width="24" height="24">
+              <span>Supaste app for macOS</span>
+            </div>
+            <span style="font-size: var(--font-size-micro); opacity: 0.7;">macOS 14.0+</span>
+          </div>
+
+          <!-- Interactive Device Switcher Tabs -->
+          <div class="pricing-tabs-control" role="tablist" aria-label="Select license tier">
+            <button type="button" class="pricing-tab-btn is-active" data-devices="1" role="tab" aria-selected="true">1 device</button>
+            <button type="button" class="pricing-tab-btn" data-devices="2" role="tab" aria-selected="false">2 devices</button>
+            <button type="button" class="pricing-tab-btn" data-devices="3" role="tab" aria-selected="false">3 devices</button>
+          </div>
+
+          <div class="pricing-price-display">
+            <span id="pricing-main-price" class="price-main">$15</span>
+            <span id="pricing-regular-price" class="price-regular">$29</span>
+          </div>
+
+          <!-- Scarcity Offer Box -->
+          <div class="scarcity-box">
+            <div class="scarcity-header">
+              <span>Limited offer for early users 🥳</span>
+              <span class="scarcity-spots">5 spots left</span>
+            </div>
+            <div class="scarcity-progress-track">
+              <div class="scarcity-progress-bar"></div>
+            </div>
+          </div>
+
+          <!-- Feature Checklist -->
+          <ul class="pricing-features-list">
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-check">✓</span>
+              <span>One-time payment</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-check">✓</span>
+              <span>14-day money-back guarantee</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-check">✓</span>
+              <span>Lifetime updates included</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-check">✓</span>
+              <span>All features unlocked from day one</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="pricing-feature-check">✓</span>
+              <span id="pricing-license-label">1 device license</span>
+            </li>
+          </ul>
+
+          <a id="pricing-cta-button" href="https://buy.polar.sh/polar_cl_YQNMbLCObEeox7yoSmkQdPZ0dPzKE9Vfc2paR3Z4IWl" class="pricing-cta-button" target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download for macOS
+          </a>
+
+          <p class="pricing-security-note">
+            Secure checkout by Polar.sh, powered by Stripe. Prices are in USD, excluding VAT and may vary by location.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section container">
+      <div class="section-headline-block">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">
+          Everything you need to know before getting started with Supaste, from privacy and compatibility to how your clipboard history works.
+        </p>
+      </div>
+
+      <div class="faq-grid">
+        <!-- 1 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>What is Supaste?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              Supaste is a macOS clipboard and screenshot history app that saves what you copy into a beautiful, searchable visual timeline. It helps you find and reuse text, links, images, files, code, colors, screenshots, and more.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Does Supaste support iCloud Sync?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              Yes. iCloud Sync is optional and can be enabled or disabled anytime in Settings.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Where is my clipboard history stored?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              Your clipboard history is stored locally on your Mac. Supaste does not use cloud sync, user accounts, analytics, or server-side clipboard storage.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Does Supaste upload my copied content?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              No. Supaste does not upload your clipboard history, screenshots, copied text, images, files, code, or colors to our servers. Your history stays on your device.
+            </p>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>What types of content does Supaste support?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              Supaste supports copied text, links, images, screenshots, files, rich text, code snippets, colors, SVGs, and other common clipboard content types.
+            </p>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Can I search my clipboard history?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              Yes. You can search your history by keyword and browse items grouped by type, source app, and custom categories.
+            </p>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Is an iPhone or iPad app available?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              Not yet. The iOS and iPadOS companion app is currently in development and will be available soon.
+            </p>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Can Supaste detect sensitive content?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              Yes. Supaste attempts to detect sensitive content such as passwords, API keys, private keys, tokens, credit card numbers, and .env files. By default, sensitive content is not saved.
+            </p>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>What does a 1 Device license mean?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              One device license equals one macOS user account. If you use multiple user accounts on the same Mac, each account requires its own activation.
+            </p>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Can I pause clipboard capture?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              Yes. You can pause capture whenever you want, for example when working with private, confidential, or sensitive information.
+            </p>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Does Supaste include screenshot history?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              Yes. Supaste can save and organize screenshots, so you can find and reuse them later alongside your clipboard history.
+            </p>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Is Supaste a subscription?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              No. Supaste is sold as a one-time purchase. There is no subscription, free trial, or recurring billing.
+            </p>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>How do I get the app after purchase?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              After purchasing Supaste through Polar.sh, you will receive access to download the Supaste DMG installer file.
+            </p>
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Can I use Supaste on multiple Macs?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              Yes. Choose the license that matches the number of Mac user accounts you want to activate. For example, if you have one user account on your MacBook and one on your iMac, you'll need a 2 Device license.
+            </p>
+          </div>
+        </div>
+
+        <!-- 15 -->
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
+            <span>Does iCloud Sync use Supaste's servers?</span>
+            <span class="faq-icon-plus">+</span>
+          </button>
+          <div class="faq-answer-pane">
+            <p class="faq-answer-text">
+              No. Your data is synced directly through Apple's iCloud using your own Apple ID. Supaste does not store or process your synced clipboard data on its own servers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secondary Product Spotlight (Cooldock) -->
+    <section id="spotlight" class="spotlight-section container">
+      <div class="spotlight-card">
+        <div>
+          <div class="spotlight-badge">Cool dock app for macOS</div>
+          <h2 class="spotlight-title">Your smart second Dock</h2>
+          <p class="spotlight-desc">
+            Cooldock brings music, todos, events, weather, search, stats, quick actions, and more useful widgets into one beautiful dock.
+          </p>
+          <a href="https://www.cooldock.com/" target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
+            Explore Cooldock
+          </a>
+        </div>
+        <div class="spotlight-media">
+          <img src="assets/dock-feature.webp" alt="Cooldock macOS live widgets app preview" loading="lazy">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <img src="assets/app-icon.png" alt="Supaste App Icon" class="brand-icon" width="32" height="32">
+            <span>Supaste</span>
+          </div>
+          <p class="footer-desc">
+            Supaste saves your clipboard and screenshots in a beautiful visual history, automatically grouped by type, app, and custom collections.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-column-title">Product</h4>
+          <ul class="footer-links-list">
+            <li><a href="#features" class="footer-link">Features</a></li>
+            <li><a href="#pricing" class="footer-link">Pricing</a></li>
+            <li><a href="#faq" class="footer-link">FAQ</a></li>
+            <li><a href="https://supaste.com/updates" class="footer-link">Updates</a></li>
+            <li><a href="https://supaste.com/roadmap" class="footer-link">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-column-title">Company & Legal</h4>
+          <ul class="footer-links-list">
+            <li><a href="https://supaste.com/privacy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="https://supaste.com/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="https://polar.sh/supaste/portal" class="footer-link">Customer Portal</a></li>
+            <li><a href="https://supaste.com/contact" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-column-title">Community</h4>
+          <ul class="footer-links-list">
+            <li><a href="https://www.producthunt.com/products/supaste" class="footer-link">Product Hunt</a></li>
+            <li><a href="https://indie.deals/deals/supaste" class="footer-link">Indie Deals</a></li>
+            <li><a href="https://x.com/soltwagner" class="footer-link">@soltwagner</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Supaste.com — All rights reserved.</div>
+        <div>Crafted with Pure SaaS design enforcement.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
