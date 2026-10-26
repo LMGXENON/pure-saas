@@ -20,8 +20,10 @@ When creating, reviewing, or improving UI/UX designs, follow the Pure SaaS desig
    - `/pure-saas reference [URL]`: Deconstruct live reference site into 16-section DESIGN.md specification.
    - `/pure-saas responsive [request]`: Optimize across mobile (375px), tablet (768px), laptop (1024px), desktop (1440px+).
 5. Non-Negotiable Engineering Rules:
+   - Follow the 5-Tier Precedence Model: 1) User & existing brand; 2) Platform (Apple HIG/Web) & WCAG 2.2 AA; 3) Approved DESIGN.md tokens; 4) Retrieved intelligence; 5) Explicitly identified proposals with unresolved items.
    - Zero raw hex colors or arbitrary values: all styling must resolve to semantic tokens in DESIGN.md.
    - Anti-slop discipline: no generic purple/cyan gradient text, excessive glassmorphism blur, or emoji UI icons.
    - Non-regression: in existing applications, preserve 100% of backend APIs, authentication, and database schemas.
-   - "Read Before You Cite": open reference files and cite exact file and section paths.
+   - "Read Before You Cite": open reference files and cite exact file and section paths using `npx pure-saas ref` and `npx pure-saas query`.
+   - Continuous Verification: verify tokens, contrast, and drift with `pure-saas contrast`, `pure-saas diff`, `pure-saas drift`, and `pure-saas check --known`.
 

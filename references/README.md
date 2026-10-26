@@ -43,7 +43,7 @@ Dedicated implementation guides with actionable Do/Don't patterns, severity rati
 | **[`hig-lookup.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/hig-lookup.md)** | Apple HIG Topic Index & Routing | **Apple platforms / HIG routing** | 123 Apple Human Interface Guidelines mapped across Foundations, Patterns, Components, and Inputs. |
 | **[`reference-analysis.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/reference-analysis.md)** | Live Reference Reverse Engineering | **Reference command** | DevTools inspection protocol, computed style extraction, 16-section `DESIGN.md` specification. |
 | **[`design-review.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-review.md)** | Quality Review Methodology | **Review command** | Evidence-based audit protocol, test vs untested tracking, verification reporting. |
-| **[`design-intelligence.json`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-intelligence.json)** | Comprehensive Design Intelligence Dataset | **Design / Query CLI / Archetypes** | 88 design styles, 192 product types, 74 font pairings, 25 chart guides, 17 motion patterns, 22 stacks. |
+| **[`design-intelligence.json`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-intelligence.json)** | Comprehensive Design Intelligence Dataset | **Design / Query CLI / Archetypes** | 88 styles, 192 product types, 192 color palettes, 74 font pairings, 34 landing patterns, 119 UX heuristics, 25 chart guides, 17 motion patterns, 32 app UI guides, 22 stacks. |
 | **[`design-styles-catalog.json`](file:///Users/lmgxenon/Downloads/pure%20saas/references/design-styles-catalog.json)** | Design Intelligence Taxonomy | **Design / Scaffolding / Style CLI** | 12 curated production styles, 10 product archetypes, and multi-stack best practices. |
 
 ---
@@ -74,7 +74,49 @@ npx pure-saas ref "cards" --json
 
 ---
 
-## 3. The "Read Before You Cite" Rule
+## 3. The 5-Tier Precedence Hierarchy
+
+When synthesizing decisions, styling rules, or reconciling conflicting patterns across platforms and tools, apply this strict precedence:
+
+1. **User Requirements & Established Brand System:** Explicit user instructions, existing brand assets, established color tokens, and active typography rules always take top priority.
+2. **Platform Conventions & Accessibility Standards:** Native platform requirements (Apple HIG on macOS/iOS, Web standards on browsers) and WCAG 2.2 AA accessibility requirements (contrast, focus indicators, 44px min touch targets).
+3. **Verified Project Decisions & Approved Tokens:** The immutable tokens and rules recorded in the root `DESIGN.md`.
+4. **Retrieved Reference Intelligence:** Guidance retrieved from `references/hig/`, `references/frameworks/`, and `references/design-intelligence.json`.
+5. **New Proposals:** Suggestions not previously approved, explicitly marked as proposals with open items tracked in the `unresolved` ledger.
+
+---
+
+## 4. Design Intelligence & Verification CLI Tools
+
+Pure SaaS equips coding agents with zero-dependency CLI tools to query intelligence and enforce design rules:
+
+```bash
+# Query multi-domain design intelligence (styles, products, colors, typography, UX, landing, charts, motion)
+npx pure-saas query [domain] "<keyword or query>"
+npx pure-saas style "<query>" --product "<type>" --stack "<stack>"
+
+# Programmatically generate an approved DESIGN.md tailored to product archetype and design dials
+npx pure-saas design-system --product "<type>" --variance <1-10> --motion <1-10> --density <1-10> --out DESIGN.md
+
+# Audit color contrast against WCAG 2.2 AA (4.5:1 text, 3.0:1 UI) and AAA (7.0:1)
+npx pure-saas contrast DESIGN.md
+
+# Diff tokens between two design files or versions
+npx pure-saas diff DESIGN.before.md DESIGN.md
+
+# Detect design drift between expected tokens and live observed values
+npx pure-saas drift DESIGN.md observations.json
+
+# Scan source code against design tokens with known defects baseline tracking
+npx pure-saas check DESIGN.md --source src --known known-defects.json
+
+# Export tokens to required format (CSS custom properties, Tailwind v3/v4, DTCG 2025.10, or JSON)
+npx pure-saas export-tokens DESIGN.md --format dtcg --out tokens.json
+```
+
+---
+
+## 5. The "Read Before You Cite" Rule
 
 - Never quote or reference a guideline from memory. Always inspect the reference file and cite both the file and the section (e.g. `references/hig/buttons.md › Best practices` or `references/frameworks/react.md › State`).
 - Load 3 to 6 focused reference documents relevant to the current user prompt.

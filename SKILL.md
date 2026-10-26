@@ -96,23 +96,36 @@ All commands must follow these 10 mandatory operational rules:
 Pure SaaS separates high-level agent instructions from deep architectural craft guides.
 Always keep core instructions focused; route specific questions to the relevant reference guide in `references/`.
 
-### The Reference Search Engine
-Before performing design or implementation work, retrieve exact reference documents for the topic:
+### The Reference Search & Intelligence Engine
+Before performing design or implementation work, retrieve exact reference documents and design intelligence for the topic:
 ```bash
+# Search reference documents (Apple HIG, Frameworks, Craft Guides)
 npx pure-saas ref "<component, framework, platform, or topic>"
+
+# Query multi-domain design intelligence (styles, products, colors, typography, UX heuristics, landing, charts, motion)
+npx pure-saas query [domain] "<keyword or query>"
+npx pure-saas style "<query>" --product "<type>" --stack "<stack>"
+
+# Programmatically generate an approved DESIGN.md tailored to product archetype and design dials
+npx pure-saas design-system --product "<type>" --variance <1-10> --motion <1-10> --density <1-10> --out DESIGN.md
 ```
 Examples:
 - `npx pure-saas ref "modal"` -> retrieves `references/hig/modality.md`, `references/hig/sheets.md`
 - `npx pure-saas ref "button"` -> retrieves `references/hig/buttons.md`, `references/frameworks/html-tailwind.md`
 - `npx pure-saas ref "react"` -> retrieves `references/frameworks/react.md`, `references/cross-platform.md`
 - `npx pure-saas ref "accessibility"` -> retrieves `references/accessibility.md`, `references/hig/accessibility.md`
+- `npx pure-saas query color "fintech"` -> retrieves verified financial color palettes
+- `npx pure-saas query ux "smooth scroll"` -> retrieves UX heuristic with Do/Don't and good/bad code examples
+- `npx pure-saas query landing "b2b saas"` -> retrieves conversion-optimized section order and CTA placement
 
 ### Reference Collections
 1. **Apple Human Interface Guidelines (`references/hig/` — 124 Documents):**
    Full individual reference documents covering 57 UI components, interaction patterns (modality, sheets, notifications, widgets, Apple Pay), foundations (color, typography, layout, materials), inputs, and platform conventions (`designing-for-ios.md`, `designing-for-macos.md`, `liquid-glass.md`).
 2. **Framework Engineering Guides (`references/frameworks/` — 22 Frameworks):**
    Actionable guidelines with Do/Don't patterns, severity ratings, and code examples for React, Next.js, Vue, Nuxt, Svelte, Tailwind, Shadcn, SwiftUI, React Native, Flutter, Electron, Angular, Astro, and more.
-3. **Core Craft Guides (`references/*.md`):**
+3. **Curated Design Intelligence (`references/design-intelligence.json` & `design-styles-catalog.json`):**
+   88 visual styles, 192 product archetypes, 192 semantic color systems, 74 typography pairings, 34 landing page patterns, 119 UX heuristics, 25 chart guides, 17 motion patterns, and 32 app UI patterns.
+4. **Core Craft Guides (`references/*.md`):**
    `design-principles.md`, `typography.md`, `color-and-tokens.md`, `layout-and-composition.md`, `anti-slop-rules.md`, `interaction-states.md`, `accessibility.md`, `responsive-design.md`, `cross-platform.md`, `code-audit.md`, `motion.md`, `platform-guidelines.md`, `design-review.md`.
 
 ### The "Read Before You Cite" Rule
@@ -159,18 +172,24 @@ Every interactive element must explicitly account for:
 
 ---
 
-## 6. Instruction and Context Priority
+## 6. Core Precedence Model & Conflict Resolution
 
-When resolving instructions or conflicting requirements, adhere to this strict hierarchy:
+When integrating multiple sources, making design proposals, or resolving conflicting requirements, adhere strictly to this 5-tier precedence hierarchy:
 
-1. **System & Safety Instructions:** Platform boundaries, sandbox rules, and developer directives.
-2. **User Current Request & Constraints:** The explicit current prompt and active constraints.
-3. **Conversation History:** Prior decisions, user preferences, and agreed architecture.
-4. **Existing Codebase & `DESIGN.md`:** Current project framework, backend contracts, and existing design tokens.
-5. **Pure SaaS Skill & Reference Guides:** Canonical guidance from `SKILL.md` and `references/`.
-6. **Reasonable Implementation Defaults:** Defensible design and engineering decisions where details remain unspecified.
+1. **User Requirements & Established Product Brand:** The user's explicit instructions, existing brand identity, typography, color system, and existing design tokens always take absolute precedence. Never discard or replace an established brand without explicit instruction.
+2. **Platform Conventions & Accessibility Standards:** Native platform requirements (Apple HIG for macOS/iOS/visionOS, Material/Android conventions for Android, Web standards for browser targets) and WCAG 2.2 AA accessibility requirements (contrast ratios, focus indicators, minimum touch targets). Platform and accessibility rules govern over aesthetics.
+3. **Verified Project Decisions & Approved Tokens:** The confirmed tokens and rules recorded in the project's root `DESIGN.md`. Once approved, these tokens are immutable across refactors.
+4. **Retrieved Guidance & Reference Intelligence:** Retrieved reference documents from Apple HIG (`references/hig/`), Framework Engineering Guides (`references/frameworks/`), and UI/UX Pro Max intelligence (`references/design-intelligence.json`).
+5. **New Agent Proposals:** Any new suggestion or style archetype not previously approved. **Proposals must always be explicitly identified as proposals** (status: `draft`, open items in `unresolved`) rather than silently treated as approved facts.
 
-*The current request takes precedence over older user-level design decisions when they conflict. Do not re-ask questions already answered in the context.*
+### Deliberate Conflict Resolution Rules:
+- **Never force Apple patterns on unrelated platforms:** Do not impose macOS window traffic lights or iOS bottom tab bars on Android or enterprise web dashboards. Use `references/cross-platform.md` to translate concepts faithfully to the target stack.
+- **Never force a single aesthetic on every product:** Do not apply neo-brutalism to medical SaaS, or clinical monochrome to a gaming landing page. Match style to product archetype using `references/design-intelligence.json`.
+- **Preserve backend contracts and automated tests:** Never modify APIs, database schemas, or testing IDs during UI work.
+- **The Decision Lifecycle:** Distinctly categorize decisions as:
+  - **Confirmed:** Approved by the user or established in current `DESIGN.md`.
+  - **Proposed:** Recommended by the agent based on retrieved intelligence.
+  - **Unresolved:** Open technical or design questions requiring user alignment before finalizing implementation. Recorded in the `unresolved` ledger of `DESIGN.md`.
 
 ---
 
@@ -210,9 +229,11 @@ Audit project constraints, framework, build tools, existing styling, brand asset
 Establish clear product identity and domain personality, isolating user-approved decisions from proposals and open questions in `design-brief.md`.
 
 ### Stage C: Establish Design System in DESIGN.md
-Define semantic design tokens (colors, typography, spacing, radii, accessibility target) in `DESIGN.md`. Validate with:
+Define semantic design tokens (colors, typography, spacing, radii, motion, accessibility target) in `DESIGN.md`, recording explicit open questions in the `unresolved` ledger. Validate and check contrast with:
 ```bash
-node scripts/pure-saas.mjs validate DESIGN.md
+npx pure-saas validate DESIGN.md
+npx pure-saas contrast DESIGN.md
+npx pure-saas diff DESIGN.before.md DESIGN.md
 ```
 
 ### Stage D: Plan Composition & Hierarchy
@@ -225,12 +246,19 @@ Implement clean, modular components bound strictly to tokens in `DESIGN.md`. App
 Inspect the rendered interface at 1440px desktop, 768px tablet, and 375px mobile viewports for text wrapping, contrast, and layout shifts.
 
 ### Stage G: Refine & Correct Defects
-Correct discovered flaws: hierarchy imbalances, contrast failures, orphaned headings, or missing states (`references/design-review.md`).
+Detect design drift and correct discovered flaws: hierarchy imbalances, contrast failures, orphaned headings, or missing states:
+```bash
+npx pure-saas drift DESIGN.md observations.json
+```
 
 ### Stage H: Enforce System Integrity
-Run token enforcement to scan source code for raw styling drift:
+Run token enforcement to scan source code for raw styling drift, tracking existing technical debt via a baseline known defects file:
 ```bash
-node scripts/pure-saas.mjs check-tokens DESIGN.md --source src
+# Scan source code against approved DESIGN.md tokens
+npx pure-saas check DESIGN.md --source src --known known-defects.json
+
+# Export tokens to required format (CSS custom properties, Tailwind v3/v4, DTCG 2025.10, or JSON)
+npx pure-saas export-tokens DESIGN.md --format dtcg --out tokens.json
 ```
 
 ### Stage I: Report Honest Results

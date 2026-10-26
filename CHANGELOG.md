@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2026-10-26
+
+### Added
+- **Unified Tri-Source Integration:** Deeply integrated Apple Design Skill, UI/UX Pro Max, and Zero Slop Design into a single, cohesive UI/UX engineering system.
+- **5-Tier Precedence Model:** Codified strict precedence hierarchy across all commands and agent entry points (User/Brand -> Platform/A11y -> Project Tokens -> Upstream Reference -> Agent Proposal) with deliberate cross-platform conflict resolution.
+- **Complete Apple HIG Reference Library (`references/hig/`):** 124 individual substantive documents covering 57 UI components, interaction patterns, foundations, inputs, and platform conventions.
+- **Framework Engineering Guides (`references/frameworks/`):** 22 dedicated markdown guides covering React, Next.js, Vue, Nuxt, Svelte, Tailwind, Shadcn, SwiftUI, Flutter, React Native, etc.
+- **Multi-Domain Design Intelligence (`references/design-intelligence.json`):** 88 visual styles, 192 product archetypes, 192 product color systems, 74 typography pairings, 34 landing page patterns, 119 UX heuristics (with Do/Don't code), 25 chart guides, 17 motion patterns, 32 app UI patterns, and 22 framework stacks.
+- **Programmatic Design System Generator (`pure-saas design-system`):** Command generating valid 16-section `DESIGN.md` specs driven by product archetype, style, and design dials (variance, motion intensity, visual density).
+- **Automated WCAG 2.2 Contrast Auditor (`pure-saas contrast`):** Relative luminance and contrast ratio engine checking normal text (4.5:1), large text (3.0:1), and UI components (3.0:1).
+- **Design Token Diffing (`pure-saas diff`):** Structural comparison tool identifying added, removed, and changed tokens across revisions.
+- **Design Drift Detection (`pure-saas drift`):** Automated validation tool comparing live browser/DOM observations against expected `DESIGN.md` tokens.
+- **Known Technical Debt Baseline (`pure-saas check --known <file>`):** Baseline tracking to suppress pre-existing technical debt and track resolved defects without failing CI builds.
+- **DTCG 2025.10 & Tailwind v4 Token Exporter (`pure-saas export-tokens`):** Export support for Design Tokens Community Group (DTCG 2025.10) specification and Tailwind v4 `@theme inline` extensions.
+
+---
+
 ## [1.0.0] - 2026-10-25
 
 ### Added

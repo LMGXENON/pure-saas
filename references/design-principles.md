@@ -53,3 +53,20 @@ Reference websites (e.g., Firecrawl, Butter, Linear) are sources of design insig
 - **Deconstruct principles:** Analyze how references handle density, contrast, typography scaling, and product storytelling.
 - **Synthesize uniquely:** Apply those structural insights to create a distinct, bespoke identity tailored exclusively to the target product and audience.
 
+---
+
+## 7. The 5-Tier Precedence Hierarchy & Decision Lifecycle
+
+When reconciling requirements or proposing new design patterns, follow this strict precedence:
+
+1. **User Requirements & Established Brand System:** Explicit user instructions, existing brand assets, active typography rules, and existing tokens take absolute priority.
+2. **Platform Conventions & Accessibility Standards:** Native platform requirements (Apple HIG on macOS/iOS, Web standards on browsers) and WCAG 2.2 AA accessibility requirements (contrast, focus indicators, minimum touch targets).
+3. **Verified Project Decisions & Approved Tokens:** The immutable tokens and rules recorded in the root `DESIGN.md`.
+4. **Retrieved Reference Intelligence:** Guidance retrieved from `references/hig/`, `references/frameworks/`, and `references/design-intelligence.json`.
+5. **New Proposals:** Suggestions not previously approved, explicitly marked as proposals with open items tracked in the `unresolved` ledger.
+
+### The Decision Lifecycle:
+- **Confirmed Decisions:** Explicitly validated by the user or established in current `DESIGN.md`.
+- **Proposed Decisions:** Generated based on design intelligence; status marked as `draft`.
+- **Unresolved Questions:** Open technical or design trade-offs requiring user confirmation before finalizing implementation, recorded in the `unresolved` frontmatter list of `DESIGN.md`.
+

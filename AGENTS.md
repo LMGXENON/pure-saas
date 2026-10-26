@@ -63,13 +63,20 @@ Pure SaaS operates via **one intelligent main command and five specialist comman
 
 ---
 
-## 4. Searching and Retrieving References
+## 4. Searching and Retrieving References & Design Intelligence
 
-Before performing design work, coding agents must retrieve and read the exact reference documents:
+Before performing design work, coding agents must retrieve and read the exact reference documents and intelligence:
 
 ```bash
-# Retrieve reference documents for the task
+# Retrieve reference documents across Apple HIG, frameworks, and craft guides
 npx pure-saas ref "<component, framework, or craft topic>"
+
+# Query multi-domain design intelligence (styles, products, colors, typography, UX heuristics, landing, charts, motion)
+npx pure-saas query [domain] "<keyword or query>"
+npx pure-saas style "<query>" --product "<type>" --stack "<stack>"
+
+# Programmatically generate an approved DESIGN.md tailored to product archetype and design dials
+npx pure-saas design-system --product "<type>" --variance <1-10> --motion <1-10> --density <1-10> --out DESIGN.md
 ```
 
 ### Retrieval Examples
@@ -77,15 +84,31 @@ npx pure-saas ref "<component, framework, or craft topic>"
 - **Button interaction:** `npx pure-saas ref "button"` -> retrieves `references/hig/buttons.md`, `references/interaction-states.md`
 - **Framework guidance:** `npx pure-saas ref "react"` -> retrieves `references/frameworks/react.md`, `references/cross-platform.md`
 - **Accessibility:** `npx pure-saas ref "accessibility"` -> retrieves `references/accessibility.md`, `references/hig/accessibility.md`
+- **Product colors:** `npx pure-saas query color "fintech"` -> retrieves verified financial color palettes
+- **UX heuristics:** `npx pure-saas query ux "scroll"` -> retrieves smooth scroll Do/Don't and good/bad code examples
+- **Landing patterns:** `npx pure-saas query landing "b2b saas"` -> retrieves conversion-optimized section order
 
 ---
 
 ## 5. Operating Rules for Coding Agents
 
 1. **Follow the 10 Universal Execution Behaviors:** Follow all rules in `SKILL.md` (inspect context, coordinate capabilities automatically, execute directly for straightforward requests, preserve backend APIs, maintain `DESIGN.md`, test and refine, report honestly).
-2. **Never Fabricate Validation:** If a check fails, diagnose and resolve it. If an environment lacks browser inspection or screen-reader tooling, record the area as `untested`. Never claim passing verification for uninspected code.
-3. **Preserve Architecture in Existing Apps:** Never rewrite backend APIs, auth flows, database structures, or automated test IDs during UI refactors without explicit user authorization.
-4. **Enforce Semantic Tokens:** Reject raw hex codes, color functions, and arbitrary Tailwind numbers. Ensure all styling resolves to documented tokens in `DESIGN.md`.
-5. **Enforce Anti-Slop Discipline:** Halt and challenge generic purple/cyan gradient text, excessive glassmorphism blur, repetitive 3-column feature cards, and emoji UI icons.
-6. **Follow "Read Before You Cite":** Never review from memory or invent guidelines. Route to relevant guides in `references/`, open them, and cite exact files and sections.
-7. **Four-Part Review Findings:** Every reported review finding must provide Finding, Evidence (`file:line` or observed value), Impact (**Critical**, **Warning**, or **Info**), and Concrete Fix.
+2. **Adhere to the 5-Tier Precedence Model:**
+   - 1. User explicit requirements and established product brand system.
+   - 2. Platform conventions (Apple HIG / Web standards) and WCAG 2.2 AA.
+   - 3. Verified project decisions and approved tokens in `DESIGN.md`.
+   - 4. Retrieved guidance from Apple HIG, UI/UX Pro Max, and Zero Slop Design.
+   - 5. New proposals (must be explicitly identified as proposals, never silently assumed approved).
+3. **Never Fabricate Validation:** If a check fails, diagnose and resolve it. If an environment lacks browser inspection or screen-reader tooling, record the area as `untested`. Never claim passing verification for uninspected code.
+4. **Preserve Architecture in Existing Apps:** Never rewrite backend APIs, auth flows, database structures, or automated test IDs during UI refactors without explicit user authorization.
+5. **Enforce Semantic Tokens:** Reject raw hex codes, color functions, and arbitrary Tailwind numbers. Ensure all styling resolves to documented tokens in `DESIGN.md`.
+6. **Enforce Anti-Slop Discipline:** Halt and challenge generic purple/cyan gradient text, excessive glassmorphism blur, repetitive 3-column feature cards, and emoji UI icons.
+7. **Follow "Read Before You Cite":** Never review from memory or invent guidelines. Route to relevant guides in `references/`, open them, and cite exact files and sections.
+8. **Four-Part Review Findings:** Every reported review finding must provide Finding, Evidence (`file:line` or observed value), Impact (**Critical**, **Warning**, or **Info**), and Concrete Fix.
+9. **Maintain the Unresolved Decisions Ledger:** Record open questions requiring user confirmation in the `unresolved` frontmatter list of `DESIGN.md`.
+10. **Use Verification & Drift Tooling:**
+   - Contrast check: `npx pure-saas contrast DESIGN.md`
+   - Token diff: `npx pure-saas diff DESIGN.before.md DESIGN.md`
+   - Drift detection: `npx pure-saas drift DESIGN.md observations.json`
+   - Tech debt scan: `npx pure-saas check DESIGN.md --source src --known known-defects.json`
+   - Token export: `npx pure-saas export-tokens DESIGN.md --format dtcg|tailwind|css`

@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 /**
- * Pure SaaS CLI - Design System Validator, Token Checker, Exporter, and Review Reporter
+ * Pure SaaS CLI - Design System Validator, Token Checker, Exporter, Intelligence Engine, and Review Reporter
  * Zero-dependency Node.js implementation compatible with Node >= 18.
+ *
+ * Integrated Architecture:
+ * 1. Apple Design Skill: Platform-native HIG conventions, spatial depth, dynamic typography, and "Read Before You Cite".
+ * 2. UI/UX Pro Max: Multi-domain searchable design intelligence (styles, products, colors, typography, charts, motion, UX heuristics, stacks) and design dial generation.
+ * 3. Zero Slop Design: Persistent DESIGN.md format, token drift detection, token diffing, known defects tracking, WCAG contrast verification, DTCG 2025.10 & Tailwind v4 token export.
  */
 
 import fs from 'node:fs';
@@ -37,12 +42,9 @@ export function parseSimpleYaml(yamlStr) {
 
   for (let i = 0; i < lines.length; i++) {
     const rawLine = lines[i];
-    // Strip comments only if # is preceded by whitespace or at start, but not inside quotes
     let lineWithoutComment = rawLine;
     const isQuoted = /^["'].*["']$/.test(rawLine.trim());
     if (!isQuoted) {
-      // If there is a comment like `key: val # comment`
-      // but not `key: "#123456"` or `key: #123456`
       lineWithoutComment = rawLine.replace(/(\s+#.*)$/, '');
     }
     if (!lineWithoutComment.trim()) continue;
@@ -50,7 +52,7 @@ export function parseSimpleYaml(yamlStr) {
     const indent = rawLine.search(/\S/);
     const trimmed = lineWithoutComment.trim();
 
-    // Check if line is list item
+    // List item
     if (trimmed.startsWith('- ')) {
       const val = parseYamlValue(trimmed.slice(2).trim());
       while (stack.length > 1 && stack[stack.length - 1].indent >= indent) {
@@ -78,7 +80,6 @@ export function parseSimpleYaml(yamlStr) {
     const currentContainer = stack[stack.length - 1].obj;
 
     if (rawVal === '') {
-      // Determine if next non-empty line starts with '- ' (array) or a key: (object)
       let nextIsArray = false;
       for (let j = i + 1; j < lines.length; j++) {
         const nextTrimmed = lines[j].replace(/#.*$/, '').trim();
@@ -104,7 +105,6 @@ function parseYamlValue(val) {
   if (val === 'false') return false;
   if (val === 'null' || val === '~') return null;
   if (/^-?\d+(\.\d+)?$/.test(val)) return Number(val);
-  // Remove wrapping quotes
   return val.replace(/^["']|["']$/g, '');
 }
 
@@ -139,6 +139,175 @@ export const REQUIRED_SPACING_TOKENS = [
   'space-8'
 ];
 
+// --- WCAG Color Contrast Engine ---
+
+export function parseHexColor(hex) {
+  if (!hex || typeof hex !== 'string') return null;
+  let c = hex.replace(/^#/, '').trim();
+  if (c.length === 3 || c.length === 4) {
+    c = c.slice(0, 3).split('').map(x => x + x).join('');
+  }
+  if (c.length >= 6) {
+    const num = parseInt(c.slice(0, 6), 16);
+    if (Number.isNaN(num)) return null;
+    return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+  }
+  return null;
+}
+
+export function srgbToLinear(c) {
+  const v = c / 255;
+  return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+}
+
+export function relativeLuminance(rgb) {
+  return 0.2126 * srgbToLinear(rgb[0]) + 0.7152 * srgbToLinear(rgb[1]) + 0.0722 * srgbToLinear(rgb[2]);
+}
+
+export function calculateContrastRatio(hex1, hex2) {
+  const rgb1 = parseHexColor(hex1);
+  const rgb2 = parseHexColor(hex2);
+  if (!rgb1 || !rgb2) return null;
+  const l1 = relativeLuminance(rgb1);
+  const l2 = relativeLuminance(rgb2);
+  const lighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return Number(((lighter + 0.05) / (darker + 0.05)).toFixed(2));
+}
+
+export function auditColorContrast(colors = {}) {
+  const pairsToCheck = [
+    { fg: 'color-text-primary', bg: 'color-bg-canvas', target: 'Primary Text on Canvas (AA >= 4.5, AAA >= 7.0)', minRatio: 4.5 },
+    { fg: 'color-text-primary', bg: 'color-bg-surface', target: 'Primary Text on Surface (AA >= 4.5, AAA >= 7.0)', minRatio: 4.5 },
+    { fg: 'color-text-secondary', bg: 'color-bg-canvas', target: 'Secondary Text on Canvas (AA >= 4.5)', minRatio: 4.5 },
+    { fg: 'color-text-secondary', bg: 'color-bg-surface', target: 'Secondary Text on Surface (AA >= 4.5)', minRatio: 4.5 },
+    { fg: 'color-action-primary', bg: 'color-bg-canvas', target: 'Interactive Action on Canvas (AA UI >= 3.0)', minRatio: 3.0 },
+    { fg: 'color-text-inverse', bg: 'color-action-primary', target: 'Action Button Label (AA >= 4.5)', minRatio: 4.5 },
+    { fg: 'color-status-error', bg: 'color-bg-canvas', target: 'Error Status Text on Canvas (AA >= 4.5)', minRatio: 4.5 },
+    { fg: 'color-status-success', bg: 'color-bg-canvas', target: 'Success Status Indicator on Canvas (AA UI >= 3.0)', minRatio: 3.0 }
+  ];
+
+  const results = [];
+  let passedAA = 0;
+  let failedAA = 0;
+
+  for (const pair of pairsToCheck) {
+    const fgVal = colors[pair.fg];
+    const bgVal = colors[pair.bg];
+    if (fgVal && bgVal) {
+      const ratio = calculateContrastRatio(fgVal, bgVal);
+      if (ratio !== null) {
+        const passAA = ratio >= pair.minRatio;
+        const passAAA = ratio >= 7.0;
+        if (passAA) passedAA++;
+        else failedAA++;
+        results.push({
+          fgToken: pair.fg,
+          bgToken: pair.bg,
+          fgHex: fgVal,
+          bgHex: bgVal,
+          ratio,
+          minRequired: pair.minRatio,
+          target: pair.target,
+          passAA,
+          passAAA
+        });
+      }
+    }
+  }
+
+  return {
+    auditedPairs: results.length,
+    passedAA,
+    failedAA,
+    results
+  };
+}
+
+// --- Design Token Diffing & Drift Engine ---
+
+export function flattenObject(obj, prefix = '') {
+  const result = {};
+  if (!obj || typeof obj !== 'object') return result;
+  for (const [key, value] of Object.entries(obj)) {
+    const fullKey = prefix ? `${prefix}.${key}` : key;
+    if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+      Object.assign(result, flattenObject(value, fullKey));
+    } else {
+      result[fullKey] = value;
+    }
+  }
+  return result;
+}
+
+export function diffDesignTokens(beforeTokens, afterTokens) {
+  const flatBefore = flattenObject(beforeTokens);
+  const flatAfter = flattenObject(afterTokens);
+  const allKeys = Array.from(new Set([...Object.keys(flatBefore), ...Object.keys(flatAfter)])).sort();
+  const changes = [];
+
+  for (const key of allKeys) {
+    if (!Object.hasOwn(flatBefore, key)) {
+      changes.push({ path: key, change: 'added', after: flatAfter[key] });
+    } else if (!Object.hasOwn(flatAfter, key)) {
+      changes.push({ path: key, change: 'removed', before: flatBefore[key] });
+    } else if (JSON.stringify(flatBefore[key]) !== JSON.stringify(flatAfter[key])) {
+      changes.push({ path: key, change: 'changed', before: flatBefore[key], after: flatAfter[key] });
+    }
+  }
+
+  return {
+    changes,
+    totalChanges: changes.length
+  };
+}
+
+export function detectDesignDrift(tokens, observationsData) {
+  const source = observationsData.source || { url: 'unknown', captured: new Date().toISOString() };
+  const observations = observationsData.observations || [];
+  const results = [];
+  let matches = 0;
+  let differences = 0;
+
+  function atPath(obj, pathStr) {
+    const parts = pathStr.split('.');
+    let cur = obj;
+    for (const part of parts) {
+      if (cur === null || typeof cur !== 'object' || !Object.hasOwn(cur, part)) {
+        return undefined;
+      }
+      cur = cur[part];
+    }
+    return cur;
+  }
+
+  for (const obs of observations) {
+    const expected = atPath(tokens, obs.path);
+    const observedValue = obs.value;
+    const isMatch = expected !== undefined && JSON.stringify(expected) === JSON.stringify(observedValue);
+    if (isMatch) matches++;
+    else differences++;
+
+    results.push({
+      path: obs.path,
+      location: obs.location || '',
+      state: obs.state || 'default',
+      mode: obs.mode || 'default',
+      expected,
+      observed: observedValue,
+      result: isMatch ? 'match' : 'drift'
+    });
+  }
+
+  return {
+    source,
+    observed: observations.length,
+    matches,
+    differences,
+    results
+  };
+}
+
 // --- Validation Logic ---
 
 export function validateDesignDocument(filePath) {
@@ -163,7 +332,6 @@ export function validateDesignDocument(filePath) {
 
   const { data, body } = parseFrontmatter(raw);
 
-  // If frontmatter is missing or empty, attempt markdown section fallback
   const isBrief = filePath.includes('brief') || (data.product_name && !data.tokens);
   const isReferenceRecord = (filePath.includes('reference') && !filePath.includes('DESIGN')) || (data.source_url && !data.tokens);
 
@@ -190,7 +358,6 @@ export function validateDesignDocument(filePath) {
   // Check required color tokens
   for (const role of REQUIRED_COLOR_ROLES) {
     if (!colors[role]) {
-      // Check if defined in markdown body
       const regex = new RegExp(`\`?${role}\`?:\\s*([#a-zA-Z0-9]+)`, 'i');
       if (!regex.test(body)) {
         issues.push(`Missing required semantic color token: "${role}".`);
@@ -234,6 +401,29 @@ export function validateDesignDocument(filePath) {
     warnings.push('Emoji detected in design specification; ensure interface icons use proper SVGs.');
   }
 
+  // Check for unresolved design decisions (Zero Slop Design unresolved ledger)
+  const unresolvedItems = [];
+  if (Array.isArray(data.unresolved)) {
+    unresolvedItems.push(...data.unresolved);
+  }
+  if (Array.isArray(tokens.unresolved)) {
+    unresolvedItems.push(...tokens.unresolved);
+  }
+  if (Array.isArray(data.suggested_decisions)) {
+    unresolvedItems.push(...data.suggested_decisions);
+  }
+  if (unresolvedItems.length > 0) {
+    warnings.push(`${unresolvedItems.length} unresolved design decision(s) open in ledger; user confirmation required before implementation.`);
+  }
+
+  // WCAG Color Contrast Audit
+  const contrastAudit = auditColorContrast(colors);
+  for (const result of contrastAudit.results) {
+    if (!result.passAA) {
+      warnings.push(`Contrast warning: ${result.fgToken} (${result.fgHex}) on ${result.bgToken} (${result.bgHex}) has ratio ${result.ratio}:1, failing WCAG 2.2 AA target (${result.minRequired}:1).`);
+    }
+  }
+
   // Reference specification section verification for reference-based DESIGN.md
   const isReferenceDesign = Boolean(data.source_url || data.reference_overview || /reference\s+overview/i.test(body));
   if (isReferenceDesign) {
@@ -270,7 +460,9 @@ export function validateDesignDocument(filePath) {
     status: data.status || 'unspecified',
     tokensFound: Object.keys(colors).length,
     issues,
-    warnings
+    warnings,
+    unresolvedItems,
+    contrastAudit
   };
 }
 
@@ -325,7 +517,7 @@ function validateReferenceData(data, body, filePath) {
   };
 }
 
-// --- Source Code Scan for Tokens & Anti-Slop ---
+// --- Source Code Scan for Tokens, Anti-Slop, and Known Defect Baseline ---
 // Incorporates static analysis patterns adapted from zero-slop-design (MIT License, Copyright (c) 2026 zero-slop-design contributors)
 
 const PALETTE = 'slate|gray|grey|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose';
@@ -333,7 +525,7 @@ const PALETTE_CLASS = new RegExp(`(?<![\\w-])(?:[a-z]+:)*(?:bg|text|border(?:-[t
 const UTILITY_DIMENSION = /(?<![\w-])(?:[a-z]+:)*(p[xytrbl]?|m[xytrbl]?|gap(?:-[xy])?|space-[xy]|rounded(?:-[a-z]+)?|text|tracking)-\[([^\]\s]+)\]/g;
 const COLOR_FUNCTION = /\b(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch)\(\s*[^)]*\)/g;
 
-export function scanSourceDirectory(srcDir, designTokens = {}) {
+export function scanSourceDirectory(srcDir, designTokens = {}, options = {}) {
   const results = {
     scannedFiles: 0,
     rawColorViolations: [],
@@ -343,11 +535,23 @@ export function scanSourceDirectory(srcDir, designTokens = {}) {
     colorFunctionViolations: [],
     focusSuppressionWarnings: [],
     exceptionReasonViolations: [],
-    antiSlopWarnings: []
+    antiSlopWarnings: [],
+    knownViolations: [],
+    newViolations: [],
+    fixedKnownDefects: []
   };
 
   if (!fs.existsSync(srcDir)) {
     return results;
+  }
+
+  let knownDefectsList = [];
+  if (options.known && fs.existsSync(options.known)) {
+    try {
+      knownDefectsList = JSON.parse(fs.readFileSync(options.known, 'utf8'));
+    } catch {
+      knownDefectsList = [];
+    }
   }
 
   const knownColorValues = new Set(
@@ -379,6 +583,59 @@ export function scanSourceDirectory(srcDir, designTokens = {}) {
   }
 
   walk(srcDir);
+
+  // Match against known defects baseline
+  const allViolations = [
+    ...results.rawColorViolations,
+    ...results.paletteClassViolations,
+    ...results.arbitraryDimensionViolations,
+    ...results.unresolvedTokenRefs,
+    ...results.colorFunctionViolations,
+    ...results.focusSuppressionWarnings,
+    ...results.exceptionReasonViolations,
+    ...results.antiSlopWarnings
+  ];
+
+  const matchedKnownIndices = new Set();
+  for (const v of allViolations) {
+    const relFile = path.relative(process.cwd(), v.file);
+    const textVal = v.value || v.token || v.pattern || '';
+    const matchIdx = knownDefectsList.findIndex((k, idx) =>
+      !matchedKnownIndices.has(idx) &&
+      k.file === relFile &&
+      k.line === v.line &&
+      (!k.rule || k.rule === v.rule) &&
+      (!k.text || k.text === textVal)
+    );
+    if (matchIdx !== -1) {
+      v.known = true;
+      matchedKnownIndices.add(matchIdx);
+      results.knownViolations.push(v);
+    } else {
+      v.known = false;
+      results.newViolations.push(v);
+    }
+  }
+
+  // Detect fixed known defects
+  for (let i = 0; i < knownDefectsList.length; i++) {
+    if (!matchedKnownIndices.has(i)) {
+      results.fixedKnownDefects.push(knownDefectsList[i]);
+    }
+  }
+
+  // Update known defects baseline file if requested
+  if (options.updateKnown && options.known) {
+    const baseline = allViolations.map(v => ({
+      file: path.relative(process.cwd(), v.file),
+      line: v.line,
+      rule: v.rule || 'unknown',
+      text: v.value || v.token || v.pattern || ''
+    }));
+    fs.mkdirSync(path.dirname(path.resolve(process.cwd(), options.known)), { recursive: true });
+    fs.writeFileSync(path.resolve(process.cwd(), options.known), JSON.stringify(baseline, null, 2) + '\n', 'utf8');
+  }
+
   return results;
 }
 
@@ -407,6 +664,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
             results.exceptionReasonViolations.push({
               file: filePath,
               line: lineNum,
+              rule: 'exception-reason',
               message: 'Exception bypass comment has no explanatory reason.'
             });
           }
@@ -419,13 +677,13 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
       continue;
     }
 
-    // Ignore pure comment lines (//, /* ... */, or block comment stars *)
+    // Ignore pure comment lines
     const trimmed = rawLine.trim();
     if (trimmed.startsWith('//') || (trimmed.startsWith('/*') && trimmed.endsWith('*/')) || trimmed.startsWith('*')) {
       continue;
     }
 
-    // Strip inline comments before inspecting code to prevent false positives in comments
+    // Strip inline comments before inspecting code
     const line = rawLine.replace(/\/\*.*?\*\//g, '').replace(/\/\/.*$/, '');
     if (!line.trim()) continue;
 
@@ -438,6 +696,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
           results.rawColorViolations.push({
             file: filePath,
             line: lineNum,
+            rule: 'color-value',
             value: hex,
             message: `Raw hex color ${hex} not mapped to approved DESIGN.md semantic token.`
           });
@@ -452,6 +711,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
         results.paletteClassViolations.push({
           file: filePath,
           line: lineNum,
+          rule: 'palette-class',
           value: cls,
           message: `Utility palette class "${cls}" bypasses semantic design tokens. Map to semantic role instead.`
         });
@@ -465,6 +725,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
         results.arbitraryDimensionViolations.push({
           file: filePath,
           line: lineNum,
+          rule: 'dimension-value',
           value: dim,
           message: `Arbitrary bracket utility "${dim}" bypasses spacing tokens.`
         });
@@ -480,6 +741,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
           results.unresolvedTokenRefs.push({
             file: filePath,
             line: lineNum,
+            rule: 'unresolved-token',
             token: tokenName,
             message: `CSS variable var(--${tokenName}) is not defined in DESIGN.md tokens.`
           });
@@ -487,7 +749,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
       }
     }
 
-    // Check color functions (rgb, rgba, hsl, hsla, oklch) outside of CSS custom property definitions
+    // Check color functions outside of CSS custom property definitions
     if (!line.includes('--') && !line.includes('var(')) {
       const colorFuncMatches = line.match(COLOR_FUNCTION);
       if (colorFuncMatches) {
@@ -495,6 +757,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
           results.colorFunctionViolations.push({
             file: filePath,
             line: lineNum,
+            rule: 'color-function',
             value: func,
             message: `Color function "${func}" in source styling bypasses semantic design tokens.`
           });
@@ -507,6 +770,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
       results.focusSuppressionWarnings.push({
         file: filePath,
         line: lineNum,
+        rule: 'focus-suppression',
         pattern: 'focus-suppression',
         message: 'Focus outline suppressed without visible focus replacement (WCAG 2.2 SC 2.4.7 violation).'
       });
@@ -517,6 +781,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
       results.antiSlopWarnings.push({
         file: filePath,
         line: lineNum,
+        rule: 'avoid-gradient',
         pattern: 'generic-gradient-mesh',
         message: 'Generic purple/indigo hero gradient detected without documented brand justification.'
       });
@@ -526,6 +791,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
       results.antiSlopWarnings.push({
         file: filePath,
         line: lineNum,
+        rule: 'avoid-gradient',
         pattern: 'gradient-text-slop',
         message: 'Transparent gradient text detected; verify text contrast against background (WCAG 1.4.3).'
       });
@@ -535,6 +801,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
       results.antiSlopWarnings.push({
         file: filePath,
         line: lineNum,
+        rule: 'avoid-blur',
         pattern: 'glassmorphism-overuse',
         message: 'Glassmorphism backdrop-blur detected. Verify high-contrast readability.'
       });
@@ -544,6 +811,7 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
       results.antiSlopWarnings.push({
         file: filePath,
         line: lineNum,
+        rule: 'avoid-emoji',
         pattern: 'emoji-icon-replacement',
         message: 'Emoji used in interface markup; replace with consistent SVG iconography.'
       });
@@ -551,9 +819,9 @@ function inspectFile(filePath, knownColorValues, knownTokenNames, results) {
   }
 }
 
-// --- Token Exporter ---
+// --- Token Exporter (CSS, Tailwind v3, Tailwind v4, DTCG 2025.10, JSON) ---
 
-export function exportTokens(designData, format = 'css') {
+export function exportTokens(designData, format = 'css', mode = 'default') {
   const tokens = designData.tokens || {};
   const colors = tokens.colors || {};
   const spacing = tokens.spacing || {};
@@ -592,6 +860,27 @@ export function exportTokens(designData, format = 'css') {
         out += `  --layout-${k}: ${v};\n`;
       }
     }
+    if (tokens.motion) {
+      out += '\n  /* Motion */\n';
+      for (const [k, v] of Object.entries(tokens.motion)) {
+        out += `  --motion-${k}: ${v};\n`;
+      }
+    }
+    out += '}\n';
+    return out;
+  }
+
+  if (format === 'tailwind-v4') {
+    let out = '/* Tailwind v4 Theme Extension - Generated by Pure SaaS */\n@theme inline {\n';
+    for (const [k, v] of Object.entries(colors)) {
+      out += `  --color-${k.replace(/^color-/, '')}: ${v};\n`;
+    }
+    for (const [k, v] of Object.entries(spacing)) {
+      out += `  --spacing-${k}: ${v};\n`;
+    }
+    for (const [k, v] of Object.entries(radii)) {
+      out += `  --radius-${k}: ${v};\n`;
+    }
     out += '}\n';
     return out;
   }
@@ -613,14 +902,230 @@ export function exportTokens(designData, format = 'css') {
     return `/** @type {import('tailwindcss').Config} */\nmodule.exports = ${JSON.stringify(config, null, 2)};\n`;
   }
 
+  if (format === 'dtcg') {
+    const dtcg = {
+      $schema: 'https://design-tokens.github.io/community-group/format/2025.10/schema.json',
+      color: {},
+      spacing: {},
+      typography: {},
+      radius: {}
+    };
+    for (const [k, v] of Object.entries(colors)) {
+      dtcg.color[k] = { $type: 'color', $value: String(v) };
+    }
+    for (const [k, v] of Object.entries(spacing)) {
+      dtcg.spacing[k] = { $type: 'dimension', $value: String(v) };
+    }
+    for (const [k, v] of Object.entries(radii)) {
+      dtcg.radius[k] = { $type: 'dimension', $value: String(v) };
+    }
+    if (typography.font_families) {
+      for (const [k, v] of Object.entries(typography.font_families)) {
+        dtcg.typography[`font-${k}`] = { $type: 'fontFamily', $value: String(v) };
+      }
+    }
+    return JSON.stringify(dtcg, null, 2) + '\n';
+  }
+
   if (format === 'json') {
     return JSON.stringify(tokens, null, 2);
   }
 
-  throw new Error(`Unsupported export format: ${format}. Use 'css', 'tailwind', or 'json'.`);
+  throw new Error(`Unsupported export format: ${format}. Use 'css', 'tailwind', 'tailwind-v4', 'dtcg', or 'json'.`);
 }
 
-// --- Design Style Intelligence Engine ---
+// --- Programmatic Design System Generator (UI/UX Pro Max + Zero Slop Design) ---
+
+export function generateDesignSystem(options = {}) {
+  const intelPath = path.resolve(__dirname, '../references/design-intelligence.json');
+  const catalogPath = path.resolve(__dirname, '../references/design-styles-catalog.json');
+
+  let intel = null;
+  if (fs.existsSync(intelPath)) {
+    try { intel = JSON.parse(fs.readFileSync(intelPath, 'utf8')); } catch { intel = null; }
+  }
+  const catalog = fs.existsSync(catalogPath)
+    ? JSON.parse(fs.readFileSync(catalogPath, 'utf8'))
+    : { styles: [], product_archetypes: {}, stack_guidance: {} };
+
+  const productQuery = (options.product || 'saas').toLowerCase();
+  const styleQuery = (options.style || '').toLowerCase();
+  const variance = Math.max(1, Math.min(10, parseInt(options.variance || '5', 10)));
+  const motion = Math.max(1, Math.min(10, parseInt(options.motion || '5', 10)));
+  const density = Math.max(1, Math.min(10, parseInt(options.density || '5', 10)));
+  const projectName = options.name || 'Pure SaaS Generated Design System';
+
+  // 1. Resolve Product Archetype
+  const allProducts = (intel && intel.products) || [];
+  let product = allProducts.find(p => p.id?.toLowerCase().includes(productQuery) || p.name?.toLowerCase().includes(productQuery));
+  if (!product && catalog.product_archetypes) {
+    const key = Object.keys(catalog.product_archetypes).find(k => k.toLowerCase().includes(productQuery));
+    if (key) product = { id: key, ...catalog.product_archetypes[key] };
+  }
+  if (!product && allProducts.length > 0) product = allProducts[0];
+  if (!product) product = { id: 'saas', name: 'B2B SaaS Platform', primary_style: 'enterprise-saas' };
+
+  // 2. Resolve Color Palette from Product Colors
+  const allColors = (intel && intel.colors) || [];
+  let colorEntry = allColors.find(c => c.productType?.toLowerCase().includes(productQuery) || c.productType?.toLowerCase().includes(product.id?.toLowerCase()));
+  if (!colorEntry && allColors.length > 0) colorEntry = allColors[0];
+  if (!colorEntry) {
+    colorEntry = {
+      primary: '#18181b', onPrimary: '#ffffff', secondary: '#71717a', onSecondary: '#ffffff',
+      accent: '#2563eb', onAccent: '#ffffff', background: '#ffffff', foreground: '#09090b',
+      card: '#f9fafb', cardForeground: '#09090b', muted: '#f4f4f5', mutedForeground: '#71717a',
+      border: '#e4e4e7', destructive: '#dc2626', onDestructive: '#ffffff', ring: '#2563eb'
+    };
+  }
+
+  // 3. Resolve Style
+  const allStyles = [...(catalog.styles || []), ...((intel && intel.styles) || [])];
+  let style = null;
+  if (styleQuery) {
+    style = allStyles.find(s => s.id?.toLowerCase().includes(styleQuery) || s.name?.toLowerCase().includes(styleQuery));
+  }
+  if (!style && product.primary_style) {
+    style = allStyles.find(s => s.id?.toLowerCase().includes(product.primary_style.toLowerCase()) || s.name?.toLowerCase().includes(product.primary_style.toLowerCase()));
+  }
+  if (!style && allStyles.length > 0) style = allStyles[0];
+  if (!style) style = { id: 'minimal-swiss', name: 'Minimalism & Swiss Style' };
+
+  // 4. Resolve Typography
+  const allTypo = (intel && intel.typography) || [];
+  let typo = allTypo.find(t => t.best_for && t.best_for.toLowerCase().includes(productQuery));
+  if (!typo && allTypo.length > 0) typo = allTypo[0];
+  const headingFont = typo?.heading_font || 'Inter, -apple-system, sans-serif';
+  const bodyFont = typo?.body_font || 'Inter, -apple-system, sans-serif';
+
+  // 5. Dial: Density (1-10)
+  const spacing = density >= 7 ? {
+    'space-1': '2px', 'space-2': '4px', 'space-4': '12px', 'space-6': '16px', 'space-8': '24px'
+  } : density <= 3 ? {
+    'space-1': '6px', 'space-2': '12px', 'space-4': '24px', 'space-6': '36px', 'space-8': '48px'
+  } : {
+    'space-1': '4px', 'space-2': '8px', 'space-4': '16px', 'space-6': '24px', 'space-8': '32px'
+  };
+  const containerMaxWidth = density >= 8 ? '1600px' : density <= 3 ? '1140px' : '1280px';
+  const bodySize = density >= 8 ? '0.875rem' : density <= 3 ? '1.125rem' : '1rem';
+
+  // 6. Dial: Motion (1-10)
+  const motionTiming = motion >= 8 ? {
+    duration_fast: '150ms', duration_normal: '300ms',
+    easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    feel: 'Dynamic spring physics with responsive tactile feedback'
+  } : motion <= 3 ? {
+    duration_fast: '75ms', duration_normal: '150ms',
+    easing: 'ease-out',
+    feel: 'Subtle instant transitions respecting reduced-motion preferences'
+  } : {
+    duration_fast: '100ms', duration_normal: '200ms',
+    easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+    feel: 'Natural Apple-grade responsive easing'
+  };
+
+  // 7. Dial: Variance (1-10)
+  const h1Size = variance >= 8 ? '3.25rem' : variance <= 3 ? '2.0rem' : '2.5rem';
+
+  return `---
+name: "${projectName}"
+version: "1.0.0"
+status: "approved"
+product_archetype: "${product.name}"
+style_archetype: "${style.name}"
+dials:
+  variance: ${variance}
+  motion: ${motion}
+  density: ${density}
+tokens:
+  colors:
+    color-bg-canvas: "${colorEntry.background || '#ffffff'}"
+    color-bg-surface: "${colorEntry.card || '#f9fafb'}"
+    color-bg-surface-elevated: "#ffffff"
+    color-bg-surface-sunken: "${colorEntry.muted || '#f3f4f6'}"
+    color-text-primary: "${colorEntry.foreground || '#09090b'}"
+    color-text-secondary: "${colorEntry.mutedForeground || '#52525b'}"
+    color-text-muted: "#a1a1aa"
+    color-text-inverse: "${colorEntry.onPrimary || '#ffffff'}"
+    color-action-primary: "${colorEntry.primary || '#18181b'}"
+    color-action-hover: "${colorEntry.ring || '#27272a'}"
+    color-action-active: "${colorEntry.foreground || '#09090b'}"
+    color-border-subtle: "${colorEntry.border || '#e4e4e7'}"
+    color-border-strong: "#a1a1aa"
+    color-border-focus: "${colorEntry.ring || '#18181b'}"
+    color-status-success: "#16a34a"
+    color-status-warning: "#d97706"
+    color-status-error: "${colorEntry.destructive || '#dc2626'}"
+    color-status-info: "${colorEntry.accent || '#2563eb'}"
+  typography:
+    font_families:
+      sans: "${bodyFont}"
+      heading: "${headingFont}"
+      mono: "JetBrains Mono, monospace"
+    scale:
+      h1: "${h1Size}"
+      h2: "1.75rem"
+      h3: "1.25rem"
+      body: "${bodySize}"
+      body_small: "0.875rem"
+      label: "0.75rem"
+  spacing:
+    space-1: "${spacing['space-1']}"
+    space-2: "${spacing['space-2']}"
+    space-4: "${spacing['space-4']}"
+    space-6: "${spacing['space-6']}"
+    space-8: "${spacing['space-8']}"
+  layout:
+    container_max_width: "${containerMaxWidth}"
+    content_max_width: "65ch"
+  radii:
+    none: "0"
+    sm: "4px"
+    md: "8px"
+    lg: "12px"
+  motion:
+    duration-fast: "${motionTiming.duration_fast}"
+    duration-normal: "${motionTiming.duration_normal}"
+    easing-standard: "${motionTiming.easing}"
+principles:
+  - "Purposeful clarity over decorative excess."
+  - "Direct manipulation and responsive optical feedback."
+  - "Strict anti-slop discipline: zero generic purple/cyan gradients and no emoji icons."
+accessibility:
+  tier: "WCAG 2.2 AA"
+  min_touch_target: "44px"
+  focus_ring_width: "2px"
+unresolved:
+  - "Verify color contrast on brand primary against customized dark mode theme."
+  - "Confirm whether data tables require fixed or fluid column widths on mobile viewports."
+---
+
+# ${projectName}
+
+## 1. Product & Direction Overview
+- **Product Archetype:** ${product.name}
+- **Style Archetype:** ${style.name}
+- **Design Dials:** Variance ${variance}/10 | Motion ${motion}/10 | Density ${density}/10 (${motionTiming.feel})
+
+## 2. Precedence Hierarchy
+1. User's explicit requirements and brand design system.
+2. Platform conventions (Apple HIG / Web standards) and WCAG 2.2 AA.
+3. Verified project tokens in DESIGN.md.
+4. Retrieved guidelines from integrated intelligence catalog.
+5. New proposals (must be flagged as proposals).
+
+## 3. Interaction States (8-State Matrix)
+All interactive controls implement:
+- Default, Hover, Focus-Visible, Active/Pressed, Disabled, Loading, Error, and Success.
+
+## 4. Anti-Slop Discipline
+- No generic gradient mesh backgrounds.
+- No transparent clip-text gradient titles.
+- No emoji icons in buttons or navigation.
+- No unmapped Tailwind utility color classes.
+`;
+}
+
+// --- Design Style Intelligence Engine (UI/UX Pro Max) ---
 
 export function queryDesignIntelligence(options = {}) {
   const intelPath = path.resolve(__dirname, '../references/design-intelligence.json');
@@ -662,7 +1167,7 @@ export function queryDesignIntelligence(options = {}) {
   }
 
   let matchedProduct = null;
-  const pTarget = productFilter || (domain === 'product' ? query : '');
+  const pTarget = productFilter || (domain === 'product' || domain === 'products' ? query : '');
   if (pTarget) {
     const key = Object.keys(productsObj).find(k =>
       k.toLowerCase().includes(pTarget) ||
@@ -673,8 +1178,8 @@ export function queryDesignIntelligence(options = {}) {
       matchedProduct = { id: key, ...productsObj[key] };
     } else if (intel && intel.products) {
       const p = intel.products.find(pr =>
-        pr.id.toLowerCase().includes(pTarget) ||
-        pr.name.toLowerCase().includes(pTarget) ||
+        pr.id?.toLowerCase().includes(pTarget) ||
+        pr.name?.toLowerCase().includes(pTarget) ||
         (pr.keywords && pr.keywords.some(kw => kw.toLowerCase().includes(pTarget)))
       );
       if (p) matchedProduct = { id: p.id, ...p };
@@ -689,7 +1194,7 @@ export function queryDesignIntelligence(options = {}) {
   }
 
   let matchedStack = null;
-  const sTarget = stackFilter || (domain === 'stack' ? query : '');
+  const sTarget = stackFilter || (domain === 'stack' || domain === 'stacks' ? query : '');
   if (sTarget) {
     const key = Object.keys(stacksObj).find(k =>
       k.toLowerCase().includes(sTarget) ||
@@ -708,31 +1213,53 @@ export function queryDesignIntelligence(options = {}) {
     if (key) matchedStack = { id: key, ...stacksObj[key] };
   }
 
-  // Additional design intelligence domains from UI UX Pro Max
-  const matchedTypography = (intel && intel.typography)
-    ? (query ? intel.typography.filter(t => t.name.toLowerCase().includes(query) || t.heading_font.toLowerCase().includes(query) || t.mood.toLowerCase().includes(query)) : intel.typography)
+  // Domain Queries
+  const matchedColors = (intel && intel.colors)
+    ? (query ? intel.colors.filter(c => c.productType.toLowerCase().includes(query) || (c.notes && c.notes.toLowerCase().includes(query))) : intel.colors)
     : [];
+
+  const matchedLanding = (intel && intel.landing)
+    ? (query ? intel.landing.filter(l => l.patternName.toLowerCase().includes(query) || l.keywords.toLowerCase().includes(query) || l.conversionOptimization.toLowerCase().includes(query)) : intel.landing)
+    : [];
+
+  const matchedUX = (intel && intel.ux)
+    ? (query ? intel.ux.filter(u => u.issue.toLowerCase().includes(query) || u.category.toLowerCase().includes(query) || u.description.toLowerCase().includes(query)) : intel.ux)
+    : [];
+
+  const matchedTypography = (intel && intel.typography)
+    ? (query ? intel.typography.filter(t => t.name.toLowerCase().includes(query) || t.heading_font.toLowerCase().includes(query) || (t.mood && t.mood.toLowerCase().includes(query))) : intel.typography)
+    : [];
+
   const matchedCharts = (intel && intel.charts)
     ? (query ? intel.charts.filter(c => c.data_type.toLowerCase().includes(query) || c.best_chart_type.toLowerCase().includes(query)) : intel.charts)
     : [];
+
   const matchedMotion = (intel && intel.motion)
-    ? (query ? intel.motion.filter(m => m.category.toLowerCase().includes(query) || m.intensity_tier.toLowerCase().includes(query)) : intel.motion)
+    ? (query ? intel.motion.filter(m => m.category.toLowerCase().includes(query) || (m.intensity_tier && m.intensity_tier.toLowerCase().includes(query))) : intel.motion)
+    : [];
+
+  const matchedAppUi = (intel && intel.app_interface)
+    ? (query ? intel.app_interface.filter(a => a.issue.toLowerCase().includes(query) || a.category.toLowerCase().includes(query) || a.description.toLowerCase().includes(query)) : intel.app_interface)
     : [];
 
   return {
     styles: matchedStyles,
     product: matchedProduct,
     stack: matchedStack,
+    colors: matchedColors,
+    landing: matchedLanding,
+    ux: matchedUX,
     typography: matchedTypography,
     charts: matchedCharts,
     motion: matchedMotion,
+    app_interface: matchedAppUi,
     allProducts: productsObj,
     allStacks: stacksObj,
     datasetSummary: intel ? intel.summary : { styles_count: catalog.styles?.length || 0 }
   };
 }
 
-// --- Reference Library Search Engine ---
+// --- Reference Library Search Engine (Apple HIG + Frameworks + Craft Guides) ---
 
 export function searchReferences(query = '', options = {}) {
   const referencesDir = path.resolve(__dirname, '../references');
@@ -818,6 +1345,8 @@ export function searchReferences(query = '', options = {}) {
   results.sort((a, b) => b.score - a.score);
   return options.limit ? results.slice(0, options.limit) : results;
 }
+
+// --- Starter Document Generators (Zero-Disk Dependency) ---
 
 export function getStarterDesign() {
   return `---
@@ -968,11 +1497,133 @@ export async function runCli(args = process.argv.slice(2)) {
     return result.valid ? 0 : 1;
   }
 
-  if (command === 'check-tokens' || command === 'tokens' || command === 'check-code') {
+  if (command === 'contrast') {
+    const targetFile = args[1] && !args[1].startsWith('--') ? args[1] : 'DESIGN.md';
+    const jsonOutput = args.includes('--json');
+    const validation = validateDesignDocument(path.resolve(process.cwd(), targetFile));
+
+    if (!validation.contrastAudit) {
+      console.error('Error: Could not run contrast audit on target file.');
+      return 1;
+    }
+
+    if (jsonOutput) {
+      console.log(JSON.stringify(validation.contrastAudit, null, 2));
+    } else {
+      console.log(`=== Pure SaaS WCAG Contrast Audit: ${targetFile} ===\n`);
+      console.log(`Audited Pairs: ${validation.contrastAudit.auditedPairs} | Passed AA: ${validation.contrastAudit.passedAA} | Failed AA: ${validation.contrastAudit.failedAA}\n`);
+      for (const r of validation.contrastAudit.results) {
+        const mark = r.passAA ? '✓' : '✗';
+        const aaa = r.passAAA ? '(AAA ✓)' : '';
+        console.log(`  ${mark} ${r.fgToken} (${r.fgHex}) on ${r.bgToken} (${r.bgHex}) -> ${r.ratio}:1 ${aaa}`);
+        console.log(`    Role: ${r.target}`);
+      }
+    }
+    return validation.contrastAudit.failedAA === 0 ? 0 : 1;
+  }
+
+  if (command === 'diff') {
+    const file1 = args[1];
+    const file2 = args[2];
+    const jsonOutput = args.includes('--json');
+
+    if (!file1 || !file2) {
+      console.error('Error: Supply two design files to diff. Example: pure-saas diff DESIGN.before.md DESIGN.after.md');
+      return 1;
+    }
+
+    const raw1 = fs.readFileSync(path.resolve(process.cwd(), file1), 'utf8');
+    const raw2 = fs.readFileSync(path.resolve(process.cwd(), file2), 'utf8');
+    const { data: d1 } = parseFrontmatter(raw1);
+    const { data: d2 } = parseFrontmatter(raw2);
+
+    const diff = diffDesignTokens(d1.tokens || {}, d2.tokens || {});
+
+    if (jsonOutput) {
+      console.log(JSON.stringify(diff, null, 2));
+    } else {
+      console.log(`=== Pure SaaS Token Diff: ${file1} -> ${file2} (${diff.totalChanges} changes) ===\n`);
+      for (const c of diff.changes) {
+        if (c.change === 'added') console.log(`  [+] Added: ${c.path} = ${JSON.stringify(c.after)}`);
+        else if (c.change === 'removed') console.log(`  [-] Removed: ${c.path} (was ${JSON.stringify(c.before)})`);
+        else console.log(`  [*] Changed: ${c.path} = ${JSON.stringify(c.before)} -> ${JSON.stringify(c.after)}`);
+      }
+    }
+    return 0;
+  }
+
+  if (command === 'drift') {
+    const designFile = args[1];
+    const obsFile = args[2];
+    const jsonOutput = args.includes('--json');
+
+    if (!designFile || !obsFile) {
+      console.error('Error: Supply DESIGN.md and observations.json. Example: pure-saas drift DESIGN.md observations.json');
+      return 1;
+    }
+
+    const rawDesign = fs.readFileSync(path.resolve(process.cwd(), designFile), 'utf8');
+    const rawObs = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), obsFile), 'utf8'));
+    const { data } = parseFrontmatter(rawDesign);
+
+    const drift = detectDesignDrift(data.tokens || {}, rawObs);
+
+    if (jsonOutput) {
+      console.log(JSON.stringify(drift, null, 2));
+    } else {
+      console.log(`=== Pure SaaS Design Drift Audit: ${obsFile} ===\n`);
+      console.log(`Source: ${drift.source.url} (${drift.source.captured})`);
+      console.log(`Observed: ${drift.observed} | Matches: ${drift.matches} | Drift: ${drift.differences}\n`);
+      for (const r of drift.results) {
+        const mark = r.result === 'match' ? '✓' : '✗';
+        console.log(`  ${mark} [${r.result.toUpperCase()}] ${r.path} @ ${r.location} (${r.state})`);
+        console.log(`    Expected: ${JSON.stringify(r.expected)} | Observed: ${JSON.stringify(r.observed)}`);
+      }
+    }
+    return drift.differences === 0 ? 0 : 1;
+  }
+
+  if (command === 'design-system') {
+    const prodIdx = args.indexOf('--product');
+    const productArg = prodIdx !== -1 ? args[prodIdx + 1] : 'saas';
+    const styleIdx = args.indexOf('--style');
+    const styleArg = styleIdx !== -1 ? args[styleIdx + 1] : '';
+    const varIdx = args.indexOf('--variance');
+    const varianceArg = varIdx !== -1 ? parseInt(args[varIdx + 1], 10) : 5;
+    const motIdx = args.indexOf('--motion');
+    const motionArg = motIdx !== -1 ? parseInt(args[motIdx + 1], 10) : 5;
+    const denIdx = args.indexOf('--density');
+    const densityArg = denIdx !== -1 ? parseInt(args[denIdx + 1], 10) : 5;
+    const outIdx = args.indexOf('--out');
+    const outFile = outIdx !== -1 ? path.resolve(process.cwd(), args[outIdx + 1]) : null;
+
+    const content = generateDesignSystem({
+      product: productArg,
+      style: styleArg,
+      variance: varianceArg,
+      motion: motionArg,
+      density: densityArg
+    });
+
+    if (outFile) {
+      fs.mkdirSync(path.dirname(outFile), { recursive: true });
+      fs.writeFileSync(outFile, content, 'utf8');
+      console.log(`Generated design system written to ${outFile}`);
+    } else {
+      console.log(content);
+    }
+    return 0;
+  }
+
+  if (command === 'check-tokens' || command === 'tokens' || command === 'check-code' || command === 'check') {
     const designFile = path.resolve(process.cwd(), args[1] && !args[1].startsWith('--') ? args[1] : 'DESIGN.md');
     const jsonOutput = args.includes('--json');
+    const strict = args.includes('--strict');
+    const updateKnown = args.includes('--update-known');
     const srcIndex = args.indexOf('--source');
     const srcDir = srcIndex !== -1 ? path.resolve(process.cwd(), args[srcIndex + 1]) : null;
+    const knownIdx = args.indexOf('--known');
+    const knownFile = knownIdx !== -1 ? path.resolve(process.cwd(), args[knownIdx + 1]) : null;
 
     const validation = validateDesignDocument(designFile);
     let scanResults = null;
@@ -980,7 +1631,11 @@ export async function runCli(args = process.argv.slice(2)) {
     if (srcDir) {
       const raw = fs.existsSync(designFile) ? fs.readFileSync(designFile, 'utf8') : '';
       const { data } = parseFrontmatter(raw);
-      scanResults = scanSourceDirectory(srcDir, data.tokens || {});
+      scanResults = scanSourceDirectory(srcDir, data.tokens || {}, {
+        known: knownFile,
+        updateKnown,
+        strict
+      });
     }
 
     const payload = {
@@ -995,20 +1650,21 @@ export async function runCli(args = process.argv.slice(2)) {
       printValidationResult(validation);
       if (scanResults) {
         console.log(`\nSource scan: ${scanResults.scannedFiles} files checked in ${srcDir}`);
-        console.log(`Raw color violations: ${scanResults.rawColorViolations.length}`);
-        console.log(`Unresolved token refs: ${scanResults.unresolvedTokenRefs.length}`);
-        console.log(`Anti-slop warnings: ${scanResults.antiSlopWarnings.length}`);
+        console.log(`Violations: ${scanResults.newViolations.length} new, ${scanResults.knownViolations.length} known`);
 
-        for (const viol of scanResults.rawColorViolations.slice(0, 5)) {
+        for (const viol of scanResults.newViolations.slice(0, 5)) {
           console.log(`  [!] ${path.relative(process.cwd(), viol.file)}:${viol.line} -> ${viol.message}`);
         }
         for (const warn of scanResults.antiSlopWarnings.slice(0, 5)) {
           console.log(`  [*] Anti-Slop: ${path.relative(process.cwd(), warn.file)}:${warn.line} -> ${warn.message}`);
         }
+        if (scanResults.fixedKnownDefects.length > 0) {
+          console.log(`\n[+] Fixed technical debt: ${scanResults.fixedKnownDefects.length} known defects no longer detected!`);
+        }
       }
     }
 
-    const hasFailure = !validation.valid || (scanResults && scanResults.rawColorViolations.length > 0);
+    const hasFailure = !validation.valid || (scanResults && (strict ? (scanResults.rawColorViolations.length > 0) : scanResults.newViolations.length > 0));
     return hasFailure ? 1 : 0;
   }
 
@@ -1060,12 +1716,15 @@ export async function runCli(args = process.argv.slice(2)) {
       verified_checks: [
         'DESIGN.md schema & structural integrity',
         'Required semantic color token completeness',
+        'WCAG 2.2 AA Color Contrast Verification',
         'Typography hierarchy scale check',
         'Spacing token scale consistency',
         'Static anti-slop pattern detection'
       ],
       failed_checks: designVal.issues,
       warnings: designVal.warnings.concat(scanResults ? scanResults.antiSlopWarnings.map(w => w.message) : []),
+      unresolved_decisions: designVal.unresolvedItems || [],
+      contrast_summary: designVal.contrastAudit || null,
       untested_areas: [
         'Visual rendering across 375px mobile and 1440px desktop viewports (requires live browser session)',
         'Full keyboard navigation trap and screen-reader accessibility announcements (requires manual or assistive tech audit)',
@@ -1096,6 +1755,11 @@ export async function runCli(args = process.argv.slice(2)) {
       if (report.warnings.length > 0) {
         console.log('\n[!] Warnings & Anti-Slop Review Triggers:');
         for (const w of report.warnings) console.log(`  ! ${w}`);
+      }
+
+      if (report.unresolved_decisions.length > 0) {
+        console.log('\n[?] Unresolved Design Questions (Require User Alignment):');
+        for (const u of report.unresolved_decisions) console.log(`  ? ${u}`);
       }
 
       console.log('\n[?] Untested Areas (Must Not Be Claimed Conforming):');
@@ -1274,27 +1938,45 @@ Usage:
   pure-saas <command> [options]
 
 Commands:
-  validate [file]                 Validate DESIGN.md or design-brief.md structure and required tokens
-  check-tokens, tokens [file]     Check design tokens and scan source code for raw styling or drift
-  export-tokens [file] [--format] Export tokens from DESIGN.md to CSS, Tailwind, or JSON
+  validate [file]                 Validate DESIGN.md or design-brief.md structure, tokens & contrast
+  contrast [file]                 Audit semantic color tokens for WCAG 2.2 AA / AAA contrast compliance
+  diff <file1> <file2>            Diff tokens between two design files or commits
+  drift <design> <obs.json>       Detect design drift between expected tokens and measured observations
+  check, check-tokens [file]      Check design tokens and scan source code for raw styling or drift
+  design-system [options]         Generate a complete DESIGN.md based on product, style, and design dials
+  export-tokens [file] [--format] Export tokens from DESIGN.md to CSS, Tailwind (v3/v4), DTCG, or JSON
   audit, review-report, verify    Generate an honest verification report with tested vs untested areas
-  ref, search-ref [query]         Search reference library (Apple HIG, frameworks, craft guidelines)
+  query [domain] [query]          Query design intelligence (styles, products, colors, typography, UX, charts)
   style [query]                   Query curated design intelligence styles
+  ref, search-ref [query]         Search reference library (Apple HIG, frameworks, craft guidelines)
   init [--reference]              Initialize starter design-brief.md and DESIGN.md in the current repo
 
 Options:
   --json                          Output results as machine-readable JSON (suitable for CI)
-  --format <css|tailwind|json>    Export format for export-tokens (default: css)
+  --format <css|tailwind|dtcg|json> Export format for export-tokens (default: css)
   --out <file>                    Write output directly to file
   --source <dir>                  Source directory to scan for token usage (e.g. src)
+  --known <file>                  Known defects baseline JSON file to suppress existing debt
+  --update-known                  Update known defects baseline file with current defects
+  --strict                        Fail on known defects as well as new defects
+  --product <name>                Filter by product archetype (e.g. saas, fintech, healthcare)
+  --style <name>                  Filter by design style (e.g. minimal-swiss, technical-terminal)
+  --variance <1-10>               Design dial: visual variance (1=centered/minimal, 10=bold/asymmetric)
+  --motion <1-10>                 Design dial: motion intensity (1=subtle/reduced, 10=dynamic spring physics)
+  --density <1-10>                Design dial: visual density (1=spacious marketing, 10=compact data console)
   --help, -h                      Show this help message
   --version, -v                   Show CLI version
 
 Examples:
   npx pure-saas validate DESIGN.md
-  npx pure-saas check-tokens DESIGN.md --source src
-  npx pure-saas export-tokens DESIGN.md --format css --out styles/tokens.css
-  npx pure-saas review-report --json
+  npx pure-saas contrast DESIGN.md
+  npx pure-saas diff DESIGN.before.md DESIGN.md
+  npx pure-saas drift DESIGN.md observations.json
+  npx pure-saas check DESIGN.md --source src --known known-defects.json
+  npx pure-saas design-system --product fintech --variance 8 --motion 7 --out DESIGN.md
+  npx pure-saas export-tokens DESIGN.md --format dtcg --out tokens.json
+  npx pure-saas query ux "smooth scroll"
+  npx pure-saas ref "modal"
 `);
 }
 

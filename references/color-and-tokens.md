@@ -93,3 +93,39 @@ Use standardized token naming across all export formats (CSS Custom Properties, 
 - **Surface Purpose:** Backgrounds should be clean, solid, or use subtle, meaningful textures (e.g., subtle dot grids for developer tools, warm paper tint for editorial tools).
 - **Subtle Depth:** If shadows are used, use multi-layered soft ambient shadows (`rgba(0, 0, 0, 0.04)` and `rgba(0, 0, 0, 0.08)`) instead of harsh, single-point black dropshadows.
 
+---
+
+## 5. WCAG 2.2 Contrast Verification & Automated Auditing
+
+All semantic color tokens must satisfy WCAG 2.2 accessibility thresholds:
+- **Normal Text (SC 1.4.3):** Ratio >= 4.5:1 against canvas and surface backgrounds.
+- **Large Text (>= 18pt or 14pt bold):** Ratio >= 3.0:1 against background.
+- **UI Components & Graphical Objects (SC 1.4.11):** Ratio >= 3.0:1 for action buttons, focus rings, borders, and status indicators against adjacent surfaces.
+
+Run automated contrast auditing on any `DESIGN.md`:
+```bash
+npx pure-saas contrast DESIGN.md
+```
+
+---
+
+## 6. Multi-Format Token Export & Drift Detection
+
+Export tokens seamlessly into production codebases without lock-in:
+```bash
+# Export to standard CSS Custom Properties (:root { ... })
+npx pure-saas export-tokens DESIGN.md --format css --out src/styles/tokens.css
+
+# Export to Tailwind v4 theme extension (@theme inline { ... })
+npx pure-saas export-tokens DESIGN.md --format tailwind-v4 --out src/styles/theme.css
+
+# Export to Tailwind v3 configuration JS
+npx pure-saas export-tokens DESIGN.md --format tailwind --out tailwind.tokens.js
+
+# Export to DTCG 2025.10 Design Tokens Community Group specification
+npx pure-saas export-tokens DESIGN.md --format dtcg --out tokens.json
+
+# Detect drift between expected tokens and live observed values
+npx pure-saas drift DESIGN.md observations.json
+```
+

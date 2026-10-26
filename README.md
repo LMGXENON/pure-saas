@@ -152,24 +152,40 @@ npx pure-saas ref "modal"
 npx pure-saas ref "button"
 npx pure-saas ref "react"
 
-# Validate DESIGN.md or design-brief.md structure and required tokens
+# Query multi-domain design intelligence (colors, UX heuristics, landing patterns, charts, typography, motion)
+npx pure-saas query color "fintech"
+npx pure-saas query ux "scroll"
+npx pure-saas query landing "saas hero"
+npx pure-saas style "developer tool dark mode"
+
+# Generate complete DESIGN.md based on product archetype and design dials
+npx pure-saas design-system --product fintech --variance 8 --motion 9 --density 8 --out DESIGN.md
+
+# Validate DESIGN.md structure, required tokens, and open unresolved questions
 npx pure-saas validate [path/to/DESIGN.md]
 
-# Scan source code for raw hex colors, unmapped styles, or anti-slop violations
-npx pure-saas check-tokens [DESIGN.md] --source src
+# Audit color contrast against WCAG 2.2 AA (4.5:1 text, 3.0:1 UI) and AAA (7.0:1)
+npx pure-saas contrast [path/to/DESIGN.md]
 
-# Export tokens to CSS Custom Properties, Tailwind, or JSON
+# Diff design tokens across revisions or commits
+npx pure-saas diff DESIGN.before.md DESIGN.md
+
+# Detect design drift between expected tokens and live measured observations
+npx pure-saas drift DESIGN.md observations.json
+
+# Scan source code for raw styling violations with known technical debt baseline
+npx pure-saas check DESIGN.md --source src --known known-defects.json
+
+# Export tokens to CSS Custom Properties, Tailwind v3/v4, DTCG 2025.10, or JSON
 npx pure-saas export-tokens DESIGN.md --format css --out styles/tokens.css
+npx pure-saas export-tokens DESIGN.md --format tailwind-v4 --out styles/theme.css
 npx pure-saas export-tokens DESIGN.md --format tailwind --out tailwind.tokens.js
-npx pure-saas export-tokens DESIGN.md --format json --out tokens.json
+npx pure-saas export-tokens DESIGN.md --format dtcg --out tokens.json
 
 # Run comprehensive quality audit & verification report
 npx pure-saas review-report --json
 
-# Query curated design intelligence taxonomy
-npx pure-saas style "developer tool dark mode"
-
-# Initialize starter templates in current repository
+# Initialize starter specifications in current repository
 npx pure-saas init
 ```
 

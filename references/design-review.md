@@ -60,6 +60,29 @@ Fix **Critical** (broken layouts, unreadable contrast < 3:1, missing keyboard na
 
 ---
 
+## 3. Automated Verification & Drift Audit Tools
+
+Use the Pure SaaS CLI to run automated, objective checks during the review workflow:
+
+```bash
+# 1. Audit color contrast against WCAG 2.2 AA (4.5:1 text, 3.0:1 UI) and AAA (7.0:1)
+npx pure-saas contrast DESIGN.md
+
+# 2. Detect design drift between expected tokens and live observed values
+npx pure-saas drift DESIGN.md observations.json
+
+# 3. Diff tokens between before/after design versions
+npx pure-saas diff DESIGN.before.md DESIGN.md
+
+# 4. Scan source directory with known defects technical debt baseline
+npx pure-saas check DESIGN.md --source src --known known-defects.json
+
+# 5. Generate comprehensive verification report (JSON or human-readable)
+npx pure-saas review-report --source src --json
+```
+
+---
+
 ## 3. Honest Reporting Rule
 
 If a page, viewport, or interaction state was not directly tested in a running browser or rendering harness, **it must be reported as "Untested", never as "Passed" or "Verified".**
