@@ -77,3 +77,4 @@ if (command === 'list') {
   console.log('  node scripts/moderate-showcase.mjs approve <id>');
   console.log('  node scripts/moderate-showcase.mjs reject <id>');
 }
+
