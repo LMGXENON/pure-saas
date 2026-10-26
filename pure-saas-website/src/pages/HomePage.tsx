@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CodeBlock } from '../components/CodeBlock';
+import { AgentPromptBanner } from '../components/AgentPromptBanner';
 import {
   ArrowRight,
   Copy,
@@ -9,8 +10,7 @@ import {
   ChevronDown,
   Sparkles,
   Code2,
-  Eye,
-  Terminal
+  Eye
 } from 'lucide-react';
 
 const VERIFIED_INSTALL_PROMPT = `Configure this repository with Pure SaaS.
@@ -202,9 +202,6 @@ export function CloudScaleConsole() {
 }`;
 
 export const HomePage: React.FC = () => {
-  // Hero Prompt Copy State (Prompt text remains hidden; only compact control visible)
-  const [copiedPrompt, setCopiedPrompt] = useState(false);
-
   // Comparison State
   const [selectedVersion, setSelectedVersion] = useState<'with' | 'without'>('with');
   const [viewMode, setViewMode] = useState<'preview' | 'code'>('preview');
@@ -212,24 +209,6 @@ export const HomePage: React.FC = () => {
 
   // FAQ Accordion State
   const [openFaq, setOpenFaq] = useState<Record<number, boolean>>({ 0: true });
-
-  const handleCopyInstallPrompt = async () => {
-    try {
-      await navigator.clipboard.writeText(VERIFIED_INSTALL_PROMPT);
-      setCopiedPrompt(true);
-      setTimeout(() => setCopiedPrompt(false), 2500);
-    } catch {
-      // Fallback
-      const ta = document.createElement('textarea');
-      ta.value = VERIFIED_INSTALL_PROMPT;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      setCopiedPrompt(true);
-      setTimeout(() => setCopiedPrompt(false), 2500);
-    }
-  };
 
   const handleCopyCode = async () => {
     const textToCopy = selectedVersion === 'with' ? CODE_WITH_PURE_SAAS : CODE_WITHOUT_PURE_SAAS;
@@ -293,39 +272,11 @@ export const HomePage: React.FC = () => {
 
           {/* Compact Installation-Prompt Control (Hidden Prompt Text by Default) */}
           <div className="pt-4 max-w-xl mx-auto w-full">
-            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left transition-colors">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="w-8 h-8 rounded-lg bg-surface-muted border border-border-subtle flex items-center justify-center shrink-0 text-accent">
-                  <Terminal className="w-4 h-4" />
-                </div>
-                <div className="min-w-0">
-                  <div className="text-xs font-semibold text-text-primary tracking-tight">
-                    Coding Agent Setup Prompt
-                  </div>
-                  <p className="text-[11px] text-text-secondary truncate">
-                    Copy the installation instructions into your AI coding agent.
-                  </p>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleCopyInstallPrompt}
-                className="h-8 px-3 rounded-lg bg-surface-muted hover:bg-surface-hover border border-border-subtle text-text-primary text-xs font-semibold hover:border-border-default active:scale-98 transition-all inline-flex items-center justify-center gap-1.5 shrink-0"
-              >
-                {copiedPrompt ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-emerald-500" />
-                    <span className="text-emerald-600 dark:text-emerald-400">Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5 text-text-muted" />
-                    <span>Copy Prompt</span>
-                  </>
-                )}
-              </button>
-            </div>
+            <AgentPromptBanner
+              promptText={VERIFIED_INSTALL_PROMPT}
+              className="w-full"
+              description="Copy the installation instructions into your AI coding agent."
+            />
           </div>
         </div>
       </section>

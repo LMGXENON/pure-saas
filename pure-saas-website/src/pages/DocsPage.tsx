@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { docsArticles, DocArticle, DocSection } from '../data/docsData';
 import { CodeBlock } from '../components/CodeBlock';
+import { AgentPromptBanner } from '../components/AgentPromptBanner';
 import {
   Search,
   Clock,
@@ -19,14 +20,12 @@ import {
   Hash,
   Share2,
   Check,
-  Copy,
   Rocket,
   Compass,
   Terminal,
   Sliders,
   HelpCircle,
   BookOpen,
-  Sparkles,
   ExternalLink
 } from 'lucide-react';
 
@@ -38,7 +37,6 @@ export const DocsPage: React.FC = () => {
   const [filterQuery, setFilterQuery] = useState<string>('');
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
-  const [copiedPrompt, setCopiedPrompt] = useState<boolean>(false);
 
   // Sync state if URL search param changes
   useEffect(() => {
@@ -74,12 +72,6 @@ export const DocsPage: React.FC = () => {
     setTimeout(() => setCopiedLink(false), 2000);
   };
 
-  const handleCopyPrompt = (promptText: string) => {
-    navigator.clipboard.writeText(promptText);
-    setCopiedPrompt(true);
-    setTimeout(() => setCopiedPrompt(false), 2000);
-  };
-
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'Getting Started':
@@ -98,25 +90,25 @@ export const DocsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-canvas text-text-primary">
+    <div className="min-h-screen bg-canvas text-text-primary overflow-x-hidden">
       {/* Sub-header / GitBook breadcrumb bar */}
-      <div className="border-b border-border-subtle bg-surface-base/80 backdrop-blur-md sticky top-14 z-30 px-4 sm:px-6 py-2.5">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 text-xs">
+      <div className="border-b border-border-subtle bg-surface-base/80 backdrop-blur-md sticky top-14 z-30 px-4 sm:px-6 lg:px-8 py-2.5 w-full">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 text-xs w-full">
           {/* Breadcrumbs & Mobile Drawer Trigger */}
-          <div className="flex items-center gap-2 text-text-secondary truncate">
+          <div className="flex items-center gap-2 text-text-secondary truncate min-w-0">
             <button
               onClick={() => setMobileDrawerOpen(true)}
-              className="lg:hidden p-1.5 -ml-1 rounded-lg text-text-primary hover:bg-surface-hover transition-colors"
+              className="lg:hidden p-1.5 -ml-1 rounded-lg text-text-primary hover:bg-surface-hover transition-colors shrink-0"
               aria-label="Open documentation navigation"
             >
               <Menu className="w-4 h-4" />
             </button>
-            <Link to="/" className="hover:text-text-primary font-medium transition-colors">Home</Link>
-            <span className="text-text-muted">/</span>
-            <Link to="/docs" className="hover:text-text-primary font-medium transition-colors">Docs</Link>
-            <span className="text-text-muted">/</span>
-            <span className="text-text-muted">{currentArticle.category}</span>
-            <span className="text-text-muted">/</span>
+            <Link to="/" className="hover:text-text-primary font-medium transition-colors shrink-0">Home</Link>
+            <span className="text-text-muted shrink-0">/</span>
+            <Link to="/docs" className="hover:text-text-primary font-medium transition-colors shrink-0">Docs</Link>
+            <span className="text-text-muted shrink-0">/</span>
+            <span className="text-text-muted truncate hidden sm:inline">{currentArticle.category}</span>
+            <span className="text-text-muted hidden sm:inline">/</span>
             <span className="text-text-primary font-semibold truncate">{currentArticle.title}</span>
           </div>
 
@@ -134,12 +126,12 @@ export const DocsPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start w-full">
           {/* ========================================================= */}
           {/* LEFT SIDEBAR: Persistent & Collapsible GitBook Navigation */}
           {/* ========================================================= */}
-          <aside className="hidden lg:block lg:col-span-3 sticky top-28 space-y-4 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 custom-scrollbar">
+          <aside className="hidden lg:block lg:col-span-3 min-w-0 sticky top-28 space-y-4 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 custom-scrollbar">
             {/* Filter Input */}
             <div className="relative">
               <Search className="w-3.5 h-3.5 text-text-muted absolute left-3 top-2.5" />
@@ -196,7 +188,7 @@ export const DocsPage: React.FC = () => {
                                   : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover/80 active:bg-surface-selected'
                               }`}
                             >
-                              <div className="flex items-center gap-2 truncate">
+                              <div className="flex items-center gap-2 truncate min-w-0">
                                 {isActive && (
                                   <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
                                 )}
@@ -285,9 +277,9 @@ export const DocsPage: React.FC = () => {
           )}
 
           {/* ========================================================= */}
-          {/* MAIN ARTICLE CONTENT                                      */}
+          {/* MAIN ARTICLE CONTENT (Responsive, shrinking properly)     */}
           {/* ========================================================= */}
-          <main className="lg:col-span-6 xl:col-span-6 space-y-8 max-w-3xl">
+          <main className="min-w-0 w-full lg:col-span-9 xl:col-span-6 space-y-8">
             {/* Header / Title block */}
             <header className="space-y-3 pb-6 border-b border-border-subtle">
               <div className="flex items-center gap-3 text-xs text-text-muted">
@@ -308,37 +300,19 @@ export const DocsPage: React.FC = () => {
               </p>
             </header>
 
-            {/* Prominent Copyable AI Agent Setup Prompt (if configured) */}
+            {/* Compact Installation Prompt Banner (Prompt text completely hidden by default) */}
             {currentArticle.agentPrompt && (
-              <div className="p-4 sm:p-5 rounded-2xl bg-surface-muted/60 border border-accent/20 space-y-3 shadow-xs">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-lg bg-accent text-white flex items-center justify-center shrink-0">
-                      <Sparkles className="w-3.5 h-3.5" />
-                    </div>
-                    <div>
-                      <h3 className="text-xs font-bold text-text-primary">Coding Agent Setup Prompt</h3>
-                      <p className="text-[11px] text-text-secondary">Copy and paste directly into Cursor, Windsurf, Claude Code, or Copilot</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => handleCopyPrompt(currentArticle.agentPrompt!)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-base border border-border-default text-text-primary hover:border-accent text-xs font-semibold transition-all shrink-0 shadow-2xs"
-                  >
-                    {copiedPrompt ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedPrompt ? 'Copied Prompt' : 'Copy Prompt'}</span>
-                  </button>
-                </div>
-                <div className="p-3 rounded-xl bg-canvas border border-border-subtle text-xs text-text-secondary font-mono leading-relaxed whitespace-pre-wrap select-all">
-                  {currentArticle.agentPrompt}
-                </div>
-              </div>
+              <AgentPromptBanner
+                promptText={currentArticle.agentPrompt}
+                className="w-full my-2"
+                description="Copy the installation instructions into your AI coding agent."
+              />
             )}
 
             {/* Sections Loop */}
-            <div className="space-y-12">
+            <div className="space-y-12 min-w-0 w-full">
               {currentArticle.sections.map((section: DocSection) => (
-                <section key={section.id} id={section.id} className="space-y-4 scroll-mt-32">
+                <section key={section.id} id={section.id} className="space-y-4 scroll-mt-32 min-w-0 w-full">
                   <div className="group flex items-center gap-2">
                     <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-text-primary">
                       {section.title}
@@ -391,12 +365,12 @@ export const DocsPage: React.FC = () => {
 
                   {/* Table */}
                   {section.table && (
-                    <div className="overflow-x-auto rounded-xl border border-border-subtle my-4">
-                      <table className="w-full text-left text-xs">
+                    <div className="overflow-x-auto w-full max-w-full rounded-xl border border-border-subtle my-4">
+                      <table className="w-full text-left text-xs min-w-full">
                         <thead className="bg-surface-muted/60 text-text-primary font-semibold border-b border-border-subtle">
                           <tr>
                             {section.table.headers.map((h, hIdx) => (
-                              <th key={hIdx} className="px-3.5 py-2.5">{h}</th>
+                              <th key={hIdx} className="px-3.5 py-2.5 whitespace-nowrap">{h}</th>
                             ))}
                           </tr>
                         </thead>
@@ -417,17 +391,17 @@ export const DocsPage: React.FC = () => {
 
                   {/* Steps List */}
                   {section.steps && (
-                    <div className="space-y-4 my-4">
+                    <div className="space-y-4 my-4 min-w-0 w-full">
                       {section.steps.map((st) => (
-                        <div key={st.step} className="p-4 rounded-xl bg-surface-base border border-border-subtle flex gap-4">
+                        <div key={st.step} className="p-4 rounded-xl bg-surface-base border border-border-subtle flex gap-4 min-w-0">
                           <div className="w-6 h-6 rounded-full bg-accent text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                             {st.step}
                           </div>
-                          <div className="space-y-1.5 flex-1">
+                          <div className="space-y-1.5 flex-1 min-w-0">
                             <h4 className="text-sm font-semibold text-text-primary">{st.title}</h4>
                             <p className="text-xs text-text-secondary leading-relaxed">{st.description}</p>
                             {st.code && (
-                              <div className="mt-2">
+                              <div className="mt-2 min-w-0 w-full">
                                 <CodeBlock code={st.code} language={st.language || 'bash'} />
                               </div>
                             )}
@@ -448,7 +422,7 @@ export const DocsPage: React.FC = () => {
 
                   {/* Code Sample */}
                   {section.codeSample && (
-                    <div className="my-4">
+                    <div className="my-4 min-w-0 w-full">
                       <CodeBlock
                         code={section.codeSample.code}
                         language={section.codeSample.language}
@@ -530,8 +504,8 @@ export const DocsPage: React.FC = () => {
           {/* ========================================================= */}
           {/* RIGHT SIDEBAR: "ON THIS PAGE" Outline & Quick Meta        */}
           {/* ========================================================= */}
-          <aside className="hidden xl:block xl:col-span-3 sticky top-28 space-y-6">
-            <div className="p-4 rounded-2xl bg-surface-base border border-border-subtle shadow-xs space-y-4">
+          <aside className="hidden xl:block xl:col-span-3 min-w-0 sticky top-28 space-y-6">
+            <div className="p-4 rounded-2xl bg-surface-base border border-border-subtle shadow-xs space-y-4 w-full overflow-hidden">
               <h3 className="text-[11px] font-bold uppercase tracking-wider text-text-muted">
                 On This Page
               </h3>
