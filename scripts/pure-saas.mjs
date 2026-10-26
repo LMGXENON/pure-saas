@@ -2002,7 +2002,7 @@ export function captureScreenshots(url, options = {}) {
       const tempShot = path.join(os.tmpdir(), `pure-saas-shot-${Date.now()}-${vp.width}x${vp.height}.png`);
       try {
         const args = [
-          '--headless',
+          '--headless=new',
           '--disable-gpu',
           `--window-size=${vp.width},${vp.height}`,
           `--screenshot=${tempShot}`,

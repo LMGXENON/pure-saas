@@ -9,6 +9,9 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
+    "build:site": "cd pure-saas-website && npm run build",
+    "export:refs": "node scripts/export-website-references.mjs",
+    "generate:docs": "node scripts/generators/generate-docs-data.mjs",
     "test": "node scripts/run-tests.mjs",
     "test:sample": "node scripts/test-sample-project.mjs",
     "test:landing": "node scripts/test-landing-workflow.mjs",
