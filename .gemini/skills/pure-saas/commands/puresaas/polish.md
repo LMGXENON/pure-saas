@@ -35,3 +35,4 @@ $ARGUMENTS
 5. **Verification:**
    - Run `npx pure-saas audit` to confirm deterministic quality improvements.
    - Check rendered browser finish across dark and light modes.
+

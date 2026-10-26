@@ -58,6 +58,35 @@ function copyDirRecursive(src, dest) {
   }
 }
 
+function syncCommandsWithRelativeLinks(srcDir, destDir) {
+  if (!fs.existsSync(srcDir)) return;
+  fs.mkdirSync(destDir, { recursive: true });
+  const entries = fs.readdirSync(srcDir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const srcPath = path.join(srcDir, entry.name);
+    const destPath = path.join(destDir, entry.name);
+
+    if (entry.isDirectory()) {
+      syncCommandsWithRelativeLinks(srcPath, destPath);
+    } else if (entry.isFile() && entry.name.endsWith('.md')) {
+      let content = fs.readFileSync(srcPath, 'utf8');
+
+      // Rewrite links to reference playbooks so they resolve correctly from destPath
+      const playbooks = ['workflow.md', 'design.md', 'polish.md', 'review.md', 'clone.md', 'responsive.md'];
+      for (const pb of playbooks) {
+        const canonicalPlaybookPath = path.join(skillSourceDir, 'reference', pb);
+        const relToPlaybook = path.relative(path.dirname(destPath), canonicalPlaybookPath);
+        const pbRegex = new RegExp(`\\]\\(\\.\\.?/\\.\\.?/reference/${pb}\\)|\\]\\(\\.\\./reference/${pb}\\)`, 'g');
+        content = content.replace(pbRegex, `](${relToPlaybook})`);
+      }
+      fs.writeFileSync(destPath, content, 'utf8');
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+
 export function buildProviders() {
   console.log('=== Building Pure SaaS Multi-Provider Distributions ===\n');
 
@@ -65,11 +94,14 @@ export function buildProviders() {
     throw new Error(`Canonical source directory not found: ${skillSourceDir}`);
   }
 
-  // 1. Sync Root SKILL.md with canonical skill/SKILL.md
+  // 1. Sync Root SKILL.md with canonical skill/SKILL.md (rewriting relative links to skill/reference/)
   const canonicalSkill = path.join(skillSourceDir, 'SKILL.md');
   const rootSkill = path.join(rootDir, 'SKILL.md');
   if (fs.existsSync(canonicalSkill)) {
-    fs.copyFileSync(canonicalSkill, rootSkill);
+    let skillContent = fs.readFileSync(canonicalSkill, 'utf8');
+    // Ensure links from root point to skill/reference/
+    skillContent = skillContent.replace(/\(reference\//g, '(skill/reference/');
+    fs.writeFileSync(rootSkill, skillContent, 'utf8');
     console.log(`✓ Synchronized root SKILL.md with canonical source`);
   }
 
@@ -115,11 +147,41 @@ export function buildProviders() {
     if (fs.existsSync(dest)) {
       fs.rmSync(dest, { recursive: true, force: true });
     }
-    copyDirRecursive(canonicalCommandsDir, dest);
+    syncCommandsWithRelativeLinks(canonicalCommandsDir, dest);
     console.log(`✓ Synchronized slash commands -> ${path.relative(rootDir, dest)}`);
   }
 
-  // 4. Synchronize Root Rules (.cursorrules, .windsurfrules, GEMINI.md, AGENTS.md, CLAUDE.md)
+  // 4. Synchronize Cursor Native Rules (.cursor/rules/*.mdc)
+  const cursorRulesDir = path.join(rootDir, '.cursor/rules');
+  if (fs.existsSync(cursorRulesDir)) {
+    fs.rmSync(cursorRulesDir, { recursive: true, force: true });
+  }
+  fs.mkdirSync(cursorRulesDir, { recursive: true });
+
+  const cursorCommandMap = [
+    { src: 'puresaas.md', dest: 'puresaas.mdc', desc: 'Main orchestrator. Understand the request, inspect the project, choose the appropriate workflow, implement the solution and verify the result.' },
+    { src: 'puresaas/design.md', dest: 'puresaas-design.mdc', desc: 'Create distinctive, production-ready interfaces and landing pages from a brief.' },
+    { src: 'puresaas/polish.md', dest: 'puresaas-polish.mdc', desc: 'Refine existing interfaces, improving visual hierarchy, typography, spacing, interactions and detail.' },
+    { src: 'puresaas/review.md', dest: 'puresaas-review.mdc', desc: 'Audit an interface, identify specific design and usability problems, prioritise them and fix them when authorised.' },
+    { src: 'puresaas/clone.md', dest: 'puresaas-clone.mdc', desc: 'Analyse a supplied website or screenshot and recreate its relevant layout, typography, styling and interactions accurately.' },
+    { src: 'puresaas/responsive.md', dest: 'puresaas-responsive.mdc', desc: 'Audit and fix responsive behaviour across mobile, tablet and desktop without compromising design quality.' }
+  ];
+
+  for (const { src, dest, desc } of cursorCommandMap) {
+    const rawContent = fs.readFileSync(path.join(canonicalCommandsDir, src), 'utf8');
+    const body = rawContent.replace(/^---[\s\S]*?---\s*/, '');
+    const mdcContent = `---
+description: "${desc}"
+globs: *
+alwaysApply: false
+---
+
+${body}`;
+    fs.writeFileSync(path.join(cursorRulesDir, dest), mdcContent, 'utf8');
+  }
+  console.log(`✓ Synchronized Cursor native rules -> .cursor/rules`);
+
+  // 5. Synchronize Root Rules (.cursorrules, .windsurfrules, GEMINI.md, AGENTS.md, CLAUDE.md)
   const agentManual = `# AGENTS.md
 
 Operating manual for AI agents working in this repository, or using Pure SaaS to design, build, and review software.

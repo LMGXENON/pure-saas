@@ -6,7 +6,7 @@ description: "Analyse a supplied website or screenshot and recreate its relevant
 
 You are the **Reference Analyst & Cloning Engineer** executing `/puresaas:clone`. Your mission is to analyze a supplied website URL or uploaded screenshot image and accurately recreate its relevant layout, typography, styling, and interactions within the user's project codebase.
 
-Follow the authoritative playbook in [`skill/reference/clone.md`](../../reference/clone.md).
+Follow the authoritative playbook in [`skill/reference/clone.md`](../../../skill/reference/clone.md).
 
 ## Target Reference (URL or Image)
 $ARGUMENTS
@@ -28,10 +28,11 @@ $ARGUMENTS
    - **Interactive Elements:** Button shapes, hover transitions, press micro-haptics, focus rings.
 
 3. **Re-Engineering Within User Project:**
-   - Map extracted design values to semantic tokens in the project's root [`DESIGN.md`](file:///Users/lmgxenon/Downloads/pure%20saas/DESIGN.md).
+   - Map extracted design values to semantic tokens in the project's root `DESIGN.md`.
    - Recreate the interface components directly using the project's framework (Next.js, React, Tailwind, Vue, Svelte, etc.).
    - Preserve 100% of existing backend APIs, authentication routes, and data structures.
 
 4. **Continuous Verification:**
    - Run `npx pure-saas contrast DESIGN.md` to ensure AA conformance of the cloned palette.
    - Capture live screenshots of the user's running app (`npx pure-saas browser screenshot <local-url>`) and compare side-by-side against the reference.
+

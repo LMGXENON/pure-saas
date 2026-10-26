@@ -66,18 +66,17 @@ npx pure-saas init
 Use the main command for a complete design and implementation task:
 
 ```text
-/pure-saas create a premium, responsive SaaS landing page
+/puresaas create a premium, responsive SaaS landing page
 ```
 
 Or use specialist commands:
 
 ```text
-/pure-saas design establish a design system for my application
-/pure-saas polish improve the visual quality of this interface
-/pure-saas review audit the application and fix issues
-/pure-saas responsive optimize mobile, tablet, and desktop layouts
-/pure-saas browser verify live pages and capture multi-viewport screenshots
-/pure-saas 3d scaffold procedural Three.js 3D components
+/puresaas:design establish a design system and build a distinctive interface
+/puresaas:polish improve the visual quality and typography tracking
+/puresaas:review audit the application and triage defects from P0 to P3
+/puresaas:clone analyse a reference website or screenshot and recreate its layout
+/puresaas:responsive optimize mobile, tablet, and desktop viewports
 ```
 
 ---
@@ -136,25 +135,25 @@ Pure SaaS scales ambition to the surface's purpose:
 
 ## The Intelligent Main Command
 
-### `/pure-saas [request]`
+### `/puresaas [request]`
 
-The main command is the default entry point for design and development tasks. It interprets the request and coordinates the relevant workflows automatically.
+The main command is the default entry point for design and development tasks. It interprets the request and coordinates the relevant specialist workflows automatically.
 
 ```text
-/pure-saas create a premium 3D landing page for my product
-/pure-saas build a native-feeling macOS productivity app
-/pure-saas build an e-commerce application with authentication and checkout
-/pure-saas add a polished, animated pricing section
-/pure-saas make this interface feel significantly more premium
-/pure-saas fix the mobile navigation
-/pure-saas improve accessibility across this page
-/pure-saas find security issues and fix them
-/pure-saas create a reusable button component
-/pure-saas test rendered page layout with browser screenshots
-/pure-saas scaffold a 3D procedural hero canvas
+/puresaas create a premium 3D landing page for my product
+/puresaas build a native-feeling macOS productivity app
+/puresaas build an e-commerce application with authentication and checkout
+/puresaas add a polished, animated pricing section
+/puresaas make this interface feel significantly more premium
+/puresaas fix the mobile navigation
+/puresaas improve accessibility across this page
+/puresaas find defects and fix them
+/puresaas create a reusable button component
+/puresaas test rendered page layout with browser screenshots
+/puresaas scaffold a 3D procedural hero canvas
 ```
 
-### How It Works (The 8-Step Build Loop)
+### How It Works (The 6-Step Build Loop)
 
 1. **Understand requirements & mode:** Identify the surface mode (Persuade, Operate, Read, Experience) and target audience.
 2. **Inspect project context:** Run `pure-saas context` to inspect dependencies, framework, styling system, existing tokens, and backend contracts.
@@ -169,32 +168,29 @@ Pure SaaS aims to minimise redundant analysis, unnecessary planning documents an
 
 ---
 
-## Specialist Verbs & Playbooks
+## Independent Slash Commands & Authoritative Playbooks
 
 Use specialist commands when you need a focused workflow. Each playbook resides in [`skill/reference/`](skill/reference/):
 
-| Command | Category | Purpose | Definition |
+| Slash Command | Specialist Role | Purpose | Authoritative Playbook |
 |---|---|---|---|
-| `/pure-saas design [request]` | Architecture | Establish or update `DESIGN.md` specification before implementation. | [`skill/reference/design-systems.md`](skill/reference/design-systems.md) |
-| `/pure-saas landing [request]` | Persuade | High-conversion SaaS landing page with hero, proof, and pricing. | [`skill/reference/landing-pages.md`](skill/reference/landing-pages.md) |
-| `/pure-saas polish [request]` | Refine | Improve visual hierarchy, hairline borders, surface lighting, and micro-interactions. | [`skill/reference/polish.md`](skill/reference/polish.md) |
-| `/pure-saas bolder [target]` | Refine | Amplify safe, flat, or bland UI into distinctive, high-conviction creative work. | [`skill/reference/bolder.md`](skill/reference/bolder.md) |
-| `/pure-saas quieter [target]` | Refine | Calm aggressive, noisy, or overstimulated layouts into serene clarity. | [`skill/reference/quieter.md`](skill/reference/quieter.md) |
-| `/pure-saas distill [target]` | Refine | Strip visual debt and simplify complex screens to their essential core. | [`skill/reference/distill.md`](skill/reference/distill.md) |
-| `/pure-saas harden [target]` | Refine | Production robustness (empty states, edge cases, error recovery, i18n). | [`skill/reference/harden.md`](skill/reference/harden.md) |
-| `/pure-saas typeset [target]` | Enhance | Editorial typography hierarchy, optical tracking, and fluid clamps. | [`skill/reference/typeset.md`](skill/reference/typeset.md) |
-| `/pure-saas layout [target]` | Enhance | Fix spatial rhythm, asymmetric balance, and 8pt grid containment. | [`skill/reference/layout.md`](skill/reference/layout.md) |
-| `/pure-saas animate [target]` | Enhance | Purposeful spring physics (`cubic-bezier(0.16, 1, 0.3, 1)`). | [`skill/reference/animate.md`](skill/reference/animate.md) |
-| `/pure-saas colorize [target]` | Enhance | Strategic 5-tier color ramps and mathematical WCAG 2.2 AA contrast. | [`skill/reference/colorize.md`](skill/reference/colorize.md) |
-| `/pure-saas delight [target]` | Enhance | Shaders, reactive canvasses, and tactile micro-surprises. | [`skill/reference/delight.md`](skill/reference/delight.md) |
-| `/pure-saas adapt [target]` | Fix | Multi-viewport responsive mastery (375px mobile to 1440px desktop). | [`skill/reference/adapt.md`](skill/reference/adapt.md) |
-| `/pure-saas clarify [target]` | Fix | Improve UX copy, active button verbs, and actionable error messages. | [`skill/reference/clarify.md`](skill/reference/clarify.md) |
-| `/pure-saas optimize [target]` | Fix | Core Web Vitals, virtualization, and sub-frame layout stability. | [`skill/reference/optimize.md`](skill/reference/optimize.md) |
-| `/pure-saas review [scope]` | Evaluate | 5-dimension deterministic audit (0–20 score) with P0–P3 defect triage. | [`skill/reference/audit.md`](skill/reference/audit.md) |
-| `/pure-saas reference [URL]` | Analyze | Reverse-engineer visual reference sites into a 16-section `DESIGN.md`. | [`skill/reference/reference-analysis.md`](skill/reference/reference-analysis.md) |
-| `/pure-saas browser [action]` | Verify | Playwright CLI headless browser automation and screenshot capture. | [`skill/reference/browser.md`](skill/reference/browser.md) |
-| `/pure-saas 3d [action]` | Experience | Procedural Three.js 3D models and img2threejs pipeline. | [`skill/reference/3d.md`](skill/reference/3d.md) |
-| `/pure-saas style [action]` | System | Selectable modular design style archetypes from Awesome Design Skills. | [`skill/reference/style-registry.md`](skill/reference/style-registry.md) |
+| `/puresaas [request]` | Principal Designer | Main orchestrator: owns complete outcome from brief to production. | [`skill/reference/workflow.md`](skill/reference/workflow.md) |
+| `/puresaas:design [brief]` | Creative Director & Builder | Distinctive landing pages & interfaces with authentic content. | [`skill/reference/design.md`](skill/reference/design.md) |
+| `/puresaas:polish [target]` | Senior Visual Designer | Typography tracking, 8pt spatial grid, hairlines & micro-craft. | [`skill/reference/polish.md`](skill/reference/polish.md) |
+| `/puresaas:review [scope]` | Independent Design Critic | 10-dimension audit and prioritized P0–P3 defect triage. | [`skill/reference/review.md`](skill/reference/review.md) |
+| `/puresaas:clone <url\|img>` | Reference Analyst & Cloning Engineer | Recreates layout, typography & styling accurately from reference. | [`skill/reference/clone.md`](skill/reference/clone.md) |
+| `/puresaas:responsive [target]` | Responsive Systems Engineer | Multi-viewport mastery (375px mobile to 1440px desktop). | [`skill/reference/responsive.md`](skill/reference/responsive.md) |
+
+### Supporting Tooling & Engineering Modules
+
+| Tooling Command | Focus Area | Playbook / Reference |
+|---|---|---|
+| `pure-saas browser <action>` | Playwright CLI headless browser automation & multi-viewport screenshots | [`skill/reference/browser.md`](skill/reference/browser.md) |
+| `pure-saas 3d <action>` | Procedural Three.js 3D model synthesis (img2threejs) | [`skill/reference/3d.md`](skill/reference/3d.md) |
+| `pure-saas style <action>` | Selectable style archetype registry (Awesome Design Skills) | [`skill/reference/style-registry.md`](skill/reference/style-registry.md) |
+| `pure-saas audit [options]` | Deterministic quality scoring across 5 dimensions | [`skill/reference/code-audit.md`](skill/reference/code-audit.md) |
+| `pure-saas ref [query]` | Master library search across 315+ engineering guides | [`skill/reference/reference-index.md`](skill/reference/reference-index.md) |
+| Craft Floor & Anti-Slop | Non-negotiable craft floor and anti-pattern ban list | [`skill/reference/craft-floor.md`](skill/reference/craft-floor.md) & [`skill/reference/anti-slop-rules.md`](skill/reference/anti-slop-rules.md) |
 
 ---
 
@@ -456,10 +452,10 @@ npx pure-saas contrast DESIGN.md
 Pure SaaS integrates, adapts, and builds upon several exceptional open-source projects under permissive open-source licenses:
 
 - **[Taste Skill](https://github.com/Leonxlnx/taste-skill)** (MIT License, © Leonxlnx) — Art direction pipeline, anti-slop visual critique heuristics, and aesthetic archetypes. Reference: [`skill/reference/art-direction-and-taste.md`](skill/reference/art-direction-and-taste.md).
-- **[Impeccable](https://github.com/pbakaus/impeccable)** (Apache-2.0 / MIT License, © Paul Bakaus) — Deterministic 5-dimension scored audit matrix (A11y, Performance, Theming, Responsive, Integrity), P0–P3 defect triage, and specialized critique verbs (`bolder`, `quieter`, `typeset`, `layout`, `harden`). Reference: [`skill/reference/deterministic-audit-matrix.md`](skill/reference/deterministic-audit-matrix.md).
-- **[Playwright CLI](https://github.com/microsoft/playwright-cli)** (Apache-2.0 License, © Microsoft Corporation) — Token-conscious browser automation, multi-viewport screenshot verification, and deterministic browser assertions. Reference: [`skill/reference/developer-tooling/playwright-browser-testing.md`](skill/reference/developer-tooling/playwright-browser-testing.md).
-- **[Awesome Design Skills](https://github.com/jdsadminllc/awesome-design-skills)** (MIT License, © JDS Admin LLC) — Modular, selectable design style registry enabling on-demand style discovery without mandatory bulk installation. Reference: [`skill/reference/design-systems/selectable-style-registry.md`](skill/reference/design-systems/selectable-style-registry.md).
-- **[img2threejs](https://github.com/img2threejs/img2threejs)** (MIT License, © img2threejs contributors) — Procedural, code-only Three.js component scaffolding in TypeScript and 6-pass staged 3D sculpting pipeline. References: [`skill/reference/components/procedural-threejs-models.md`](skill/reference/components/procedural-threejs-models.md), [`skill/reference/img2threejs-pipeline.md`](skill/reference/img2threejs-pipeline.md).
+- **[Impeccable](https://github.com/pbakaus/impeccable)** (Apache-2.0 / MIT License, © Paul Bakaus) — Deterministic 5-dimension scored audit matrix (A11y, Performance, Theming, Responsive, Integrity), P0–P3 defect triage, and specialized design critique workflows. Reference: [`skill/reference/review.md`](skill/reference/review.md).
+- **[Playwright CLI](https://github.com/microsoft/playwright-cli)** (Apache-2.0 License, © Microsoft Corporation) — Token-conscious browser automation, multi-viewport screenshot verification, and deterministic browser assertions. Reference: [`skill/reference/browser.md`](skill/reference/browser.md).
+- **[Awesome Design Skills](https://github.com/jdsadminllc/awesome-design-skills)** (MIT License, © JDS Admin LLC) — Modular, selectable design style registry enabling on-demand style discovery without mandatory bulk installation. Reference: [`skill/reference/style-registry.md`](skill/reference/style-registry.md).
+- **[img2threejs](https://github.com/img2threejs/img2threejs)** (MIT License, © img2threejs contributors) — Procedural, code-only Three.js component scaffolding in TypeScript and 6-pass staged 3D sculpting pipeline. Reference: [`skill/reference/3d.md`](skill/reference/3d.md).
 
 ---
 

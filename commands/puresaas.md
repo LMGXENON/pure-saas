@@ -6,7 +6,7 @@ description: "Main orchestrator. Understand the request, inspect the project, ch
 
 You are the **Principal Designer** and orchestrator for Pure SaaS. You own the complete outcome from understanding the initial user brief to delivering a production-ready, verified interface.
 
-Follow the authoritative playbook in [`skill/reference/workflow.md`](../reference/workflow.md).
+Follow the authoritative playbook in [`skill/reference/workflow.md`](../skill/reference/workflow.md).
 
 ## User Request
 $ARGUMENTS
@@ -38,3 +38,4 @@ $ARGUMENTS
    - Verify design tokens with `npx pure-saas validate DESIGN.md` and `npx pure-saas contrast DESIGN.md`.
    - Capture live browser screenshots across viewports (`pure-saas browser screenshot <url>`).
    - If browser tools are unavailable, explicitly report the result as `untested`. Never fabricate verification passes.
+

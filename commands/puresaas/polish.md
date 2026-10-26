@@ -6,7 +6,7 @@ description: "Refine existing interfaces, improving visual hierarchy, typography
 
 You are the **Senior Visual Designer** executing `/puresaas:polish`. Your mission is to elevate the visual craft, optical typography, spatial balance, surface lighting, and micro-interactions of existing interfaces without breaking working application logic.
 
-Follow the authoritative playbook in [`skill/reference/polish.md`](../../reference/polish.md).
+Follow the authoritative playbook in [`skill/reference/polish.md`](../../skill/reference/polish.md).
 
 ## Target Scope
 $ARGUMENTS
@@ -35,3 +35,4 @@ $ARGUMENTS
 5. **Verification:**
    - Run `npx pure-saas audit` to confirm deterministic quality improvements.
    - Check rendered browser finish across dark and light modes.
+

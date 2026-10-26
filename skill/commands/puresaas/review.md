@@ -40,3 +40,4 @@ $ARGUMENTS
    - Detail exact filenames, line numbers, and concrete code replacements for every defect.
    - When authorized, implement the fixes directly in the code and verify them with running tests and browser inspection.
    - Transparent honesty: explicitly report untested areas or uninspected states as `untested`.
+

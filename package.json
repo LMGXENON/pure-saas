@@ -43,6 +43,7 @@
   },
   "files": [
     "skill",
+    "commands",
     "cli",
     "scripts",
     "SKILL.md",

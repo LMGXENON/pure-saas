@@ -192,6 +192,69 @@ runTest('CLI: Subcommand --help flags print guidance without failing', () => {
   return true;
 });
 
+// 14. Cursor Native Rules (.cursor/rules/*.mdc)
+runTest('Cursor Native Rules (.cursor/rules/*.mdc)', () => {
+  const cursorRules = [
+    'puresaas.mdc',
+    'puresaas-design.mdc',
+    'puresaas-polish.mdc',
+    'puresaas-review.mdc',
+    'puresaas-clone.mdc',
+    'puresaas-responsive.mdc'
+  ];
+  const rulesDir = path.join(rootDir, '.cursor/rules');
+  for (const rule of cursorRules) {
+    const full = path.join(rulesDir, rule);
+    if (!fs.existsSync(full)) {
+      throw new Error(`Missing Cursor rule file: ${rule}`);
+    }
+    const content = fs.readFileSync(full, 'utf8');
+    if (!content.includes('alwaysApply: false') || !content.includes('description:')) {
+      throw new Error(`Invalid Cursor rule frontmatter in ${rule}`);
+    }
+  }
+  return true;
+});
+
+// 15. Repository-Wide Markdown Link & Reference Integrity
+runTest('Repository-Wide Markdown Link Resolution', () => {
+  const broken = [];
+  function checkLinks(filePath) {
+    let content = fs.readFileSync(filePath, 'utf8');
+    content = content.replace(/\`\`\`[\s\S]*?\`\`\`/g, '');
+    content = content.replace(/\`[^\`]*\`/g, '');
+
+    const regex = /\[([^\]]*)\]\(([^)]+)\)/g;
+    let match;
+    while ((match = regex.exec(content)) !== null) {
+      const raw = match[2].trim().split('#')[0].split('?')[0];
+      if (!raw || raw.startsWith('http://') || raw.startsWith('https://') || raw.startsWith('mailto:') || raw.startsWith('#')) {
+        continue;
+      }
+      let resolved = raw.startsWith('/') ? path.join(rootDir, raw) : path.resolve(path.dirname(filePath), raw);
+      const rootResolved = path.resolve(rootDir, raw);
+      if (!fs.existsSync(resolved) && !fs.existsSync(rootResolved)) {
+        broken.push(`${path.relative(rootDir, filePath)} -> ${raw}`);
+      }
+    }
+  }
+
+  function walk(dir) {
+    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (ent.name === 'node_modules' || ent.name === '.git' || ent.name === '.test-tmp') continue;
+      const full = path.join(dir, ent.name);
+      if (ent.isDirectory()) walk(full);
+      else if (ent.name.endsWith('.md')) checkLinks(full);
+    }
+  }
+
+  walk(rootDir);
+  if (broken.length > 0) {
+    throw new Error(`Found broken link targets: \n  - ${broken.join('\n  - ')}`);
+  }
+  return true;
+});
+
 console.log('\n========================================');
 const passedCount = results.filter(r => r.pass).length;
 console.log(`Results: ${passedCount} / ${results.length} tests passed.\n`);

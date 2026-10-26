@@ -35,7 +35,7 @@ Deconstruct the inspected reference into five core layers:
 5. **Micro-Interactions & Physics:** Cubic-bezier spring curves, active press feedback.
 
 ### Phase 3: Translation into Target Project Tokens
-Map extracted values to semantic tokens in the project's root [`DESIGN.md`](file:///Users/lmgxenon/Downloads/pure%20saas/DESIGN.md) and verify mathematical contrast with `npx pure-saas contrast DESIGN.md`.
+Map extracted values to semantic tokens in the project's root `DESIGN.md` and verify mathematical contrast with `npx pure-saas contrast DESIGN.md`.
 
 ### Phase 4: Faithful Component Re-Engineering
 Recreate the interface components within the user's project framework (Next.js, React, Tailwind, Vue, etc.) while preserving 100% of existing backend APIs and authentication routes.

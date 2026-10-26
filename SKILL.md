@@ -22,12 +22,12 @@ Pure SaaS provides **one main orchestrator command and five specialist slash com
 
 | Slash Command | Specialist Role | Purpose & Scope | Authoritative Playbook |
 | :--- | :--- | :--- | :--- |
-| **`/puresaas [request]`** | **Principal Designer** | Main orchestrator. Understands request, inspects project, selects appropriate workflow, implements solution, and verifies result. | [`reference/workflow.md`](reference/workflow.md) |
-| **`/puresaas:design [brief]`** | **Creative Director & Builder** | Turns a product brief into a distinctive, fully implemented interface and landing page with strong visual hierarchy and authentic content. | [`reference/design.md`](reference/design.md) |
-| **`/puresaas:polish [target]`** | **Senior Visual Designer** | Elevates visual craft, typography tracking, surface lighting, and micro-interactions without breaking what already works. | [`reference/polish.md`](reference/polish.md) |
-| **`/puresaas:review [scope]`** | **Independent Design Critic** | Judges the interface honestly across 10 critical dimensions, prioritizing defects from P0 to P3 and driving verified fixes. | [`reference/review.md`](reference/review.md) |
-| **`/puresaas:clone [URL/Image]`** | **Reference Analyst & Cloning Engineer** | Analyses a supplied website or screenshot and recreates its layout, typography, styling, and interactions accurately within project. | [`reference/clone.md`](reference/clone.md) |
-| **`/puresaas:responsive [target]`** | **Responsive Systems Engineer** | Makes the interface feel purposefully designed across all viewports (375px mobile to 1440px desktop) with zero overflow. | [`reference/responsive.md`](reference/responsive.md) |
+| **`/puresaas [request]`** | **Principal Designer** | Main orchestrator. Understands request, inspects project, selects appropriate workflow, implements solution, and verifies result. | [`reference/workflow.md`](skill/reference/workflow.md) |
+| **`/puresaas:design [brief]`** | **Creative Director & Builder** | Turns a product brief into a distinctive, fully implemented interface and landing page with strong visual hierarchy and authentic content. | [`reference/design.md`](skill/reference/design.md) |
+| **`/puresaas:polish [target]`** | **Senior Visual Designer** | Elevates visual craft, typography tracking, surface lighting, and micro-interactions without breaking what already works. | [`reference/polish.md`](skill/reference/polish.md) |
+| **`/puresaas:review [scope]`** | **Independent Design Critic** | Judges the interface honestly across 10 critical dimensions, prioritizing defects from P0 to P3 and driving verified fixes. | [`reference/review.md`](skill/reference/review.md) |
+| **`/puresaas:clone [URL/Image]`** | **Reference Analyst & Cloning Engineer** | Analyses a supplied website or screenshot and recreates its layout, typography, styling, and interactions accurately within project. | [`reference/clone.md`](skill/reference/clone.md) |
+| **`/puresaas:responsive [target]`** | **Responsive Systems Engineer** | Makes the interface feel purposefully designed across all viewports (375px mobile to 1440px desktop) with zero overflow. | [`reference/responsive.md`](skill/reference/responsive.md) |
 
 ---
 
@@ -112,4 +112,4 @@ All six commands share one foundational knowledge base:
 - **8-State Interaction Matrix:** Every interactive component must handle default, hover, active, focus-visible, disabled, loading, error, and success states.
 - **Honest Verification:** Never claim passing verification for uninspected code. If tools or dependencies are missing, report the area as `untested`.
 
-Consult [`reference/craft-floor.md`](reference/craft-floor.md) and [`reference/reference-index.md`](reference/reference-index.md) for full design catalogs.
+Consult [`reference/craft-floor.md`](skill/reference/craft-floor.md) and [`reference/reference-index.md`](skill/reference/reference-index.md) for full design catalogs.

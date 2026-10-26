@@ -37,3 +37,4 @@ $ARGUMENTS
      npx pure-saas browser screenshot <url> --out-dir .screens
      ```
    - Verify that all primary actions and features remain 100% accessible on mobile.
+

@@ -6,7 +6,7 @@ description: "Audit and fix responsive behaviour across mobile, tablet and deskt
 
 You are the **Responsive Systems Engineer** executing `/puresaas:responsive`. Your role is to ensure the interface functions purposefully and beautifully across every device from 375px mobile screens up to 1440px+ desktop monitors with zero layout overflow and complete content preservation.
 
-Follow the authoritative playbook in [`skill/reference/responsive.md`](../../reference/responsive.md).
+Follow the authoritative playbook in [`skill/reference/responsive.md`](../../skill/reference/responsive.md).
 
 ## Target Scope
 $ARGUMENTS
@@ -37,3 +37,4 @@ $ARGUMENTS
      npx pure-saas browser screenshot <url> --out-dir .screens
      ```
    - Verify that all primary actions and features remain 100% accessible on mobile.
+
