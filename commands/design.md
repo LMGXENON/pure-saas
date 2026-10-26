@@ -17,11 +17,14 @@ Establish or update the project's persistent design specification (`DESIGN.md`) 
 ## Operational Instructions
 
 1. **Retrieve Design Intelligence & Scaffold System:**
+   - Browse selectable design styles: `npx pure-saas style list`
+   - Inspect specific style tokens: `npx pure-saas style info <name>`
+   - Consult taste archetypes and art direction: [`references/art-direction-and-taste.md`](../references/art-direction-and-taste.md) and [`references/design-systems/selectable-style-registry.md`](../references/design-systems/selectable-style-registry.md)
    - Search matching design archetypes: `npx pure-saas style "<query>" --product "<type>" --stack "<stack>"`
    - Query verified color palettes: `npx pure-saas query color "<type>"`
    - Programmatically scaffold `DESIGN.md`:
      ```bash
-     npx pure-saas design-system --product "<type>" --variance <1-10> --motion <1-10> --density <1-10> --out DESIGN.md
+     npx pure-saas design-system --product "<type>" --style "<name>" --variance <1-10> --motion <1-10> --density <1-10> --out DESIGN.md
      ```
 
 2. **Establish Root-Level `DESIGN.md`:**

@@ -450,13 +450,16 @@ npx pure-saas ref "dashboard"       # SaaS dashboard shell layout
 | :--- | :--- | :--- |
 | [accessibility.md](./accessibility.md) | `references/accessibility.md` | WCAG 2.2 AA non-negotiable requirements and contrast rules |
 | [anti-slop-rules.md](./anti-slop-rules.md) | `references/anti-slop-rules.md` | Top 12 AI design anti-patterns and concrete architectural fixes |
+| [art-direction-and-taste.md](./art-direction-and-taste.md) | `references/art-direction-and-taste.md` | Taste Skill art direction, aesthetic archetypes, and visual self-correction |
 | [backgrounds.md](./backgrounds.md) | `references/backgrounds.md` | Master directory of interactive canvas shaders and React Bits components |
 | [code-audit.md](./code-audit.md) | `references/code-audit.md` | Static code inspection search patterns, token grep checks, and replacement ledger |
 | [color-and-tokens.md](./color-and-tokens.md) | `references/color-and-tokens.md` | Semantic color hierarchy, WCAG contrast tiers, light/dark mode pairs |
 | [cross-platform.md](./cross-platform.md) | `references/cross-platform.md` | Platform translation between Apple HIG, Android Material, and Web |
 | [design-principles.md](./design-principles.md) | `references/design-principles.md` | Core design philosophy: Clarity, Deference, Depth, Authenticity |
 | [design-review.md](./design-review.md) | `references/design-review.md` | Evidence-based audit protocol and verification reporting |
+| [deterministic-audit-matrix.md](./deterministic-audit-matrix.md) | `references/deterministic-audit-matrix.md` | Impeccable 5-dimension scored technical audit and P0-P3 defect triage |
 | [hig-lookup.md](./hig-lookup.md) | `references/hig-lookup.md` | Apple HIG 123-topic index and routing guide |
+| [img2threejs-pipeline.md](./img2threejs-pipeline.md) | `references/img2threejs-pipeline.md` | img2threejs 6-pass staged sculpting pipeline from 2D images to Three.js |
 | [interaction-states.md](./interaction-states.md) | `references/interaction-states.md` | Complete 8-state component matrix (default, hover, focus, active, disabled, loading, error, success) |
 | [layout-and-composition.md](./layout-and-composition.md) | `references/layout-and-composition.md` | 8pt spatial grid, asymmetric visual weight, and content containment |
 | [motion.md](./motion.md) | `references/motion.md` | Purposeful physics-based spring motion and cubic-bezier curves |
@@ -464,3 +467,6 @@ npx pure-saas ref "dashboard"       # SaaS dashboard shell layout
 | [reference-analysis.md](./reference-analysis.md) | `references/reference-analysis.md` | Live reference reverse engineering and 16-section DESIGN.md protocol |
 | [responsive-design.md](./responsive-design.md) | `references/responsive-design.md` | Viewport constraints, container queries, and fluid typography |
 | [typography.md](./typography.md) | `references/typography.md` | Optical hierarchy, fluid scale formulas, line heights, and letter-spacing tracking |
+| [procedural-threejs-models.md](./components/procedural-threejs-models.md) | `references/components/procedural-threejs-models.md` | Code-only procedural Three.js component architecture & lifecycle hooks |
+| [selectable-style-registry.md](./design-systems/selectable-style-registry.md) | `references/design-systems/selectable-style-registry.md` | Awesome Design Skills selectable modular design styles and tokens |
+| [playwright-browser-testing.md](./developer-tooling/playwright-browser-testing.md) | `references/developer-tooling/playwright-browser-testing.md` | Playwright CLI token-conscious browser automation & responsive verification |

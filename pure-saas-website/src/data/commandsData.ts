@@ -177,6 +177,60 @@ export const commandsData: CommandSpec[] = [
       { title: 'Mobile Touch Ergonomics & Thumb Zones', path: 'references/responsive/touch-target-ergonomics.md' },
       { title: 'Adaptive Navigation Patterns: Mobile Drawer to Desktop Rail', path: 'references/responsive/adaptive-navigation-patterns.md' }
     ]
+  },
+  {
+    name: '/pure-saas browser',
+    id: 'browser',
+    syntax: '/pure-saas browser [check|setup|screenshot|verify] [url]',
+    tagline: 'Token-conscious browser testing, screenshot capture, and layout verification',
+    purpose: 'Executes live browser testing via Playwright CLI. Captures multi-viewport screenshots (1440px, 768px, 375px), verifies responsive layouts, checks for horizontal overflow, and tests keyboard focus visibility without heavyweight dependencies.',
+    whenToUse: 'Use when validating layout changes, verifying responsiveness across device viewports, taking screenshots for review, or running automated browser tests.',
+    difference: 'Directly executes a real headless browser session rather than estimating visual rendering from code alone.',
+    arguments: [
+      '[action]: Action to execute: check (verify environment), setup (install browsers), screenshot (capture viewports), verify (audit live page).',
+      '[url]: Target URL (e.g., http://localhost:3000).'
+    ],
+    prerequisites: [
+      'Accessible local or remote web server.',
+      'Playwright CLI or system Chrome/Chromium installation.'
+    ],
+    exampleRequest: '/pure-saas browser screenshot http://localhost:3000 --out-dir .screens',
+    expectedOutput: '1. Diagnostic browser environment status\n2. Viewport screenshots captured at 1440px, 768px, and 375px\n3. Responsive layout integrity verification\n4. Zero false-positive pass claims when browsers are unavailable.',
+    commonMistakes: [
+      'Claiming browser testing passed without verifying that a browser is actually installed.',
+      'Testing only at a single desktop resolution.'
+    ],
+    references: [
+      { title: 'Playwright CLI Browser Testing', path: 'references/developer-tooling/playwright-browser-testing.md' },
+      { title: 'Mobile-First Breakpoint Architecture', path: 'references/responsive/mobile-first-breakpoint-strategy.md' }
+    ]
+  },
+  {
+    name: '/pure-saas 3d',
+    id: '3d',
+    syntax: '/pure-saas 3d [check|spec|scaffold] [target]',
+    tagline: 'Procedural, code-only Three.js 3D model generation and scaffolding',
+    purpose: 'Scaffolds parametric, code-only Three.js components in TypeScript and runs the 6-pass img2threejs staging pipeline. Enforces strict resource cleanup, responsive resize handling, and performance limits (under 5,000 polygons, 60fps).',
+    whenToUse: 'Use when building 3D hero canvasses, interactive product showcases, or procedural models without external asset files.',
+    difference: 'Generates self-contained, lightweight TypeScript code rather than downloading heavy binary GLTF/GLB files.',
+    arguments: [
+      '[action]: Action to execute: check (prerequisites check), spec (generate 6-pass sculpt spec from image), scaffold (generate Three.js component).',
+      '[target]: Component name (e.g., HeroCanvas) or input image path.'
+    ],
+    prerequisites: [
+      'Project with Three.js installed or installable (npm install three @types/three).',
+      'TypeScript support for component templates.'
+    ],
+    exampleRequest: '/pure-saas 3d scaffold ProductViewer --out src/components/ProductViewer.tsx',
+    expectedOutput: '1. Verified Three.js prerequisites check\n2. Parametric Three.js component with requestAnimationFrame loop\n3. Strict disposal logic in useEffect cleanup (geometry, material, renderer)\n4. Responsive resize observer handling devicePixelRatio.',
+    commonMistakes: [
+      'Generating unmanaged Three.js instances that cause memory leaks.',
+      'Over-promising 3D model accuracy from 2D images without meeting image suitability requirements.'
+    ],
+    references: [
+      { title: 'Procedural Three.js Models in TypeScript', path: 'references/components/procedural-threejs-models.md' },
+      { title: 'img2threejs 6-Pass Staged Sculpting Pipeline', path: 'references/img2threejs-pipeline.md' }
+    ]
   }
 ];
 

@@ -17,12 +17,14 @@ The universal entry point and intelligent default for UI/UX design, implementati
 Inspect the request:
 
 ### A. Specialist Subcommands
-If the request begins with one of the 5 specialist commands, execute that focused workflow:
+If the request begins with one of the specialist commands, execute that focused workflow:
 - `design [request]` → Establish or update root-level `DESIGN.md` specification before implementation.
 - `polish [request]` → Elevate visual craft, typography, spacing, surface lighting, and micro-interactions without rebuilding working logic.
-- `review [request or scope]` → Rigorous, evidence-based quality audit across bugs, security, accessibility, performance, and tokens.
-- `reference [URL]` → Reverse-engineer visual reference via browser DevTools and recreate requested design language.
+- `review [request or scope]` → Rigorous, 5-dimension deterministic quality audit (A11y, Performance, Theming, Responsive, Integrity) with P0–P3 defect triage.
+- `reference [URL]` → Reverse-engineer visual reference via browser DevTools and recreate requested design language into a 16-section `DESIGN.md`.
 - `responsive [request]` → Fix and optimize layouts across mobile, tablet, laptop, and desktop viewports.
+- `browser [action] [url]` → Execute token-conscious browser automation, multi-viewport screenshots, and live page verification via Playwright CLI.
+- `3d [action]` → Synthesize procedural, code-only Three.js 3D models in TypeScript from 2D images or scaffold parametric 3D components.
 
 ### B. Natural-Language Request (Default Execution Engine)
 For all other requests, `/pure-saas` is the default. It understands the user's intent, inspects the existing project context, determines the right capabilities, and completes the task autonomously without forcing the user to pick manual workflows or answer unnecessary questions.

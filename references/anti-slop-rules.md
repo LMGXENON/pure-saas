@@ -86,4 +86,7 @@ Before declaring any design task complete, the agent must verify:
 - [ ] Are all corner radii systematically proportional to the brand geometry?
 - [ ] Does all copy describe real product capabilities rather than generic hype?
 - [ ] Is every color, space, and radius mapped to a semantic design token?
+- [ ] Has the implementation passed the 5-dimension deterministic audit (Accessibility, Performance, Theming, Responsive, Integrity)?
+- [ ] Has the visual output been verified in a rendered browser session without horizontal overflow?
+
 

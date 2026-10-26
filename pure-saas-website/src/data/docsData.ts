@@ -784,6 +784,64 @@ export const docsArticles: DocArticle[] = [
       "title": "/pure-saas reference"
     },
     "next": {
+      "slug": "command-browser",
+      "title": "/pure-saas browser"
+    }
+  },
+  {
+    "slug": "command-browser",
+    "title": "/pure-saas browser",
+    "category": "Commands",
+    "readTime": "4 min read",
+    "summary": "Token-conscious browser testing, screenshot capture, and layout verification via Playwright CLI.",
+    "sections": [
+      {
+        "id": "syntax-browser",
+        "title": "Syntax & Purpose",
+        "level": 2,
+        "codeSample": {
+          "language": "text",
+          "code": "/pure-saas browser [check|setup|screenshot|verify] [url]"
+        },
+        "content": [
+          "Launches headless browser sessions using Playwright CLI or system Chrome to capture multi-viewport screenshots (1440px, 768px, 375px) and verify that responsive layouts render without horizontal overflow."
+        ]
+      }
+    ],
+    "prev": {
+      "slug": "command-responsive",
+      "title": "/pure-saas responsive"
+    },
+    "next": {
+      "slug": "command-3d",
+      "title": "/pure-saas 3d"
+    }
+  },
+  {
+    "slug": "command-3d",
+    "title": "/pure-saas 3d",
+    "category": "Commands",
+    "readTime": "4 min read",
+    "summary": "Procedural, code-only Three.js 3D model generation and scaffolding via img2threejs pipeline.",
+    "sections": [
+      {
+        "id": "syntax-3d",
+        "title": "Syntax & Purpose",
+        "level": 2,
+        "codeSample": {
+          "language": "text",
+          "code": "/pure-saas 3d [check|spec|scaffold] [target]"
+        },
+        "content": [
+          "Scaffolds parametric Three.js components in TypeScript with proper lifecycle cleanup (disposing geometries and materials) and implements the 6-pass img2threejs sculpting pipeline from 2D images."
+        ]
+      }
+    ],
+    "prev": {
+      "slug": "command-browser",
+      "title": "/pure-saas browser"
+    },
+    "next": {
       "slug": "cli-overview",
       "title": "CLI Overview & Installation"
     }
@@ -810,8 +868,8 @@ export const docsArticles: DocArticle[] = [
       }
     ],
     "prev": {
-      "slug": "command-responsive",
-      "title": "/pure-saas responsive"
+      "slug": "command-3d",
+      "title": "/pure-saas 3d"
     },
     "next": {
       "slug": "cli-validate-and-contrast",
@@ -892,6 +950,87 @@ export const docsArticles: DocArticle[] = [
       "title": "pure-saas export-tokens"
     },
     "next": {
+      "slug": "cli-audit",
+      "title": "pure-saas audit"
+    }
+  },
+  {
+    "slug": "cli-audit",
+    "title": "pure-saas audit",
+    "category": "CLI Reference",
+    "readTime": "4 min read",
+    "summary": "Deterministic 5-dimension quality audit scored 0–20 points across A11y, Performance, Theming, Responsive, and Integrity with P0–P3 triage.",
+    "sections": [
+      {
+        "id": "audit-scoring",
+        "title": "Deterministic 5-Dimension Audit",
+        "level": 2,
+        "content": [
+          "Evaluates source code against 61 deterministic rules. Produces a 0–4 score for each dimension, an aggregate score out of 20, a quality rating band (Critical, Poor, Acceptable, Good, Excellent), and triages findings by priority (P0 blocker to P3 suggestion)."
+        ],
+        "codeSample": {
+          "language": "bash",
+          "code": "# Run audit on source directory\nnpx pure-saas audit --source src\n\n# Output machine-readable JSON for CI gates\nnpx pure-saas audit --source src --json\n\n# Fail CI if score is below threshold\nnpx pure-saas audit --min-score 16"
+        }
+      }
+    ],
+    "prev": {
+      "slug": "cli-check-and-drift",
+      "title": "pure-saas check & drift"
+    },
+    "next": {
+      "slug": "cli-browser-and-3d",
+      "title": "pure-saas browser & 3d"
+    }
+  },
+  {
+    "slug": "cli-browser-and-3d",
+    "title": "pure-saas browser & 3d",
+    "category": "CLI Reference",
+    "readTime": "4 min read",
+    "summary": "Execute headless browser testing via Playwright CLI and scaffold procedural Three.js 3D components.",
+    "sections": [
+      {
+        "id": "browser-and-3d-cli",
+        "title": "Browser Automation & 3D Tools",
+        "level": 2,
+        "codeSample": {
+          "language": "bash",
+          "code": "# Browser checks and multi-viewport screenshots\nnpx pure-saas browser check\nnpx pure-saas browser screenshot http://localhost:3000\n\n# 3D prerequisites check and component scaffolding\nnpx pure-saas 3d check\nnpx pure-saas 3d scaffold HeroScene --out src/components/HeroScene.tsx"
+        }
+      }
+    ],
+    "prev": {
+      "slug": "cli-audit",
+      "title": "pure-saas audit"
+    },
+    "next": {
+      "slug": "cli-style-registry",
+      "title": "pure-saas style"
+    }
+  },
+  {
+    "slug": "cli-style-registry",
+    "title": "pure-saas style",
+    "category": "CLI Reference",
+    "readTime": "3 min read",
+    "summary": "Discover and inspect curated design style archetypes from the modular style catalog without bulk installations.",
+    "sections": [
+      {
+        "id": "style-catalog-cli",
+        "title": "Modular Style Catalog",
+        "level": 2,
+        "codeSample": {
+          "language": "bash",
+          "code": "# List available style archetypes\nnpx pure-saas style list\n\n# Inspect detailed tokens and typography for a style\nnpx pure-saas style info \"editorial-luxury\"\n\n# Apply style tokens to DESIGN.md\nnpx pure-saas style select \"swiss-high-contrast\" --out DESIGN.md"
+        }
+      }
+    ],
+    "prev": {
+      "slug": "cli-browser-and-3d",
+      "title": "pure-saas browser & 3d"
+    },
+    "next": {
       "slug": "safety-and-guardrails",
       "title": "Safety Guardrails & Backend Integrity"
     }
@@ -917,8 +1056,8 @@ export const docsArticles: DocArticle[] = [
       }
     ],
     "prev": {
-      "slug": "cli-check-and-drift",
-      "title": "pure-saas check & drift"
+      "slug": "cli-style-registry",
+      "title": "pure-saas style"
     },
     "next": {
       "slug": "faq",

@@ -28,5 +28,11 @@ Optimize layouts and interactions across screen sizes, viewports, and touch/keyb
    - **Typography Scaling:** Use fluid type scales or explicit responsive classes to prevent massive headings from breaking lines awkwardly on mobile.
    - **Navigation & Drawers:** Convert horizontal desktop menus to accessible slide-out drawers or modal sheets with proper focus management and backdrop dismiss.
 3. **Preserve Logic:** Retain all backend API connections, event listeners, and form validations.
-4. **Verify & Report:** Test across all 3 viewports and report fixed overflow, layout shifts, and touch adaptations.
+4. **Verify & Report:**
+   - Capture responsive screenshot proof across all 3 viewports:
+     ```bash
+     npx pure-saas browser screenshot <url> --viewports 375,768,1440 --out ./screenshots
+     npx pure-saas browser verify <url>
+     ```
+   - Test across all 3 viewports and report fixed overflow, layout shifts, and touch adaptations.
 

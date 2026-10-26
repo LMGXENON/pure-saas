@@ -13,6 +13,8 @@ triggers:
   - "/pure-saas review"
   - "/pure-saas reference"
   - "/pure-saas responsive"
+  - "/pure-saas browser"
+  - "/pure-saas 3d"
   - "@pure-saas"
   - "create a website"
   - "design a website"
@@ -28,13 +30,15 @@ triggers:
   - "review UI"
   - "responsive layout"
   - "accessibility review"
+  - "browser test"
+  - "3d model"
 ---
 
 # Pure SaaS: Universal Agent Design & Implementation Skill
 
 You are an expert product designer, art director, and senior frontend engineer following the **Pure SaaS** design standard.
 
-Pure SaaS is a universal UI/UX design and implementation skill operating via **one intelligent main command** (`/pure-saas`) and **five specialist commands** (`design`, `polish`, `review`, `reference`, `responsive`). It works across websites, web applications, dashboards, mobile apps, desktop apps, e-commerce, portfolios, design systems, individual components, and other supported software projects.
+Pure SaaS is a universal UI/UX design and implementation skill operating via **one intelligent main command** (`/pure-saas`) and **seven specialist commands** (`design`, `polish`, `review`, `reference`, `responsive`, `browser`, `3d`). It works across websites, web applications, dashboards, mobile apps, desktop apps, e-commerce, portfolios, design systems, individual components, 3D interactive canvases, and other supported software projects.
 
 ---
 
@@ -54,6 +58,8 @@ The universal entry point and intelligent default for almost everything.
 - `/pure-saas create a reusable button component`
 - `/pure-saas find security issues and fix them`
 - `/pure-saas recreate this reference's visual style`
+- `/pure-saas test my website across mobile, tablet, and desktop viewports`
+- `/pure-saas create a procedural 3D model of this reference hardware device`
 
 ### Autonomous Capability Coordination:
 When invoked with an arbitrary natural-language request, `/pure-saas` automatically:
@@ -65,17 +71,19 @@ When invoked with an arbitrary natural-language request, `/pure-saas` automatica
 
 ---
 
-## 2. Five Specialist Commands
+## 2. Seven Specialist Commands
 
 Every specialist command inherits this canonical `SKILL.md`, relevant reference guides, conversation context, project instructions, and `DESIGN.md` where applicable:
 
 | Command | Purpose | Key Actions |
 | :--- | :--- | :--- |
-| **`/pure-saas design [request]`** | **Design direction & system definition** | For substantial design work, create or update a root-level `DESIGN.md` before implementation. Specify page/section structure, layout, spacing, typography, colours, tokens, components, assets, interactions, motion, responsive behaviour, and accessibility. Ground decisions in actual project needs. Distinguish observed facts, inferences, and unknowns. |
-| **`/pure-saas polish [request]`** | **Visual & tactile craft elevation** | Improve the quality of an existing implementation without unnecessarily rebuilding it. Inspect the actual result and refine visual hierarchy, spacing, typography, alignment, component consistency, micro-interactions, animation, accessibility, and responsive details. Preserve working functionality. |
-| **`/pure-saas review [request or scope]`** | **Evidence-based quality audit** | Conduct a rigorous, evidence-based review. Identify concrete bugs, security weaknesses, accessibility problems, performance issues, visual inconsistencies, and missing requirements. Prioritise findings by severity and provide file references/evidence. Do not modify files by default. |
-| **`/pure-saas reference [URL]`** | **Reverse-engineer visual reference** | Deep inspection via browser DevTools (rendered pages, DOM, computed styles, assets, typography, spacing, responsive layouts, motion, network resources). Translate relevant findings into requested implementation without necessarily copying the entire site. Report inspection limitations honestly. |
-| **`/pure-saas responsive [request]`** | **Cross-device layout optimization** | Focus on responsive layouts across mobile, tablet, laptop, and desktop. Inspect existing implementation, identify actual layout failures, and fix breakpoints, overflow, navigation, typography, spacing, grids, images, touch targets, and component behaviour. Preserve desktop design and functionality. |
+| **`/pure-saas design [request]`** | **Design direction & system definition** | For substantial design work, create or update a root-level `DESIGN.md` before implementation. Select curated design styles from the registry (`pure-saas style list`), apply taste archetypes, and specify layout, spacing, typography, colours, tokens, components, assets, interactions, motion, and accessibility. |
+| **`/pure-saas polish [request]`** | **Visual & tactile craft elevation** | Improve the quality of an existing implementation without unnecessarily rebuilding it. Apply specialized craft verbs (`polish`, `bolder`, `quieter`, `typeset`, `layout`, `harden`), refine visual hierarchy, 1px hairline borders, micro-interactions, spring physics, and responsive details. Preserve working backend functionality. |
+| **`/pure-saas review [request or scope]`** | **Deterministic quality audit** | Conduct a rigorous, 5-dimension deterministic audit (Accessibility, Performance, Theming, Responsive, Integrity) scored 0–20 points with P0–P3 defect triage. Run `npx pure-saas audit --source src`. Prioritize findings by severity with file references and concrete code diffs. Do not modify files by default. |
+| **`/pure-saas reference [URL]`** | **Reverse-engineer visual reference** | Deep inspection via browser DevTools (rendered pages, DOM, computed styles, assets, typography, spacing, responsive layouts, motion, network resources). Translate relevant findings into a 16-section `DESIGN.md` and requested implementation without copying the entire site. Report inspection limitations honestly. |
+| **`/pure-saas responsive [request]`** | **Cross-device layout optimization** | Focus on responsive layouts across mobile (375px), tablet (768px), laptop (1024px), and desktop (1440px). Inspect implementation, identify actual layout failures, fix breakpoints, overflow, touch targets (≥44px), and component behaviour. Capture multi-viewport screenshot proof with Playwright CLI. |
+| **`/pure-saas browser [action] [url]`** | **Browser testing & visual verification** | Execute token-conscious browser automation via Playwright CLI or Chrome headless fallback. Run `pure-saas browser check`, `pure-saas browser setup`, `pure-saas browser screenshot <url> --viewports 375,768,1440`, and `pure-saas browser verify <url>`. Verify actual rendered screenshots before declaring completion. |
+| **`/pure-saas 3d [action]`** | **Procedural Three.js 3D synthesis** | Convert 2D reference images into procedural, code-only Three.js models written in TypeScript via the 6-pass staged sculpting pipeline (img2threejs). Run `pure-saas 3d check`, `pure-saas 3d spec <image>`, and `pure-saas 3d scaffold <name>`. Zero bloated binary assets; 100% parametric TypeScript with `userData.tick` animation hooks. |
 
 ---
 

@@ -12,20 +12,24 @@ Pure SaaS is an open-source, universal AI-agent skill and design enforcement too
 
 ## 2. Command Architecture
 
-Pure SaaS operates via **one intelligent main command and five specialist commands**:
+Pure SaaS operates via **one intelligent main command and seven specialist commands**:
 
 1. **`/pure-saas [any request]`**  
    The universal entry point. Autonomously inspects context, establishes or updates `DESIGN.md`, executes frontend code, enforces tokens, integrates motion and accessibility, fixes bugs while preserving backend APIs, and reports verification honestly.
 2. **`/pure-saas design [request]`**  
-   Establish or update the root-level `DESIGN.md` specification before implementation.
+   Establish or update the root-level `DESIGN.md` specification before implementation with selectable style archetypes.
 3. **`/pure-saas polish [request]`**  
    Elevate visual craft, typography tracking, surface lighting, and micro-interactions without rebuilding working logic.
 4. **`/pure-saas review [request or scope]`**  
-   Rigorous, evidence-based quality audit across bugs, security, accessibility, performance, and tokens.
+   5-dimension deterministic quality audit (A11y, Performance, Theming, Responsive, Integrity) scored 0–20 points with P0–P3 defect triage.
 5. **`/pure-saas reference [URL]`**  
    Reverse-engineer visual references via browser DevTools and recreate requested design language into a 16-section `DESIGN.md`.
 6. **`/pure-saas responsive [request]`**  
    Optimize layouts across mobile (375-430px), tablet (768-834px), laptop (1024-1280px), and desktop (1440px+).
+7. **`/pure-saas browser [action] [url]`**  
+   Execute token-conscious browser testing, visual screenshot capture, and responsive verification via Playwright CLI.
+8. **`/pure-saas 3d [action]`**  
+   Synthesize procedural, code-only Three.js 3D models in TypeScript from 2D images or scaffold parametric 3D components (img2threejs).
 
 ---
 

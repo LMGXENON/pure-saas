@@ -75,6 +75,9 @@ Or use specialist commands:
 /pure-saas design establish a design system for my application
 /pure-saas polish improve the visual quality of this interface
 /pure-saas review audit the application and fix issues
+/pure-saas responsive optimize mobile, tablet, and desktop layouts
+/pure-saas browser verify live pages and capture multi-viewport screenshots
+/pure-saas 3d scaffold procedural Three.js 3D components
 ```
 
 ---
@@ -116,7 +119,7 @@ AI coding agents frequently produce repetitive, generic design patterns:
 - Desktop-first interfaces that neglect mobile layouts, keyboard accessibility and interaction states.
 - Inconsistent animations, transitions and component behaviour.
 
-**Pure SaaS addresses these problems at the agent level.** It provides one intelligent main command and five specialist commands to help AI coding agents design, build, refine, review and optimise professional software interfaces.
+**Pure SaaS addresses these problems at the agent level.** It provides one intelligent main command and seven specialist commands to help AI coding agents design, build, refine, review and optimise professional software interfaces.
 
 Its goal is to produce distinctive, polished, production-quality experiences instead of generic AI-generated templates.
 
@@ -136,6 +139,8 @@ The main command is the default entry point for design and development tasks. It
 /pure-saas improve accessibility across this page
 /pure-saas find security issues and fix them
 /pure-saas create a reusable button component
+/pure-saas test rendered page layout with browser screenshots
+/pure-saas scaffold a 3D procedural hero canvas
 ```
 
 ### How It Works
@@ -152,15 +157,17 @@ Pure SaaS aims to minimise redundant analysis, unnecessary planning documents an
 
 ## Specialist Commands
 
-Use one of the five specialist commands when you need a focused workflow. Each inherits the canonical instructions from `SKILL.md` and should follow the project's persistent `DESIGN.md` where applicable.
+Use one of the seven specialist commands when you need a focused workflow. Each inherits the canonical instructions from `SKILL.md` and should follow the project's persistent `DESIGN.md` where applicable.
 
 | Command | Purpose | Definition |
 |---|---|---|
-| `/pure-saas design [request]` | Establish or update the project's persistent design specification before implementation. | [`commands/design.md`](commands/design.md) |
+| `/pure-saas design [request]` | Establish or update the project's persistent design specification before implementation with selectable style archetypes. | [`commands/design.md`](commands/design.md) |
 | `/pure-saas polish [request]` | Improve visual hierarchy, spacing, typography, surfaces, micro-interactions and SVGs without unnecessarily rebuilding working logic. | [`commands/polish.md`](commands/polish.md) |
-| `/pure-saas review [scope]` | Audit bugs, security weaknesses, accessibility, performance and design-token consistency. | [`commands/review.md`](commands/review.md) |
-| `/pure-saas reference [URL]` | Analyse a website reference and recreate its relevant design language and behaviour. | [`commands/reference.md`](commands/reference.md) |
+| `/pure-saas review [scope]` | 5-dimension deterministic quality audit (A11y, Performance, Theming, Responsive, Integrity) scored 0–20 with P0–P3 defect triage. | [`commands/review.md`](commands/review.md) |
+| `/pure-saas reference [URL]` | Analyse a website reference and recreate its relevant design language and behaviour into a 16-section `DESIGN.md`. | [`commands/reference.md`](commands/reference.md) |
 | `/pure-saas responsive [request]` | Improve mobile, tablet, laptop and desktop layouts, including overflow, touch targets and navigation. | [`commands/responsive.md`](commands/responsive.md) |
+| `/pure-saas browser [action]` | Execute token-conscious browser testing, visual screenshot capture, and responsive verification via Playwright CLI. | [`commands/browser.md`](commands/browser.md) |
+| `/pure-saas 3d [action]` | Synthesize procedural, code-only Three.js 3D models in TypeScript from 2D images or scaffold parametric 3D components (img2threejs). | [`commands/3d.md`](commands/3d.md) |
 
 ---
 
@@ -294,6 +301,83 @@ npx pure-saas export-tokens DESIGN.md --format tailwind --out tailwind.tokens.js
 npx pure-saas export-tokens DESIGN.md --format dtcg --out tokens.json
 ```
 
+### Deterministic 5-Dimension Audit
+
+Audit your project across Accessibility, Performance, Theming, Responsive design, and Token Integrity with scored ratings (0–20 total) and P0–P3 defect triage:
+
+```bash
+# Run deterministic audit against source code
+npx pure-saas audit --source src
+
+# Output JSON for CI/CD gates
+npx pure-saas audit --source src --json
+
+# Enforce minimum passing score threshold
+npx pure-saas audit --min-score 16
+```
+
+### Browser Testing & Multi-Viewport Verification
+
+Token-conscious browser testing and automated screenshot verification powered by Playwright CLI:
+
+```bash
+# Check browser automation environment and tools
+npx pure-saas browser check
+
+# Verify or install Playwright browsers
+npx pure-saas browser setup
+
+# Capture full-page screenshots at 1440px, 768px, and 375px
+npx pure-saas browser screenshot http://localhost:3000 --out-dir .screens
+
+# Audit responsive layout integrity in a live browser
+npx pure-saas browser verify http://localhost:3000
+```
+
+### Procedural 3D Model Scaffolding (img2threejs)
+
+Parametric, code-only Three.js component scaffolding and image-to-3D sculpting pipeline:
+
+```bash
+# Check 3D prerequisites (Node.js, Three.js, optional tools)
+npx pure-saas 3d check
+
+# Scaffold a production Three.js component with lifecycle and resize handlers
+npx pure-saas 3d scaffold HeroCanvas --out src/components/HeroCanvas.tsx
+
+# Generate a 6-pass sculpting specification from an input image
+npx pure-saas 3d spec assets/logo.png --out 3d-spec.json
+```
+
+### Selectable Style Registry (Awesome Design Skills)
+
+Query and inspect curated design archetypes from the modular style catalog:
+
+```bash
+# List all available styles across all categories
+npx pure-saas style list
+
+# Inspect tokens, typography, and rules for a specific style
+npx pure-saas style info "editorial-luxury"
+
+# Apply a style archetype to your DESIGN.md
+npx pure-saas style select "swiss-high-contrast" --out DESIGN.md
+```
+
+### Agent Instruction Sync
+
+Install or update project-level agent rules across all supported AI assistants:
+
+```bash
+# Sync configuration for all agents (Cursor, Windsurf, Copilot, Gemini, Claude Code)
+npx pure-saas install all
+
+# Sync specific agent configuration
+npx pure-saas install cursor
+npx pure-saas install claude
+npx pure-saas install gemini
+```
+
 ### Generate a Quality Report
 
 ```bash
@@ -337,6 +421,18 @@ npx pure-saas validate DESIGN.md
 # Audit color contrast against WCAG 2.2 AA tiers
 npx pure-saas contrast DESIGN.md
 ```
+
+---
+
+## Acknowledgements & Integrated Open-Source Capabilities
+
+Pure SaaS integrates, adapts, and builds upon several exceptional open-source projects under permissive open-source licenses:
+
+- **[Taste Skill](https://github.com/Leonxlnx/taste-skill)** (MIT License, © Leonxlnx) — Art direction pipeline, anti-slop visual critique heuristics, and aesthetic archetypes. Reference: [`references/art-direction-and-taste.md`](references/art-direction-and-taste.md).
+- **[Impeccable](https://github.com/pbakaus/impeccable)** (Apache-2.0 / MIT License, © Paul Bakaus) — Deterministic 5-dimension scored audit matrix (A11y, Performance, Theming, Responsive, Integrity), P0–P3 defect triage, and specialized critique verbs (`bolder`, `quieter`, `typeset`, `layout`, `harden`). Reference: [`references/deterministic-audit-matrix.md`](references/deterministic-audit-matrix.md).
+- **[Playwright CLI](https://github.com/microsoft/playwright-cli)** (Apache-2.0 License, © Microsoft Corporation) — Token-conscious browser automation, multi-viewport screenshot verification, and deterministic browser assertions. Reference: [`references/developer-tooling/playwright-browser-testing.md`](references/developer-tooling/playwright-browser-testing.md).
+- **[Awesome Design Skills](https://github.com/jdsadminllc/awesome-design-skills)** (MIT License, © JDS Admin LLC) — Modular, selectable design style registry enabling on-demand style discovery without mandatory bulk installation. Reference: [`references/design-systems/selectable-style-registry.md`](references/design-systems/selectable-style-registry.md).
+- **[img2threejs](https://github.com/img2threejs/img2threejs)** (MIT License, © img2threejs contributors) — Procedural, code-only Three.js component scaffolding in TypeScript and 6-pass staged 3D sculpting pipeline. References: [`references/components/procedural-threejs-models.md`](references/components/procedural-threejs-models.md), [`references/img2threejs-pipeline.md`](references/img2threejs-pipeline.md).
 
 ---
 
