@@ -132,6 +132,8 @@ Examples:
    88 visual styles, 192 product archetypes, 192 semantic color systems, 74 typography pairings, 34 landing page patterns, 119 UX heuristics, 25 chart guides, 17 motion patterns, and 32 app UI patterns.
 4. **Core Craft Guides (`references/*.md`):**
    `design-principles.md`, `typography.md`, `color-and-tokens.md`, `layout-and-composition.md`, `anti-slop-rules.md`, `interaction-states.md`, `accessibility.md`, `responsive-design.md`, `cross-platform.md`, `code-audit.md`, `motion.md`, `platform-guidelines.md`, `design-review.md`.
+5. **Interactive Backgrounds & Shaders (`references/backgrounds/` — 15 Components & `backgrounds.md`):**
+   Full source code, CSS, props, WebGL/canvas shaders, and integration recipes from React Bits (`gradient-ascii.md`, `pattern-waves.md`, `prism.md`, `aurora.md`, `liquid-chrome.md`, `iridescence.md`, `plasma.md`, `particles.md`, `hyperspeed.md`, `dither.md`, `dot-grid.md`, `ballpit.md`, `waves.md`, `threads.md`, `topography.md`).
 
 ### The "Read Before You Cite" Rule
 - **Read before making claims:** Never invent guideline numbers, token values, or measurements from memory. Open the matching reference file in `references/` and cite both file and heading.

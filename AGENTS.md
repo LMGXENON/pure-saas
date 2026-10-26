@@ -60,7 +60,7 @@ Pure SaaS operates via **one intelligent main command and five specialist comman
 | `references/responsive-design.md` | Viewport constraints, container queries, and fluid typography | Yes |
 | `references/typography.md` | Optical hierarchy, fluid scale formulas, line heights, and letter-spacing tracking | Yes |
 | `scripts/pure-saas.mjs` | Zero-dependency Node.js CLI, reference search engine, design intelligence query engine, token validator, and static code scanner | Yes |
-| `tests/` | Automated test suite (CLI, tokens, enforcement, commands, real-world apps, reference search) | Yes |
+| `references/backgrounds/` | Interactive background shader and canvas component references from React Bits | Yes |
 
 ---
 
@@ -83,6 +83,7 @@ npx pure-saas design-system --product "<type>" --variance <1-10> --motion <1-10>
 ### Retrieval Examples
 - **Component pattern:** `npx pure-saas ref "modal"` -> retrieves `references/hig/modality.md`, `references/hig/sheets.md`
 - **Button interaction:** `npx pure-saas ref "button"` -> retrieves `references/hig/buttons.md`, `references/interaction-states.md`
+- **Background shaders:** `npx pure-saas ref "gradient ascii"` -> retrieves `references/backgrounds/gradient-ascii.md`, `references/backgrounds.md`
 - **Framework guidance:** `npx pure-saas ref "react"` -> retrieves `references/frameworks/react.md`, `references/cross-platform.md`
 - **Accessibility:** `npx pure-saas ref "accessibility"` -> retrieves `references/accessibility.md`, `references/hig/accessibility.md`
 - **Product colors:** `npx pure-saas query color "fintech"` -> retrieves verified financial color palettes

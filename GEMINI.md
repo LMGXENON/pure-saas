@@ -10,6 +10,7 @@ When creating, reviewing, or improving UI/UX designs, follow the Pure SaaS desig
    - Components & states: references/interaction-states.md, accessibility.md.
    - Responsive & platforms: references/responsive-design.md, cross-platform.md, platform-guidelines.md.
    - Motion & physics: references/motion.md.
+   - Interactive backgrounds & shaders: references/backgrounds.md, references/backgrounds/*.md.
    - Reference URL recreation: references/reference-analysis.md.
 3. Universal Command: Use `/pure-saas [request]` as the default entry point. It autonomously coordinates
    design specification, component building, token enforcement, accessibility, motion, and verification.

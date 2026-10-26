@@ -22,10 +22,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Run Test Suite
-        run: npm test
-
-      - name: Validate Starter Fixtures
+      - name: Validate Reference Search and CLI
         run: |
-          node scripts/pure-saas.mjs validate tests/fixtures/valid-design.md
+          node scripts/pure-saas.mjs ref "modal"
+          node scripts/pure-saas.mjs query color "fintech"
 

@@ -1305,6 +1305,7 @@ export function searchReferences(query = '', options = {}) {
       let category = 'Craft Guideline';
       if (relPath.startsWith('hig/')) category = 'Apple HIG';
       else if (relPath.startsWith('frameworks/')) category = 'Framework Guideline';
+      else if (relPath.startsWith('backgrounds/')) category = 'Background Component';
 
       let score = 0;
       const lowerRel = relPath.toLowerCase();

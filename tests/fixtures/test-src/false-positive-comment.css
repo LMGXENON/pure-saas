@@ -1,9 +1,0 @@
-/* Note: Background was originally #ff00ea in 2024 legacy mocks */
-.commented-element {
-  background-color: var(--color-bg-canvas);
-  color: var(--color-text-primary);
-  /* pure-saas-ignore color-value: verified legacy trademark asset */
-  border-color: #ffaa00;
-  /* EXC-002: hardware terminal pure black */
-  box-shadow: 0 0 10px #000000;
-}

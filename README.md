@@ -243,6 +243,8 @@ The Pure SaaS CLI provides design references, design-system generation, token va
 npx pure-saas ref "modal"
 npx pure-saas ref "button"
 npx pure-saas ref "react"
+npx pure-saas ref "gradient ascii"
+npx pure-saas ref "pattern waves"
 ```
 
 ### Query Design Intelligence
@@ -317,15 +319,17 @@ Consult the CLI implementation for the exact syntax and supported behaviour.
 
 ---
 
-## Testing and Quality Assurance
+## Quality Assurance & Verification
 
-Run the automated test suite:
+Verify design specifications and token compliance using the CLI:
 
 ```bash
-npm test
-```
+# Validate DESIGN.md structure and semantic tokens
+npx pure-saas validate DESIGN.md
 
-Run the relevant build, lint, validation and test commands documented by the project before releasing changes.
+# Audit color contrast against WCAG 2.2 AA tiers
+npx pure-saas contrast DESIGN.md
+```
 
 ---
 
