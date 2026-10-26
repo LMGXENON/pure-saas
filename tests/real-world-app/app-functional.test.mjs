@@ -3,6 +3,7 @@ import assert from 'node:assert';
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import { execSync } from 'node:child_process';
 import {
   validateDesignDocument,
   scanSourceDirectory,
@@ -10,6 +11,11 @@ import {
 } from '../../scripts/pure-saas.mjs';
 
 const APP_DIR = path.resolve(process.cwd(), 'tests/real-world-app');
+const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const HAS_CHROME = fs.existsSync(CHROME_PATH);
+const CHROME_CMD = process.platform === 'darwin'
+  ? `arch -arm64 "${CHROME_PATH}"`
+  : `"${CHROME_PATH}"`;
 
 test('Real-World App: Business logic and API contracts preserved 100%', async () => {
   const originalCode = fs.readFileSync(path.join(APP_DIR, 'original/app.js'), 'utf8');
@@ -96,4 +102,33 @@ test('Real-World App: Pure SaaS token validation and anti-slop enforcement', () 
   // Original legacy directory scan: must catch the 22 raw colors
   const originalScan = scanSourceDirectory(path.join(APP_DIR, 'original'), tokens);
   assert.ok(originalScan.rawColorViolations.length > 20, 'Original legacy code must be flagged for unapproved raw styling');
+});
+
+test('Real-World App: Headless Chrome responsive render across viewports', (t) => {
+  if (!HAS_CHROME) {
+    t.skip('Google Chrome not detected at standard macOS location; browser rendering marked as untested.');
+    return;
+  }
+
+  const htmlUrl = encodeURI(`file://${path.join(APP_DIR, 'redesigned/index.html')}`);
+
+  // 1. Desktop viewport (1440x900)
+  const desktopShot = '/tmp/saas-desktop-1440.png';
+  execSync(
+    `${CHROME_CMD} --headless=new --disable-gpu --screenshot="${desktopShot}" --window-size=1440,900 "${htmlUrl}" 2>/dev/null`,
+    { timeout: 15000 }
+  );
+  assert.ok(fs.existsSync(desktopShot), 'Desktop screenshot must be generated');
+  const dStat = fs.statSync(desktopShot);
+  assert.ok(dStat.size > 20000, `Desktop render must produce substantial visual content (${dStat.size} bytes)`);
+
+  // 2. Mobile viewport (375x812)
+  const mobileShot = '/tmp/saas-mobile-375.png';
+  execSync(
+    `${CHROME_CMD} --headless=new --disable-gpu --screenshot="${mobileShot}" --window-size=375,812 "${htmlUrl}" 2>/dev/null`,
+    { timeout: 15000 }
+  );
+  assert.ok(fs.existsSync(mobileShot), 'Mobile screenshot must be generated');
+  const mStat = fs.statSync(mobileShot);
+  assert.ok(mStat.size > 15000, `Mobile render must produce substantial visual content (${mStat.size} bytes)`);
 });

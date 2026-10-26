@@ -15,10 +15,10 @@ Conduct a rigorous, evidence-based quality review of the requested implementatio
 ## Operational Instructions
 
 1. **Load Relevant References ("Read Before You Cite"):**
-   - Open [`references/code-audit.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/code-audit.md) for concrete grep patterns, guideline citations, and stack replacements.
-   - Open [`references/cross-platform.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/cross-platform.md) for platform vocabulary and conventions.
-   - Open [`references/accessibility.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/accessibility.md) for WCAG 2.2 AA requirements.
-   - Open [`references/anti-slop-rules.md`](file:///Users/lmgxenon/Downloads/pure%20saas/references/anti-slop-rules.md) for anti-generic design checks.
+   - Open [`references/code-audit.md`](../references/code-audit.md) for concrete grep patterns, guideline citations, and stack replacements.
+   - Open [`references/cross-platform.md`](../references/cross-platform.md) for platform vocabulary and conventions.
+   - Open [`references/accessibility.md`](../references/accessibility.md) for WCAG 2.2 AA requirements.
+   - Open [`references/anti-slop-rules.md`](../references/anti-slop-rules.md) for anti-generic design checks.
 
 2. **Conduct Evidence-Based Audit Across Dimensions:**
    - **Bugs & Defect Identification:** Detect broken interactions, layout errors, unhandled edge cases, and missing component states across the 8-state matrix.
