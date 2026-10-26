@@ -10,3 +10,4 @@ if exist "%BASE_DIR%\scripts\pure-saas.mjs" (
 ) else (
   npx pure-saas %*
 )
+

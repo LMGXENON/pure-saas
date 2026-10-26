@@ -44,3 +44,4 @@ Ambitious craft does not mean loud visual noise on every screen. Scale ambition 
 - **Operate (Dashboards & Consoles):** Precision, spatial density, low visual noise, restrained color accents, sub-millisecond perceived latency, and keyboard navigation.
 - **Read (Docs & Publishing):** Typographic calm, comfortable reading rhythm, balanced margins, high readability, and predictable wayfinding.
 - **Experience (3D & Interactive):** Tactile physics, procedural canvasses, shaders, and responsive manipulation.
+

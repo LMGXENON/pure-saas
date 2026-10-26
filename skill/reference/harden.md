@@ -24,3 +24,4 @@ Use `/pure-saas harden [target]` to transform a fragile prototype into bulletpro
 2. **Fixed Height Prohibition:** Never set fixed pixel heights (`height: 240px`) on content containers. Use `min-height` with flex/grid layout so the container expands if text wraps or internationalized translations are longer.
 3. **Touch Action & Zoom:** Never disable mobile zoom with `user-scalable=no` or `maximum-scale=1.0` in `<meta name="viewport">`. This violates WCAG SC 1.4.4.
 4. **Accessible Hit Target Expansion:** For small icons (16px–20px), expand the clickable hit target to 44x44px using negative margin or padding (`p-3 -m-3` or `::before` pseudo-element).
+

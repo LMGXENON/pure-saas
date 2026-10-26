@@ -55,3 +55,4 @@ Instead of generic light-gray `#f3f4f6`, use an opinionated canvas:
 ## 3. Verification
 
 Capture screenshots before and after. Verify that readability and accessibility were not sacrificed for boldness (all text must maintain $\ge$ 4.5:1 contrast).
+

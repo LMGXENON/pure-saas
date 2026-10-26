@@ -56,3 +56,4 @@ Follow the 8-step build loop:
 3. Capture browser screenshots at 1440px, 768px, and 375px.
 4. Run `npx pure-saas audit --source src`.
 5. Fix identified defects and report verified results.
+

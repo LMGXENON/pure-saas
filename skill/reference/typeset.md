@@ -53,3 +53,4 @@ Always apply tabular numbers (`font-variant-numeric: tabular-nums` or `tabular-n
 - Table numeric columns
 
 This guarantees that numbers of differing widths align perfectly along decimal columns without jumping on re-renders.
+

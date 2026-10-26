@@ -35,3 +35,4 @@ Pure SaaS structures colors into 5 functional tiers rather than arbitrary hex bu
 Dark mode is not an inversion filter (`invert(100%)`). It is an independent lighting model:
 - **Canvas Depth:** In light mode, canvas is typically darker than raised cards (e.g. `#f8fafc` canvas with `#ffffff` white cards). In dark mode, canvas is the deepest tone (`#09090b`), and cards are raised higher to reflect ambient light (`#18181b` or `#1f2937`).
 - **Border Visibility:** In dark mode, shadows disappear into the black floor. Depth must be defined using crisp hairline borders (`rgba(255, 255, 255, 0.08)` to `0.12`).
+

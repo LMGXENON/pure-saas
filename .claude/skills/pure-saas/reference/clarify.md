@@ -18,3 +18,4 @@ Use `/pure-saas clarify [target]` to eliminate confusing jargon, passive copy, v
    - Speak in the natural vocabulary of the user's domain (e.g., in a cloud console: "Cluster", "Region", "Ingress", "Replica"). Never use generic consumer placeholders.
 4. **Transparent Pricing Terms:**
    - Explain what happens after a trial ends, what is included in each tier, and whether cancellation is instant.
+

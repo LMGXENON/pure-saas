@@ -992,11 +992,40 @@ export function exportTokens(designData, format = 'css', mode = 'default') {
   throw new Error(`Unsupported export format: ${format}. Use 'css', 'tailwind', 'tailwind-v4', 'dtcg', or 'json'.`);
 }
 
+// --- Resource Path Resolvers (Self-Contained Skill Architecture) ---
+
+export function getCatalogPath() {
+  const candidates = [
+    path.resolve(__dirname, '../skill/data/design-styles-catalog.json'),
+    path.resolve(__dirname, '../data/design-styles-catalog.json'),
+    path.resolve(__dirname, '../references/design-styles-catalog.json')
+  ];
+  return candidates.find(p => fs.existsSync(p)) || candidates[0];
+}
+
+export function getIntelligencePath() {
+  const candidates = [
+    path.resolve(__dirname, '../skill/data/design-intelligence.json'),
+    path.resolve(__dirname, '../data/design-intelligence.json'),
+    path.resolve(__dirname, '../references/design-intelligence.json')
+  ];
+  return candidates.find(p => fs.existsSync(p)) || candidates[0];
+}
+
+export function getReferencesDir() {
+  const candidates = [
+    path.resolve(__dirname, '../skill/reference'),
+    path.resolve(__dirname, '../reference'),
+    path.resolve(__dirname, '../references')
+  ];
+  return candidates.find(p => fs.existsSync(p)) || candidates[0];
+}
+
 // --- Programmatic Design System Generator (UI/UX Pro Max + Zero Slop Design) ---
 
 export function generateDesignSystem(options = {}) {
-  const intelPath = path.resolve(__dirname, '../references/design-intelligence.json');
-  const catalogPath = path.resolve(__dirname, '../references/design-styles-catalog.json');
+  const intelPath = getIntelligencePath();
+  const catalogPath = getCatalogPath();
 
   let intel = null;
   if (fs.existsSync(intelPath)) {
@@ -1186,8 +1215,8 @@ All interactive controls implement:
 // --- Design Style Intelligence Engine (UI/UX Pro Max) ---
 
 export function queryDesignIntelligence(options = {}) {
-  const intelPath = path.resolve(__dirname, '../references/design-intelligence.json');
-  const catalogPath = path.resolve(__dirname, '../references/design-styles-catalog.json');
+  const intelPath = getIntelligencePath();
+  const catalogPath = getCatalogPath();
 
   let intel = null;
   if (fs.existsSync(intelPath)) {
@@ -1320,7 +1349,7 @@ export function queryDesignIntelligence(options = {}) {
 // --- Reference Library Search Engine (Apple HIG + Frameworks + Craft Guides) ---
 
 export function searchReferences(query = '', options = {}) {
-  const referencesDir = path.resolve(__dirname, '../references');
+  const referencesDir = getReferencesDir();
   const results = [];
   const qTerms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
 
@@ -1399,7 +1428,7 @@ export function searchReferences(query = '', options = {}) {
         }
 
         results.push({
-          path: path.join('references', relPath),
+          path: path.relative(process.cwd(), filePath),
           fullPath: filePath,
           title,
           category,
@@ -2739,7 +2768,7 @@ export async function runCli(args = process.argv.slice(2)) {
     const action = args[1];
 
     if (command === 'style' && action === 'list') {
-      const catalogPath = path.resolve(__dirname, '../references/design-styles-catalog.json');
+      const catalogPath = getCatalogPath();
       if (fs.existsSync(catalogPath)) {
         const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
         console.log(`=== Selectable Design Style Registry (${catalog.styles.length} styles) ===\n`);
@@ -2766,7 +2795,7 @@ export async function runCli(args = process.argv.slice(2)) {
         console.error('Error: Please specify a style ID. Example: pure-saas style info minimalism-swiss');
         return 1;
       }
-      const catalogPath = path.resolve(__dirname, '../references/design-styles-catalog.json');
+      const catalogPath = getCatalogPath();
       if (fs.existsSync(catalogPath)) {
         const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
         const found = catalog.styles.find(s => s.id === styleId || s.name.toLowerCase().includes(styleId.toLowerCase()));

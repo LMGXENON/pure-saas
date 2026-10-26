@@ -20,3 +20,4 @@ try {
   console.error(`Pure SaaS CLI Error: ${error.message}`);
   process.exit(1);
 }
+

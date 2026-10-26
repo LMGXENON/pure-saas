@@ -53,3 +53,4 @@ When the user enters `/pure-saas [request]`:
 | `/pure-saas browser [action]` | Playwright CLI browser automation | [`browser.md`](browser.md) |
 | `/pure-saas 3d [action]` | Procedural Three.js 3D models (img2threejs) | [`3d.md`](3d.md) |
 | `/pure-saas style [action]` | Modular style archetype registry | [`style-registry.md`](style-registry.md) |
+

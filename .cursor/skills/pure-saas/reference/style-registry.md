@@ -30,3 +30,4 @@ npx pure-saas style select "minimalism-swiss" --out DESIGN.md
 3. **`data-dense-dashboard`:** Deep slate (`#0f172a`), cyan accent (`#38bdf8`), compact rows, tabular numbers. Best for analytics, BI, trading.
 4. **`editorial-literary`:** Warm paper (`#faf9f5`), serif display (`Newsreader`), racing green accent (`#14532d`). Best for publishing, technical essays.
 5. **`creative-studio`:** Deep charcoal (`#121214`), amber accent (`#f59e0b`), floating toolbars. Best for media, audio, 3D editors.
+

@@ -23,3 +23,4 @@ Distillation is the pursuit of maximum clarity through subtraction. The goal is 
   **After (Distilled):** 5 high-impact differentiators, clear price, single high-contrast action button, and a clean billing note.
 - **Before:** A dashboard with 8 KPI tiles displaying arbitrary percentages, 3 separate search inputs, and 4 filter dropdowns.
   **After (Distilled):** 4 core business metrics, 1 unified search/filter bar with keyboard navigation, and direct data manipulation in the table.
+

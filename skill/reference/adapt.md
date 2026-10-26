@@ -29,3 +29,4 @@ Wide Desktop (1440px+):       Max-width containment (1152px - 1280px), centered 
 4. **Header to Mobile Navigation:**
    - Desktop horizontal link lists must collapse into an accessible slide-over drawer or bottom sheet on viewports below 768px.
    - The hamburger button must have `aria-expanded` and trap focus while open.
+

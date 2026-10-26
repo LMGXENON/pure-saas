@@ -11,3 +11,4 @@ elif [ -f "$BASE_DIR/cli/bin/pure-saas.js" ]; then
 else
   exec npx pure-saas "$@"
 fi
+

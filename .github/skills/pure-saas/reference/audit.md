@@ -73,3 +73,4 @@ When reporting audit findings, use this structured schema:
 2. **Evidence:** Exact file path and line number (`src/components/Hero.tsx:42`), observed CSS property, or measured contrast ratio.
 3. **Impact:** Priority rating ([P0], [P1], [P2], [P3]) and user consequence.
 4. **Concrete Fix:** Exact code replacement diff or token mapping.
+

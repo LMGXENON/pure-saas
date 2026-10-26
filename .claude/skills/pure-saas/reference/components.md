@@ -25,3 +25,4 @@ Separate structure and accessibility from styling:
 - Use Radix UI, Headless UI, React Aria, or semantic HTML elements (`<dialog>`, `<popover>`, `<details>`).
 - Roving `tabindex` for menus, toolbars, and tab lists.
 - Portaled modals and dropdowns to prevent clipping by parent `overflow: hidden`.
+

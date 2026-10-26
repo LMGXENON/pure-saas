@@ -34,3 +34,4 @@ Verify that:
 2. Text does not clip or overflow container boundaries.
 3. Both Light and Dark modes render with correct contrast.
 4. Console contains zero runtime exceptions.
+

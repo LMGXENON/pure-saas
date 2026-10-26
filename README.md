@@ -7,7 +7,7 @@
 
 Build distinctive, polished interfaces without generic AI design patterns.
 
-[Website](YOUR_ACTUAL_WEBSITE_URL) · [GitHub Repository](https://github.com/LMGXENON/pure-saas)
+[GitHub Repository](https://github.com/LMGXENON/pure-saas) · [Reference Library](skill/reference/reference-index.md)
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=nodedotjs&logoColor=white)](package.json)
@@ -191,7 +191,7 @@ Use specialist commands when you need a focused workflow. Each playbook resides 
 | `/pure-saas clarify [target]` | Fix | Improve UX copy, active button verbs, and actionable error messages. | [`skill/reference/clarify.md`](skill/reference/clarify.md) |
 | `/pure-saas optimize [target]` | Fix | Core Web Vitals, virtualization, and sub-frame layout stability. | [`skill/reference/optimize.md`](skill/reference/optimize.md) |
 | `/pure-saas review [scope]` | Evaluate | 5-dimension deterministic audit (0–20 score) with P0–P3 defect triage. | [`skill/reference/audit.md`](skill/reference/audit.md) |
-| `/pure-saas reference [URL]` | Analyze | Reverse-engineer visual reference sites into a 16-section `DESIGN.md`. | [`references/reference-analysis.md`](references/reference-analysis.md) |
+| `/pure-saas reference [URL]` | Analyze | Reverse-engineer visual reference sites into a 16-section `DESIGN.md`. | [`skill/reference/reference-analysis.md`](skill/reference/reference-analysis.md) |
 | `/pure-saas browser [action]` | Verify | Playwright CLI headless browser automation and screenshot capture. | [`skill/reference/browser.md`](skill/reference/browser.md) |
 | `/pure-saas 3d [action]` | Experience | Procedural Three.js 3D models and img2threejs pipeline. | [`skill/reference/3d.md`](skill/reference/3d.md) |
 | `/pure-saas style [action]` | System | Selectable modular design style archetypes from Awesome Design Skills. | [`skill/reference/style-registry.md`](skill/reference/style-registry.md) |
@@ -236,7 +236,7 @@ Do not claim complete inspection, screenshot comparison or animation verificatio
 
 All Pure SaaS commands follow these operational principles:
 
-1. **Read the canonical skill:** Consult `SKILL.md` and relevant reference documents in `references/`.
+1. **Read the canonical skill:** Consult `SKILL.md` and relevant reference playbooks in `skill/reference/`.
 2. **Understand context:** Use the request and available project context without unnecessary questions.
 3. **Inspect architecture:** Understand existing frameworks, styling systems and backend contracts.
 4. **Select relevant workflows:** Coordinate only the capabilities required for the task.
@@ -255,13 +255,13 @@ Pure SaaS is intended for AI coding environments that support skills, project in
 
 | Platform / Agent | Integration mechanism | Relevant files |
 |---|---|---|
-| Claude Code | Skills and commands | `SKILL.md`, `commands/` |
+| Claude Code | Skills and playbooks | `SKILL.md`, `skill/reference/` |
 | Cursor | Project rules and skill instructions | `.cursorrules`, `SKILL.md` |
 | Gemini / Antigravity | Root instructions and skill entry point | `GEMINI.md`, `SKILL.md` |
 | Windsurf | Project rules | `.windsurfrules`, `SKILL.md` |
 | GitHub Copilot | Repository custom instructions | `.github/copilot-instructions.md`, `SKILL.md` |
-| OpenCode | Native commands and skill instructions | `SKILL.md`, `commands/` |
-| Codex / compatible agents | Skill instructions or system context | `SKILL.md`, `commands/` |
+| OpenCode | Native skills and instructions | `SKILL.md`, `skill/reference/` |
+| Codex / compatible agents | Skill instructions or system context | `SKILL.md`, `skill/reference/` |
 
 The exact invocation and automatic discovery behaviour depend on the agent, its version and configuration.
 
@@ -273,7 +273,7 @@ The Pure SaaS CLI provides design references, design-system generation, token va
 
 ### Search the Reference Library
 
-Pure SaaS includes a curated library of **260+ architectural reference guides, component specifications, Apple HIG documents, and framework manuals** catalogued in `references/reference-index.md`.
+Pure SaaS includes a curated library of **330+ architectural reference guides, component specifications, Apple HIG documents, and framework manuals** catalogued in `skill/reference/reference-index.md`.
 
 Search any topic across components, layouts, design systems, UX patterns, visual craft, accessibility, theming, and real-world flows:
 
@@ -455,11 +455,11 @@ npx pure-saas contrast DESIGN.md
 
 Pure SaaS integrates, adapts, and builds upon several exceptional open-source projects under permissive open-source licenses:
 
-- **[Taste Skill](https://github.com/Leonxlnx/taste-skill)** (MIT License, © Leonxlnx) — Art direction pipeline, anti-slop visual critique heuristics, and aesthetic archetypes. Reference: [`references/art-direction-and-taste.md`](references/art-direction-and-taste.md).
-- **[Impeccable](https://github.com/pbakaus/impeccable)** (Apache-2.0 / MIT License, © Paul Bakaus) — Deterministic 5-dimension scored audit matrix (A11y, Performance, Theming, Responsive, Integrity), P0–P3 defect triage, and specialized critique verbs (`bolder`, `quieter`, `typeset`, `layout`, `harden`). Reference: [`references/deterministic-audit-matrix.md`](references/deterministic-audit-matrix.md).
-- **[Playwright CLI](https://github.com/microsoft/playwright-cli)** (Apache-2.0 License, © Microsoft Corporation) — Token-conscious browser automation, multi-viewport screenshot verification, and deterministic browser assertions. Reference: [`references/developer-tooling/playwright-browser-testing.md`](references/developer-tooling/playwright-browser-testing.md).
-- **[Awesome Design Skills](https://github.com/jdsadminllc/awesome-design-skills)** (MIT License, © JDS Admin LLC) — Modular, selectable design style registry enabling on-demand style discovery without mandatory bulk installation. Reference: [`references/design-systems/selectable-style-registry.md`](references/design-systems/selectable-style-registry.md).
-- **[img2threejs](https://github.com/img2threejs/img2threejs)** (MIT License, © img2threejs contributors) — Procedural, code-only Three.js component scaffolding in TypeScript and 6-pass staged 3D sculpting pipeline. References: [`references/components/procedural-threejs-models.md`](references/components/procedural-threejs-models.md), [`references/img2threejs-pipeline.md`](references/img2threejs-pipeline.md).
+- **[Taste Skill](https://github.com/Leonxlnx/taste-skill)** (MIT License, © Leonxlnx) — Art direction pipeline, anti-slop visual critique heuristics, and aesthetic archetypes. Reference: [`skill/reference/art-direction-and-taste.md`](skill/reference/art-direction-and-taste.md).
+- **[Impeccable](https://github.com/pbakaus/impeccable)** (Apache-2.0 / MIT License, © Paul Bakaus) — Deterministic 5-dimension scored audit matrix (A11y, Performance, Theming, Responsive, Integrity), P0–P3 defect triage, and specialized critique verbs (`bolder`, `quieter`, `typeset`, `layout`, `harden`). Reference: [`skill/reference/deterministic-audit-matrix.md`](skill/reference/deterministic-audit-matrix.md).
+- **[Playwright CLI](https://github.com/microsoft/playwright-cli)** (Apache-2.0 License, © Microsoft Corporation) — Token-conscious browser automation, multi-viewport screenshot verification, and deterministic browser assertions. Reference: [`skill/reference/developer-tooling/playwright-browser-testing.md`](skill/reference/developer-tooling/playwright-browser-testing.md).
+- **[Awesome Design Skills](https://github.com/jdsadminllc/awesome-design-skills)** (MIT License, © JDS Admin LLC) — Modular, selectable design style registry enabling on-demand style discovery without mandatory bulk installation. Reference: [`skill/reference/design-systems/selectable-style-registry.md`](skill/reference/design-systems/selectable-style-registry.md).
+- **[img2threejs](https://github.com/img2threejs/img2threejs)** (MIT License, © img2threejs contributors) — Procedural, code-only Three.js component scaffolding in TypeScript and 6-pass staged 3D sculpting pipeline. References: [`skill/reference/components/procedural-threejs-models.md`](skill/reference/components/procedural-threejs-models.md), [`skill/reference/img2threejs-pipeline.md`](skill/reference/img2threejs-pipeline.md).
 
 ---
 

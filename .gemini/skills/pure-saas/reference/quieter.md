@@ -39,3 +39,4 @@ Strip off multi-colored drop shadows (`box-shadow: 0 0 30px rgba(59, 130, 246, 0
 ## 3. Verification
 
 Capture screenshots before and after. Verify that information hierarchy remains distinct and legible while the overall noise floor is dramatically lowered.
+

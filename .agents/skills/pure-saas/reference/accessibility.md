@@ -24,3 +24,4 @@ Accessibility in Pure SaaS is a non-negotiable legal and engineering requirement
    - `ArrowLeft` / `ArrowRight` cycles through tabs (roving `tabindex`).
    - `Home` / `End` jumps to first/last tab.
    - Active tab panel carries `role="tabpanel"` and `aria-labelledby="tab-id"`.
+

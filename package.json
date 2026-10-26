@@ -11,8 +11,9 @@
     "build": "node scripts/build.mjs",
     "test": "node scripts/run-tests.mjs",
     "test:sample": "node scripts/test-sample-project.mjs",
+    "test:landing": "node scripts/test-landing-workflow.mjs",
     "validate": "node scripts/pure-saas.mjs validate",
-    "validate-refs": "node scripts/generators/validate-references.mjs",
+    "validate-refs": "node scripts/validate-references.mjs",
     "contrast": "node scripts/pure-saas.mjs contrast",
     "check-tokens": "node scripts/pure-saas.mjs check-tokens",
     "audit": "node scripts/pure-saas.mjs audit",
@@ -41,14 +42,17 @@
     "node": ">=18.0.0"
   },
   "files": [
+    "skill",
+    "cli",
     "scripts",
-    "references",
-    "commands",
     "SKILL.md",
     "AGENTS.md",
+    "CLAUDE.md",
+    "GEMINI.md",
+    "PRODUCT.md",
+    "DESIGN.md",
     "README.md",
     ".cursorrules",
-    "GEMINI.md",
     ".windsurfrules",
     "LICENSE"
   ]

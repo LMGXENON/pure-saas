@@ -58,3 +58,4 @@ Immerse the user in interactive exploration, creative manipulation, or tactile d
 - **Procedural Canvas / 3D:** Lightweight, code-only Three.js components or WebGL shaders. Under 5,000 polygons, 60fps target, strict memory cleanup on unmount.
 - **Audio & Haptic Feedback:** Micro-interaction cues and smooth transitions between tool states.
 - **Refusals:** Refuse unmanaged Three.js instances that leak WebGL contexts, refuse heavy binary GLTF downloads where parametric code suffices, and refuse jerky frame drops.
+

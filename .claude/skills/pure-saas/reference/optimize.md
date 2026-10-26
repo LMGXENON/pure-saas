@@ -24,3 +24,4 @@ Use `/pure-saas optimize [target]` to diagnose and eliminate UI performance bott
 4. **Bundle & Asset Optimization:**
    - Lazy load components below the fold (`React.lazy`, dynamic imports).
    - Convert raster images to modern AVIF/WebP formats with appropriate `sizes` attributes.
+

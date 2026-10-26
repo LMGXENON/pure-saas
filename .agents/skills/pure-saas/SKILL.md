@@ -92,3 +92,4 @@ Consult [reference/craft-floor.md](reference/craft-floor.md) before writing any 
 - **Themed Browser Surfaces:** Apply active palette tokens to text selection (`::selection`), caret color (`caret-color`), focus rings, and custom scrollbars.
 - **8-State Interaction Matrix:** Every interactive control handles default, hover, focus-visible, active press, disabled, loading, error, and success.
 - **Never Fabricate Verification:** If a check cannot run, report it as `untested`. Never claim passing verification for uninspected code.
+

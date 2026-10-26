@@ -24,3 +24,4 @@ Use `/pure-saas delight [target]` to infuse an interface with memorable personal
    - Rendering sleek, platform-aware keyboard shortcut badges (`<kbd>⌘K</kbd>`).
 3. **Copy Success Animation:**
    - When a user copies a code snippet or prompt, smoothly morph the icon from a copy glyph into an animated checkmark with an instant green micro-bloom.
+

@@ -72,3 +72,4 @@ Before shipping any landing page, verify:
 - [ ] Viewport 375px: Hamburger/drawer navigation replaces desktop links, touch targets $\ge$ 44px, zero horizontal overflow.
 - [ ] Lighthouse Performance $\ge$ 90; zero layout shifts (`CLS < 0.1`).
 - [ ] WCAG 2.2 AA Contrast passing on all copy, buttons, badges, and pricing cards.
+

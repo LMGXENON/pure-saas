@@ -137,3 +137,4 @@ export function MetricCard({ label, value, change, isPositive }: MetricCardProps
   // Keep directory for inspection on error
   process.exit(1);
 }
+

@@ -41,8 +41,8 @@ function execCli(args) {
 console.log('=== Pure SaaS Comprehensive Test Suite ===\n');
 
 // 1. Reference Guides Integrity
-runTest('Reference Guides Validation (129 files)', () => {
-  const res = spawnSync('node', ['scripts/generators/validate-references.mjs'], { encoding: 'utf8', cwd: rootDir });
+runTest('Reference Guides Validation (skill/reference)', () => {
+  const res = spawnSync('node', ['scripts/validate-references.mjs'], { encoding: 'utf8', cwd: rootDir });
   return res.status === 0;
 });
 
@@ -153,3 +153,4 @@ if (passedCount === results.length) {
   console.error('✗ Some tests failed.');
   process.exit(1);
 }
+

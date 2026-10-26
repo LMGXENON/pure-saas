@@ -38,3 +38,4 @@ Symmetrical, uniform 3-card grids feel static and templated. Introduce purposefu
 - **60/40 Split Hero:** 60% width dedicated to value proposition and core CTA; 40% dedicated to live interactive UI or 3D canvas.
 - **Spotlight + Rail:** One large primary card spotlighting a flagship capability (occupying 2 columns), paired with stacked secondary cards.
 - **Alternating Directional Anchors:** Zig-zag narrative blocks with alternating image/copy alignment, maintaining strict vertical grid rhythm.
+

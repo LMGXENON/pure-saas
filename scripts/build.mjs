@@ -90,6 +90,9 @@ export function buildProviders() {
     // Copy specialized agent definitions
     copyDirRecursive(path.join(skillSourceDir, 'agents'), path.join(target.dir, 'agents'));
 
+    // Copy design data (catalog and intelligence)
+    copyDirRecursive(path.join(skillSourceDir, 'data'), path.join(target.dir, 'data'));
+
     // Copy launcher scripts
     copyDirRecursive(path.join(skillSourceDir, 'scripts'), path.join(target.dir, 'scripts'));
 
@@ -219,3 +222,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     process.exit(1);
   }
 }
+
