@@ -15,4 +15,5 @@ evals/
 # Chrome profiles
 **/.profile-*
 screenshots/
+!demo-comparison/screenshots/
 
