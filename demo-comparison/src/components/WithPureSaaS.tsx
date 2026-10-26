@@ -28,7 +28,7 @@ export function WithPureSaaS({ onOpenCommand }: WithPureSaaSProps) {
   const [methodFilter, setMethodFilter] = useState<'ALL' | 'GET' | 'POST'>('ALL');
   const [statusFilter, setStatusFilter] = useState<'ALL' | '200' | '500'>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedEndpoint, setSelectedEndpoint] = useState<EndpointItem | null>(SHARED_ENDPOINTS[0]);
+  const [selectedEndpoint, setSelectedEndpoint] = useState<EndpointItem | null>(null);
   const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [copiedCurl, setCopiedCurl] = useState(false);
   const [hoveredPoint, setHoveredPoint] = useState<{ time: string; rps: number; latency: number } | null>(null);
@@ -738,3 +738,4 @@ export function WithPureSaaS({ onOpenCommand }: WithPureSaaSProps) {
     </div>
   );
 }
+

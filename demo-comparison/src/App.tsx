@@ -260,8 +260,8 @@ export function App() {
                       Baseline: Without Pure SaaS
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300">
-                    Unguided AI Template
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-300">
+                    Standard AI Output
                   </span>
                 </div>
                 <div className="flex-1 overflow-y-auto">
@@ -433,10 +433,10 @@ export function App() {
                   advantage: 'High-velocity operational workflow for engineers.'
                 },
                 {
-                  dimension: '8. Anti-Slop Discipline',
-                  without: 'Purple-to-indigo gradient text on H1; pulsing green dots (animate-ping); raw Tailwind colors.',
-                  with: 'High-contrast typography; solid accessible status badges with semantic SVG icons; 3-tier semantic tokens.',
-                  advantage: '100% WCAG 2.2 AA compliant; professional Apple-grade craft floor.'
+                  dimension: '8. Material Surface & Token Architecture',
+                  without: 'Hardcoded utility palette colors; flat card elevations; unmanaged contrast ratios across nested components.',
+                  with: '3-tier semantic token architecture (primitive → semantic → component); subtle material surface elevations; WCAG 2.2 AA verified contrast.',
+                  advantage: 'Systematic theme stability, predictable hierarchy, and zero color drift.'
                 }
               ].map((row, idx) => (
                 <div

@@ -116,7 +116,7 @@ export default function App() {
   const [methodFilter, setMethodFilter] = useState<'ALL' | 'GET' | 'POST'>('ALL');
   const [statusFilter, setStatusFilter] = useState<'ALL' | '200' | '500'>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedEndpoint, setSelectedEndpoint] = useState<Endpoint | null>(ENDPOINTS[0]);
+  const [selectedEndpoint, setSelectedEndpoint] = useState<Endpoint | null>(null);
   const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [copiedCurl, setCopiedCurl] = useState(false);
   const [hoveredPoint, setHoveredPoint] = useState<{ time: string; rps: number; latency: number } | null>(null);

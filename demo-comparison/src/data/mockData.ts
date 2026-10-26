@@ -127,3 +127,4 @@ export const SHARED_REGIONS = [
   { region: 'eu-central-1', nodes: 28, latency: 48, status: 'healthy' },
   { region: 'ap-northeast-1', nodes: 24, latency: 112, status: 'warning' }
 ];
+
