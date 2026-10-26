@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
               <span className="font-bold text-sm tracking-tight text-text-primary">Pure SaaS</span>
             </Link>
             <p className="text-xs text-text-secondary leading-relaxed max-w-sm mb-4">
-              Universal AI-agent skill and design enforcement toolkit. Guiding coding assistants to build production-grade web interfaces without generic AI slop.
+              Universal AI-agent skill and design enforcement toolkit. Guiding coding assistants to build production-grade web interfaces using reusable design systems, components and practical workflows.
             </p>
             <div className="flex items-center gap-3 text-xs text-text-muted">
               <span>MIT License</span>
@@ -37,21 +37,21 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-xs font-semibold text-text-primary uppercase tracking-wider mb-3">Product</h4>
             <ul className="space-y-2 text-xs text-text-secondary">
+              <li><Link to="/docs?slug=getting-started-introduction" className="hover:text-text-primary">Getting Started</Link></li>
               <li><Link to="/showcase" className="hover:text-text-primary">Showcase</Link></li>
-              <li><Link to="/get-started" className="hover:text-text-primary">Get Started</Link></li>
-              <li><Link to="/commands" className="hover:text-text-primary">6 Slash Commands</Link></li>
+              <li><Link to="/commands" className="hover:text-text-primary">Commands</Link></li>
               <li><Link to="/cli" className="hover:text-text-primary">CLI Tools</Link></li>
             </ul>
           </div>
 
           {/* Documentation Links */}
           <div>
-            <h4 className="text-xs font-semibold text-text-primary uppercase tracking-wider mb-3">Resources</h4>
+            <h4 className="text-xs font-semibold text-text-primary uppercase tracking-wider mb-3">Documentation</h4>
             <ul className="space-y-2 text-xs text-text-secondary">
-              <li><Link to="/docs" className="hover:text-text-primary">Core Documentation</Link></li>
-              <li><Link to="/references" className="hover:text-text-primary">260+ Reference Library</Link></li>
-              <li><Link to="/docs?slug=anti-slop" className="hover:text-text-primary">Anti-Slop Rules</Link></li>
-              <li><Link to="/docs?slug=interaction-states" className="hover:text-text-primary">8-State Matrix</Link></li>
+              <li><Link to="/docs" className="hover:text-text-primary">Documentation Portal</Link></li>
+              <li><Link to="/docs?slug=getting-started-installation" className="hover:text-text-primary">Installation Guide</Link></li>
+              <li><Link to="/docs?slug=getting-started-configuration" className="hover:text-text-primary">Configuration & Dials</Link></li>
+              <li><Link to="/references" className="hover:text-text-primary">Reference Library</Link></li>
             </ul>
           </div>
 

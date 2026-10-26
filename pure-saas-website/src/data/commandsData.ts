@@ -101,8 +101,8 @@ export const commandsData: CommandSpec[] = [
     id: 'review',
     syntax: '/pure-saas review [request or scope]',
     tagline: 'Evidence-based quality audit across bugs, security, a11y, and tokens',
-    purpose: 'Conducts a forensic, evidence-based quality inspection of code and design files. Identifies concrete defects across accessibility (WCAG 2.2 AA), styling tokens, anti-slop rules, performance vitals, and keyboard trapping. Does not edit files by default.',
-    whenToUse: 'Use before opening pull requests, during design handoff QA, or to audit legacy pages for AI slop and hardcoded hex values.',
+    purpose: 'Conducts a forensic, evidence-based quality inspection of code and design files. Identifies concrete defects across accessibility (WCAG 2.2 AA), styling tokens, layout responsiveness, performance vitals, and keyboard trapping. Does not edit files by default.',
+    whenToUse: 'Use before opening pull requests, during design handoff QA, or to audit pages for token consistency and hardcoded hex values.',
     difference: 'Strictly analytical and read-only. Produces a 4-part structured finding report (Finding, Evidence with file:line, Impact severity, Concrete Fix).',
     arguments: [
       '[request or scope]: Optional directory (e.g., "src/components") or specific feature branch to audit.'

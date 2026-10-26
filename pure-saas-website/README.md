@@ -1,12 +1,12 @@
 # Pure SaaS Official Website & Documentation Portal
 
-This directory contains the complete, production-ready website for **Pure SaaS** — the universal AI-agent skill and design enforcement toolkit.
+This directory contains the complete, production-ready website for **Pure SaaS** — the skill and design toolkit for AI coding agents.
 
 The website functions as:
-1. **The official marketing website:** High-conversion value proposition, Apple-grade visual polish, interactive before-and-after showcases.
-2. **The official documentation portal:** Searchable guides on the 5-tier precedence model, anti-slop rules, 8-state component matrix, and verification protocols.
-3. **The interactive reference explorer:** Direct access to 260+ architectural reference guides, Apple HIG documents, and framework manuals.
-4. **The comprehensive practical guide:** Teaching developers how to install, configure, invoke, and master Pure SaaS across Claude Code, Cursor, Windsurf, Copilot, and Gemini.
+1. **The official product website:** Minimal, Apple-inspired introduction explaining how Pure SaaS helps AI coding agents build better SaaS interfaces.
+2. **The community showcase:** A curated gallery of real websites created by people using Pure SaaS, with a community submission workflow.
+3. **The GitBook-style documentation portal:** Onboarding, practical guides, command references, and troubleshooting.
+4. **The CLI & technical manual:** Options for validation, contrast audits, and token exports.
 
 ---
 
@@ -71,14 +71,14 @@ npx wrangler pages deploy dist --project-name pure-saas
 
 | Route | Page | Purpose |
 | :--- | :--- | :--- |
-| `/` | Home | Hero value prop, copyable quickstart, before/after slider, 4 pillars, command suite preview |
-| `/showcase` | Showcase | Interactive before-and-after comparisons between generic AI slop and Pure SaaS production UI |
-| `/get-started` | Get Started | 10-step practical onboarding journey with agent-specific installation commands |
-| `/docs` | Documentation | Searchable documentation portal covering architecture, precedence, anti-slop, and state matrices |
-| `/commands` | Commands | In-depth guide and decision matrix for the universal `/pure-saas` and 5 specialist commands |
-| `/cli` | CLI Manual | Documentation and options for all CLI subcommands (`validate`, `contrast`, `diff`, `drift`, `check`, etc.) |
-| `/references` | Reference Explorer | Interactive explorer for all 260+ reference guides with category filters and live search |
-| `*` | 404 Not Found | Polished error state with suggested navigation links |
+| `/` | Home | Product introduction, copyable quickstart, live demonstration, how it works |
+| `/showcase` | Showcase | Community gallery of real websites created with Pure SaaS, project detail views, submission form |
+| `/docs` | Documentation | GitBook-style portal with Getting Started as first section, practical guides, commands, CLI, troubleshooting |
+| `/commands` | Commands | Compact overview and quick-selection table for the 6 slash commands |
+| `/cli` | CLI Manual | Usage, syntax, supported features, and troubleshooting |
+| `/references` | Reference Explorer | Technical reference explorer |
+| `/get-started` | Redirect | Redirects to `/docs?slug=getting-started-introduction` |
+| `*` | 404 Not Found | Error state with suggested navigation links |
 
 ---
 

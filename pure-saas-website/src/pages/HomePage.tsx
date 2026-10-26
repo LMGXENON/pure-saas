@@ -1,425 +1,442 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CodeBlock } from '../components/CodeBlock';
-import { BeforeAfterSlider } from '../components/BeforeAfterSlider';
-import { showcaseData } from '../data/showcaseData';
-import { 
-  Sparkles, 
-  ArrowRight, 
-  ShieldCheck, 
-  Palette, 
-  Terminal, 
-  Layers, 
-  Cpu, 
-  SlidersHorizontal 
+import {
+  ArrowRight,
+  ExternalLink,
+  Layers,
+  SlidersHorizontal,
+  CheckCircle2,
+  ShieldCheck,
+  Terminal,
+  Activity,
+  Cpu,
+  Database
 } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
-  const primaryShowcase = showcaseData[0]; // SaaS metric cluster dashboard
+  const [demoTab, setDemoTab] = useState<'metrics' | 'activity'>('metrics');
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative px-4 sm:px-6 pt-20 pb-24 md:pt-28 md:pb-32 overflow-hidden border-b border-border-subtle bg-gradient-to-b from-surface-elevated/40 via-surface-base to-canvas">
-        <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-surface-muted border border-border-subtle text-text-secondary mb-8 shadow-xs animate-fade-in">
-            <span className="px-1.5 py-0.2 rounded bg-surface-base text-accent text-[10px] font-semibold border border-border-subtle uppercase tracking-wider">RELEASE</span>
-            <span className="text-xs">Pure SaaS 1.0 Ready for Production</span>
-            <span className="text-border-default">•</span>
-            <span className="text-text-primary font-semibold">260+ Guides Added</span>
+      {/* ========================================================= */}
+      {/* HERO SECTION                                              */}
+      {/* ========================================================= */}
+      <section className="relative px-4 sm:px-6 pt-20 pb-20 md:pt-28 md:pb-28 border-b border-border-subtle bg-gradient-to-b from-surface-elevated/30 via-surface-base to-canvas">
+        <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+          {/* Eyebrow Label */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-surface-muted border border-border-subtle text-text-secondary mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+            <span>Open-source AI skill & design toolkit</span>
           </div>
 
           {/* Primary Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-text-primary leading-[1.06] max-w-4xl">
-            Eliminate AI slop.<br className="hidden sm:inline" />
-            <span className="text-accent">Hardware-grade UI/UX</span> for AI coding agents.
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-text-primary leading-[1.08] max-w-3xl">
+            Build better SaaS websites with Pure SaaS.
           </h1>
 
-          {/* Subheadline */}
-          <p className="mt-6 text-base sm:text-lg md:text-xl text-text-secondary max-w-2xl leading-relaxed">
-            The open-source AI skill and design enforcement toolkit. Guides Claude Code, Cursor, Windsurf, Copilot, and Gemini to build production-quality interfaces with Apple HIG polish and zero generic templates.
+          {/* Supporting Text */}
+          <p className="mt-6 text-base sm:text-xl text-text-secondary max-w-2xl leading-relaxed">
+            Pure SaaS helps AI coding agents build and improve SaaS interfaces using reusable design guidance, components and practical workflows.
           </p>
 
-          {/* Action Group */}
+          {/* Call to Action Buttons */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
             <Link
-              to="/get-started"
+              to="/docs?slug=getting-started-introduction"
               className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 rounded-xl bg-accent text-white font-semibold text-sm hover:opacity-90 active:scale-98 transition-all shadow-subtle gap-2"
             >
               <span>Get Started</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              to="/docs"
+              to="/showcase"
               className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 rounded-xl bg-surface-base border border-border-default text-text-primary font-medium text-sm hover:bg-surface-hover active:scale-98 transition-all shadow-subtle gap-2"
             >
-              <span>Read the Documentation</span>
+              <span>Explore Showcase</span>
             </Link>
           </div>
 
-          {/* Real Copyable Terminal Command */}
+          {/* Terminal Quickstart */}
           <div className="mt-10 w-full max-w-md text-left">
-            <CodeBlock 
-              code="npx pure-saas init" 
-              language="bash" 
-              filename="Terminal Quickstart" 
+            <CodeBlock
+              code="npx pure-saas init"
+              language="bash"
+              filename="Terminal Quickstart"
             />
-            <div className="flex items-center justify-center gap-6 mt-3 text-xs text-text-muted">
-              <span>✓ Zero Dependencies</span>
-              <span>✓ MIT Licensed</span>
-              <span>✓ 100% Offline Compatible</span>
-            </div>
+            <p className="text-center text-xs text-text-muted mt-3">
+              Works locally with Cursor, Claude Code, Windsurf, Copilot, and Gemini.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Interactive Before & After Showcase */}
+      {/* ========================================================= */}
+      {/* GENUINE PRODUCT DEMONSTRATION                             */}
+      {/* ========================================================= */}
       <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-base">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-                Visual Difference
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
-                Say goodbye to generic AI landing templates.
-              </h2>
-              <p className="text-xs sm:text-sm text-text-secondary mt-1 max-w-xl">
-                Compare uncurated LLM output ("AI Slop") against Pure SaaS's tokenized, accessible, hardware-polished output.
-              </p>
-            </div>
-            <Link to="/showcase" className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline">
-              <span>View all 4 interactive showcases</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+        <div className="max-w-5xl mx-auto space-y-6">
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <span className="text-xs font-semibold uppercase tracking-wider text-accent">
+              Product Demonstration
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
+              Production-ready interfaces generated by your agent.
+            </h2>
+            <p className="text-xs sm:text-sm text-text-secondary mt-2">
+              Every component uses semantic design tokens, clean typography, hairline borders, and responsive layouts.
+            </p>
           </div>
 
-          <BeforeAfterSlider item={primaryShowcase} />
+          {/* Live Component Preview Window */}
+          <div className="rounded-2xl border border-border-subtle bg-surface-elevated/40 shadow-elevated overflow-hidden">
+            {/* Window Titlebar */}
+            <div className="px-5 py-3.5 border-b border-border-subtle bg-surface-base flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-border-default" />
+                <span className="w-2.5 h-2.5 rounded-full bg-border-default" />
+                <span className="w-2.5 h-2.5 rounded-full bg-border-default" />
+                <span className="text-xs text-text-muted ml-2 font-medium">Cloud Infrastructure Monitor</span>
+              </div>
+              <div className="flex items-center gap-1.5 p-1 rounded-lg bg-surface-muted">
+                <button
+                  onClick={() => setDemoTab('metrics')}
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
+                    demoTab === 'metrics'
+                      ? 'bg-surface-base text-text-primary shadow-xs'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  Live Metrics
+                </button>
+                <button
+                  onClick={() => setDemoTab('activity')}
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
+                    demoTab === 'activity'
+                      ? 'bg-surface-base text-text-primary shadow-xs'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  Cluster Activity
+                </button>
+              </div>
+            </div>
+
+            {/* Component Body */}
+            <div className="p-6 sm:p-8 space-y-6">
+              {demoTab === 'metrics' ? (
+                <div className="space-y-6">
+                  {/* Top Bar with Status Tag */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      <h3 className="text-lg font-bold text-text-primary">Global Cluster Health</h3>
+                      <p className="text-xs text-text-secondary mt-0.5">342 edge micro-regions active across 3 continents.</p>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-base border border-border-subtle text-xs">
+                      <span className="px-1.5 py-0.5 rounded bg-surface-muted text-[10px] font-semibold text-text-secondary uppercase tracking-wider">
+                        Operational
+                      </span>
+                      <span className="font-medium text-text-primary">99.998% Uptime</span>
+                    </div>
+                  </div>
+
+                  {/* 4-Column Metric Cluster */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-xl bg-surface-base border border-border-subtle divide-y sm:divide-y-0 sm:divide-x divide-border-subtle overflow-hidden">
+                    <div className="p-4 sm:p-5">
+                      <div className="text-xs text-text-secondary font-medium flex items-center justify-between">
+                        <span>P99 Latency</span>
+                        <Activity className="w-3.5 h-3.5 text-accent" />
+                      </div>
+                      <div className="text-2xl font-bold tracking-tight text-text-primary mt-2 tabular-nums">
+                        12.4<span className="text-xs text-text-muted font-normal ml-0.5">ms</span>
+                      </div>
+                      <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1 font-medium">
+                        ↓ 2.1ms vs last hour
+                      </div>
+                    </div>
+
+                    <div className="p-4 sm:p-5">
+                      <div className="text-xs text-text-secondary font-medium flex items-center justify-between">
+                        <span>Active Nodes</span>
+                        <Cpu className="w-3.5 h-3.5 text-accent" />
+                      </div>
+                      <div className="text-2xl font-bold tracking-tight text-text-primary mt-2 tabular-nums">
+                        1,420
+                      </div>
+                      <div className="text-[11px] text-text-muted mt-1 font-medium">
+                        100% healthy
+                      </div>
+                    </div>
+
+                    <div className="p-4 sm:p-5">
+                      <div className="text-xs text-text-secondary font-medium flex items-center justify-between">
+                        <span>Edge Throughput</span>
+                        <Database className="w-3.5 h-3.5 text-accent" />
+                      </div>
+                      <div className="text-2xl font-bold tracking-tight text-text-primary mt-2 tabular-nums">
+                        48.2<span className="text-xs text-text-muted font-normal ml-0.5">GB/s</span>
+                      </div>
+                      <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1 font-medium">
+                        ↑ 8.4% peak load
+                      </div>
+                    </div>
+
+                    <div className="p-4 sm:p-5">
+                      <div className="text-xs text-text-secondary font-medium flex items-center justify-between">
+                        <span>Error Rate</span>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                      </div>
+                      <div className="text-2xl font-bold tracking-tight text-text-primary mt-2 tabular-nums">
+                        0.001<span className="text-xs text-text-muted font-normal ml-0.5">%</span>
+                      </div>
+                      <div className="text-[11px] text-text-muted mt-1 font-medium">
+                        Within SLA limit
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-text-muted mb-2">
+                    Recent Deployment Logs
+                  </div>
+                  <div className="rounded-xl border border-border-subtle bg-surface-base divide-y divide-border-subtle">
+                    <div className="p-3.5 flex items-center justify-between text-xs">
+                      <div>
+                        <span className="font-semibold text-text-primary">region-us-east-1a</span>
+                        <span className="text-text-muted ml-2">Config updated via GitOps</span>
+                      </div>
+                      <span className="text-[11px] text-text-muted">2m ago</span>
+                    </div>
+                    <div className="p-3.5 flex items-center justify-between text-xs">
+                      <div>
+                        <span className="font-semibold text-text-primary">region-eu-central-1</span>
+                        <span className="text-text-muted ml-2">TLS certificates renewed</span>
+                      </div>
+                      <span className="text-[11px] text-text-muted">14m ago</span>
+                    </div>
+                    <div className="p-3.5 flex items-center justify-between text-xs">
+                      <div>
+                        <span className="font-semibold text-text-primary">region-ap-southeast-1</span>
+                        <span className="text-text-muted ml-2">Traffic scaled to 240 instances</span>
+                      </div>
+                      <span className="text-[11px] text-text-muted">42m ago</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* The 4 Non-Negotiable Pillars */}
+      {/* ========================================================= */}
+      {/* HOW IT WORKS (3 Simple Steps)                             */}
+      {/* ========================================================= */}
       <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-elevated/30">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-              Engineering Governance
+              How It Works
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
-              Built on 4 non-negotiable principles.
+              Give your AI coding agent a task, use Pure SaaS to guide the work, and review the resulting interface.
             </h2>
-            <p className="text-xs sm:text-sm text-text-secondary mt-2">
-              Pure SaaS does not offer superficial aesthetic suggestions. It enforces architectural discipline.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col justify-between">
-              <div>
-                <div className="w-9 h-9 rounded-xl bg-blue-500/10 text-accent flex items-center justify-center mb-4">
-                  <Palette className="w-5 h-5" />
-                </div>
-                <h3 className="text-base font-semibold text-text-primary mb-2">Zero AI Slop</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  Halts and challenges purple/cyan gradient text, heavy 40px glass blurs, emoji UI icons, and repetitive 3-column card grids.
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-border-subtle text-xs font-medium text-accent">
-                anti-slop-rules.md
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col justify-between">
-              <div>
-                <div className="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center mb-4">
-                  <SlidersHorizontal className="w-5 h-5" />
-                </div>
-                <h3 className="text-base font-semibold text-text-primary mb-2">Semantic Tokens</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  Rejects hardcoded hex colors and arbitrary bracket classes. Binds 100% of styling to documented tokens in DESIGN.md.
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-border-subtle text-xs font-medium text-purple-500">
-                color-and-tokens.md
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col justify-between">
-              <div>
-                <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <h3 className="text-base font-semibold text-text-primary mb-2">WCAG 2.2 AA</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  Guarantees 4.5:1 text contrast, visible focus rings, roving keyboard navigation, and minimum 24px/44px touch targets.
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-border-subtle text-xs font-medium text-emerald-500">
-                accessibility.md
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col justify-between">
-              <div>
-                <div className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-4">
-                  <Cpu className="w-5 h-5" />
-                </div>
-                <h3 className="text-base font-semibold text-text-primary mb-2">Non-Regression</h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  Preserves 100% of existing backend endpoints, database schemas, authentication flows, and test selectors during UI redesigns.
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-border-subtle text-xs font-medium text-amber-500">
-                SKILL.md § 3
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How the Skill Works (Concise 3-Step Architecture) */}
-      <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-base">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-              Operational Workflow
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
-              How Pure SaaS works inside your agent.
-            </h2>
-            <p className="text-xs sm:text-sm text-text-secondary mt-2">
-              From natural language request to verified, production-ready code in three autonomous phases.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="relative pl-6 border-l-2 border-accent/40 space-y-3">
-              <div className="text-xs font-bold uppercase tracking-wider text-accent">PHASE 01</div>
-              <h3 className="text-lg font-bold text-text-primary">Context & Reference Retrieval</h3>
+            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle space-y-3">
+              <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent font-bold text-sm flex items-center justify-center">
+                1
+              </div>
+              <h3 className="text-base font-bold text-text-primary">Give your agent a task</h3>
               <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                The agent inspects your workspace, detects existing tokens, and retrieves exact architectural references from the 280+ file library before writing any code.
+                Describe the interface, screen, or component you want to build in natural language or use a slash command.
               </p>
             </div>
 
-            <div className="relative pl-6 border-l-2 border-purple-500/40 space-y-3">
-              <div className="text-xs font-bold uppercase tracking-wider text-purple-500">PHASE 02</div>
-              <h3 className="text-lg font-bold text-text-primary">Tokenized Implementation</h3>
+            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle space-y-3">
+              <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent font-bold text-sm flex items-center justify-center">
+                2
+              </div>
+              <h3 className="text-base font-bold text-text-primary">Guide the work with Pure SaaS</h3>
               <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                Components are authored using semantic CSS variables and the complete 8-state matrix (hover, focus-visible, active scale, loading states) without touching backend APIs.
+                Pure SaaS provides proven component blueprints, layout standards, and semantic tokens directly to your agent.
               </p>
             </div>
 
-            <div className="relative pl-6 border-l-2 border-emerald-500/40 space-y-3">
-              <div className="text-xs font-bold uppercase tracking-wider text-emerald-500">PHASE 03</div>
-              <h3 className="text-lg font-bold text-text-primary">Honest Evidence Verification</h3>
+            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle space-y-3">
+              <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent font-bold text-sm flex items-center justify-center">
+                3
+              </div>
+              <h3 className="text-base font-bold text-text-primary">Review the result</h3>
               <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                The CLI validates DESIGN.md, measures WCAG 2.2 AA contrast ratios, and outputs a 4-part evidence audit citing exact files, lines, and observed values.
+                Inspect clean, production-ready code with responsive layouts, accessible contrast, and zero backend breaking changes.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6 Slash Commands Overview */}
+      {/* ========================================================= */}
+      {/* CORE PRACTICAL CAPABILITIES                               */}
+      {/* ========================================================= */}
       <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-base">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-                Command Suite
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
-                One intelligent universal command. Five specialists.
-              </h2>
-              <p className="text-xs sm:text-sm text-text-secondary mt-1 max-w-xl">
-                Invoke directly in Claude Code, Cursor, Windsurf, Copilot, or Gemini.
-              </p>
-            </div>
-            <Link to="/commands" className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline">
-              <span>View full command guide & examples</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-surface-elevated/40 border-2 border-accent/30 shadow-subtle flex flex-col justify-between">
-              <div>
-                <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-accent text-white font-bold inline-block mb-3">
-                  Default Entry Point
-                </span>
-                <h3 className="text-base font-bold text-text-primary">
-                  <code>/pure-saas [request]</code>
-                </h3>
-                <p className="text-xs text-text-secondary mt-2 leading-relaxed">
-                  Autonomous end-to-end design, implementation, and quality enforcement. Coordinates all 6 workflows from brief to verified code.
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-border-subtle flex items-center justify-between text-xs">
-                <span className="text-text-muted">General UI/UX</span>
-                <Link to="/commands#universal" className="text-accent font-medium hover:underline">Learn more →</Link>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col justify-between">
-              <div>
-                <h3 className="text-base font-bold text-text-primary">
-                  <code>/pure-saas design</code>
-                </h3>
-                <p className="text-xs text-text-secondary mt-2 leading-relaxed">
-                  Establish or update the root-level DESIGN.md specification before touching source code files.
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-border-subtle flex items-center justify-between text-xs">
-                <span className="text-text-muted">Specification Only</span>
-                <Link to="/commands#design" className="text-accent font-medium hover:underline">Learn more →</Link>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col justify-between">
-              <div>
-                <h3 className="text-base font-bold text-text-primary">
-                  <code>/pure-saas polish</code>
-                </h3>
-                <p className="text-xs text-text-secondary mt-2 leading-relaxed">
-                  Elevate visual craft, surface lighting, and tactile micro-interactions without rebuilding working logic.
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-border-subtle flex items-center justify-between text-xs">
-                <span className="text-text-muted">Visual Craft</span>
-                <Link to="/commands#polish" className="text-accent font-medium hover:underline">Learn more →</Link>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col justify-between">
-              <div>
-                <h3 className="text-base font-bold text-text-primary">
-                  <code>/pure-saas review</code>
-                </h3>
-                <p className="text-xs text-text-secondary mt-2 leading-relaxed">
-                  Forensic 4-part evidence audit across bugs, security, WCAG 2.2 accessibility, and token drift.
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-border-subtle flex items-center justify-between text-xs">
-                <span className="text-text-muted">Read-Only QA</span>
-                <Link to="/commands#review" className="text-accent font-medium hover:underline">Learn more →</Link>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col justify-between">
-              <div>
-                <h3 className="text-base font-bold text-text-primary">
-                  <code>/pure-saas reference</code>
-                </h3>
-                <p className="text-xs text-text-secondary mt-2 leading-relaxed">
-                  Reverse-engineer live visual references via browser DevTools into a 16-section DESIGN.md specification.
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-border-subtle flex items-center justify-between text-xs">
-                <span className="text-text-muted">Reverse Engineering</span>
-                <Link to="/commands#reference" className="text-accent font-medium hover:underline">Learn more →</Link>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col justify-between">
-              <div>
-                <h3 className="text-base font-bold text-text-primary">
-                  <code>/pure-saas responsive</code>
-                </h3>
-                <p className="text-xs text-text-secondary mt-2 leading-relaxed">
-                  Diagnose and resolve viewport layout failures across mobile (375px), tablet (768px), and desktop.
-                </p>
-              </div>
-              <div className="mt-6 pt-3 border-t border-border-subtle flex items-center justify-between text-xs">
-                <span className="text-text-muted">Cross-Device</span>
-                <Link to="/commands#responsive" className="text-accent font-medium hover:underline">Learn more →</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 260+ Reference Library Stats */}
-      <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-elevated/40">
-        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="max-w-xl">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-              Knowledge Base
+              Core Capabilities
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
-              A comprehensive library of 260+ architectural references.
+              Practical tools for everyday frontend engineering.
             </h2>
-            <p className="text-xs sm:text-sm text-text-secondary mt-3 leading-relaxed">
-              Pure SaaS doesn't rely on generic LLM memory. Agents dynamically retrieve exact reference documents with code snippets, 8-state matrices, and WCAG rules for every task.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-4">
-              <Link to="/references" className="inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-surface-base border border-border-default text-text-primary text-xs font-semibold hover:bg-surface-hover shadow-xs">
-                <Layers className="w-4 h-4 text-accent" />
-                <span>Browse 260+ Guides</span>
-              </Link>
-              <Link to="/cli" className="inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-surface-muted text-text-secondary text-xs font-medium hover:text-text-primary">
-                <Terminal className="w-4 h-4" />
-                <span>CLI Search Command</span>
-              </Link>
-            </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full lg:max-w-lg">
-            <div className="p-4 rounded-xl bg-surface-base border border-border-subtle shadow-xs">
-              <div className="text-3xl font-bold tracking-tight text-accent tabular-nums">126</div>
-              <div className="text-xs text-text-secondary mt-1">Craft & Engineering Guides</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 rounded-2xl bg-surface-elevated/40 border border-border-subtle space-y-3">
+              <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-2">
+                <SlidersHorizontal className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-text-primary">Semantic Token Architecture</h3>
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                Components use semantic CSS variables instead of hardcoded hex values, making light and dark mode transitions automatic and consistent.
+              </p>
             </div>
-            <div className="p-4 rounded-xl bg-surface-base border border-border-subtle shadow-xs">
-              <div className="text-3xl font-bold tracking-tight text-accent tabular-nums">124</div>
-              <div className="text-xs text-text-secondary mt-1">Apple HIG Topics</div>
+
+            <div className="p-6 rounded-2xl bg-surface-elevated/40 border border-border-subtle space-y-3">
+              <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-2">
+                <Layers className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-text-primary">Proven Component Blueprints</h3>
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                Blueprints for dashboards, data tables, modals, authentication, and settings pages that handle all 8 interaction states out of the box.
+              </p>
             </div>
-            <div className="p-4 rounded-xl bg-surface-base border border-border-subtle shadow-xs">
-              <div className="text-3xl font-bold tracking-tight text-accent tabular-nums">22</div>
-              <div className="text-xs text-text-secondary mt-1">Framework Guidelines</div>
+
+            <div className="p-6 rounded-2xl bg-surface-elevated/40 border border-border-subtle space-y-3">
+              <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-2">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-text-primary">Zero Backend Breaking Changes</h3>
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                Pure SaaS focuses strictly on UI improvement, leaving database models, API routes, authentication logic, and test IDs untouched.
+              </p>
             </div>
-            <div className="p-4 rounded-xl bg-surface-base border border-border-subtle shadow-xs">
-              <div className="text-3xl font-bold tracking-tight text-accent tabular-nums">15</div>
-              <div className="text-xs text-text-secondary mt-1">Interactive Shaders</div>
-            </div>
-            <div className="p-4 rounded-xl bg-surface-base border border-border-subtle shadow-xs">
-              <div className="text-3xl font-bold tracking-tight text-accent tabular-nums">88</div>
-              <div className="text-xs text-text-secondary mt-1">Curated Design Styles</div>
-            </div>
-            <div className="p-4 rounded-xl bg-surface-base border border-border-subtle shadow-xs">
-              <div className="text-3xl font-bold tracking-tight text-accent tabular-nums">100%</div>
-              <div className="text-xs text-text-secondary mt-1">Offline Capable</div>
+
+            <div className="p-6 rounded-2xl bg-surface-elevated/40 border border-border-subtle space-y-3">
+              <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-2">
+                <Terminal className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-text-primary">Focused Slash Commands</h3>
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                Specialized commands for design specification, visual polish, evidence audits, live reference analysis, and responsive mobile fixes.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Final Conversion Section */}
-      <section className="px-4 sm:px-6 py-24 bg-surface-base text-center">
-        <div className="max-w-3xl mx-auto flex flex-col items-center">
-          <div className="w-12 h-12 rounded-2xl bg-accent text-white flex items-center justify-center font-bold text-lg mb-6 shadow-bloom">
-            <Sparkles className="w-6 h-6" />
+      {/* ========================================================= */}
+      {/* SHOWCASE SECTION TEASER                                   */}
+      {/* ========================================================= */}
+      <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-elevated/20">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div className="max-w-xl">
+            <span className="text-xs font-semibold uppercase tracking-wider text-accent">
+              Community Showcase
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
+              Explore websites built by the community using Pure SaaS.
+            </h2>
+            <p className="text-xs sm:text-sm text-text-secondary mt-3 leading-relaxed">
+              Discover real projects created by developers using Pure SaaS, inspect live demos, or submit your own website to be featured.
+            </p>
+            <div className="mt-6">
+              <Link
+                to="/showcase"
+                className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-accent text-white text-xs font-semibold hover:opacity-90 transition-opacity shadow-xs"
+              >
+                <span>Browse Showcase Gallery</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-tight">
-            Build production software with true design craft.
-          </h2>
-          <p className="mt-4 text-sm sm:text-base text-text-secondary max-w-xl">
-            Install Pure SaaS into your local repository or agent configuration and start generating hardware-grade interfaces today.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+
+          <div className="w-full md:w-80 p-5 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle space-y-3">
+            <div className="text-xs font-semibold text-text-primary">Have you built with Pure SaaS?</div>
+            <p className="text-xs text-text-secondary leading-relaxed">
+              Submit your live website or web application to the showcase and share your work with other developers.
+            </p>
             <Link
-              to="/get-started"
-              className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-accent text-white font-semibold text-sm hover:opacity-90 active:scale-98 transition-all shadow-subtle gap-2"
+              to="/showcase"
+              className="inline-block text-xs font-semibold text-accent hover:underline pt-1"
             >
-              <span>Read the 10-Step Guide</span>
-              <ArrowRight className="w-4 h-4" />
+              Submit your project →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* DOCUMENTATION SECTION TEASER                              */}
+      {/* ========================================================= */}
+      <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-base">
+        <div className="max-w-5xl mx-auto text-center space-y-4">
+          <span className="text-xs font-semibold uppercase tracking-wider text-accent">
+            Documentation Portal
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight">
+            Everything you need to install Pure SaaS, learn its commands and start building.
+          </h2>
+          <p className="text-xs sm:text-sm text-text-secondary max-w-xl mx-auto leading-relaxed">
+            From step-by-step installation guides to detailed command references and CLI manuals.
+          </p>
+
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              to="/docs?slug=getting-started-introduction"
+              className="h-11 px-5 rounded-xl bg-accent text-white text-xs font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2 shadow-xs"
+            >
+              <span>Read Documentation</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+            <Link
+              to="/commands"
+              className="h-11 px-5 rounded-xl bg-surface-muted text-text-primary border border-border-subtle text-xs font-medium hover:bg-surface-hover transition-colors inline-flex items-center gap-2"
+            >
+              <span>Commands Guide</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* FINAL CONVERSION SECTION                                  */}
+      {/* ========================================================= */}
+      <section className="px-4 sm:px-6 py-20 bg-canvas text-center">
+        <div className="max-w-2xl mx-auto space-y-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight">
+            Start building better interfaces today.
+          </h2>
+          <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+            Initialize Pure SaaS in your repository in seconds with zero external dependencies.
+          </p>
+          <div className="pt-2 flex items-center justify-center gap-3">
+            <Link
+              to="/docs?slug=getting-started-introduction"
+              className="h-11 px-6 rounded-xl bg-accent text-white text-xs font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2 shadow-subtle"
+            >
+              <span>Get Started</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <a
               href="https://github.com/LMGXENON/pure-saas"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-12 px-6 rounded-xl bg-surface-muted border border-border-subtle text-text-primary font-medium text-sm hover:bg-surface-hover active:scale-98 transition-all gap-2"
+              className="h-11 px-5 rounded-xl bg-surface-base border border-border-default text-text-primary text-xs font-medium hover:bg-surface-hover transition-colors inline-flex items-center gap-1.5"
             >
-              <span>View GitHub Repository</span>
+              <span>GitHub</span>
+              <ExternalLink className="w-3 h-3 text-text-muted" />
             </a>
           </div>
         </div>

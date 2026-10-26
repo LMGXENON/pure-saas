@@ -11,12 +11,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: 'Showcase', path: '/showcase' },
-    { label: 'Get Started', path: '/get-started' },
     { label: 'Documentation', path: '/docs' },
     { label: 'Commands', path: '/commands' },
-    { label: 'CLI Tools', path: '/cli' },
-    { label: 'References', path: '/references' },
+    { label: 'CLI', path: '/cli' },
+    { label: 'Showcase', path: '/showcase' },
   ];
 
   return (
@@ -83,6 +81,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
           >
             <Github className="w-4 h-4" />
           </a>
+
+          {/* Clear Get Started Action */}
+          <Link
+            to="/docs?slug=getting-started-introduction"
+            className="hidden sm:inline-flex items-center h-8 px-3 rounded-lg bg-accent text-white font-semibold text-xs hover:opacity-90 active:scale-98 transition-all shadow-xs"
+          >
+            Get Started
+          </Link>
 
           {/* Mobile Menu Trigger */}
           <button

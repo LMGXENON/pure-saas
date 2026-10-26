@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ReferenceSearchModal } from './components/ReferenceSearchModal';
 import { HomePage } from './pages/HomePage';
 import { ShowcasePage } from './pages/ShowcasePage';
-import { GetStartedPage } from './pages/GetStartedPage';
 import { DocsPage } from './pages/DocsPage';
 import { CommandsPage } from './pages/CommandsPage';
 import { CliPage } from './pages/CliPage';
@@ -31,9 +30,9 @@ export function App() {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/showcase" element={<ShowcasePage />} />
-          <Route path="/get-started" element={<GetStartedPage />} />
           <Route path="/docs" element={<DocsPage />} />
+          <Route path="/get-started" element={<Navigate to="/docs?slug=getting-started-introduction" replace />} />
+          <Route path="/showcase" element={<ShowcasePage />} />
           <Route path="/commands" element={<CommandsPage />} />
           <Route path="/cli" element={<CliPage />} />
           <Route path="/references" element={<ReferencesPage />} />

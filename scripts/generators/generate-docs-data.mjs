@@ -1,5 +1,5 @@
 // scripts/generators/generate-docs-data.mjs
-// Generates the comprehensive GitBook-style documentation portal dataset for pure-saas-website
+// Generates the streamlined, practical documentation portal dataset for Pure SaaS
 
 import fs from 'fs';
 import path from 'path';
@@ -8,405 +8,108 @@ const docsDataPath = path.resolve('pure-saas-website/src/data/docsData.ts');
 
 const articles = [
   // ==========================================
-  // CATEGORY 1: OVERVIEW
+  // SECTION 1: GETTING STARTED (First in Sidebar)
   // ==========================================
   {
-    slug: 'introduction',
-    title: 'Introduction & Core Philosophy',
-    category: 'Overview',
-    readTime: '4 min read',
-    summary: 'Pure SaaS is an open-source, universal AI skill and design enforcement toolkit that guides AI coding agents to produce hardware-grade, production-quality UI/UX designs while eliminating AI slop.',
+    slug: 'getting-started-introduction',
+    title: 'Introduction & Prerequisites',
+    category: 'Getting Started',
+    readTime: '3 min read',
+    summary: 'What Pure SaaS is, how it helps AI coding agents build better SaaS interfaces, and the basic system requirements.',
     sections: [
       {
         id: 'what-is-pure-saas',
         title: 'What is Pure SaaS?',
         level: 2,
         content: [
-          'Pure SaaS is not a component library, an npm UI framework, or a hosted cloud subscription. It is an engineering and design governance engine that operates directly inside your local AI coding assistant — including Claude Code, Cursor, Windsurf, GitHub Copilot, and Google Gemini / Antigravity.',
-          'When modern LLMs generate user interfaces, they default to superficial tropes: arbitrary purple and cyan gradient text, excessive 40px glassmorphism blur, repetitive 3-column card grids, emoji UI icons, and pulsing green status dots. Pure SaaS halts these generic outputs at the prompt and generation boundary.',
-          'By supplying coding agents with a 5-tier precedence model, an 8-state component interaction matrix, a strict semantic token architecture, and 260+ curated architectural reference guides, Pure SaaS ensures every interface generated feels like handcrafted, hardware-polished software.'
-        ],
-        callout: {
-          type: 'tip',
-          title: 'Zero Vendor Lock-in',
-          text: 'Pure SaaS runs 100% locally on your machine. It has zero external telemetry, requires no API keys, and has no runtime client dependencies in production.'
-        }
-      },
-      {
-        id: 'the-stance',
-        title: 'The Pure SaaS Stance: Clarity, Deference, Depth & Authenticity',
-        level: 2,
-        content: [
-          'The core philosophy of Pure SaaS is inspired by Apple Human Interface Guidelines and modern Swiss typography:',
-          '1. Clarity: Text is legible at every scale, icons are precise and purposeful, and adornments are secondary to user content.',
-          '2. Deference: The interface never competes with user data. Fluid motion and subtle depth guide attention without demanding it.',
-          '3. Depth: Surfaces use layered elevation (canvas, surface, elevated, overlay) with crisp hairline borders rather than muddy single drop-shadows.',
-          '4. Authenticity: Copy reflects actual software capabilities rather than vague AI marketing clichés. No fake statistics, fabricated live counters, or decorative fluff.'
-        ],
-        table: {
-          headers: ['Dimension', 'Uncurated AI Slop', 'Pure SaaS Standard'],
-          rows: [
-            ['Typography', 'Arbitrary font weights & centered body copy', 'Fluid type scales, strict max-w-65ch, tabular numbers'],
-            ['Colors', 'Hardcoded hex codes (#3b82f6) & random gradients', 'Semantic tokens mapped to light/dark CSS variables'],
-            ['Surfaces', 'Backdrop-blur-md bg-white/10 on every card', 'Opaque layered surfaces with crisp 1px hairline borders'],
-            ['States', 'Only default state styled; focus rings ignored', 'Full 8-state matrix (hover, focus-visible, active, disabled, etc.)'],
-            ['Indicators', 'Pulsing/pinging green dots for fake live status', 'Clean monospace text badges ([OPERATIONAL], [LIVE])']
-          ]
-        }
-      },
-      {
-        id: 'who-is-it-for',
-        title: 'Who is Pure SaaS For?',
-        level: 2,
-        content: [
-          'Pure SaaS is designed for full-stack software engineers, indie hackers, frontend architects, and product designers who use AI agents to write production software.',
-          'Whether you are scaffolding a greenfield SaaS application from scratch or refactoring a 5-year-old enterprise codebase, Pure SaaS guarantees that your agent will never degrade existing backend APIs or introduce generic visual artifacts.'
+          'Pure SaaS is an open-source skill and design enforcement toolkit for AI coding assistants — including Claude Code, Cursor, Windsurf, GitHub Copilot, and Google Gemini.',
+          'Instead of leaving your AI coding agent to guess visual hierarchies, spacing ratios, or accessibility requirements, Pure SaaS supplies it with verified design system guidance, component blueprints, and structured workflows directly in your repository.',
+          'Pure SaaS runs 100% locally on your machine. It requires no API keys, makes no external telemetry requests, and introduces zero client-side dependencies into your production web application.'
         ]
-      }
-    ],
-    relatedReferences: [
-      { title: 'Anti-Slop Rules & Deadly Tropes', path: 'references/anti-slop-rules.md' },
-      { title: 'Core Design Principles', path: 'references/design-principles.md' },
-      { title: 'Interaction States Matrix', path: 'references/interaction-states.md' }
-    ]
-  },
-  {
-    slug: 'problems-solved',
-    title: 'Problems Solved & The Anti-Slop Stance',
-    category: 'Overview',
-    readTime: '5 min read',
-    summary: 'Explore the 7 deadly patterns of AI-generated design and how Pure SaaS systematically identifies and replaces each flaw with production-grade craft.',
-    sections: [
+      },
       {
-        id: 'the-7-deadly-patterns',
-        title: 'The 7 Deadly Patterns of AI Slop',
+        id: 'prerequisites',
+        title: 'Prerequisites',
         level: 2,
         content: [
-          'Through hundreds of hours of observing LLM coding outputs, we cataloged the recurring patterns where AI assistants consistently fail human design taste. Pure SaaS introduces automated review triggers for each:'
+          'Before using Pure SaaS, ensure your local environment satisfies the following requirements:'
         ],
         list: [
-          'Purple/Cyan Gradient Meshes: Wrapping every primary headline in bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text text-transparent.',
-          'Card Vomit: Wrapping every single paragraph into an identical rounded-2xl p-6 border card, arranged in 3 identical columns.',
-          'Decorative Emoji UI: Using emojis (🚀, ⚡, 💡, 🔥) as primary interface icons instead of stroke-consistent SVG icon families.',
-          'Missing Interactive States: Only styling the resting state and ignoring hover, active/pressed, focus-visible, and disabled states.',
-          'Hardcoded Color Chaos: Peppered arbitrary hex values and Tailwind bracket classes that break dark mode inversion.',
-          'Centered Text Fatigue: Centering all content, causing awkward line wrapping and poor reading ergonomics on wide viewports.',
-          'Green Pulsing Dots: Adding small circular green elements with animate-pulse or animate-ping to fake real-time system activity.'
-        ]
-      },
-      {
-        id: 'green-dot-ban',
-        title: 'The Absolute Ban on Green Pulsing Dots',
-        level: 2,
-        content: [
-          'One of the most widespread AI design clichés is the small, circular green indicator with a pulsing, glowing, or breathing animation placed next to text like "Online", "Live", or "Connected".',
-          'Pure SaaS strictly bans this pattern across all components, badges, cards, navigation bars, and headers. Genuine system status must be communicated via clean typography, monospace badges (e.g. [OPERATIONAL]), or static accessible tags that do not cause visual cognitive distraction.'
-        ],
-        callout: {
-          type: 'warning',
-          title: 'Absolute Rule Enforcement',
-          text: 'Do not evade this rule by changing class names, animation speeds, or shades of green. The visual pattern itself is prohibited across the repository.'
-        }
-      }
-    ],
-    relatedReferences: [
-      { title: 'Anti-Slop Rules Reference', path: 'references/anti-slop-rules.md' },
-      { title: 'Layout & Composition Guide', path: 'references/layout-and-composition.md' }
-    ]
-  },
-  {
-    slug: 'core-concepts',
-    title: 'Core Concepts & Architecture',
-    category: 'Overview',
-    readTime: '6 min read',
-    summary: 'Understand the three foundational pillars of Pure SaaS: the 5-Tier Precedence Model, the 8-State Component Matrix, and Semantic Token Architecture.',
-    sections: [
-      {
-        id: '5-tier-precedence',
-        title: 'The 5-Tier Precedence Model',
-        level: 2,
-        content: [
-          'When conflicting requirements arise during AI code generation, agents must strictly resolve decisions according to the 5-Tier Precedence Model:'
-        ],
-        table: {
-          headers: ['Tier', 'Authority', 'Rules of Precedence'],
-          rows: [
-            ['Tier 1', 'User Directives & Brand System', 'Explicit requirements, established brand assets, and verified code conventions always take highest precedence.'],
-            ['Tier 2', 'Platform Standards & WCAG 2.2 AA', 'Platform conventions (Apple HIG, Web Standards) and legal accessibility requirements (4.5:1 text contrast, 24px touch targets).'],
-            ['Tier 3', 'Approved Tokens in DESIGN.md', 'Explicit color tokens, spacing scales, and typography hierarchies documented in the root DESIGN.md.'],
-            ['Tier 4', 'Retrieved Guidance', 'Architectural reference files retrieved from references/ (Apple HIG, UI/UX Pro Max, craft guides).'],
-            ['Tier 5', 'New Agent Proposals', 'Must be explicitly presented as proposals and recorded in DESIGN.md frontmatter unresolved list before execution.']
-          ]
-        }
-      },
-      {
-        id: '8-state-matrix',
-        title: 'The 8-State Component Matrix',
-        level: 2,
-        content: [
-          'In production software, components are state machines, not static mockups. Pure SaaS requires every interactive component to handle all 8 states:'
-        ],
-        list: [
-          '1. Default: Baseline resting state with proper tokenized contrast and hairline border.',
-          '2. Hover: Subtle surface tint transition (150ms ease-out) without drastic layout shifting.',
-          '3. Focus-Visible: High-contrast 2px focus ring with 2px offset, exclusively visible on keyboard navigation.',
-          '4. Active / Pressed: Tactile downward scale (active:scale-[0.98]) or darkened surface to provide physical feedback.',
-          '5. Disabled: Reduced opacity (opacity-50), cursor-not-allowed, and pointer-events-none with aria-disabled="true".',
-          '6. Loading / Pending: Inline SVG spinner or skeleton pulse preserving exact layout dimensions to avoid CLS.',
-          '7. Empty: Clear graphic, empathetic explanation, and a direct call to action when no data exists.',
-          '8. Error / Success: High-contrast validation messaging, aria-invalid attributes, and accessible alert announcements.'
-        ]
-      },
-      {
-        id: 'semantic-tokens',
-        title: 'Semantic Token Architecture',
-        level: 2,
-        content: [
-          'Pure SaaS mandates semantic CSS variables over raw values. Components never use raw hex values (e.g. #09090b) or arbitrary Tailwind numbers. Instead, they reference semantic roles:',
-          '• Canvas: var(--color-canvas) — Application background backdrop.',
-          '• Surface: var(--color-surface-base), var(--color-surface-elevated), var(--color-surface-overlay).',
-          '• Border: var(--color-border-subtle), var(--color-border-default), var(--color-border-strong).',
-          '• Text: var(--color-text-primary), var(--color-text-secondary), var(--color-text-muted).',
-          '• Accent: var(--color-accent-primary), var(--color-accent-hover), var(--color-accent-contrast).'
-        ],
-        callout: {
-          type: 'note',
-          title: 'Automated Dark Mode Inversion',
-          text: 'Because colors are mapped to semantic roles rather than static shades, dark mode inversion occurs automatically without rewriting component JSX.'
-        }
-      }
-    ],
-    relatedReferences: [
-      { title: 'Semantic Tokens Guide', path: 'references/color-and-tokens.md' },
-      { title: 'Interaction States Guide', path: 'references/interaction-states.md' }
-    ]
-  },
-  {
-    slug: 'architecture',
-    title: 'Skill, Commands, CLI & References',
-    category: 'Overview',
-    readTime: '5 min read',
-    summary: 'A complete architectural walkthrough of how the Pure SaaS skill, slash commands, CLI tooling, and reference library collaborate in real time.',
-    sections: [
-      {
-        id: 'system-layers',
-        title: 'The Four System Layers',
-        level: 2,
-        content: [
-          'Pure SaaS is organized into four complementary layers designed to operate together seamlessly:'
-        ],
-        table: {
-          headers: ['Layer', 'Components', 'Role in Ecosystem'],
-          rows: [
-            ['1. Skill Core', 'SKILL.md, AGENTS.md, GEMINI.md', 'Sets the stance, universal behaviors, and behavioral rules for all AI coding agents.'],
-            ['2. Slash Commands', 'commands/*.md (6 canonical commands)', 'User-facing shortcuts (/pure-saas, design, polish, review, reference, responsive).'],
-            ['3. Reference Library', 'references/ (287 markdown files)', 'Deep knowledge repository across components, layouts, craft, HIG, and frameworks.'],
-            ['4. Pure SaaS CLI', 'scripts/pure-saas.mjs', 'Zero-dependency Node.js engine for token validation, design-system generation, and drift detection.']
-          ]
-        }
-      },
-      {
-        id: 'execution-flow',
-        title: 'Runtime Collaboration Flow',
-        level: 2,
-        content: [
-          '1. The user issues an instruction in natural language or triggers a slash command (e.g. /pure-saas "Add pricing table").',
-          '2. The agent reads SKILL.md and inspects the local codebase for existing tokens, frameworks, and DESIGN.md.',
-          '3. The agent retrieves the exact reference files needed using npx pure-saas ref "pricing" (e.g. references/layouts/pricing-matrix.md).',
-          '4. The agent formulates or updates DESIGN.md with approved tokens and layout hierarchy.',
-          '5. The agent implements code adhering to the 8-state matrix, WCAG 2.2 contrast, and mobile breakpoints.',
-          '6. The agent executes npx pure-saas validate DESIGN.md to verify zero token drift and reports verification honestly.'
-        ]
-      }
-    ]
-  },
-  {
-    slug: 'capabilities-limitations',
-    title: 'Capabilities & Architectural Boundaries',
-    category: 'Overview',
-    readTime: '4 min read',
-    summary: 'Understand the exact capabilities of Pure SaaS and the strict architectural boundaries that protect your existing application code.',
-    sections: [
-      {
-        id: 'guaranteed-capabilities',
-        title: 'Guaranteed Capabilities',
-        level: 2,
-        content: [
-          'Pure SaaS is purpose-built to deliver:',
-          '• Autonomous UI/UX implementation from natural language briefs.',
-          '• Design specification creation and updates in root-level DESIGN.md.',
-          '• Visual craft elevation (tight typography tracking, hairline borders, spring physics).',
-          '• Read-only forensic audits across accessibility, styling, and security.',
-          '• Live reference reverse-engineering from browser URLs into 16-section specifications.',
-          '• Responsive viewport optimization across mobile (375px), tablet (768px), and desktop (1440px+).'
-        ]
-      },
-      {
-        id: 'non-destructive-boundaries',
-        title: 'Strict Non-Destructive Boundaries',
-        level: 2,
-        content: [
-          'Pure SaaS enforces strict non-negotiable boundaries when operating in existing codebases:',
-          '1. Backend Preservation: Pure SaaS never modifies database models, SQL schemas, API routes, or server endpoints during a frontend refactor.',
-          '2. Auth Flow Safety: Authentication logic, token cookies, and OAuth handlers remain 100% untouched unless explicitly commanded by the user.',
-          '3. Test ID Integrity: Data-testid attributes and test selectors are preserved to prevent breaking automated CI test suites.',
-          '4. Honest Verification: If an environment lacks browser DevTools or screen-reader tooling, the agent records the area as untested rather than fabricating passes.'
-        ],
-        callout: {
-          type: 'important',
-          title: 'Preservation Rule',
-          text: 'In existing applications, Pure SaaS preserves 100% of backend architecture. UI improvements must adapt to your data models, never vice versa.'
-        }
-      }
-    ]
-  },
-
-  // ==========================================
-  // CATEGORY 2: GETTING STARTED
-  // ==========================================
-  {
-    slug: 'prerequisites',
-    title: 'Prerequisites & System Compatibility',
-    category: 'Getting Started',
-    readTime: '3 min read',
-    summary: 'Verify your local development environment before installing Pure SaaS.',
-    sections: [
-      {
-        id: 'system-requirements',
-        title: 'System Requirements',
-        level: 2,
-        content: [
-          'Pure SaaS has minimal requirements and operates across macOS, Linux, and Windows WSL:',
-          '• Node.js: Version 18.0.0 or higher (Node 20+ LTS recommended).',
-          '• AI Coding Agent: Any supported agent (Claude Code, Cursor, Windsurf, Copilot, Gemini).',
-          '• Package Manager: npm, pnpm, yarn, or bun.',
-          '• Git: Initialized git repository for version tracking.'
-        ]
-      },
-      {
-        id: 'verify-node',
-        title: 'Verifying Node.js Version',
-        level: 2,
-        content: [
-          'Run the following command in your terminal to verify your Node.js environment:'
+          'Node.js 18.0.0 or higher (Node 20+ LTS recommended).',
+          'An AI coding assistant (Cursor, Windsurf, Claude Code, GitHub Copilot, or Gemini).',
+          'A modern package manager (npm, pnpm, yarn, or bun).',
+          'A frontend project using HTML/CSS, React, Next.js, Vue, Svelte, or Tailwind CSS.'
         ],
         codeSample: {
           language: 'bash',
-          code: 'node -v\n# Expected output: v18.0.0 or higher'
+          code: 'node -v\n# Expected: v18.0.0 or higher'
         }
       }
     ]
   },
   {
-    slug: 'supported-environments',
-    title: 'Supported AI Coding Assistants',
+    slug: 'getting-started-installation',
+    title: 'Installation',
     category: 'Getting Started',
-    readTime: '5 min read',
-    summary: 'Learn how Pure SaaS integrates with Claude Code, Cursor, Windsurf, GitHub Copilot, and Google Gemini / Antigravity.',
+    readTime: '3 min read',
+    summary: 'Install Pure SaaS into your local repository using the zero-dependency CLI or manual setup.',
     sections: [
       {
-        id: 'supported-matrix',
-        title: 'Supported Assistants & Integration Files',
-        level: 2,
-        content: [
-          'Pure SaaS automatically configures the appropriate instruction files for your editor:'
-        ],
-        table: {
-          headers: ['Assistant / Tool', 'Primary Integration File', 'Slash Command Support'],
-          rows: [
-            ['Cursor IDE', '.cursorrules (Workspace root)', 'Yes (/pure-saas, design, polish, etc.)'],
-            ['Windsurf (Codeium)', '.windsurfrules (Workspace root)', 'Yes (Workflows & Prompts)'],
-            ['Claude Code (Anthropic)', '~/.claude/skills/pure-saas/SKILL.md', 'Yes (Native Claude Skill)'],
-            ['GitHub Copilot', '.github/copilot-instructions.md', 'Contextual rules enforcement'],
-            ['Google Gemini / Antigravity', 'GEMINI.md (Workspace root)', 'Full native integration']
-          ]
-        }
-      },
-      {
-        id: 'multi-agent-compatibility',
-        title: 'Cross-Agent Compatibility',
-        level: 2,
-        content: [
-          'Because all integration files reference the canonical SKILL.md and references/ directory, multiple developers on the same team can use different AI assistants without configuration divergence.'
-        ]
-      }
-    ]
-  },
-  {
-    slug: 'installation',
-    title: 'Installation & Workspace Setup',
-    category: 'Getting Started',
-    readTime: '4 min read',
-    summary: 'Step-by-step instructions to initialize Pure SaaS in a new or existing repository.',
-    sections: [
-      {
-        id: 'one-line-init',
+        id: 'cli-quickstart',
         title: 'Quickstart: npx pure-saas init',
         level: 2,
         content: [
-          'The fastest way to install Pure SaaS into any repository is via the interactive CLI setup:'
+          'The fastest way to install Pure SaaS into any repository is by running the interactive initialization command:'
         ],
         codeSample: {
           language: 'bash',
           code: 'npx pure-saas init'
         },
         content_after: [
-          'This command automatically detects your project structure, framework (React, Next.js, Vue, Tailwind, etc.), and configured AI assistants, creating the necessary instruction and token files.'
+          'This command automatically inspects your repository, detects your active framework and AI assistants, and configures the appropriate instruction files (.cursorrules, GEMINI.md, or .windsurfrules).'
         ]
       },
       {
-        id: 'manual-installation',
-        title: 'Manual Installation (Global or Workspace)',
+        id: 'assistant-configurations',
+        title: 'Configuring Your AI Assistant',
         level: 2,
         content: [
-          'If you prefer manual setup, simply copy the skill files into your preferred directory:'
+          'If you prefer manual configuration, create or update the configuration file corresponding to your editor in the workspace root:'
         ],
-        steps: [
-          {
-            step: 1,
-            title: 'Clone or Download Repository',
-            description: 'Clone the repository or copy SKILL.md and references/ into your workspace.',
-            code: 'git clone https://github.com/LMGXENON/pure-saas.git',
-            language: 'bash'
-          },
-          {
-            step: 2,
-            title: 'Configure Your Assistant Dotfile',
-            description: 'Add the reference to SKILL.md in your .cursorrules, GEMINI.md, or .windsurfrules.',
-            code: 'When writing frontend code, strictly follow the rules in SKILL.md and references/anti-slop-rules.md.',
-            language: 'markdown'
-          },
-          {
-            step: 3,
-            title: 'Verify CLI Availability',
-            description: 'Run the CLI help command to verify access to reference retrieval.',
-            code: 'npx pure-saas --help',
-            language: 'bash'
-          }
-        ]
+        table: {
+          headers: ['Assistant', 'Configuration File', 'Rule Added'],
+          rows: [
+            ['Cursor IDE', '.cursorrules', 'When designing UI components, follow SKILL.md design guidelines and DESIGN.md tokens.'],
+            ['Windsurf (Codeium)', '.windsurfrules', 'Follow SKILL.md guidelines and reference architecture for all frontend tasks.'],
+            ['Claude Code', '~/.claude/skills/pure-saas', 'Register SKILL.md as an active local Claude skill.'],
+            ['GitHub Copilot', '.github/copilot-instructions.md', 'Enforce token consistency and component state guidelines from SKILL.md.'],
+            ['Google Gemini', 'GEMINI.md', 'Execute frontend tasks according to SKILL.md and DESIGN.md specifications.']
+          ]
+        }
       }
     ]
   },
   {
-    slug: 'configuration',
-    title: 'Configuration & Design System Frontmatter',
+    slug: 'getting-started-configuration',
+    title: 'Configuration & DESIGN.md',
     category: 'Getting Started',
-    readTime: '5 min read',
-    summary: 'Customize the behavior of Pure SaaS using YAML frontmatter and design system dials in DESIGN.md.',
+    readTime: '4 min read',
+    summary: 'Learn how DESIGN.md governs design tokens and calibrates agent behavior using frontmatter dials.',
     sections: [
       {
-        id: 'design-md-anatomy',
-        title: 'The Anatomy of DESIGN.md',
+        id: 'design-md-overview',
+        title: 'The Role of DESIGN.md',
         level: 2,
         content: [
-          'Every Pure SaaS workspace is governed by a root-level DESIGN.md file. It contains machine-readable YAML frontmatter alongside human-readable design specifications:'
+          'Pure SaaS uses a single root-level DESIGN.md file to establish the source of truth for all styling decisions.',
+          'Your AI coding agent inspects this file before authoring components. When you update tokens in DESIGN.md, the agent reflects those changes across all generated code.'
         ],
         codeSample: {
           language: 'markdown',
           filename: 'DESIGN.md',
           code: `---
-product: "FinTech Telemetry Dashboard"
-archetype: "financial-analytics"
+product: "Acme Analytics"
+archetype: "saas-dashboard"
 variance: 3
 motion: 4
 density: 8
@@ -415,438 +118,340 @@ tokens:
   canvas: "#09090b"
   surface: "#18181b"
   border: "rgba(255, 255, 255, 0.08)"
-  accent: "#38bdf8"
-unresolved: []
+  accent: "#0071e3"
 ---
 
-# DESIGN.md — FinTech Telemetry Dashboard
-
-## 1. Visual Hierarchy & Spatial Grid
-All spacing adheres strictly to an 8pt spatial grid...`
+# DESIGN.md — Acme Analytics Specification`
         }
       },
       {
         id: 'design-dials',
-        title: 'The Three Design Dials (1-10 Scale)',
+        title: 'Frontmatter Dials (1–10 Scale)',
         level: 2,
         content: [
-          'Pure SaaS introduces three dials that calibrate agent visual creativity against strict corporate consistency:'
+          'You can customize three numeric dials in the frontmatter of DESIGN.md to tailor the agent\'s output:'
         ],
         table: {
-          headers: ['Dial', 'Range', 'Recommended Setting', 'Behavior'],
+          headers: ['Dial', 'Range', 'Purpose'],
           rows: [
-            ['variance', '1 – 10', '2 – 4 (B2B SaaS)', '1 = Strict token adherence; 10 = High experimental layout freedom.'],
-            ['motion', '1 – 10', '3 – 5 (Enterprise)', '1 = Instant transitions (reduced motion); 10 = Physics-based springs & reveals.'],
-            ['density', '1 – 10', '7 – 9 (Data Rich)', '1 = Spacious editorial marketing; 10 = Compact tabular telemetry data.']
+            ['variance', '1 – 10', 'Controls creative layout freedom. Set to 2–4 for strict corporate consistency, 7–9 for expressive exploratory landing pages.'],
+            ['motion', '1 – 10', 'Controls transition dynamics. Set to 1 for reduced motion, 4–5 for standard micro-interactions, 8+ for spring-revealed hero graphics.'],
+            ['density', '1 – 10', 'Controls information density. Set to 2–4 for spacious marketing copy, 7–9 for compact data tables and telemetry clusters.']
           ]
         }
       }
     ]
   },
   {
-    slug: 'verifying-setup',
-    title: 'Verifying Your Installation',
+    slug: 'getting-started-verifying',
+    title: 'Verifying Installation',
     category: 'Getting Started',
-    readTime: '3 min read',
-    summary: 'Run automated diagnostics to ensure your skill, CLI, and tokens are configured properly.',
+    readTime: '2 min read',
+    summary: 'Verify that Pure SaaS is properly configured and accessible to both your terminal and AI coding agent.',
     sections: [
       {
-        id: 'cli-validation',
-        title: 'Automated CLI Validation',
+        id: 'cli-verification',
+        title: '1. Verify the CLI',
         level: 2,
         content: [
-          'Execute the built-in validator against your DESIGN.md file to check token completeness, contrast compliance, and frontmatter schema:'
+          'Run the built-in validator against your DESIGN.md file:'
         ],
         codeSample: {
           language: 'bash',
-          code: 'npx pure-saas validate DESIGN.md\n# Expected: ✓ All tokens valid. Contrast ratio: 7.2:1 (AAA)'
+          code: 'npx pure-saas validate DESIGN.md\n# Expected: ✓ All tokens valid'
         }
       },
       {
-        id: 'agent-smoke-test',
-        title: 'Agent Smoke Test',
+        id: 'agent-verification',
+        title: '2. Verify Agent Recognition',
         level: 2,
         content: [
-          'To test that your AI coding assistant is actively adhering to Pure SaaS, issue the following prompt:',
-          'Prompt: "Build a primary button component with hover, active, and focus states using our tokens."',
-          'Expected Agent Behavior: The agent will open references/components/button.md, avoid hardcoded hex codes, implement a 2px focus ring with 2px offset, and include active:scale-[0.98].'
+          'Ask your AI assistant: "What design tokens are defined in our DESIGN.md file?"',
+          'The agent should open DESIGN.md, read the frontmatter, and list your canvas, surface, border, and accent colors accurately.'
         ]
       }
     ]
   },
   {
-    slug: 'first-task',
-    title: 'Your First Task: Step-by-Step',
+    slug: 'getting-started-first-task',
+    title: 'Your First Task',
     category: 'Getting Started',
-    readTime: '6 min read',
-    summary: 'Walk through your first end-to-end task with Pure SaaS: scaffolding a production-ready metric card cluster.',
+    readTime: '4 min read',
+    summary: 'A simple tutorial showing how to give your AI agent a task and review the resulting interface.',
     sections: [
       {
-        id: 'prompting-the-agent',
-        title: '1. Issuing the Universal Request',
+        id: 'step-1-prompt',
+        title: 'Step 1: Issue the Command',
         level: 2,
         content: [
-          'Open your AI assistant chat window and type:'
+          'In your AI coding assistant\'s chat window, enter a clear request:'
         ],
         codeSample: {
           language: 'text',
-          code: '/pure-saas Create a 4-card metric cluster for a cloud telemetry dashboard displaying API latency, error rate, active clusters, and throughput.'
+          code: '/pure-saas Build a responsive 4-column metric card cluster for a SaaS telemetry dashboard. Include P99 latency, error rate, throughput, and active nodes.'
         }
       },
       {
-        id: 'what-pure-saas-executes',
-        title: '2. What Pure SaaS Executes Automatically',
+        id: 'step-2-agent-execution',
+        title: 'Step 2: Watch the Agent Execute',
         level: 2,
         content: [
-          'When you run this command, Pure SaaS will:',
-          '1. Retrieve references/components/card.md and references/layouts/saas-dashboard.md.',
-          '2. Inspect existing color tokens to ensure light and dark mode compatibility.',
-          '3. Format numeric values with tabular figures (font-variant-numeric: tabular-nums) to prevent layout jitter.',
-          '4. Implement subtle hairline borders (1px solid var(--color-border-subtle)) instead of heavy drop shadows.',
-          '5. Guarantee zero green pulsing dots — status is rendered via crisp monospace tags ([OPERATIONAL], [HEALTHY]).',
-          '6. Present an honest verification summary citing exact file lines and contrast measurements.'
+          'Pure SaaS guides the agent to:',
+          '1. Retrieve component patterns from the reference library.',
+          '2. Bind all styling to documented tokens in DESIGN.md.',
+          '3. Implement all interactive states (hover, focus-visible, active).',
+          '4. Verify contrast ratios and mobile responsiveness.'
         ]
       }
     ]
   },
   {
-    slug: 'setup-troubleshooting',
-    title: 'Common Setup Issues & Diagnostics',
+    slug: 'getting-started-understanding-output',
+    title: 'Understanding the Output',
     category: 'Getting Started',
-    readTime: '4 min read',
-    summary: 'Quick fixes for common installation, node version, and agent rule discovery problems.',
+    readTime: '3 min read',
+    summary: 'How to interpret the code, styling tokens, and verification summaries produced by Pure SaaS.',
     sections: [
       {
-        id: 'node-version-error',
-        title: 'Error: Unsupported Node.js version',
+        id: 'output-structure',
+        title: 'What Pure SaaS Produces',
         level: 2,
         content: [
-          'If you see an error regarding Node.js version when running npx pure-saas, ensure you are running Node 18 or newer:',
-          'Fix: Use nvm or fnm to switch to Node 20 LTS: nvm install 20 && nvm use 20.'
+          'When Pure SaaS completes a task, it outputs:',
+          '• Clean, production-ready TSX/JSX components.',
+          '• Semantic token bindings (using CSS variables rather than hardcoded hex values).',
+          '• Full accessibility support (WCAG 2.2 AA contrast, visible keyboard focus rings).',
+          '• An evidence verification summary reporting exact files modified and tests conducted.'
         ]
-      },
+      }
+    ]
+  },
+  {
+    slug: 'getting-started-next-steps',
+    title: 'Next Steps',
+    category: 'Getting Started',
+    readTime: '2 min read',
+    summary: 'Where to go after completing your first task with Pure SaaS.',
+    sections: [
       {
-        id: 'agent-ignoring-rules',
-        title: 'Agent Not Loading SKILL.md Rules',
+        id: 'explore-more',
+        title: 'Continuing Your Journey',
         level: 2,
         content: [
-          'If your AI assistant is still outputting purple gradients or raw hex codes, the workspace instructions file may not be linked:',
-          '• For Cursor: Verify that .cursorrules exists in your workspace root and contains the instruction to read SKILL.md.',
-          '• For Gemini: Verify GEMINI.md exists in your workspace root.',
-          '• For Claude Code: Run /skills to confirm pure-saas appears in the active skill manifest.'
+          'Now that your setup is working, explore the rest of the documentation:',
+          '• Learn the specialist slash commands in the Commands section.',
+          '• Follow practical tutorials in the Guides section.',
+          '• Discover real projects in the Community Showcase.'
         ]
       }
     ]
   },
 
   // ==========================================
-  // CATEGORY 3: USING PURE SAAS
+  // SECTION 2: GUIDES & WORKFLOWS
   // ==========================================
   {
-    slug: 'invoking-skill',
-    title: 'Invoking the Skill & Workflows',
-    category: 'Using Pure SaaS',
-    readTime: '4 min read',
-    summary: 'Learn the two ways to use Pure SaaS: proactive natural language mode and explicit slash commands.',
-    sections: [
-      {
-        id: 'proactive-mode',
-        title: 'Proactive Natural Language Mode',
-        level: 2,
-        content: [
-          'Pure SaaS is designed to be proactive. You do not always have to remember a slash command. When you ask your agent any frontend, design, or component question, the agent automatically recognizes the task and applies Pure SaaS governance:',
-          'Example: "Can you restyle our user settings page to look more polished?"',
-          'The agent automatically checks DESIGN.md, retrieves references/layouts/settings-page.md, and executes with full state and accessibility compliance.'
-        ]
-      },
-      {
-        id: 'explicit-slash-commands',
-        title: 'Explicit Slash Commands',
-        level: 2,
-        content: [
-          'When you need precise, specialized workflows, use the 6 canonical slash commands:'
-        ],
-        list: [
-          '/pure-saas [request] — Universal autonomous execution',
-          '/pure-saas design [request] — Specification only in DESIGN.md',
-          '/pure-saas polish [request] — Visual craft, tracking, and micro-interactions',
-          '/pure-saas review [request] — Forensic 4-part evidence audit',
-          '/pure-saas reference [URL] — Reverse-engineering live sites',
-          '/pure-saas responsive [request] — Viewport and touch target optimization'
-        ]
-      }
-    ]
-  },
-  {
-    slug: 'typical-workflow',
-    title: 'The End-to-End Workflow',
-    category: 'Using Pure SaaS',
+    slug: 'guide-dashboard',
+    title: 'Building a SaaS Dashboard',
+    category: 'Guides & Workflows',
     readTime: '6 min read',
-    summary: 'A detailed walkthrough of how a full design task progresses from context inspection to verified commit.',
+    summary: 'Step-by-step practical guide to designing a high-density, responsive SaaS telemetry dashboard.',
     sections: [
       {
-        id: 'step-1-inspect',
-        title: 'Phase 1: Context Inspection',
+        id: 'dashboard-blueprint',
+        title: 'Dashboard Architecture',
         level: 2,
         content: [
-          'The agent inspects package.json, Tailwind config, existing CSS variables, and the root DESIGN.md. It determines the product archetype, color ramp, and spacing grid.'
-        ]
-      },
-      {
-        id: 'step-2-retrieve',
-        title: 'Phase 2: Reference Retrieval ("Read Before You Cite")',
-        level: 2,
-        content: [
-          'The agent never relies on memory alone. It queries the reference library (e.g. references/components/modal-dialog.md) and reads the exact 8-state matrix, focus trap rules, and WCAG requirements.'
-        ]
-      },
-      {
-        id: 'step-3-implement',
-        title: 'Phase 3: Implementation & Token Binding',
-        level: 2,
-        content: [
-          'The component is coded in TSX/JSX using semantic CSS variables. Focus rings, active scales, and loading states are authored with exact micro-interaction curves.'
-        ]
-      },
-      {
-        id: 'step-4-verify',
-        title: 'Phase 4: Honest Verification Report',
-        level: 2,
-        content: [
-          'The agent runs npx pure-saas validate, checks color contrast ratios, verifies responsive breakpoints, and formats findings with exact file paths and line numbers.'
-        ]
-      }
-    ]
-  },
-  {
-    slug: 'effective-requests',
-    title: 'Writing High-Craft Prompts',
-    category: 'Using Pure SaaS',
-    readTime: '5 min read',
-    summary: 'Master the art of prompt engineering for AI UI design to achieve the highest aesthetic and engineering quality.',
-    sections: [
-      {
-        id: 'prompt-formula',
-        title: 'The 4-Part High-Craft Prompt Formula',
-        level: 2,
-        content: [
-          'To achieve the best possible results from Pure SaaS, structure your request with four concrete parameters:'
-        ],
-        table: {
-          headers: ['Parameter', 'Description', 'Example'],
-          rows: [
-            ['1. Archetype & Domain', 'Specify the exact industry and tone.', '"High-throughput developer platform"'],
-            ['2. Information Density', 'State whether it is spacious marketing or data-dense.', '"High data density, tabular telemetry"'],
-            ['3. Reference Anchors', 'Name real-world reference products.', '"Apple Developer portal & Stripe Dashboard"'],
-            ['4. Technical Constraints', 'Enforce backend stability and frameworks.', '"React 18 + Tailwind, do not alter trpc router"']
-          ]
-        }
-      },
-      {
-        id: 'good-vs-bad-prompts',
-        title: 'Prompt Comparison',
-        level: 2,
-        content: [
-          '• Bad (Vague & Generic): "Make a nice modern dashboard for my app with cool charts."',
-          '• Good (Pure SaaS Formula): "/pure-saas Build an audit log table for our B2B SaaS dashboard. Include searchable actor filters, monospace IP timestamps, status badges, and expandable JSON event payloads. Preserve existing useAuditLogs hook."'
-        ]
-      }
-    ]
-  },
-  {
-    slug: 'choosing-workflow',
-    title: 'Choosing the Right Workflow',
-    category: 'Using Pure SaaS',
-    readTime: '4 min read',
-    summary: 'A decision framework to help you select the exact slash command for your current engineering phase.',
-    sections: [
-      {
-        id: 'decision-tree',
-        title: 'Workflow Decision Tree',
-        level: 2,
-        content: [
-          'Use this guide to choose the optimal workflow for your task:'
-        ],
-        table: {
-          headers: ['If your goal is...', 'Use this command', 'Files Modified'],
-          rows: [
-            ['Scaffolding a new screen or component', '/pure-saas [request]', 'Component TSX, CSS, DESIGN.md'],
-            ['Planning visual direction & brand tokens', '/pure-saas design [request]', 'DESIGN.md only (no code touched)'],
-            ['Polishing existing working UI/UX', '/pure-saas polish [request]', 'Component CSS/classes only (logic intact)'],
-            ['Checking code for WCAG or token bugs', '/pure-saas review [scope]', 'Read-only audit report (no files modified)'],
-            ['Recreating an inspiring URL or site', '/pure-saas reference [URL]', 'DESIGN.md + component blueprint'],
-            ['Fixing mobile or tablet layout issues', '/pure-saas responsive [request]', 'Responsive breakpoint classes']
-          ]
-        }
-      }
-    ]
-  },
-  {
-    slug: 'understanding-results',
-    title: 'Understanding Results & Verification Reports',
-    category: 'Using Pure SaaS',
-    readTime: '4 min read',
-    summary: 'How to interpret the 4-part evidence audit reports and token verification outputs produced by Pure SaaS.',
-    sections: [
-      {
-        id: 'four-part-finding',
-        title: 'The 4-Part Evidence Audit Format',
-        level: 2,
-        content: [
-          'Whenever Pure SaaS reviews code or completes a refactor, it delivers findings using a standardized 4-part structure:'
+          'Modern SaaS dashboards require high readability and structured data hierarchy. Follow these guidelines when generating dashboard views:',
+          '1. Spatial Grid: Structure layouts with an 8pt spatial grid (p-4, p-6, gap-4).',
+          '2. Tabular Numerals: Always apply tabular figures (font-variant-numeric: tabular-nums) on streaming metrics.',
+          '3. Subtle Hairline Borders: Divide metric columns with 1px borders rather than floating card boxes.',
+          '4. Responsive Flow: Collapse 4-column clusters into 2 columns on tablet (768px) and single columns on mobile (375px).'
         ],
         codeSample: {
-          language: 'markdown',
-          code: `### Finding: Text contrast failure on secondary metric label
-- Evidence: src/components/MetricCard.tsx:42 (color: #71717a on #18181b, ratio 3.2:1)
-- Impact: Critical (Violates WCAG 2.2 AA SC 1.4.3 minimum 4.5:1 ratio)
-- Concrete Fix: Replace text-zinc-500 with text-[var(--color-text-secondary)] (#a1a1aa, ratio 5.1:1)`
+          language: 'tsx',
+          filename: 'MetricCluster.tsx',
+          code: `export const MetricCluster = () => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-2xl bg-[var(--color-surface-base)] border border-[var(--color-border-subtle)] divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border-subtle)]">
+    <div className="p-5">
+      <div className="text-xs text-[var(--color-text-secondary)] font-medium">P99 Latency</div>
+      <div className="text-2xl font-bold tracking-tight text-[var(--color-text-primary)] mt-2 tabular-nums">
+        12.4<span className="text-xs text-[var(--color-text-muted)] font-normal ml-0.5">ms</span>
+      </div>
+      <div className="text-xs text-emerald-600 dark:text-emerald-400 mt-1">↓ 2.1ms vs last hour</div>
+    </div>
+    {/* Additional columns... */}
+  </div>
+);`
         }
       }
     ]
   },
   {
-    slug: 'reviewing-refining',
-    title: 'Reviewing & Refining Generated Interfaces',
-    category: 'Using Pure SaaS',
-    readTime: '4 min read',
-    summary: 'Tips for running iterative refinement cycles with your coding assistant without losing progress.',
+    slug: 'guide-refactoring',
+    title: 'Refactoring Existing UI Without Breaking Backends',
+    category: 'Guides & Workflows',
+    readTime: '5 min read',
+    summary: 'How to safely elevate visual polish in existing applications while preserving 100% of API endpoints, hooks, and test IDs.',
     sections: [
       {
-        id: 'iterative-polish',
-        title: 'Iterative Micro-Refinement',
+        id: 'non-regression-rule',
+        title: 'The Non-Regression Contract',
         level: 2,
         content: [
-          'Rather than asking the agent to rewrite entire components from scratch, guide it with targeted refinement prompts:',
-          '• Adjusting density: "Tighten table padding to py-2.5 and reduce font-size to text-xs with tabular figures."',
-          '• Refining motion: "Slow down the modal dialog enter transition to 200ms cubic-bezier(0.16, 1, 0.3, 1)."',
-          '• Elevating borders: "Change the card border from border-slate-700 to 1px solid var(--color-border-subtle)."'
+          'A primary rule in Pure SaaS is preservation of working code. When refactoring existing UI:',
+          '• Never alter backend API endpoints, GraphQL queries, or fetch payloads.',
+          '• Preserve data-testid attributes used by automated test suites.',
+          '• Maintain existing prop names and callback signatures.'
+        ]
+      }
+    ]
+  },
+  {
+    slug: 'guide-reverse-engineering',
+    title: 'Reverse Engineering Live Websites',
+    category: 'Guides & Workflows',
+    readTime: '5 min read',
+    summary: 'How to use /pure-saas reference to inspect live web references and extract tokenized design systems.',
+    sections: [
+      {
+        id: 'reference-workflow',
+        title: 'The Extraction Workflow',
+        level: 2,
+        content: [
+          'When you discover an inspiring web interface, pass its URL to the reference command:',
+          'Command: /pure-saas reference https://example.com',
+          'Pure SaaS inspects the page\'s computed styles in browser DevTools and extracts exact font sizes, line heights, color ramps, and spacing grids into a structured DESIGN.md file.'
+        ]
+      }
+    ]
+  },
+  {
+    slug: 'guide-accessibility',
+    title: 'Accessibility & Contrast Verification',
+    category: 'Guides & Workflows',
+    readTime: '4 min read',
+    summary: 'Ensure your web interfaces meet WCAG 2.2 AA accessibility standards automatically.',
+    sections: [
+      {
+        id: 'wcag-rules',
+        title: 'Core Accessibility Requirements',
+        level: 2,
+        content: [
+          'Pure SaaS audits all generated interfaces against key WCAG 2.2 AA criteria:'
+        ],
+        list: [
+          'Text Contrast (SC 1.4.3): Minimum 4.5:1 ratio for normal body copy, 3:1 for large text.',
+          'Visible Focus Rings (SC 2.4.7): 2px high-contrast focus ring with 2px offset on keyboard navigation.',
+          'Touch Targets (SC 2.5.8): Minimum 24×24px touch targets on desktop, 44×44px on mobile viewports.',
+          'Semantic HTML (SC 1.3.1): Use button, nav, main, and table elements rather than unstyled div tags.'
         ]
       }
     ]
   },
 
   // ==========================================
-  // CATEGORY 4: COMMANDS
+  // SECTION 3: COMMANDS
   // ==========================================
   {
-    slug: 'command-overview',
-    title: 'Command Suite Overview & Selection Matrix',
+    slug: 'commands-overview',
+    title: 'Command System Overview',
     category: 'Commands',
-    readTime: '4 min read',
-    summary: 'A complete overview of the 6 canonical slash commands in Pure SaaS, their syntax, arguments, and execution behaviors.',
+    readTime: '3 min read',
+    summary: 'How the Pure SaaS command system operates: one universal entry point and five specialized commands.',
     sections: [
       {
-        id: 'command-list',
-        title: 'The 6 Canonical Commands',
+        id: 'command-structure',
+        title: 'One Intelligent Entry Point, Five Specialists',
         level: 2,
         content: [
-          'Pure SaaS operates via one universal command and five specialized commands defined in commands/:',
-          '1. /pure-saas [request] — Universal autonomous entry point.',
-          '2. /pure-saas design [request] — Specification establishment in DESIGN.md.',
-          '3. /pure-saas polish [request] — Visual craft, surface lighting, and tracking.',
-          '4. /pure-saas review [request] — 4-part evidence audit (read-only).',
-          '5. /pure-saas reference [URL] — Reverse-engineering live websites.',
-          '6. /pure-saas responsive [request] — Viewport and touch target optimization.'
+          'Pure SaaS provides six canonical slash commands:',
+          '• /pure-saas [request] — Universal autonomous entry point for any feature build or refactor.',
+          '• /pure-saas design [request] — Establish or update DESIGN.md specification before touching code.',
+          '• /pure-saas polish [request] — Elevate visual craft, typography tracking, and micro-interactions.',
+          '• /pure-saas review [request] — Forensic 4-part evidence quality audit (read-only).',
+          '• /pure-saas reference [URL] — Reverse-engineer live reference sites into DESIGN.md.',
+          '• /pure-saas responsive [request] — Optimize layouts across mobile, tablet, and desktop viewports.'
         ]
       }
     ]
   },
   {
     slug: 'cmd-pure-saas',
-    title: '/pure-saas — Universal Entry Point',
+    title: '/pure-saas — Universal Command',
     category: 'Commands',
-    readTime: '6 min read',
-    summary: 'The main command that autonomously inspects context, establishes DESIGN.md, builds components, enforces tokens, and verifies output.',
+    readTime: '4 min read',
+    summary: 'The main command that autonomously handles design specification, code execution, token binding, and verification.',
     sections: [
       {
-        id: 'syntax-usage',
-        title: 'Syntax & Usage',
+        id: 'cmd-syntax',
+        title: 'Syntax & Verified Example',
         level: 2,
-        content: [
-          'The /pure-saas command is your primary tool for any feature build or refactor:'
-        ],
         codeSample: {
-          language: 'bash',
-          code: '/pure-saas [any request or feature description]'
-        }
-      },
-      {
-        id: 'execution-phases',
-        title: 'Autonomous Execution Lifecycle',
-        level: 2,
-        content: [
-          'When invoked, /pure-saas executes in 6 distinct phases:',
-          '1. Context Discovery: Scans package.json, styling configs, and DESIGN.md.',
-          '2. Reference Retrieval: Retrieves matching component and layout guides from references/.',
-          '3. Design Specification: Validates or creates token hierarchies in DESIGN.md.',
-          '4. Code Implementation: Authors component TSX/CSS with full 8-state support.',
-          '5. Accessibility & Motion: Adds ARIA labels, focus rings, and physics-based reveals.',
-          '6. Verification: Runs npx pure-saas validate and outputs an honest verification report.'
+          language: 'text',
+          code: '/pure-saas Build a searchable API key management screen with one-time reveal modal and copy button.'
+        },
+        content_after: [
+          'When invoked, Pure SaaS automatically inspects your repository, retrieves relevant component blueprints, writes accessible code, binds semantic tokens, and verifies the output.'
         ]
       }
     ]
   },
   {
     slug: 'cmd-design',
-    title: '/pure-saas design — System Specification',
+    title: '/pure-saas design',
     category: 'Commands',
-    readTime: '4 min read',
-    summary: 'Establish, update, or calibrate the root-level DESIGN.md specification before touching source code.',
+    readTime: '3 min read',
+    summary: 'Establish or update the root-level DESIGN.md specification before touching source code.',
     sections: [
       {
-        id: 'design-purpose',
-        title: 'Purpose & Guarantees',
+        id: 'cmd-design-usage',
+        title: 'Syntax & When to Use',
         level: 2,
         content: [
-          'The /pure-saas design command is strictly non-destructive to source code. It only authors or updates DESIGN.md and design-brief.md.',
-          'Use this command when planning a new product, selecting color palettes, setting typography hierarchies, or establishing brand geometry before implementation begins.'
+          'Use /pure-saas design when you want to plan color palettes, typography scales, or spatial grids without generating UI code immediately:'
         ],
         codeSample: {
           language: 'text',
-          code: '/pure-saas design Create a dark-mode telemetry system specification for an AI inference monitoring platform.'
+          code: '/pure-saas design Plan a high-density financial analytics theme with dark-mode tokens.'
         }
       }
     ]
   },
   {
     slug: 'cmd-polish',
-    title: '/pure-saas polish — Visual Craft & Micro-Interactions',
+    title: '/pure-saas polish',
     category: 'Commands',
-    readTime: '4 min read',
-    summary: 'Elevate typography tracking, surface lighting, hairline borders, and micro-interactions without rebuilding working logic.',
+    readTime: '3 min read',
+    summary: 'Elevate typography tracking, surface lighting, and tactile micro-interactions on existing components.',
     sections: [
       {
-        id: 'polish-scope',
-        title: 'What Gets Polished',
+        id: 'cmd-polish-usage',
+        title: 'Syntax & When to Use',
         level: 2,
         content: [
-          'The /pure-saas polish command targets visual craft exclusively:',
-          '• Optical Typography: Calibrates letter-spacing tracking (e.g. tracking-[-0.02em] on large headers).',
-          '• Layered Elevation: Replaces single drop-shadows with multi-stop ambient and directional shadows.',
-          '• Hairline Borders: Enforces 1px solid var(--color-border-subtle) on dark surfaces.',
-          '• Tactile Micro-Interactions: Adds active:scale-[0.98] and spring transitions to buttons and dropdown items.'
-        ]
+          'Use /pure-saas polish when your UI works properly but needs visual refinement:'
+        ],
+        codeSample: {
+          language: 'text',
+          code: '/pure-saas polish Refine letter-spacing tracking on headers and add subtle active scale on buttons.'
+        }
       }
     ]
   },
   {
     slug: 'cmd-review',
-    title: '/pure-saas review — Forensic Quality Audit',
+    title: '/pure-saas review',
     category: 'Commands',
-    readTime: '5 min read',
-    summary: 'Conducts a forensic, evidence-based quality audit across bugs, security, WCAG 2.2 accessibility, and token drift without editing files.',
+    readTime: '3 min read',
+    summary: 'Conducts a read-only, evidence-based quality audit across accessibility, tokens, and responsive layout.',
     sections: [
       {
-        id: 'review-protocol',
-        title: 'The Audit Protocol',
+        id: 'cmd-review-usage',
+        title: 'Syntax & When to Use',
         level: 2,
         content: [
-          'The /pure-saas review command is strictly read-only. It inspects your codebase and files an evidence-based report:',
-          '• Contrast Auditing: Measures foreground/background contrast against WCAG 2.2 AA (4.5:1 text, 3:1 UI).',
-          '• Token Consistency: Detects unmapped hex values and arbitrary Tailwind classes.',
-          '• Keyboard Trapping: Checks dialog and modal components for Tab trapping and Escape handlers.',
-          '• Anti-Slop Check: Scans for prohibited green pulsing dots, emoji icons, and purple gradients.'
+          'Use /pure-saas review to audit code without modifying any files:'
         ],
         codeSample: {
           language: 'text',
@@ -857,22 +462,17 @@ All spacing adheres strictly to an 8pt spatial grid...`
   },
   {
     slug: 'cmd-reference',
-    title: '/pure-saas reference — Visual Reverse Engineering',
+    title: '/pure-saas reference',
     category: 'Commands',
-    readTime: '5 min read',
-    summary: 'Reverse-engineer live visual references via browser DevTools into a 16-section DESIGN.md specification.',
+    readTime: '3 min read',
+    summary: 'Deconstruct a live reference website into an actionable 16-section DESIGN.md specification.',
     sections: [
       {
-        id: 'reverse-engineering-protocol',
-        title: 'The 16-Section Extraction Protocol',
+        id: 'cmd-reference-usage',
+        title: 'Syntax & When to Use',
         level: 2,
         content: [
-          'When given a live website URL, /pure-saas reference inspects the page using DevTools and extracts:',
-          '1. Exact computed font families, weights, line heights, and letter tracking.',
-          '2. Background, surface, border, and accent color ramps.',
-          '3. Spacing grid rules and container max-widths.',
-          '4. Animation durations, easing bezier curves, and spring physics.',
-          '5. Interactive states across buttons, inputs, and navigation drawers.'
+          'Pass any accessible website URL to deconstruct its design system:'
         ],
         codeSample: {
           language: 'text',
@@ -883,60 +483,46 @@ All spacing adheres strictly to an 8pt spatial grid...`
   },
   {
     slug: 'cmd-responsive',
-    title: '/pure-saas responsive — Multi-Viewport Ergonomics',
+    title: '/pure-saas responsive',
     category: 'Commands',
-    readTime: '4 min read',
-    summary: 'Diagnose and resolve viewport layout failures across mobile (375-430px), tablet (768-834px), and desktop (1440px+).',
+    readTime: '3 min read',
+    summary: 'Audit and optimize layouts across mobile (375px), tablet (768px), and desktop (1440px+) viewports.',
     sections: [
       {
-        id: 'responsive-breakpoints',
-        title: 'Viewport Breakpoint Standards',
+        id: 'cmd-responsive-usage',
+        title: 'Syntax & When to Use',
         level: 2,
         content: [
-          'Pure SaaS tests and optimizes across four primary viewport tiers:',
-          '• Mobile (375px – 430px): Minimum 44px touch targets, single-column flow, bottom-sheet drawers.',
-          '• Tablet (768px – 834px): 2-column adaptive grids, collapsible sidebars.',
-          '• Laptop (1024px – 1280px): Persistent navigation, multi-column dashboard layouts.',
-          '• Desktop (1440px+): Restricted max-width containers (max-w-7xl) to prevent line-length sprawl.'
-        ]
+          'Diagnose and resolve viewport layout issues:'
+        ],
+        codeSample: {
+          language: 'text',
+          code: '/pure-saas responsive Ensure the pricing matrix table scrolls horizontally with sticky first column on mobile.'
+        }
       }
     ]
   },
 
   // ==========================================
-  // CATEGORY 5: CLI REFERENCE
+  // SECTION 4: CLI REFERENCE
   // ==========================================
   {
     slug: 'cli-overview',
-    title: 'CLI Installation & Global Syntax',
+    title: 'CLI Overview & Syntax',
     category: 'CLI Reference',
-    readTime: '4 min read',
-    summary: 'Complete reference for the zero-dependency pure-saas Node.js command-line tool.',
+    readTime: '3 min read',
+    summary: 'Overview of the zero-dependency pure-saas command-line tool.',
     sections: [
       {
         id: 'cli-intro',
-        title: 'Zero Dependencies, High Performance',
+        title: 'Zero Dependencies',
         level: 2,
         content: [
-          'The Pure SaaS CLI (scripts/pure-saas.mjs) is implemented in 100% native Node.js with zero external npm dependencies. It starts instantly and works completely offline.'
+          'The Pure SaaS CLI is implemented in native Node.js with zero runtime dependencies. Run it via npx without manual installation:'
         ],
         codeSample: {
           language: 'bash',
           code: 'npx pure-saas --help'
-        }
-      },
-      {
-        id: 'global-flags',
-        title: 'Global CLI Options',
-        level: 2,
-        table: {
-          headers: ['Flag', 'Alias', 'Description'],
-          rows: [
-            ['--help', '-h', 'Display global or command-specific help menu.'],
-            ['--version', '-v', 'Display installed pure-saas CLI version.'],
-            ['--verbose', '-V', 'Enable detailed diagnostic log output.'],
-            ['--quiet', '-q', 'Suppress non-essential terminal outputs.']
-          ]
         }
       }
     ]
@@ -945,32 +531,16 @@ All spacing adheres strictly to an 8pt spatial grid...`
     slug: 'cli-design-system',
     title: 'design-system Command',
     category: 'CLI Reference',
-    readTime: '5 min read',
-    summary: 'Programmatically generate an approved DESIGN.md specification tailored to 192 product archetypes.',
+    readTime: '3 min read',
+    summary: 'Programmatically generate DESIGN.md specifications from 192 product archetypes.',
     sections: [
       {
-        id: 'ds-usage',
-        title: 'Command Syntax',
+        id: 'cli-ds-usage',
+        title: 'Usage',
         level: 2,
         codeSample: {
           language: 'bash',
-          code: 'npx pure-saas design-system --product "FinTech Analytics" --archetype financial-analytics --variance 3 --motion 4 --density 8 --out DESIGN.md'
-        }
-      },
-      {
-        id: 'ds-options',
-        title: 'Available Options',
-        level: 2,
-        table: {
-          headers: ['Option', 'Default', 'Description'],
-          rows: [
-            ['--product <name>', 'Required', 'The title or brand name of your application.'],
-            ['--archetype <id>', 'saas-modern', 'One of 192 product archetypes (fintech, devtool, health, etc.).'],
-            ['--variance <1-10>', '3', 'Creative layout freedom dial.'],
-            ['--motion <1-10>', '4', 'Animation and transition dynamic intensity.'],
-            ['--density <1-10>', '7', 'Spatial density (padding, table spacing, font scales).'],
-            ['--out <file>', 'DESIGN.md', 'Output destination file path.']
-          ]
+          code: 'npx pure-saas design-system --product "My App" --archetype saas-dashboard --out DESIGN.md'
         }
       }
     ]
@@ -979,468 +549,104 @@ All spacing adheres strictly to an 8pt spatial grid...`
     slug: 'cli-export-tokens',
     title: 'export-tokens Command',
     category: 'CLI Reference',
-    readTime: '4 min read',
-    summary: 'Export verified DESIGN.md tokens into DTCG Design Tokens Community Group JSON, Tailwind theme configuration, or native CSS variables.',
+    readTime: '3 min read',
+    summary: 'Export DESIGN.md tokens into DTCG JSON, Tailwind CSS config, or native CSS variables.',
     sections: [
       {
-        id: 'export-usage',
-        title: 'Export Formats',
+        id: 'cli-export-usage',
+        title: 'Usage',
         level: 2,
         codeSample: {
           language: 'bash',
-          code: '# Export as W3C DTCG Tokens JSON\nnpx pure-saas export-tokens DESIGN.md --format dtcg --out tokens.json\n\n# Export as Tailwind CSS theme extension\nnpx pure-saas export-tokens DESIGN.md --format tailwind --out tailwind.tokens.js\n\n# Export as native CSS variables\nnpx pure-saas export-tokens DESIGN.md --format css --out src/tokens.css'
+          code: '# Export as CSS variables\nnpx pure-saas export-tokens DESIGN.md --format css --out src/tokens.css\n\n# Export as Tailwind theme\nnpx pure-saas export-tokens DESIGN.md --format tailwind --out tailwind.tokens.js'
         }
       }
     ]
   },
   {
-    slug: 'cli-validate-contrast',
-    title: 'validate & contrast Commands',
+    slug: 'cli-validation',
+    title: 'Validation & Contrast Checks',
     category: 'CLI Reference',
-    readTime: '4 min read',
-    summary: 'Automate token syntax validation and WCAG 2.2 AA color contrast compliance in CI pipelines.',
+    readTime: '3 min read',
+    summary: 'Automate token syntax checks and WCAG 2.2 contrast validation in CI workflows.',
     sections: [
       {
-        id: 'validate-cmd',
-        title: 'Validating DESIGN.md',
-        level: 2,
-        content: [
-          'Validates that your DESIGN.md specification adheres to the schema and includes all required tokens:'
-        ],
-        codeSample: {
-          language: 'bash',
-          code: 'npx pure-saas validate DESIGN.md'
-        }
-      },
-      {
-        id: 'contrast-cmd',
-        title: 'Checking WCAG Contrast',
-        level: 2,
-        content: [
-          'Calculates mathematical luminance contrast between all foreground text and background surface tokens:'
-        ],
-        codeSample: {
-          language: 'bash',
-          code: 'npx pure-saas contrast DESIGN.md\n# Verifies AA (4.5:1) and AAA (7:1) ratios across light and dark modes.'
-        }
-      }
-    ]
-  },
-  {
-    slug: 'cli-drift-debt',
-    title: 'drift & check Commands',
-    category: 'CLI Reference',
-    readTime: '4 min read',
-    summary: 'Detect token drift and scan existing source code for hardcoded colors, missing focus rings, and known UI defects.',
-    sections: [
-      {
-        id: 'drift-cmd',
-        title: 'Detecting Token Drift',
+        id: 'cli-val-usage',
+        title: 'Usage',
         level: 2,
         codeSample: {
           language: 'bash',
-          code: 'npx pure-saas drift DESIGN.md observations.json\n# Flags tokens in source code that do not match the approved DESIGN.md specification.'
-        }
-      },
-      {
-        id: 'check-cmd',
-        title: 'Static Code Inspection',
-        level: 2,
-        codeSample: {
-          language: 'bash',
-          code: 'npx pure-saas check DESIGN.md --source src --known known-defects.json\n# Scans all TSX/CSS files for hardcoded hex values, missing alt attributes, and raw border colors.'
+          code: '# Validate token schema\nnpx pure-saas validate DESIGN.md\n\n# Check WCAG contrast\nnpx pure-saas contrast DESIGN.md'
         }
       }
     ]
   },
 
   // ==========================================
-  // CATEGORY 6: GUIDES & WORKFLOWS
+  // SECTION 5: TROUBLESHOOTING & FAQ
   // ==========================================
   {
-    slug: 'guide-saas-dashboard',
-    title: 'Building a High-Density SaaS Dashboard',
-    category: 'Guides & Workflows',
-    readTime: '8 min read',
-    summary: 'Step-by-step practical guide to designing and coding an enterprise SaaS telemetry dashboard with tabular numbers, hairline borders, and zero card vomit.',
+    slug: 'troubleshooting-setup',
+    title: 'Common Setup Problems',
+    category: 'Troubleshooting & FAQ',
+    readTime: '3 min read',
+    summary: 'Quick solutions for Node.js version mismatches and workspace initialization issues.',
     sections: [
       {
-        id: 'dashboard-overview',
-        title: 'Architectural Blueprint',
+        id: 'node-issues',
+        title: 'Node.js Version Mismatch',
         level: 2,
         content: [
-          'High-density SaaS dashboards (such as telemetry consoles, financial ledgers, and database portals) require exceptional visual restraint. When AI generates dashboards, it commonly wraps every metric in an identical rounded-2xl container.',
-          'Follow these architectural rules for an authentic Apple-grade dashboard:'
-        ],
-        list: [
-          'Asymmetrical visual weight: Pair large metric figures with live micro-charts and contextual deltas.',
-          'Hairline boundaries: Divide metric clusters with 1px borders (divide-border-subtle) rather than floating boxes.',
-          'Tabular figures: Apply font-variant-numeric: tabular-nums to prevent visual jitter on streaming updates.',
-          'Monospace telemetry: Display hashes, IPs, and timestamps in SF Mono or JetBrains Mono at text-xs.'
-        ]
-      },
-      {
-        id: 'dashboard-code',
-        title: 'Production Implementation',
-        level: 2,
-        codeSample: {
-          language: 'tsx',
-          filename: 'TelemetryCluster.tsx',
-          code: `export const TelemetryCluster = () => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-2xl bg-[var(--color-surface-base)] border border-[var(--color-border-subtle)] divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border-subtle)]">
-    <div className="p-5">
-      <div className="text-xs text-[var(--color-text-secondary)] font-medium">P99 Latency</div>
-      <div className="text-2xl font-bold font-mono tracking-tight text-[var(--color-text-primary)] mt-2">
-        12.4<span className="text-xs text-[var(--color-text-muted)] font-normal ml-0.5">ms</span>
-      </div>
-      <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono mt-1 flex items-center gap-1">
-        <span>↓ 2.1ms</span>
-        <span className="text-[var(--color-text-muted)] font-sans">vs last hour</span>
-      </div>
-    </div>
-    {/* Additional telemetry columns... */}
-  </div>
-);`
-        }
-      }
-    ],
-    relatedReferences: [
-      { title: 'SaaS Dashboard Blueprint', path: 'references/layouts/saas-dashboard.md' },
-      { title: 'Data Table Blueprint', path: 'references/components/data-table.md' }
-    ]
-  },
-  {
-    slug: 'guide-elevating-ui',
-    title: 'Refactoring Legacy UI Without Breaking Backends',
-    category: 'Guides & Workflows',
-    readTime: '7 min read',
-    summary: 'How to safely elevate visual polish in production applications while preserving 100% of API routes, data fetching hooks, and test IDs.',
-    sections: [
-      {
-        id: 'safe-refactor-rules',
-        title: 'The Non-Regression Protocol',
-        level: 2,
-        content: [
-          'The biggest risk when asking an AI assistant to redesign a UI is that it will rewrite your state management, delete backend props, or remove data-testid attributes used by your Playwright test suite.',
-          'Pure SaaS solves this through strict non-regression rules enforced in SKILL.md § 3:'
-        ],
-        steps: [
-          {
-            step: 1,
-            title: 'Audit Existing Props & Hooks',
-            description: 'Before altering JSX, the agent records all exported props, event handlers, and data-testid attributes.'
-          },
-          {
-            step: 2,
-            title: 'Isolate Visual Markup',
-            description: 'Refactor only styling classes, surface tokens, and typography tracking. Never alter useEffect dependencies or API payloads.'
-          },
-          {
-            step: 3,
-            title: 'Run Automated Type & Test Verification',
-            description: 'Execute npm run lint or tsc --noEmit to guarantee zero TypeScript regression.'
-          }
+          'If you see an unsupported engine warning, ensure your Node version is 18 or newer:',
+          'Fix: Switch to Node 20 LTS using your version manager: nvm use 20'
         ]
       }
     ]
   },
   {
-    slug: 'guide-reverse-engineering',
-    title: 'Reverse Engineering Live Sites into 16-Section Specs',
-    category: 'Guides & Workflows',
-    readTime: '7 min read',
-    summary: 'A complete tutorial on using /pure-saas reference to deconstruct inspiring live websites into tokenized design specifications.',
+    slug: 'troubleshooting-agents',
+    title: 'Agent Troubleshooting',
+    category: 'Troubleshooting & FAQ',
+    readTime: '3 min read',
+    summary: 'What to do if your AI assistant is not picking up workspace instructions.',
     sections: [
       {
-        id: 'reverse-engineering-steps',
-        title: 'Step-by-Step Deconstruction',
+        id: 'reloading-rules',
+        title: 'Refreshing Agent Instructions',
         level: 2,
         content: [
-          'Learn how Pure SaaS reverse-engineers a reference website:'
-        ],
-        steps: [
-          {
-            step: 1,
-            title: 'Discover Accessible Pages',
-            description: 'Discover all accessible pages linked through navigation, footers, and internal links.'
-          },
-          {
-            step: 2,
-            title: 'Inspect Computed Styles in DevTools',
-            description: 'Extract exact computed font-family, font-size, line-height, letter-spacing, and RGB color values.'
-          },
-          {
-            step: 3,
-            title: 'Record Animation Bezier Curves',
-            description: 'Capture transition durations and cubic-bezier timing functions from active hover states.'
-          },
-          {
-            step: 4,
-            title: 'Author 16-Section DESIGN.md',
-            description: 'Synthesize findings into the standardized 16-section design specification.'
-          }
+          'If your AI assistant is ignoring DESIGN.md or SKILL.md, reload the editor window or start a new chat session to force re-indexing of workspace rules.'
         ]
       }
     ]
   },
   {
-    slug: 'guide-wcag-audit',
-    title: 'Conducting a WCAG 2.2 AA Accessibility Audit',
-    category: 'Guides & Workflows',
-    readTime: '6 min read',
-    summary: 'How to audit and guarantee WCAG 2.2 AA conformance across color contrast, keyboard focus traps, and touch targets.',
-    sections: [
-      {
-        id: 'wcag-checklist',
-        title: 'Core Audit Criteria',
-        level: 2,
-        content: [
-          'Pure SaaS audits against 5 essential accessibility gates:'
-        ],
-        list: [
-          'SC 1.4.3 Contrast (Minimum): Normal text must meet at least 4.5:1; large text (18pt+ or 14pt bold) must meet at least 3:1.',
-          'SC 2.4.7 Focus Visible: Any keyboard-focusable element must display an unambiguous, high-contrast focus indicator (e.g. 2px focus ring with 2px offset).',
-          'SC 2.1.2 No Keyboard Trap: Keyboard users must be able to navigate into and out of modals, dropdowns, and date pickers using Tab, Shift+Tab, and Escape.',
-          'SC 2.5.8 Target Size (Minimum): All interactive elements must provide a minimum touch target size of 24×24px (44×44px on mobile viewports).',
-          'SC 1.3.1 Info and Relationships: Semantic HTML elements (button, dialog, nav, main, table) must be used instead of clickable div tags.'
-        ]
-      }
-    ]
-  },
-
-  // ==========================================
-  // CATEGORY 7: REFERENCE LIBRARY
-  // ==========================================
-  {
-    slug: 'reference-index-guide',
-    title: 'The Master Reference Manifest',
-    category: 'Reference Library',
-    readTime: '5 min read',
-    summary: 'An architectural index of the 287 reference files included with Pure SaaS and how agents route queries.',
-    sections: [
-      {
-        id: 'reference-breakdown',
-        title: 'Library Directory Breakdown',
-        level: 2,
-        content: [
-          'The Pure SaaS reference library contains 287 substantive reference files organized into 12 craft directories alongside the Apple HIG index and interactive shader components:'
-        ],
-        table: {
-          headers: ['Category / Subdirectory', 'File Count', 'Scope & Purpose'],
-          rows: [
-            ['references/components/', '20 files', 'Interactive primitives (buttons, modals, tables, toasts, inputs, cards, tabs, etc.) with 8-state matrices.'],
-            ['references/layouts/', '12 files', 'Complete page blueprints (SaaS dashboards, marketing heroes, pricing tables, settings, status pages).'],
-            ['references/design-systems/', '12 files', 'Token architectures, typography scales, color ramps, fluid spacing, and brand geometry.'],
-            ['references/ux-patterns/', '12 files', 'Keyboard shortcuts, focus trapping, skeleton loaders, empty states, and inline validation.'],
-            ['references/visual-craft/', '10 files', 'Apple HIG polish, layered surface lighting, hairline borders, and spring physics.'],
-            ['references/frontend-engineering/', '12 files', 'Compound components, headless primitives, virtualization, and web vitals.'],
-            ['references/accessibility/', '10 files', 'WCAG 2.2 AA matrices, ARIA roles, contrast formulas, and touch targets.'],
-            ['references/theming/', '8 files', 'Dark mode inversion, CSS variable scopes, and system preference detection.'],
-            ['references/developer-tooling/', '8 files', 'Token linting, Stylelint configs, and visual regression CI.'],
-            ['references/real-world-flows/', '10 files', 'Stripe checkout, auth lifecycles, multi-tenancy, and API key management.'],
-            ['references/design-analysis/', '6 files', 'Screenshot deconstruction, DOM style extraction, and completion gates.'],
-            ['references/responsive/', '6 files', 'Mobile-first breakpoints, touch ergonomics, and fluid clamp formulas.'],
-            ['references/hig/', '124 files', 'Substantive Apple Human Interface Guidelines across components and patterns.'],
-            ['references/frameworks/', '22 files', 'Stack guidelines across React, Next.js, Vue, Svelte, Tailwind, SwiftUI, etc.'],
-            ['references/backgrounds/', '15 files', 'Interactive WebGL shader and canvas components from React Bits.']
-          ]
-        }
-      }
-    ]
-  },
-  {
-    slug: 'reference-selection',
-    title: 'Selection Routing & "Read Before You Cite"',
-    category: 'Reference Library',
-    readTime: '4 min read',
-    summary: 'The operational rule governing how AI coding assistants select, retrieve, and cite references before proposing UI changes.',
-    sections: [
-      {
-        id: 'read-before-cite',
-        title: 'The "Read Before You Cite" Rule',
-        level: 2,
-        content: [
-          'A key failure mode of unguided LLMs is hallucinating design standards or citing non-existent guidelines from memory.',
-          'Pure SaaS strictly enforces the "Read Before You Cite" rule: An agent is forbidden from quoting design recommendations unless it opens and reads the exact reference file in the workspace or queries the CLI search engine:',
-          'Example: Before creating a modal dialog, the agent must execute npx pure-saas ref "modal" and open references/components/modal-dialog.md and references/hig/modality.md.'
-        ]
-      }
-    ]
-  },
-  {
-    slug: 'reference-contributing',
-    title: 'Extending the Reference Library',
-    category: 'Reference Library',
-    readTime: '4 min read',
-    summary: 'Guidelines for authoring and contributing new reference guides to the Pure SaaS open-source library.',
-    sections: [
-      {
-        id: 'authoring-standards',
-        title: 'Reference Guide Authoring Standards',
-        level: 2,
-        content: [
-          'Every reference file in references/ must follow the canonical structure to ensure automated validation passes:',
-          '1. Mandatory YAML Frontmatter: Must include title, category, description, and tags.',
-          '2. Section 1 (Overview & Principles): Architectural explanation and design rationale.',
-          '3. Section 2 (Implementation Guide): Fully typed TypeScript/TSX code sample with semantic CSS variables.',
-          '4. Section 3 (Best Practices): Minimum of 4 concrete Do and Don\'t pairs in a markdown table.',
-          '5. Validation: Run npm run validate-refs to ensure zero lint or schema errors.'
-        ]
-      }
-    ]
-  },
-
-  // ==========================================
-  // CATEGORY 8: TECHNICAL REFERENCE & FAQ
-  // ==========================================
-  {
-    slug: 'platforms-integrations',
-    title: 'Platform Standards & Host Integration Files',
-    category: 'Technical Reference & FAQ',
-    readTime: '5 min read',
-    summary: 'Technical specification of host integration files (.cursorrules, GEMINI.md, .windsurfrules) and platform convention mapping.',
-    sections: [
-      {
-        id: 'integration-files',
-        title: 'Host Configuration Files',
-        level: 2,
-        content: [
-          'Pure SaaS provides pre-configured root instruction files for every major developer environment:',
-          '• .cursorrules: Configures Cursor Composer with slash command aliases and token enforcement.',
-          '• GEMINI.md: Configures Google Gemini and Antigravity agents with strict execution behaviors.',
-          '• .windsurfrules: Configures Windsurf Cascade with anti-slop rules and reference routing.',
-          '• .github/copilot-instructions.md: Enforces semantic tokens and non-regression in GitHub Copilot.'
-        ]
-      }
-    ]
-  },
-  {
-    slug: 'token-contract',
-    title: 'Semantic Token Contract & CSS Variables',
-    category: 'Technical Reference & FAQ',
-    readTime: '5 min read',
-    summary: 'The formal CSS variable contract required by Pure SaaS components across light and dark modes.',
-    sections: [
-      {
-        id: 'css-contract',
-        title: 'Mandatory CSS Variable Schema',
-        level: 2,
-        codeSample: {
-          language: 'css',
-          filename: 'globals.css',
-          code: `:root {
-  --color-canvas: #fbfbfd;
-  --color-surface-base: #ffffff;
-  --color-surface-elevated: #f5f5f7;
-  --color-surface-overlay: #ffffff;
-  --color-surface-muted: #e5e5ea;
-  --color-border-subtle: rgba(0, 0, 0, 0.08);
-  --color-border-default: rgba(0, 0, 0, 0.15);
-  --color-text-primary: #1d1d1f;
-  --color-text-secondary: #6e6e73;
-  --color-text-muted: #86868b;
-  --color-accent-primary: #0071e3;
-}
-
-[data-theme="dark"], .dark {
-  --color-canvas: #000000;
-  --color-surface-base: #121214;
-  --color-surface-elevated: #1c1c1e;
-  --color-surface-overlay: #242426;
-  --color-surface-muted: #2c2c2e;
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-default: rgba(255, 255, 255, 0.15);
-  --color-text-primary: #f5f5f7;
-  --color-text-secondary: #a1a1a6;
-  --color-text-muted: #86868b;
-  --color-accent-primary: #2997ff;
-}`
-        }
-      }
-    ]
-  },
-  {
-    slug: 'known-limitations',
-    title: 'Architectural Boundaries & Unsupported Scenarios',
-    category: 'Technical Reference & FAQ',
-    readTime: '4 min read',
-    summary: 'Documented boundaries, unsupported operations, and manual developer gates in Pure SaaS.',
-    sections: [
-      {
-        id: 'boundaries',
-        title: 'What Pure SaaS Does NOT Do',
-        level: 2,
-        content: [
-          'To ensure safety, Pure SaaS explicitly restricts itself from:',
-          '1. Modifying production database schemas or running migration scripts automatically.',
-          '2. Deploying code to live cloud infrastructure (AWS, Vercel, Fly.io) without explicit user intervention.',
-          '3. Editing private authentication keys, secrets, or .env files.',
-          '4. Altering backend API contracts or test suites.'
-        ]
-      }
-    ]
-  },
-  {
-    slug: 'faq',
+    slug: 'technical-faq',
     title: 'Frequently Asked Questions',
-    category: 'Technical Reference & FAQ',
-    readTime: '6 min read',
-    summary: 'Answers to the most common questions regarding Pure SaaS licensing, performance, tokens, and agent capabilities.',
+    category: 'Troubleshooting & FAQ',
+    readTime: '4 min read',
+    summary: 'Common questions about licensing, dependencies, and framework compatibility.',
     sections: [
       {
         id: 'faq-list',
         title: 'Common Questions',
         level: 2,
         content: [
-          'Q: Is Pure SaaS free and open source?',
-          'A: Yes. Pure SaaS is 100% open source under the MIT License. You can use it in private commercial projects, client work, or open-source repositories with zero royalties.',
+          'Q: Is Pure SaaS open source and free for commercial use?',
+          'A: Yes. Pure SaaS is released under the MIT License and can be used in commercial products with zero royalties.',
           '',
           'Q: Does Pure SaaS require an internet connection or send code to external servers?',
-          'A: No. Pure SaaS runs entirely locally inside your coding agent and machine. It has zero external telemetry and makes no external network requests.',
+          'A: No. Pure SaaS runs entirely locally inside your coding agent and machine.',
           '',
-          'Q: Can I use Pure SaaS with an existing component library like shadcn/ui or Radix?',
-          'A: Yes! Pure SaaS works exceptionally well with shadcn/ui, Radix UI, and Headless UI. It replaces generic Tailwind classes with semantic tokens and ensures proper focus rings and hover states.',
-          '',
-          'Q: Why is there an absolute ban on green pulsing dots?',
-          'A: Green circular pulsing/pinging dots are one of the most overused AI-generated tropes. They distract the user, fake real-time activity, and degrade visual refinement. Pure SaaS enforces clean typography and accessible status pills instead.'
-        ]
-      }
-    ]
-  },
-  {
-    slug: 'troubleshooting',
-    title: 'Master Troubleshooting & Diagnostics',
-    category: 'Technical Reference & FAQ',
-    readTime: '5 min read',
-    summary: 'Comprehensive diagnostic guide for resolving agent confusion, missing reference errors, and styling inconsistencies.',
-    sections: [
-      {
-        id: 'diagnostic-steps',
-        title: 'Diagnostic Procedures',
-        level: 2,
-        steps: [
-          {
-            step: 1,
-            title: 'Verify File Existence',
-            description: 'Ensure DESIGN.md and SKILL.md are present in your workspace root.'
-          },
-          {
-            step: 2,
-            title: 'Run CLI Validation',
-            description: 'Run npx pure-saas validate DESIGN.md to check for syntax errors or missing tokens.'
-          },
-          {
-            step: 3,
-            title: 'Clear Agent Cache',
-            description: 'If your agent is ignoring instructions, restart the AI agent session or reload the IDE window to re-index workspace rules.'
-          }
+          'Q: What frameworks are supported?',
+          'A: React, Next.js, Vue, Svelte, Tailwind CSS, HTML/CSS, and modern web primitives.'
         ]
       }
     ]
   }
 ];
 
-// Add next/prev pointers automatically across the sequential articles
+// Add next/prev pointers across sequential articles
 for (let i = 0; i < articles.length; i++) {
   if (i > 0) {
     articles[i].prev = { slug: articles[i - 1].slug, title: articles[i - 1].title };
@@ -1451,7 +657,7 @@ for (let i = 0; i < articles.length; i++) {
 }
 
 const fileContent = `// Auto-generated by scripts/generators/generate-docs-data.mjs
-// Comprehensive GitBook-style documentation portal dataset for Pure SaaS
+// Streamlined documentation dataset for Pure SaaS
 
 export interface DocSection {
   id: string;
@@ -1499,4 +705,4 @@ export const docsArticles: DocArticle[] = ${JSON.stringify(articles, null, 2)};
 `;
 
 fs.writeFileSync(docsDataPath, fileContent, 'utf8');
-console.log(`Successfully wrote ${articles.length} comprehensive articles to ${docsDataPath}`);
+console.log(`Successfully wrote ${articles.length} streamlined articles to ${docsDataPath}`);
