@@ -2,8 +2,15 @@
 
 Claude Code project instructions for Pure SaaS.
 
-## Invoking Pure SaaS
-- Main command: `/pure-saas [request]`
+## Invoking Pure SaaS Workflows
+- **Principal Designer (Main):** `/pure-saas [request]`
+- **Creative Director & Builder:** `/pure-saas design [brief]`
+- **Senior Visual Designer:** `/pure-saas polish [target]`
+- **Independent Design Critic:** `/pure-saas review [scope]`
+- **Reference Analyst:** `/pure-saas reference <url>`
+- **Responsive Systems Engineer:** `/pure-saas responsive [target]`
+
+## Supporting Tooling
 - Review & audit: `pure-saas audit --source src`
 - Context inspection: `pure-saas context`
 - Health & diagnostics: `pure-saas doctor`

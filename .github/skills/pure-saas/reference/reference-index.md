@@ -444,38 +444,40 @@ npx pure-saas ref "dashboard"       # SaaS dashboard shell layout
 
 ---
 
-## Core Specialist Playbooks & Governance Guidelines
+## The Six Specialist Command Playbooks
 
-| Playbook | Relative Path | Focus Area |
+| Playbook | Command | Role & Scope |
 | :--- | :--- | :--- |
-| [workflow.md](./workflow.md) | `reference/workflow.md` | Universal 8-step build, inspection, and verification loop |
+| [workflow.md](./workflow.md) | `/pure-saas [request]` | **Principal Designer**: Owns complete outcome from brief to production |
+| [design.md](./design.md) | `/pure-saas design [brief]` | **Creative Director & Builder**: Turns brief into distinctive implemented interface |
+| [polish.md](./polish.md) | `/pure-saas polish [target]` | **Senior Visual Designer**: Elevates typography tracking, hairlines & micro-craft |
+| [review.md](./review.md) | `/pure-saas review [scope]` | **Independent Design Critic**: 10-dimension audit and P0-P3 defect triage |
+| [reference.md](./reference.md) | `/pure-saas reference [URL]` | **Reference Analyst**: Extracts deep design intelligence and translates to project |
+| [responsive.md](./responsive.md) | `/pure-saas responsive [target]` | **Responsive Systems Engineer**: Multi-viewport mastery (375px to 1440px) |
+
+---
+
+## Shared Design Intelligence & Governance Guidelines
+
+| Guide | Relative Path | Focus Area |
+| :--- | :--- | :--- |
 | [craft-floor.md](./craft-floor.md) | `reference/craft-floor.md` | Non-negotiable craft requirements, hairlines, and anti-slop ban list |
 | [anti-slop-rules.md](./anti-slop-rules.md) | `reference/anti-slop-rules.md` | Top 12 AI design anti-patterns and concrete architectural fixes |
+| [art-direction-and-taste.md](./art-direction-and-taste.md) | `reference/art-direction-and-taste.md` | Taste Skill art direction, aesthetic archetypes, and visual conviction |
 | [design-systems.md](./design-systems.md) | `reference/design-systems.md` | 3-tier token hierarchy, DESIGN.md contracts, and token export |
-| [landing-pages.md](./landing-pages.md) | `reference/landing-pages.md` | High-conversion Persuade-mode SaaS landing page architecture |
-| [audit.md](./audit.md) | `reference/audit.md` | 5-dimension deterministic audit (0-20 score) and P0-P3 defect triage |
 | [code-audit.md](./code-audit.md) | `reference/code-audit.md` | Static code inspection search patterns and replacement ledger |
-| [polish.md](./polish.md) | `reference/polish.md` | Surface lighting, hairline borders, and micro-interaction finish |
-| [bolder.md](./bolder.md) | `reference/bolder.md` | Visual conviction and contrast amplifier for timid interfaces |
-| [quieter.md](./quieter.md) | `reference/quieter.md` | De-escalating overstimulated or noisy layouts into serene clarity |
-| [distill.md](./distill.md) | `reference/distill.md` | Visual debt reduction and simplifying complex interfaces |
-| [harden.md](./harden.md) | `reference/harden.md` | Production robustness: empty states, edge cases, error recovery |
 | [typeset.md](./typeset.md) | `reference/typeset.md` | Optical hierarchy, letter-spacing tracking, and fluid clamp scales |
 | [layout.md](./layout.md) | `reference/layout.md` | 8pt spatial grid, asymmetric visual weight, and container rhythm |
 | [animate.md](./animate.md) | `reference/animate.md` | Purposeful physics-based spring motion and snappy duration tiers |
 | [colorize.md](./colorize.md) | `reference/colorize.md` | 5-tier semantic color hierarchy, WCAG AA contrast, light/dark parity |
-| [delight.md](./delight.md) | `reference/delight.md` | Tactile micro-interactions, canvas shaders, and reactive feedback |
-| [adapt.md](./adapt.md) | `reference/adapt.md` | Multi-viewport responsive mastery (375px mobile to 1440px desktop) |
-| [clarify.md](./clarify.md) | `reference/clarify.md` | UX microcopy, active verb buttons, and actionable error messages |
-| [optimize.md](./optimize.md) | `reference/optimize.md` | Core Web Vitals, virtualization, and sub-frame layout stability |
 | [browser.md](./browser.md) | `reference/browser.md` | Playwright CLI headless browser automation & multi-viewport screenshots |
 | [3d.md](./3d.md) | `reference/3d.md` | Procedural Three.js 3D model synthesis (img2threejs pipeline) |
 | [style-registry.md](./style-registry.md) | `reference/style-registry.md` | Curated style archetype registry (Swiss, Technical, Editorial, etc.) |
 | [accessibility.md](./accessibility.md) | `reference/accessibility.md` | WCAG 2.2 AA non-negotiable requirements and keyboard focus rules |
-| [art-direction-and-taste.md](./art-direction-and-taste.md) | `reference/art-direction-and-taste.md` | Taste Skill art direction, aesthetic archetypes, and visual conviction |
 | [backgrounds.md](./backgrounds.md) | `reference/backgrounds.md` | Master directory of interactive canvas shaders and WebGL backgrounds |
 | [cross-platform.md](./cross-platform.md) | `reference/cross-platform.md` | Platform translation between Apple HIG, Android Material, and Web |
 | [design-principles.md](./design-principles.md) | `reference/design-principles.md` | Core design philosophy: Intentionality, Typography, Composition |
 | [hig-lookup.md](./hig-lookup.md) | `reference/hig-lookup.md` | Apple HIG 123-topic index and routing guide |
+| [modes.md](./modes.md) | `reference/modes.md` | Surface modes: Persuade, Operate, Read, Experience |
 | [platform-guidelines.md](./platform-guidelines.md) | `reference/platform-guidelines.md` | Host platform conventions for Web, macOS, iOS, and Mobile |
-| [reference-analysis.md](./reference-analysis.md) | `reference/reference-analysis.md` | Live reference reverse engineering and 16-section DESIGN.md protocol |
+| [routing.md](./routing.md) | `reference/routing.md` | Specialist command router and intent handler |

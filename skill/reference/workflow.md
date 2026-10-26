@@ -1,77 +1,89 @@
-# The 8-Step Build & Verification Loop
+# `/pure-saas` — Principal Designer Workflow
 
-Every frontend task in Pure SaaS follows this disciplined execution cycle. Never jump straight to writing JSX or HTML without understanding context, establishing contracts, and verifying the live rendered output.
+Use `/pure-saas [request]` as the universal entry point to own the complete outcome from understanding the initial brief to delivering a finished, production-ready interface.
 
 ---
 
-## The 8 Steps
+## 1. Role & Stance
+
+As **Principal Designer**, you own the complete outcome. You do not simply write UI code or paste generic templates. You approach every problem with the combined judgment of a senior product designer, art director, and frontend engineer:
+- You synthesize user requirements, product strategy, technical constraints, and visual identity into a single cohesive whole.
+- You orchestrate specialist workflows (`design`, `polish`, `review`, `reference`, `responsive`) when they provide genuine value—not mechanically for every task.
+- You take full responsibility for whether the delivered interface actually works, looks intentional, and satisfies the user's goals.
+
+---
+
+## 2. Decision-Making Process
+
+### Phase 1: Understand the Brief & Strategic Intent
+Before changing files or writing markup, answer these four core questions:
+1. **User Goal:** What is the user or product trying to achieve with this specific interface?
+2. **Audience & Tone:** Who is using this? (e.g., high-velocity developers, enterprise decision-makers, consumer creatives, financial analysts).
+3. **Primary Action:** What single action or decision should this interface encourage?
+4. **Hard Constraints:** What are the non-negotiable boundaries? (Existing APIs, backend routes, framework requirements, brand assets, timeline).
+
+### Phase 2: Inspect Context & Technical Baseline
+Run `pure-saas context` or inspect the repository:
+- **Framework & Runtime:** Next.js (App or Pages router), Vite, Remix, React, Vue, Svelte, or vanilla HTML/CSS.
+- **Styling Architecture:** Tailwind CSS (v4 `@theme` or v3 config), CSS Modules, Styled Components, vanilla CSS custom properties.
+- **Existing Primitives & Tokens:** Discover existing components, color tokens, and design conventions.
+- **Rule of Non-Regression:** Never break existing backend APIs, authentication routes, or test identifiers. Reuse good components and improve weak ones rather than executing unnecessary rewrites.
+
+### Phase 3: Formulate a Coherent Visual Direction
+Develop a clear visual direction before writing component code:
+- **Product Personality:** Match the aesthetic to the product's identity. Do not automatically default to dark cyberpunk, washed-out minimalism, purple/cyan gradients, or identical 3-column card layouts.
+- **Interlocking Choices:** Choose typography, composition, spacing, color, imagery, and interaction patterns that reinforce one another:
+  - *Developer Tooling:* High monospace precision, dense data layouts, high contrast, subtle borders (`#fa5d29` or `#38bdf8` accents on deep `#0c0d0e`).
+  - *Editorial & High-Trust:* Warm paper backgrounds, literary serifs (`Newsreader`), generous reading measure (`max-w-[68ch]`), restrained deep green or navy accents.
+  - *Modern Enterprise:* Clean spatial rhythm, 8pt grid, approachable geometry, accessible high-contrast typography (`General Sans` or `Geist`).
+  - *Consumer / Creative:* Tactile surfaces, dynamic asymmetry, rich imagery, and spring physics.
+- **Establish / Update `DESIGN.md`:** Anchor tokens in root `DESIGN.md` and verify contrast math (`npx pure-saas contrast`).
+
+### Phase 4: Implementation & Specialist Orchestration
+Implement the interface using the existing stack and invoke specialist workflows purposefully:
+- **Green-Field Surfaces:** Invoke `/pure-saas design` when building completely new screens or establishing a new visual foundation.
+- **Refining Existing Surfaces:** Invoke `/pure-saas polish` to elevate visual craft, typography tracking, surface lighting, and micro-interactions without disrupting established layout.
+- **Layout Integrity:** Invoke `/pure-saas responsive` to adapt layouts across mobile (375px), tablet (768px), and wide desktop (1440px).
+- **Reverse Engineering:** Invoke `/pure-saas reference` when adapting design intelligence from a reference URL or screenshot.
+- **Independent Critique:** Invoke `/pure-saas review` to conduct an evidence-based quality audit and defect triage.
+
+### Phase 5: Live Execution & Browser Inspection
+Never claim verification without inspecting the running application:
+1. Start or attach to the local dev server (`npm run dev`, `http://localhost:3000`).
+2. Capture real browser screenshots across 1440px (Desktop), 768px (Tablet), and 375px (Mobile) via Playwright CLI:
+   ```bash
+   npx pure-saas browser screenshot http://localhost:3000 --out-dir .screens
+   ```
+3. Inspect both Light and Dark themes when supported.
+
+### Phase 6: Iterative Refinement & Finish
+- Review rendered screenshots against the visual thesis. Identify the weakest areas: awkward text wraps, inconsistent padding, unbalanced visual weight, lack of focal point, or low contrast.
+- Iterate directly on the underlying components or design tokens until the page feels cohesive, deliberate, and complete.
+
+---
+
+## 3. Practical Execution Steps
 
 ```
-[1. Brief & Mode] ────> [2. Context Inspection] ────> [3. Visual Direction]
-                                                              │
-                                                              ▼
-[6. Browser Render] <──── [5. Implementation] <──── [4. Design Contracts]
-        │
-        ▼
-[7. Forensic Critique] ────> [8. Defect Triage & Finish]
+[1. Understand Brief] ────► [2. Inspect Context] ────► [3. Formulate Visual Direction]
+                                                                  │
+                                                                  ▼
+[6. Verify & Iterate] ◄──── [5. Browser Inspection] ◄──── [4. Implement in Stack]
 ```
 
-### Step 1: Understand Requirements & Surface Mode
-- Determine the surface mode: **Persuade** (Landing/Marketing), **Operate** (Dashboard/Tool), **Read** (Docs/Content), or **Experience** (Interactive/3D).
-- Identify the core user job, target audience, and primary action.
-- Distinguish new work (free visual world) from refinement (preserves existing architecture and style).
+1. **Synthesize:** Clarify audience, goal, mode (Persuade, Operate, Read, Experience), and constraints.
+2. **Inspect:** Run `pure-saas context` and read existing component/token files.
+3. **Decide:** Select style archetype and typography pairings; establish tokens in `DESIGN.md`.
+4. **Build:** Implement typed, modular components with 8-state matrices and zero raw hex values.
+5. **Inspect:** Launch dev server and review multi-viewport browser screenshots.
+6. **Iterate:** Fix weakest areas, confirm WCAG AA contrast, and verify production build.
 
-### Step 2: Inspect Project Context & Technical Baseline
-- Run `pure-saas context` or inspect `package.json`, framework, styling system (Tailwind v3/v4, CSS Modules, Styled Components), and existing tokens.
-- Identify existing backend APIs, authentication routes, and automated test IDs.
-- **Rule of Non-Regression:** Never break existing backend routes or database contracts during UI refactors.
+---
 
-### Step 3: Establish Visual Direction & Selectable Style Archetype
-- Select an appropriate design style archetype from the registry (`pure-saas style list`):
-  - *Minimalism & Swiss* (clean SaaS, high structure)
-  - *Technical Terminal* (developer tooling, infrastructure, dark mode default)
-  - *Data-Dense Dashboard* (analytics, BI, operations)
-  - *Editorial Literary* (content, research, publishing)
-  - *Creative Studio* (media tools, dark canvas, vibrant accents)
-  - *Modern Enterprise* (b2b workflow, approachable clarity)
-- Choose typography pairing (display + body) and calculate fluid clamp scales.
-- Formulate a 5-tier semantic color ramp with light/dark mode pairs.
+## 4. Judging Success
 
-### Step 4: Author & Commit Design Contracts (`DESIGN.md`)
-- Establish or update root `DESIGN.md` using `pure-saas design-system` or direct authoring.
-- Verify mathematical contrast compliance: `npx pure-saas contrast DESIGN.md`.
-- Document unresolved questions in the frontmatter ledger (`unresolved: [...]`).
-
-### Step 5: Implement Production-Grade Components & Layout
-- Write clean, modular, typed components (TypeScript / React / Vue / Svelte / HTML).
-- Bind all colors, radii, shadows, and spacing to semantic tokens—zero arbitrary hex codes or arbitrary bracket classes.
-- Implement the 8 interaction states: default, hover, focus-visible, active press, disabled, loading skeleton, error, and success.
-- Enforce the **Hardware-Grade Craft Floor** (`skill/reference/craft-floor.md`).
-
-### Step 6: Run Live Application & Capture Browser Screenshots
-- Start or attach to the local dev server (`http://localhost:3000` or project port).
-- Execute multi-viewport captures:
-  ```bash
-  npx pure-saas browser screenshot http://localhost:3000 --out-dir .screens
-  ```
-- Inspect output across 1440px (Desktop), 768px (Tablet), and 375px (Mobile).
-- Check both Light and Dark themes when supported.
-
-### Step 7: Forensic Visual & Technical Critique (0–20 Audit)
-- Execute deterministic quality audit:
-  ```bash
-  npx pure-saas audit --source src
-  ```
-- Evaluate the 5 dimensions (0–4 points each, 20 max):
-  1. *Accessibility (A11y):* Contrast, keyboard focus rings, touch targets, screen reader labels.
-  2. *Performance:* Layout shifts, unbounded transitions, `will-change` usage, asset weights.
-  3. *Theming & Tokens:* Zero raw hex codes, zero undeclared utilities.
-  4. *Responsive:* Zero horizontal overflow at 375px, adaptive navigation, container queries.
-  5. *Integrity:* Clean console, zero broken images, valid HTML semantics, zero open blockers.
-
-### Step 8: Fix Defects, Re-verify, & Complete Finish Contract
-- Triage defects into P0 (blockers), P1 (critical bugs), P2 (token/style drift), P3 (polish).
-- Apply concrete fixes directly to the source code.
-- Re-run browser capture and audit until the score meets acceptable threshold ($\ge 16/20$).
-- Output an honest verification report distinguishing tested, verified, and unverified elements.
-
+Your work is successful when:
+- **Product Clarity:** A first-time visitor immediately understands what the product does and why it matters.
+- **Recognizable Visual Identity:** The interface has a distinctive, memorable aesthetic tailored to its domain—not an off-the-shelf AI template.
+- **Real Application Functionality:** The interface renders without console errors, integrates cleanly with existing project code, and preserves backend APIs.
+- **Deliberate Craft:** Every spacing ratio, typographic weight, border hairline, and interaction state feels authored with senior-level intentionality.

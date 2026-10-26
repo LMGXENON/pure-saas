@@ -3176,28 +3176,30 @@ Pure SaaS CLI - AI Agent Design Enforcement Toolkit
 Usage:
   pure-saas <command> [options]
 
-Core Commands:
-  validate [file]                 Validate DESIGN.md or design-brief.md structure, tokens & contrast
+The Six Specialist Workflows:
+  /pure-saas [request]            Principal Designer: Own complete outcome from brief to production
+  design [brief]                  Creative Director & Builder: Turn brief into distinctive implemented interface
+  polish [target]                 Senior Visual Designer: Elevate typography tracking, lighting & micro-craft
+  review [scope]                  Independent Design Critic: 10-dimension audit and P0-P3 defect triage
+  reference <url>                 Reference Analyst: Extract deep design intelligence and translate to project
+  responsive [target]             Responsive Systems Engineer: Multi-viewport mastery (375px to 1440px)
+
+Supporting Tooling & Verification:
+  validate [file]                 Validate DESIGN.md structure, tokens & WCAG contrast
   contrast [file]                 Audit semantic color tokens for WCAG 2.2 AA / AAA contrast compliance
   diff <file1> <file2>            Diff tokens between two design files or commits
   drift <design> <obs.json>       Detect design drift between expected tokens and measured observations
   check, check-tokens [file]      Check design tokens and scan source code for raw styling or drift
-  design-system [options]         Generate a complete DESIGN.md based on product, style, and design dials
+  context                         Inspect framework, styling system, component primitives & mode
+  doctor                          Health & environment verification (browsers, tokens, rules)
   export-tokens [file] [--format] Export tokens from DESIGN.md to CSS, Tailwind (v3/v4), DTCG, or JSON
-  audit, review [options]         5-dimension deterministic quality audit (A11y, Perf, Tokens, Responsive, Integrity)
+  audit [options]                 5-dimension deterministic quality audit (A11y, Perf, Tokens, Responsive, Integrity)
   browser <check|setup|screenshot|verify>  Playwright CLI browser automation and multi-viewport screenshots
   3d <check|spec|scaffold>        Procedural Three.js 3D model synthesis from images (img2threejs)
   style <list|info|select|query>  Selectable design style registry (Awesome Design Skills & Taste Skill)
-  query [domain] [query]          Query design intelligence (styles, products, colors, typography, UX, charts)
   ref, search-ref [query]         Search reference library (Apple HIG, frameworks, craft guidelines)
   init [--reference]              Initialize starter design-brief.md and DESIGN.md in the current repo
   install, setup [agent]          Configure agent rules for Cursor, Windsurf, Copilot, Gemini, or Claude
-
-Specialist Workflows:
-  design [request]                Establish or update root-level DESIGN.md specification
-  polish [request]                Elevate visual craft, typography tracking, hairline borders, and micro-interactions
-  responsive [request]            Optimize and verify layouts across mobile, tablet, and desktop viewports
-  reference <url>                 Deconstruct reference website into 16-section DESIGN.md specification
 
 Options:
   --json                          Output results as machine-readable JSON (suitable for CI)

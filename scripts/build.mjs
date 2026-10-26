@@ -114,42 +114,25 @@ Pure SaaS is an open-source, universal AI-agent skill and frontend engineering t
 
 ## 2. Command Architecture
 
-Pure SaaS operates via **one intelligent main command and 18 specialized verbs**:
+Pure SaaS operates via **one principal command and five specialist workflows**:
 
-1. **\`/pure-saas [request]\`**: Universal entry point. Autonomously inspects context, establishes \`DESIGN.md\`, executes frontend code, binds tokens, integrates motion and accessibility, and verifies output.
-2. **Specialized Verbs**:
-   - \`design\`: Establish/update \`DESIGN.md\` tokens and contracts.
-   - \`landing\`: High-conversion SaaS landing page with hero, proof, and pricing.
-   - \`review\`: 5-dimension deterministic quality audit (0–20 points) with P0–P3 defect triage.
-   - \`polish\`: Elevate visual craft, typography tracking, surface lighting, and micro-interactions.
-   - \`bolder\`: Amplify safe, flat, or bland UI into distinctive, high-conviction creative work.
-   - \`quieter\`: Calm aggressive, noisy, or overstimulated layouts into serene clarity.
-   - \`typeset\`: Editorial typography hierarchy, optical tracking, and fluid clamps.
-   - \`layout\`: Fix spatial rhythm, asymmetric balance, and 8pt grid containment.
-   - \`distill\`: Strip visual debt and simplify complex screens to their essential core.
-   - \`harden\`: Production robustness (empty states, edge cases, error recovery, i18n).
-   - \`animate\`: Purposeful spring physics (\`cubic-bezier(0.16, 1, 0.3, 1)\`).
-   - \`colorize\`: Strategic 5-tier color ramps and mathematical WCAG 2.2 AA contrast.
-   - \`delight\`: Shaders, reactive canvasses, and tactile micro-surprises.
-   - \`adapt\` / \`responsive\`: Multi-viewport responsive mastery (375px mobile to 1440px desktop).
-   - \`clarify\`: UX microcopy, active button verbs, and actionable error messages.
-   - \`optimize\`: Core Web Vitals, virtualization, and sub-frame layout stability.
-   - \`browser\`: Playwright CLI headless browser automation and multi-viewport screenshots.
-   - \`3d\`: Procedural Three.js 3D models (img2threejs pipeline).
-   - \`style\`: Modular style archetype registry (Swiss, Technical, Editorial, Modern Enterprise).
+1. **\`/pure-saas [request]\`** — **Principal Designer**: Owns the complete outcome from understanding the brief, audience, and constraints to delivering a finished, production-ready interface.
+2. **\`/pure-saas design [brief]\`** — **Creative Director & Builder**: Turns a product brief into a distinctive, fully implemented interface with strong visual hierarchy and authentic content.
+3. **\`/pure-saas polish [target]\`** — **Senior Visual Designer**: Elevates visual craft, typography tracking, surface lighting, and micro-interactions without breaking working behavior.
+4. **\`/pure-saas review [scope]\`** — **Independent Design Critic**: Judges the interface honestly across 10 dimensions, prioritizing defects from P0 to P3 and driving verified fixes.
+5. **\`/pure-saas reference [URL/Image]\`** — **Reference Analyst & Art Director**: Extracts deep design intelligence from references and translates it into an original, domain-tailored implementation.
+6. **\`/pure-saas responsive [target]\`** — **Responsive Systems Engineer**: Makes the interface feel purposefully designed across all viewports (375px mobile to 1440px desktop) with zero overflow.
 
 ---
 
-## 3. The 8-Step Build & Verification Loop
+## 3. The 6-Step Build & Verification Loop
 
 1. **Understand Requirements & Mode:** Determine whether surface is Persuade, Operate, Read, or Experience.
 2. **Inspect Context:** Check dependencies, styling system, existing tokens, and backend APIs.
-3. **Select Style Archetype:** Pick from curated archetypes in \`pure-saas style list\`.
-4. **Author DESIGN.md:** Define 3-tier semantic tokens and verify WCAG contrast math.
-5. **Implement Components:** Build with 8-state interaction matrix and zero raw hex codes.
-6. **Capture Real Browser Screenshots:** Test across 1440px, 768px, and 375px viewports.
-7. **Forensic Audit:** Measure code against 5 dimensions (0–20 score).
-8. **Fix Defects & Verify Finish:** Triage P0–P3 defects and complete deliverable.
+3. **Formulate Visual Direction:** Pick style archetype from \`pure-saas style list\`, choose typography, and author \`DESIGN.md\`.
+4. **Implement Components:** Build with 8-state interaction matrix and zero raw hex codes.
+5. **Capture Real Browser Screenshots:** Test across 1440px, 768px, and 375px viewports.
+6. **Forensic Review & Verified Fixes:** Measure against the 10 dimensions, triage P0–P3 defects, and verify final finish.
 
 ---
 
@@ -165,8 +148,15 @@ Pure SaaS operates via **one intelligent main command and 18 specialized verbs**
 
 Claude Code project instructions for Pure SaaS.
 
-## Invoking Pure SaaS
-- Main command: \`/pure-saas [request]\`
+## Invoking Pure SaaS Workflows
+- **Principal Designer (Main):** \`/pure-saas [request]\`
+- **Creative Director & Builder:** \`/pure-saas design [brief]\`
+- **Senior Visual Designer:** \`/pure-saas polish [target]\`
+- **Independent Design Critic:** \`/pure-saas review [scope]\`
+- **Reference Analyst:** \`/pure-saas reference <url>\`
+- **Responsive Systems Engineer:** \`/pure-saas responsive [target]\`
+
+## Supporting Tooling
 - Review & audit: \`pure-saas audit --source src\`
 - Context inspection: \`pure-saas context\`
 - Health & diagnostics: \`pure-saas doctor\`
@@ -182,19 +172,16 @@ Claude Code project instructions for Pure SaaS.
 
   const rootRule = `When creating, reviewing, or improving UI/UX designs, follow the Pure SaaS design system:
 
-1. Read SKILL.md in full. It defines the stance, surface modes (Persuade, Operate, Read, Experience),
-   the 8-step build loop, the 8-state component matrix, semantic token architecture, and honest verification.
+1. Read SKILL.md in full. It defines the six specialist command workflows: Principal Designer,
+   Creative Director, Senior Visual Designer, Independent Critic, Reference Analyst, and Responsive Engineer.
 2. Retrieve exact references for the task using \`npx pure-saas ref "<component, framework, or topic>"\`.
-3. Universal Command: Use \`/pure-saas [request]\` as the default entry point.
-4. Specialist Verbs:
-   - \`design\`: Establish or update DESIGN.md before coding.
-   - \`landing\`: High-conversion SaaS landing page with hero, proof, and pricing.
-   - \`polish\`: Elevate typography tracking, surface lighting, micro-interactions.
-   - \`bolder\` / \`quieter\`: Amplify bland UI or calm overstimulated layouts.
-   - \`typeset\` / \`layout\`: Editorial typography and 8pt spatial grid rhythm.
-   - \`review\`: 5-dimension deterministic audit (A11y, Perf, Theming, Responsive, Integrity) scored 0–20.
-   - \`browser\`: Playwright CLI headless browser automation & multi-viewport screenshots.
-   - \`3d\`: Procedural Three.js 3D model synthesis from reference images.
+3. Principal Command: Use \`/pure-saas [request]\` as the default entry point.
+4. Specialist Commands:
+   - \`/pure-saas design [brief]\`: Turn product brief into a distinctive, fully implemented interface.
+   - \`/pure-saas polish [target]\`: Elevate typography tracking, surface lighting, micro-interactions.
+   - \`/pure-saas review [scope]\`: Judge interface honestly across 10 dimensions with P0-P3 defect triage.
+   - \`/pure-saas reference [URL/Image]\`: Extract design intelligence from references and adapt to target project.
+   - \`/pure-saas responsive [target]\`: Viewport mastery from 375px mobile to 1440px desktop with zero overflow.
 5. Non-Negotiable Engineering Rules:
    - Zero raw hex colors or arbitrary styling: resolve to semantic tokens in DESIGN.md.
    - Zero generic AI slop: no purple/cyan gradient text, excessive glassmorphism blur, repetitive 3-column cards, or green pulsing dots.

@@ -1,66 +1,81 @@
-# Polish: Hardware-Grade Visual Refinement
+# `/pure-saas polish` — Senior Visual Designer
 
-Use `/pure-saas polish [target]` or `impeccable polish` when an interface is functionally working, but lacks the tactile refinement, optical precision, and surface lighting of an elite Apple or Linear-grade product.
-
----
-
-## 1. Polish Objectives
-
-A polish pass does NOT rewrite state management, change data fetching, or replace existing component architecture. It focuses strictly on:
-1. **Hairline Borders:** Replacing coarse 2px borders with razor-sharp 1px hairline borders (`1px solid var(--color-border)`).
-2. **Surface Lighting & Depth:** Multi-stop box shadows that combine an ambient occluding shadow with a subtle directional light bloom.
-3. **Optical Alignment:** Aligning asymmetric icons, optical tracking on headings (-0.025em), and baseline alignment of badges and counters.
-4. **Spring Micro-Interactions:** Adding physical tactile press scale (`scale(0.98)` on active) and rapid spring transitions (`cubic-bezier(0.16, 1, 0.3, 1)`).
-5. **Themed Browser Surfaces:** Custom text selection (`::selection`), caret color (`caret-color`), and subtle scrollbars.
+Use `/pure-saas polish [target]` to take an existing interface from acceptable to exceptional without destroying what already works.
 
 ---
 
-## 2. Refinement Techniques
+## 1. Role & Stance
 
-### A. Surface Elevation & Shadows
-Never use generic muddy shadows (`box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1)`). Use layered ambient + directional light:
-```css
-/* Card Elevation: Ambient occluding floor + directional overhead light */
-box-shadow: 
-  0 1px 2px 0 rgba(0, 0, 0, 0.05),
-  0 4px 12px -2px rgba(0, 0, 0, 0.08);
-```
+As **Senior Visual Designer**, you elevate craft, elegance, and micro-refinement:
+- You preserve the product's established identity and working behavior—you do not blow up working code or force an unrelated style simply because it is trendy.
+- You distinguish high-impact architectural craft defects from trivial cosmetic adjustments.
+- You fix the underlying design tokens, spacing rules, and component implementations rather than piling on brittle inline CSS overrides.
 
-### B. Tactile Button Press Physics
-When a user clicks or taps a button, give them physical confirmation:
-```css
-.btn-action {
-  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), background-color 150ms ease;
-}
-.btn-action:hover {
-  transform: translateY(-1px);
-}
-.btn-action:active {
-  transform: translateY(0.5px) scale(0.985);
-}
-```
+---
 
-### C. Optical Hierarchy on Badges & Tags
-Ensure small status badges align with cap-height rather than baseline:
-```css
-.badge {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  letter-spacing: 0.02em;
-  font-weight: 500;
-  padding: 0.125rem 0.5rem;
-  border-radius: var(--radius-sm);
-}
+## 2. Decision-Making Process
+
+### Phase 1: Holistic Whole-Page Assessment
+Before modifying a single line of code, step back and examine the interface as an interconnected system:
+1. **The Squint Test:** Squint at the screen. What dominates? Does the visual weight match the information hierarchy, or do loud borders, badges, or secondary icons distract from primary content?
+2. **Find the High-Impact Levers:** Identify the 3–5 changes that will elevate the entire screen (e.g., standardizing container widths, tightening loose heading tracking, replacing thick black borders with subtle hairlines, or aligning disparate baseline grids).
+3. **Inspect with Real Content:** Evaluate how components behave with long titles, real numbers, and actual copy rather than judging empty or idealized mocks.
+
+### Phase 2: Systematic Visual Craft Evaluation
+Examine the interface across these core craft dimensions:
+- **Typography & Measure:**
+  - Are display headings optically tracked? Tighten tracking on sizes $\ge$ 24px (`-0.015em` to `-0.03em`).
+  - Do headlines wrap with `text-wrap: balance` to prevent awkward one-word orphans?
+  - Is body text line length constrained to 60–75 characters (`max-w-prose` / `max-w-[68ch]`)?
+  - Are numbers, prices, and timestamps rendered with tabular numerals (`tabular-nums`)?
+- **Spatial Rhythm & Containment (8pt Grid):**
+  - Are margins and paddings aligned to 4, 8, 12, 16, 24, 32, 48, 64px increments?
+  - Is there strictly more vertical whitespace *above* a section heading than *below* it?
+  - Are container max-widths consistent across all sections (`max-w-6xl` or `max-w-7xl`)?
+- **Lighting, Surfaces & Hairlines:**
+  - Are container borders subtle 1px hairlines (`rgba(255, 255, 255, 0.08)` in dark mode; `rgba(0, 0, 0, 0.08)` in light mode)?
+  - Are shadows realistic multi-stop ambient occlusion layers rather than harsh single-point black dropshadows?
+  - In dark mode, is depth communicated through subtle surface elevation (`#09090b` canvas $\rightarrow$ `#18181b` surface) rather than blurred drop shadows?
+- **Micro-Interactions & Tactile Feedback:**
+  - Do buttons have an active physical compression (`active:scale-[0.985] active:translate-y-[0.5px]`)?
+  - Are transition durations snappy (100–150ms for micro-interactions; 200–280ms for overlays)?
+  - Do motion curves use natural exponential spring physics (`cubic-bezier(0.16, 1, 0.3, 1)`)?
+- **Themed Browser Surfaces:**
+  - Are text selection (`::selection`), caret color (`caret-color`), and focus rings (`:focus-visible`) styled with palette tokens?
+
+### Phase 3: Execute Highest-Impact Improvements First
+1. **Underlying Primitives First:** Fix the shared token or base component (e.g., in `Button.tsx` or `DESIGN.md`), allowing the polish to propagate cleanly across all instances.
+2. **Eliminate Visual Noise:** Remove repetitive section kickers/eyebrows, redundant card borders inside cards, and gratuitous glow gradients.
+3. **Harmonize Spacing:** Align mismatched padding between adjacent cards and container edges.
+
+### Phase 4: Re-inspection & Verification
+- Re-run the application and capture updated screenshots.
+- Confirm that every change improved visual coherence without introducing regression or breaking responsive behavior.
+
+---
+
+## 3. Practical Execution Steps
+
+```bash
+# 1. Run audit to establish baseline quality score
+npx pure-saas audit --source src
+
+# 2. Inspect live rendered layout in browser
+npx pure-saas browser screenshot http://localhost:3000 --out-dir .screens
+
+# 3. Apply targeted visual polish to components and tokens
+npx pure-saas polish "Fix heading tracking, hairline card borders, and button active states"
+
+# 4. Re-verify audit score improvements
+npx pure-saas audit --source src
 ```
 
 ---
 
-## 3. Verification Protocol
+## 4. Judging Success
 
-After executing polish:
-1. Capture screenshots of modified components before and after.
-2. Verify that 100% of automated tests still pass.
-3. Verify that zero backend APIs or component props were broken.
-
+Your polish is successful when:
+- **Noticeable Craft Elevation:** The interface immediately feels more refined, authoritative, and premium to experienced designers.
+- **Preserved Identity & Stability:** The visual brand, layout structure, and backend integrations remain intact.
+- **Architectural Cleanliness:** Improvements exist in clean tokens, components, or layout rules—not stacked CSS overrides.
+- **Zero Regressions:** Zero broken layouts at mobile (375px) or desktop (1440px), zero contrast regressions, and zero console warnings.

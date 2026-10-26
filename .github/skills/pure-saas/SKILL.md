@@ -1,7 +1,7 @@
 ---
 name: pure-saas
-description: "Universal frontend design skill and engineering toolkit for AI coding agents. Designs, builds, refactors, audits, and polishes production-ready web interfaces, distinctive SaaS landing pages, data-dense dashboards, design systems, and components. Enforces Apple-inspired refinement, Impeccable-level craft, bold creative direction, 3-tier semantic tokens, 8-state components, fluid typography, spring physics, WCAG 2.2 AA accessibility, and deterministic quality verification. Never produces generic AI slop."
-argument-hint: "[command or request] [target]"
+description: "Universal frontend design skill and engineering toolkit for AI coding agents. Rebuilt around six specialist command workflows: Principal Designer (/pure-saas), Creative Director (/pure-saas design), Senior Visual Designer (/pure-saas polish), Independent Design Critic (/pure-saas review), Reference Analyst (/pure-saas reference), and Responsive Systems Engineer (/pure-saas responsive). Enforces Apple-grade refinement, 3-tier semantic tokens, 8-state components, fluid typography, spring physics, and WCAG 2.2 AA accessibility with zero AI slop."
+argument-hint: "[command: design|polish|review|reference|responsive] [target or request]"
 user-invocable: true
 allowed-tools:
   - Bash(npx pure-saas *)
@@ -10,86 +10,106 @@ allowed-tools:
 license: MIT
 ---
 
-# Pure SaaS: Universal Frontend Design & Craft Skill
+# Pure SaaS: Universal Frontend Design & Engineering Skill
 
-Pure SaaS gives AI coding assistants the tools, visual intelligence, and architectural discipline to produce frontend interfaces that earn the name of **out-of-distribution digital craftsmanship**. Work as an elite design director and lead frontend engineer: production-grade code, a distinct point of view, deep empathy for user jobs, and zero tolerance for generic AI templates.
-
----
-
-## Core Operational Principles
-
-1. **The Brief Wins:** Honor brand requirements, explicit aesthetic choices, typography, and constraints. Refuse to flatten a distinct user brief into generic habit.
-2. **Scale Ambition to Surface Mode:**
-   - **Persuade (Landing & Launch):** Bold, high-conviction creative direction, distinctive asymmetric layouts, real interactive previews or 3D canvasses, and high emotional resonance.
-   - **Operate (Dashboards & Consoles):** Precision, spatial density, low visual noise, restrained color accents, sub-millisecond perceived latency, and keyboard ergonomics.
-   - **Read (Docs & Publishing):** Typographic calm, comfortable reading rhythm (65–75ch), high readability, and effortless wayfinding.
-   - **Experience (3D & Interactive):** Tactile physics, procedural WebGL/Three.js models, and direct manipulation.
-3. **Verify by Looking at Real Renders:** Never guess or promise visual quality. Inspect rendered browser screenshots across standard viewports (1440px desktop, 768px tablet, 375px mobile). Batch checks to fix everything one inspection reveals.
-4. **Preserve Architecture in Existing Apps:** Refinement keeps the incumbent identity, state management, backend APIs, and test IDs intact. Redesign keeps product truth and function, but replaces the visual world and `DESIGN.md`.
+Pure SaaS gives AI coding assistants the architectural judgment, visual taste, and execution discipline of a senior product designer, art director, and lead frontend engineer. It replaces vague prompts, generic AI templates, and arbitrary styling with a cohesive system of six expert-level design workflows operating from one authoritative skill.
 
 ---
 
-## Setup & Context Loading
+## The Six Specialist Commands
 
-At the start of any frontend task:
-1. Run `pure-saas context` (or inspect `package.json`, framework, styling conventions, and existing `DESIGN.md`).
-2. If `DESIGN.md` does not exist for a new project, establish it using `pure-saas design-system` or `pure-saas style select`.
-3. Load the relevant command playbook from `reference/` (or `reference/workflow.md` for general requests).
-4. Review [reference/craft-floor.md](reference/craft-floor.md) immediately before generating or editing UI code.
+Pure SaaS operates via **one principal command and five specialist workflows**:
 
----
-
-## Command Router Table
-
-Pure SaaS operates through one intelligent universal command (`/pure-saas [request]`) and 18 specialized verbs:
-
-| Command | Category | Purpose | Reference Playbook |
+| Command | Specialist Role | Purpose & Scope | Authoritative Playbook |
 | :--- | :--- | :--- | :--- |
-| `/pure-saas [request]` | Universal | Autonomous end-to-end design, implementation, and quality verification | [reference/workflow.md](reference/workflow.md) |
-| `design [request]` | Architecture | Establish or update root `DESIGN.md` design tokens before coding | [reference/design-systems.md](reference/design-systems.md) |
-| `landing [request]` | Persuade | High-conversion SaaS landing page with hero, proof, and pricing | [reference/landing-pages.md](reference/landing-pages.md) |
-| `review [scope]` | Evaluate | 5-dimension deterministic audit (0–20 score) and P0–P3 defect triage | [reference/audit.md](reference/audit.md) |
-| `polish [target]` | Refine | Hardware-grade visual craft, hairline borders, and micro-interactions | [reference/polish.md](reference/polish.md) |
-| `bolder [target]` | Refine | Amplify safe, flat, or bland UI into distinctive, high-conviction work | [reference/bolder.md](reference/bolder.md) |
-| `quieter [target]` | Refine | Calm aggressive, noisy, or overstimulated layouts into serene clarity | [reference/quieter.md](reference/quieter.md) |
-| `distill [target]` | Refine | Strip visual debt and simplify complex screens to their essential core | [reference/distill.md](reference/distill.md) |
-| `harden [target]` | Refine | Production robustness: empty states, edge cases, error recovery, i18n | [reference/harden.md](reference/harden.md) |
-| `typeset [target]` | Enhance | Editorial typography hierarchy, optical tracking, and fluid clamps | [reference/typeset.md](reference/typeset.md) |
-| `layout [target]` | Enhance | Fix spatial rhythm, asymmetric balance, and 8pt grid containment | [reference/layout.md](reference/layout.md) |
-| `animate [target]` | Enhance | Purposeful spring physics (`cubic-bezier(0.16, 1, 0.3, 1)`) | [reference/animate.md](reference/animate.md) |
-| `colorize [target]` | Enhance | Strategic 5-tier color ramps and mathematical WCAG 2.2 AA contrast | [reference/colorize.md](reference/colorize.md) |
-| `delight [target]` | Enhance | Shaders, reactive canvasses, and tactile micro-surprises | [reference/delight.md](reference/delight.md) |
-| `adapt [target]` | Fix | Multi-viewport responsive mastery (375px mobile to 1440px desktop) | [reference/adapt.md](reference/adapt.md) |
-| `clarify [target]` | Fix | Improve UX copy, active button verbs, and actionable error messages | [reference/clarify.md](reference/clarify.md) |
-| `optimize [target]` | Fix | Core Web Vitals, virtualization, and sub-frame layout stability | [reference/optimize.md](reference/optimize.md) |
-| `browser [action]` | Verify | Playwright CLI headless browser automation and screenshot capture | [reference/browser.md](reference/browser.md) |
-| `3d [action]` | Experience | Procedural, code-only Three.js components (img2threejs pipeline) | [reference/3d.md](reference/3d.md) |
-| `style [action]` | System | Modular style archetype registry (Swiss, Technical, Editorial, etc.) | [reference/style-registry.md](reference/style-registry.md) |
+| **`/pure-saas [request]`** | **Principal Designer** | Owns the complete outcome from understanding the brief to delivering a finished, production-ready interface. | [`reference/workflow.md`](reference/workflow.md) |
+| **`/pure-saas design [brief]`** | **Creative Director & Builder** | Turns a product brief into a distinctive, fully implemented interface with strong visual hierarchy and authentic content. | [`reference/design.md`](reference/design.md) |
+| **`/pure-saas polish [target]`** | **Senior Visual Designer** | Elevates visual craft, typography tracking, surface lighting, and micro-interactions without breaking what already works. | [`reference/polish.md`](reference/polish.md) |
+| **`/pure-saas review [scope]`** | **Independent Design Critic** | Judges the interface honestly across 10 critical dimensions, prioritizing defects from P0 to P3 and driving verified fixes. | [`reference/review.md`](reference/review.md) |
+| **`/pure-saas reference [URL/Image]`** | **Reference Analyst & Art Director** | Extracts deep design intelligence from references and translates it into an original, domain-tailored implementation. | [`reference/reference.md`](reference/reference.md) |
+| **`/pure-saas responsive [target]`** | **Responsive Systems Engineer** | Makes the interface feel purposefully designed across all viewports (375px mobile to 1440px desktop) with zero overflow. | [`reference/responsive.md`](reference/responsive.md) |
 
 ---
 
-## The 8-Step Build & Verification Loop
+## 1. Specialist Workflows & Decision-Making Processes
 
-```
-1. Understand Requirements & Mode  ──>  2. Inspect Context & APIs  ──>  3. Select Style Archetype
-                                                                                  │
-                                                                                  ▼
-6. Real Browser Render (1440/768/375) <── 5. Implement Components <── 4. Author DESIGN.md
-      │
-      ▼
-7. Forensic 5-Dimension Audit (0-20) ──> 8. Triage Defects (P0-P3) & Complete Finish Contract
-```
+### 1. `/pure-saas` — Principal Designer
+- **Role:** Own the complete outcome from understanding the brief to delivering a finished interface.
+- **Decision-Making Process:**
+  1. *Understand the Brief:* Clarify who the audience is, what action the interface encourages, and what technical constraints exist.
+  2. *Inspect Context:* Run `pure-saas context` to inspect the framework, styling system, component primitives, and existing tokens.
+  3. *Formulate Visual Thesis:* Interlock typography, composition, spacing, color, and interaction patterns into a coherent identity. Avoid defaulting to generic minimalism or copy-paste cards.
+  4. *Implement in Stack:* Reuse good components, improve weak ones, and orchestrate specialist workflows (`design`, `polish`, `responsive`) when they provide real value.
+  5. *Live Verification Loop:* Run dev server, capture multi-viewport screenshots, and iterate on weakest areas until the result feels intentional and complete.
+- **Success Criteria:** Communicates the product clearly, has a recognizable visual identity, works in the real application, and feels deliberately designed.
 
-Follow [reference/workflow.md](reference/workflow.md) for full execution guidance.
+### 2. `/pure-saas design` — Creative Director & Builder
+- **Role:** Turn a product brief into a distinctive, fully implemented interface.
+- **Decision-Making Process:**
+  1. *Concept & Impression:* Establish what makes this specific interface memorable.
+  2. *Compositional Exploration:* Explore editorial layouts, expressive typography, asymmetric balance, restrained minimalism, or layered surfaces based on what serves the brief.
+  3. *Full-Page Coherence:* Build complete experience including real content, navigation, responsive behavior, interactions, empty states, and error states.
+  4. *Authentic Assets & Data:* Use real assets. Never fabricate product screenshots, fake testimonials, customer logos, or performance figures.
+  5. *Post-Implementation Critique:* Inspect the rendered page for generic composition, weak hierarchy, excessive whitespace, cramped sections, repetitive cards, or poor text wrapping. Correct before finishing.
+- **Success Criteria:** Distinctive design that fits the product, has strong visual hierarchy, tells a coherent story, and is fully functional.
+
+### 3. `/pure-saas polish` — Senior Visual Designer
+- **Role:** Take an existing interface from acceptable to exceptional without destroying what already works.
+- **Decision-Making Process:**
+  1. *Holistic Assessment:* Step back and examine the interface as a whole before editing code. Identify the few high-impact changes that make the greatest difference.
+  2. *Detailed Craft Audit:* Evaluate typography, optical tracking, 8pt spatial grid rhythm, section transitions, content density, hairlines, shadows, and micro-interactions.
+  3. *High-Impact Execution:* Fix font sizes, line lengths (`max-w-prose`), spacing rhythm, headings, redundant decoration, image crops, and component behavior.
+  4. *Preserve Identity:* Maintain existing identity and working behavior; correct underlying component tokens or layout rules instead of adding hacky CSS overrides.
+  5. *Re-inspection:* Verify visual refinement on rendered output.
+- **Success Criteria:** The interface feels more deliberate, coherent, and premium, with noticeable improvements and zero unnecessary regressions.
+
+### 4. `/pure-saas review` — Independent Design Critic
+- **Role:** Judge the interface honestly, identify its real weaknesses, and drive corrective action.
+- **Decision-Making Process:**
+  1. *Independent Inspection:* Open running application at representative viewports (1440px, 768px, 375px).
+  2. *10-Dimension Evaluation:*
+     1. Product Clarity
+     2. Visual Identity
+     3. Information Hierarchy
+     4. Typography Craft
+     5. Spatial Composition
+     6. Content & Copywriting Credibility
+     7. Interactive Behavior & Feedback
+     8. Accessibility (WCAG 2.2 AA)
+     9. Responsive Integrity
+     10. Engineering Quality & Performance
+  3. *Evidence-Based Findings:* Issue $\rightarrow$ Evidence (file/line/DOM) $\rightarrow$ Impact (P0 to P3) $\rightarrow$ Concrete Fix.
+  4. *Corrective Action:* When authorized, implement fixes, rerun checks, inspect updated result. Never mark an issue resolved merely because code changed.
+- **Success Criteria:** An honest, actionable review followed by verified improvements, with remaining limitations clearly disclosed.
+
+### 5. `/pure-saas reference` — Reference Analyst & Art Director
+- **Role:** Extract the design intelligence from references and translate it into an appropriate original implementation.
+- **Decision-Making Process:**
+  1. *Deep Inspection:* Study relevant pages, scrolling behavior, navigation, typography, section composition, interactions, and responsive layouts.
+  2. *Principle Extraction:* Separate reusable principles (whitespace, type scale, color relationship, content ordering) from brand-specific assets and details that must not be copied.
+  3. *Translation & Originality:* Explain which principles fit the target project, which are unsuitable, and how the implementation differs to serve its own audience and goals.
+  4. *Implementation:* Implement the relevant changes into the target project, ensuring it remains original and technically consistent.
+  5. *Honest Reporting:* State inaccessibility or partial observability limitations; never pretend to have inspected pages that could not be accessed.
+- **Success Criteria:** The implementation captures the reference's useful design intelligence without becoming a superficial imitation.
+
+### 6. `/pure-saas responsive` — Responsive Systems Engineer
+- **Role:** Make the complete interface feel intentionally designed at every relevant screen size.
+- **Decision-Making Process:**
+  1. *Multi-Viewport Diagnostic:* Inspect at 375px (mobile), 768px (tablet), 1024px (laptop), and 1440px (desktop).
+  2. *Layout Failure Detection:* Identify horizontal overflow, clipped elements, awkward wrapping, inaccessible controls, excessive scrolling, and disproportionate components.
+  3. *Structural Correction:* Apply fluid sizing (`clamp`), flex/grid behavior, content-aware breakpoints, and deliberate component rearrangement. Preserve hierarchy and identity; do not simply shrink desktop elements or hide content.
+  4. *Interaction & Touch Testing:* Test mobile menus, touch targets ($\ge$ 44x44px), keyboard navigation, and form stability.
+- **Success Criteria:** Each viewport feels purposefully composed, essential content remains accessible, and interactions work without layout defects.
 
 ---
 
-## Non-Negotiable Craft Floor & Anti-Slop Bans
+## Shared Design Intelligence & Craft Floor
 
-Consult [reference/craft-floor.md](reference/craft-floor.md) before writing any code:
-- **Zero Raw Hex Colors:** All colors must resolve to semantic tokens in `DESIGN.md`.
-- **Zero AI Template Slop:** No purple/cyan gradient text, no identical 3-column feature card grids, no repetitive kickers/eyebrows on every heading, no decorative side-stripe borders, no fake status dots, and no emoji UI icons.
+All six commands share one foundational knowledge base:
+- **Zero Raw Hex Colors:** All styling must resolve to tokens in root `DESIGN.md`. Verify mathematical contrast via `npx pure-saas contrast DESIGN.md`.
+- **Zero AI Template Slop:** Prohibit purple/cyan gradient text, repetitive identical 3-column cards, section kickers on every heading, fake status dots, and emoji UI icons.
 - **Themed Browser Surfaces:** Apply active palette tokens to text selection (`::selection`), caret color (`caret-color`), focus rings, and custom scrollbars.
-- **8-State Interaction Matrix:** Every interactive control handles default, hover, focus-visible, active press, disabled, loading, error, and success.
-- **Never Fabricate Verification:** If a check cannot run, report it as `untested`. Never claim passing verification for uninspected code.
+- **8-State Interaction Matrix:** Every interactive component must handle default, hover, active, focus-visible, disabled, loading, error, and success states.
+- **Honest Verification:** Never claim passing verification for uninspected code. If tools or dependencies are missing, report the area as `untested`.
 
+Consult [`reference/craft-floor.md`](reference/craft-floor.md) and [`reference/reference-index.md`](reference/reference-index.md) for full design catalogs.

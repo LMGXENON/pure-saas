@@ -118,16 +118,27 @@ runTest('CLI: "pure-saas style list" & "pure-saas style info"', () => {
   return list.status === 0 && info.status === 0 && info.stdout.includes('Minimalism & Swiss');
 });
 
-// 11. CLI: Specialist Verbs
-runTest('CLI: Specialist Verbs (bolder, typeset, landing, polish)', () => {
-  const verbs = ['bolder', 'typeset', 'landing', 'polish', 'quieter', 'harden', 'layout'];
-  for (const v of verbs) {
-    const res = execCli([v]);
-    if (res.status !== 0 || !res.stdout.includes(`Pure SaaS Specialist Action: ${v.toUpperCase()}`)) {
-      return false;
-    }
+// 11. CLI: Six Specialist Commands
+runTest('CLI: Six Specialist Commands (design, polish, review, reference, responsive, context)', () => {
+  const design = execCli(['design', 'minimalism-swiss test']);
+  const polish = execCli(['polish']);
+  const review = execCli(['review']);
+  const refRecord = path.join(rootDir, '.test-tmp', 'test-ref.md');
+  const reference = execCli(['reference', 'https://example.com']);
+  const responsive = execCli(['responsive']);
+  const context = execCli(['context']);
+
+  // Clean up any test reference record
+  if (fs.existsSync(path.join(rootDir, 'reference-record.md'))) {
+    fs.unlinkSync(path.join(rootDir, 'reference-record.md'));
   }
-  return true;
+
+  return design.status === 0 &&
+         polish.status === 0 &&
+         review.status === 0 &&
+         reference.status === 0 &&
+         responsive.status === 0 &&
+         context.status === 0;
 });
 
 // 12. CLI: Help Flag Handling

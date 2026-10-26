@@ -5,7 +5,7 @@ status: "approved"
 product_archetype: "SaaS (General)"
 style_archetype: "Minimalism & Swiss Style"
 dials:
-  variance: 5
+  variance: 6
   motion: 5
   density: 6
 tokens:
@@ -76,7 +76,7 @@ unresolved:
 ## 1. Product & Direction Overview
 - **Product Archetype:** SaaS (General)
 - **Style Archetype:** Minimalism & Swiss Style
-- **Design Dials:** Variance 5/10 | Motion 5/10 | Density 6/10 (Natural Apple-grade responsive easing)
+- **Design Dials:** Variance 6/10 | Motion 5/10 | Density 6/10 (Natural Apple-grade responsive easing)
 
 ## 2. Precedence Hierarchy
 1. User's explicit requirements and brand design system.
