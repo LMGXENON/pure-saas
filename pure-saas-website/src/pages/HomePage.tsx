@@ -1,443 +1,576 @@
+// pure-saas-website/src/pages/HomePage.tsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CodeBlock } from '../components/CodeBlock';
 import {
   ArrowRight,
-  ExternalLink,
-  Layers,
-  SlidersHorizontal,
-  CheckCircle2,
-  ShieldCheck,
-  Terminal,
-  Activity,
-  Cpu,
-  Database
+  Copy,
+  Check,
+  ChevronDown,
+  Sparkles,
+  Code2,
+  Eye
 } from 'lucide-react';
 
+const VERIFIED_INSTALL_PROMPT = `Configure this repository with Pure SaaS.
+1. Run \`npx pure-saas init\` to install skill files and agent rules.
+2. Run \`npx pure-saas design-system --product "SaaS" --variance 5 --motion 5 --density 6 --out DESIGN.md\` to establish semantic tokens.
+3. Verify the installation by running \`npx pure-saas validate DESIGN.md\`.`;
+
+// =========================================================================
+// SECTION 2 CODE STRINGS (Exact matching code for genuine comparison)
+// =========================================================================
+const CODE_WITHOUT_PURE_SAAS = `// Without Pure SaaS: Unguided AI output
+// Arbitrary hardcoded hex values, mismatched border radii, lack of accessible focus states
+export function ApiKeyCard() {
+  return (
+    <div style={{ backgroundColor: '#1e293b', borderRadius: '14px', padding: '20px', border: '1px solid #334155' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h3 style={{ color: '#f8fafc', fontSize: '15px', fontWeight: 'bold' }}>Production API Key</h3>
+        <span style={{ backgroundColor: '#0284c7', color: '#fff', fontSize: '10px', padding: '2px 8px', borderRadius: '20px' }}>
+          Active
+        </span>
+      </div>
+      <p style={{ color: '#94a3b8', fontSize: '12px', marginTop: '6px' }}>
+        Used to authenticate high-throughput webhook telemetry.
+      </p>
+      <div style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
+        <input
+          readOnly
+          value="sk_live_98a7df8a97f98d7sf"
+          style={{ flex: 1, backgroundColor: '#0f172a', border: '1px solid #475569', color: '#38bdf8', borderRadius: '4px', padding: '6px 10px', fontSize: '12px' }}
+        />
+        <button
+          style={{ backgroundColor: '#4f46e5', color: '#fff', border: 'none', borderRadius: '3px', padding: '6px 14px', fontSize: '12px', cursor: 'pointer' }}
+        >
+          Copy
+        </button>
+      </div>
+    </div>
+  );
+}`;
+
+const CODE_WITH_PURE_SAAS = `// With Pure SaaS: Guided by DESIGN.md semantic tokens
+// System radius, Apple-grade hairline border, tabular figures, accessible focus ring
+export function ApiKeyCard() {
+  return (
+    <div className="rounded-xl bg-surface-base border border-border-subtle p-5 shadow-xs space-y-4">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <h3 className="text-sm font-bold text-text-primary tracking-tight">Production API Key</h3>
+          <p className="text-xs text-text-secondary mt-0.5">Used to authenticate webhook telemetry</p>
+        </div>
+        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-accent/10 text-accent border border-accent/20">
+          Active
+        </span>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <div className="flex-1 flex items-center justify-between h-9 px-3 rounded-lg bg-surface-muted/60 border border-border-default font-mono text-xs text-text-primary select-all">
+          <span className="tabular-nums">sk_live_••••••••••••e92b</span>
+          <span className="text-[10px] text-text-muted">Secret</span>
+        </div>
+        <button
+          type="button"
+          className="h-9 px-3.5 rounded-lg bg-accent text-white text-xs font-semibold hover:opacity-90 active:scale-98 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 transition-all shadow-xs"
+        >
+          Copy Key
+        </button>
+      </div>
+    </div>
+  );
+}`;
+
 export const HomePage: React.FC = () => {
-  const [demoTab, setDemoTab] = useState<'metrics' | 'activity'>('metrics');
+  // Hero Prompt Copy State
+  const [copiedPrompt, setCopiedPrompt] = useState(false);
+  const [promptFallbackOpen, setPromptFallbackOpen] = useState(false);
+
+  // Comparison State
+  const [comparisonView, setComparisonView] = useState<'split' | 'with' | 'without'>('split');
+  const [activeCodeTab, setActiveCodeTab] = useState<'preview' | 'code'>('preview');
+  const [copiedCodeVersion, setCopiedCodeVersion] = useState<string | null>(null);
+
+  // Interactive Demonstration State
+  const [copiedKeyWith, setCopiedKeyWith] = useState(false);
+  const [copiedKeyWithout, setCopiedKeyWithout] = useState(false);
+  const [revealedKey, setRevealedKey] = useState(false);
+
+  // FAQ Accordion State
+  const [openFaq, setOpenFaq] = useState<Record<number, boolean>>({ 0: true });
+
+  const handleCopyInstallPrompt = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(VERIFIED_INSTALL_PROMPT);
+        setCopiedPrompt(true);
+        setTimeout(() => setCopiedPrompt(false), 2500);
+      } else {
+        setPromptFallbackOpen(true);
+      }
+    } catch {
+      setPromptFallbackOpen(true);
+    }
+  };
+
+  const handleCopyCode = async (version: 'with' | 'without') => {
+    const text = version === 'with' ? CODE_WITH_PURE_SAAS : CODE_WITHOUT_PURE_SAAS;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedCodeVersion(version);
+      setTimeout(() => setCopiedCodeVersion(null), 2000);
+    } catch {}
+  };
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* ========================================================= */}
-      {/* HERO SECTION                                              */}
-      {/* ========================================================= */}
-      <section className="relative px-4 sm:px-6 pt-20 pb-20 md:pt-28 md:pb-28 border-b border-border-subtle bg-gradient-to-b from-surface-elevated/30 via-surface-base to-canvas">
-        <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
-          {/* Eyebrow Label */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-surface-muted border border-border-subtle text-text-secondary mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            <span>Open-source AI skill & design toolkit</span>
+    <div className="min-h-screen bg-canvas text-text-primary selection:bg-accent/20 selection:text-accent">
+      {/* ================================================================= */}
+      {/* SECTION 1: HERO                                                   */}
+      {/* ================================================================= */}
+      <section className="relative pt-16 pb-16 md:pt-24 md:pb-24 border-b border-border-subtle overflow-hidden">
+        {/* Subtle Ambient Radial Lighting */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[340px] bg-accent/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-surface-muted border border-border-subtle text-text-secondary">
+            <Sparkles className="w-3.5 h-3.5 text-accent" />
+            <span>Developer Skill & Design Toolkit</span>
           </div>
 
           {/* Primary Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-text-primary leading-[1.08] max-w-3xl">
-            Build better SaaS websites with Pure SaaS.
+          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-text-primary leading-[1.08] max-w-3xl mx-auto">
+            Build better SaaS interfaces with Pure SaaS.
           </h1>
 
-          {/* Supporting Text */}
-          <p className="mt-6 text-base sm:text-xl text-text-secondary max-w-2xl leading-relaxed">
-            Pure SaaS helps AI coding agents build and improve SaaS interfaces using reusable design guidance, components and practical workflows.
+          {/* One short supporting paragraph */}
+          <p className="text-base sm:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed font-normal">
+            Pure SaaS gives AI coding agents practical design guidance and reusable workflows to help build polished SaaS websites.
           </p>
 
-          {/* Call to Action Buttons */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
+          {/* Primary Actions */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <Link
               to="/docs?slug=getting-started-introduction"
-              className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 rounded-xl bg-accent text-white font-semibold text-sm hover:opacity-90 active:scale-98 transition-all shadow-subtle gap-2"
+              className="h-11 px-6 rounded-xl bg-accent text-white text-xs font-semibold hover:opacity-90 active:scale-98 transition-all inline-flex items-center gap-2 shadow-xs"
             >
               <span>Get Started</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
+
             <Link
               to="/showcase"
-              className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 rounded-xl bg-surface-base border border-border-default text-text-primary font-medium text-sm hover:bg-surface-hover active:scale-98 transition-all shadow-subtle gap-2"
+              className="h-11 px-5 rounded-xl bg-surface-base border border-border-default text-text-primary text-xs font-semibold hover:bg-surface-hover hover:border-border-hover transition-colors inline-flex items-center gap-2 shadow-2xs"
             >
               <span>Explore Showcase</span>
             </Link>
-          </div>
 
-          {/* Terminal Quickstart */}
-          <div className="mt-10 w-full max-w-md text-left">
-            <CodeBlock
-              code="npx pure-saas init"
-              language="bash"
-              filename="Terminal Quickstart"
-            />
-            <p className="text-center text-xs text-text-muted mt-3">
-              Works locally with Cursor, Claude Code, Windsurf, Copilot, and Gemini.
-            </p>
+            {/* Compact Copy Install Prompt Action */}
+            <button
+              onClick={handleCopyInstallPrompt}
+              className="h-11 px-4 rounded-xl bg-surface-muted/80 border border-border-subtle hover:border-accent text-text-secondary hover:text-text-primary text-xs font-medium transition-all inline-flex items-center gap-2 group"
+              title="Copy install prompt for your AI coding assistant"
+            >
+              {copiedPrompt ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-500" />
+                  <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Prompt Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5 text-text-muted group-hover:text-accent transition-colors" />
+                  <span>Copy install prompt</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
-      </section>
 
-      {/* ========================================================= */}
-      {/* GENUINE PRODUCT DEMONSTRATION                             */}
-      {/* ========================================================= */}
-      <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-base">
-        <div className="max-w-5xl mx-auto space-y-6">
-          <div className="text-center max-w-2xl mx-auto mb-8">
-            <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-              Product Demonstration
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
-              Production-ready interfaces generated by your agent.
-            </h2>
-            <p className="text-xs sm:text-sm text-text-secondary mt-2">
-              Every component uses semantic design tokens, clean typography, hairline borders, and responsive layouts.
-            </p>
-          </div>
-
-          {/* Live Component Preview Window */}
-          <div className="rounded-2xl border border-border-subtle bg-surface-elevated/40 shadow-elevated overflow-hidden">
-            {/* Window Titlebar */}
-            <div className="px-5 py-3.5 border-b border-border-subtle bg-surface-base flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-border-default" />
-                <span className="w-2.5 h-2.5 rounded-full bg-border-default" />
-                <span className="w-2.5 h-2.5 rounded-full bg-border-default" />
-                <span className="text-xs text-text-muted ml-2 font-medium">Cloud Infrastructure Monitor</span>
-              </div>
-              <div className="flex items-center gap-1.5 p-1 rounded-lg bg-surface-muted">
+        {/* Fallback Prompt Modal (if clipboard access fails) */}
+        {promptFallbackOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+            <div className="w-full max-w-md rounded-2xl bg-surface-base border border-border-default p-6 space-y-4 shadow-2xl text-left">
+              <h3 className="text-sm font-bold text-text-primary">AI Coding Agent Setup Prompt</h3>
+              <p className="text-xs text-text-secondary">Copy and paste this instruction into your AI coding assistant:</p>
+              <textarea
+                readOnly
+                value={VERIFIED_INSTALL_PROMPT}
+                rows={5}
+                className="w-full p-3 text-xs font-mono rounded-lg bg-surface-muted border border-border-subtle select-all"
+              />
+              <div className="flex justify-end">
                 <button
-                  onClick={() => setDemoTab('metrics')}
-                  className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
-                    demoTab === 'metrics'
-                      ? 'bg-surface-base text-text-primary shadow-xs'
-                      : 'text-text-secondary hover:text-text-primary'
-                  }`}
+                  onClick={() => setPromptFallbackOpen(false)}
+                  className="px-4 py-1.5 rounded-lg bg-accent text-white text-xs font-semibold"
                 >
-                  Live Metrics
-                </button>
-                <button
-                  onClick={() => setDemoTab('activity')}
-                  className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
-                    demoTab === 'activity'
-                      ? 'bg-surface-base text-text-primary shadow-xs'
-                      : 'text-text-secondary hover:text-text-primary'
-                  }`}
-                >
-                  Cluster Activity
+                  Done
                 </button>
               </div>
             </div>
+          </div>
+        )}
+      </section>
 
-            {/* Component Body */}
-            <div className="p-6 sm:p-8 space-y-6">
-              {demoTab === 'metrics' ? (
-                <div className="space-y-6">
-                  {/* Top Bar with Status Tag */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                      <h3 className="text-lg font-bold text-text-primary">Global Cluster Health</h3>
-                      <p className="text-xs text-text-secondary mt-0.5">342 edge micro-regions active across 3 continents.</p>
-                    </div>
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-base border border-border-subtle text-xs">
-                      <span className="px-1.5 py-0.5 rounded bg-surface-muted text-[10px] font-semibold text-text-secondary uppercase tracking-wider">
-                        Operational
+      {/* ================================================================= */}
+      {/* SECTION 2: BEFORE AND AFTER PURE SAAS                             */}
+      {/* ================================================================= */}
+      <section className="py-16 md:py-24 border-b border-border-subtle bg-surface-base/40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
+          {/* Header & View Controls */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-accent mb-2">
+                <span>Official Demonstration</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-text-primary">
+                Before and after Pure SaaS
+              </h2>
+              <p className="text-xs sm:text-sm text-text-secondary mt-1">
+                A genuine comparison between an unguided AI component and the same component guided by Pure SaaS.
+              </p>
+            </div>
+
+            {/* View Switching Controls */}
+            <div className="flex flex-wrap items-center gap-2">
+              {/* Split / Single View Toggle */}
+              <div className="inline-flex p-1 rounded-xl bg-surface-muted border border-border-subtle text-xs">
+                <button
+                  onClick={() => setComparisonView('split')}
+                  className={`hidden sm:inline-block px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                    comparisonView === 'split'
+                      ? 'bg-surface-base text-text-primary shadow-xs font-semibold'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  Side by Side
+                </button>
+                <button
+                  onClick={() => setComparisonView('without')}
+                  className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                    comparisonView === 'without'
+                      ? 'bg-surface-base text-text-primary shadow-xs font-semibold'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  Without Pure SaaS
+                </button>
+                <button
+                  onClick={() => setComparisonView('with')}
+                  className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                    comparisonView === 'with'
+                      ? 'bg-surface-base text-text-primary shadow-xs font-semibold'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  With Pure SaaS
+                </button>
+              </div>
+
+              {/* Preview vs Code Tab */}
+              <div className="inline-flex p-1 rounded-xl bg-surface-muted border border-border-subtle text-xs">
+                <button
+                  onClick={() => setActiveCodeTab('preview')}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                    activeCodeTab === 'preview'
+                      ? 'bg-surface-base text-text-primary shadow-xs font-semibold'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  <Eye className="w-3.5 h-3.5" />
+                  <span>Preview</span>
+                </button>
+                <button
+                  onClick={() => setActiveCodeTab('code')}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                    activeCodeTab === 'code'
+                      ? 'bg-surface-base text-text-primary shadow-xs font-semibold'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  <Code2 className="w-3.5 h-3.5" />
+                  <span>Source Code</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Interactive Comparison Container */}
+          {activeCodeTab === 'preview' ? (
+            <div className={`grid gap-6 ${comparisonView === 'split' ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1 max-w-2xl mx-auto'}`}>
+              {/* Card 1: Without Pure SaaS */}
+              {(comparisonView === 'split' || comparisonView === 'without') && (
+                <div className="rounded-2xl border border-rose-500/20 bg-rose-500/5 p-6 space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-rose-500/10 text-xs">
+                    <span className="font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider text-[11px]">
+                      Without Pure SaaS (Unguided AI)
+                    </span>
+                    <span className="text-[10px] text-text-muted font-mono">Arbitrary styling</span>
+                  </div>
+
+                  {/* Rendered Live Preview (Matches CODE_WITHOUT_PURE_SAAS) */}
+                  <div style={{ backgroundColor: '#1e293b', borderRadius: '14px', padding: '20px', border: '1px solid #334155' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <h3 style={{ color: '#f8fafc', fontSize: '15px', fontWeight: 'bold' }}>Production API Key</h3>
+                      <span style={{ backgroundColor: '#0284c7', color: '#fff', fontSize: '10px', padding: '2px 8px', borderRadius: '20px' }}>
+                        Active
                       </span>
-                      <span className="font-medium text-text-primary">99.998% Uptime</span>
+                    </div>
+                    <p style={{ color: '#94a3b8', fontSize: '12px', marginTop: '6px' }}>
+                      Used to authenticate high-throughput webhook telemetry.
+                    </p>
+                    <div style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
+                      <input
+                        readOnly
+                        value="sk_live_98a7df8a97f98d7sf"
+                        style={{ flex: 1, backgroundColor: '#0f172a', border: '1px solid #475569', color: '#38bdf8', borderRadius: '4px', padding: '6px 10px', fontSize: '12px' }}
+                      />
+                      <button
+                        onClick={() => {
+                          setCopiedKeyWithout(true);
+                          setTimeout(() => setCopiedKeyWithout(false), 2000);
+                        }}
+                        style={{ backgroundColor: '#4f46e5', color: '#fff', border: 'none', borderRadius: '3px', padding: '6px 14px', fontSize: '12px', cursor: 'pointer' }}
+                      >
+                        {copiedKeyWithout ? 'Copied' : 'Copy'}
+                      </button>
                     </div>
                   </div>
 
-                  {/* 4-Column Metric Cluster */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-xl bg-surface-base border border-border-subtle divide-y sm:divide-y-0 sm:divide-x divide-border-subtle overflow-hidden">
-                    <div className="p-4 sm:p-5">
-                      <div className="text-xs text-text-secondary font-medium flex items-center justify-between">
-                        <span>P99 Latency</span>
-                        <Activity className="w-3.5 h-3.5 text-accent" />
-                      </div>
-                      <div className="text-2xl font-bold tracking-tight text-text-primary mt-2 tabular-nums">
-                        12.4<span className="text-xs text-text-muted font-normal ml-0.5">ms</span>
-                      </div>
-                      <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1 font-medium">
-                        ↓ 2.1ms vs last hour
-                      </div>
-                    </div>
-
-                    <div className="p-4 sm:p-5">
-                      <div className="text-xs text-text-secondary font-medium flex items-center justify-between">
-                        <span>Active Nodes</span>
-                        <Cpu className="w-3.5 h-3.5 text-accent" />
-                      </div>
-                      <div className="text-2xl font-bold tracking-tight text-text-primary mt-2 tabular-nums">
-                        1,420
-                      </div>
-                      <div className="text-[11px] text-text-muted mt-1 font-medium">
-                        100% healthy
-                      </div>
-                    </div>
-
-                    <div className="p-4 sm:p-5">
-                      <div className="text-xs text-text-secondary font-medium flex items-center justify-between">
-                        <span>Edge Throughput</span>
-                        <Database className="w-3.5 h-3.5 text-accent" />
-                      </div>
-                      <div className="text-2xl font-bold tracking-tight text-text-primary mt-2 tabular-nums">
-                        48.2<span className="text-xs text-text-muted font-normal ml-0.5">GB/s</span>
-                      </div>
-                      <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1 font-medium">
-                        ↑ 8.4% peak load
-                      </div>
-                    </div>
-
-                    <div className="p-4 sm:p-5">
-                      <div className="text-xs text-text-secondary font-medium flex items-center justify-between">
-                        <span>Error Rate</span>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                      </div>
-                      <div className="text-2xl font-bold tracking-tight text-text-primary mt-2 tabular-nums">
-                        0.001<span className="text-xs text-text-muted font-normal ml-0.5">%</span>
-                      </div>
-                      <div className="text-[11px] text-text-muted mt-1 font-medium">
-                        Within SLA limit
-                      </div>
-                    </div>
+                  {/* Analysis Callout */}
+                  <div className="text-[11px] text-text-secondary space-y-1 pt-1">
+                    <div className="font-semibold text-rose-500">Observed Issues:</div>
+                    <ul className="list-disc pl-4 space-y-0.5 text-text-muted">
+                      <li>Arbitrary hex colors (#1e293b, #4f46e5, #0284c7) detached from project theme.</li>
+                      <li>Clashing radii (14px card, 4px input, 3px button, 20px badge).</li>
+                      <li>Missing focus indicators for keyboard navigation.</li>
+                    </ul>
                   </div>
                 </div>
-              ) : (
-                <div className="space-y-4">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-text-muted mb-2">
-                    Recent Deployment Logs
+              )}
+
+              {/* Card 2: With Pure SaaS */}
+              {(comparisonView === 'split' || comparisonView === 'with') && (
+                <div className="rounded-2xl border border-accent/30 bg-surface-base p-6 space-y-4 shadow-subtle">
+                  <div className="flex items-center justify-between pb-3 border-b border-border-subtle text-xs">
+                    <span className="font-bold text-accent uppercase tracking-wider text-[11px] flex items-center gap-1">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>With Pure SaaS (Token Enforced)</span>
+                    </span>
+                    <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">WCAG 2.2 AA</span>
                   </div>
-                  <div className="rounded-xl border border-border-subtle bg-surface-base divide-y divide-border-subtle">
-                    <div className="p-3.5 flex items-center justify-between text-xs">
+
+                  {/* Rendered Live Preview (Matches CODE_WITH_PURE_SAAS) */}
+                  <div className="rounded-xl bg-surface-base border border-border-subtle p-5 shadow-xs space-y-4">
+                    <div className="flex items-center justify-between gap-3">
                       <div>
-                        <span className="font-semibold text-text-primary">region-us-east-1a</span>
-                        <span className="text-text-muted ml-2">Config updated via GitOps</span>
+                        <h3 className="text-sm font-bold text-text-primary tracking-tight">Production API Key</h3>
+                        <p className="text-xs text-text-secondary mt-0.5">Used to authenticate webhook telemetry</p>
                       </div>
-                      <span className="text-[11px] text-text-muted">2m ago</span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-accent/10 text-accent border border-accent/20">
+                        Active
+                      </span>
                     </div>
-                    <div className="p-3.5 flex items-center justify-between text-xs">
-                      <div>
-                        <span className="font-semibold text-text-primary">region-eu-central-1</span>
-                        <span className="text-text-muted ml-2">TLS certificates renewed</span>
+
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 flex items-center justify-between h-9 px-3 rounded-lg bg-surface-muted/60 border border-border-default font-mono text-xs text-text-primary select-all">
+                        <span className="tabular-nums">
+                          {revealedKey ? 'sk_live_948f2b7a91e92b' : 'sk_live_••••••••••••e92b'}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setRevealedKey(!revealedKey)}
+                          className="text-[10px] text-text-muted hover:text-text-primary underline ml-2"
+                        >
+                          {revealedKey ? 'Hide' : 'Reveal'}
+                        </button>
                       </div>
-                      <span className="text-[11px] text-text-muted">14m ago</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCopiedKeyWith(true);
+                          setTimeout(() => setCopiedKeyWith(false), 2000);
+                        }}
+                        className="h-9 px-3.5 rounded-lg bg-accent text-white text-xs font-semibold hover:opacity-90 active:scale-98 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 transition-all shadow-xs shrink-0"
+                      >
+                        {copiedKeyWith ? 'Copied' : 'Copy Key'}
+                      </button>
                     </div>
-                    <div className="p-3.5 flex items-center justify-between text-xs">
-                      <div>
-                        <span className="font-semibold text-text-primary">region-ap-southeast-1</span>
-                        <span className="text-text-muted ml-2">Traffic scaled to 240 instances</span>
-                      </div>
-                      <span className="text-[11px] text-text-muted">42m ago</span>
-                    </div>
+                  </div>
+
+                  {/* Analysis Callout */}
+                  <div className="text-[11px] text-text-secondary space-y-1 pt-1">
+                    <div className="font-semibold text-accent">Pure SaaS Improvements:</div>
+                    <ul className="list-disc pl-4 space-y-0.5 text-text-secondary">
+                      <li>100% semantic CSS tokens tied to DESIGN.md.</li>
+                      <li>Consistent 8pt spatial grid geometry and hairline borders.</li>
+                      <li>Tabular numbers, keyboard focus rings, and active state transitions.</li>
+                    </ul>
                   </div>
                 </div>
               )}
             </div>
-          </div>
+          ) : (
+            /* Code View (Matches exact source code) */
+            <div className={`grid gap-6 ${comparisonView === 'split' ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1 max-w-2xl mx-auto'}`}>
+              {(comparisonView === 'split' || comparisonView === 'without') && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs font-bold text-rose-500">
+                    <span>Without Pure SaaS (Unguided Code)</span>
+                    <button
+                      onClick={() => handleCopyCode('without')}
+                      className="inline-flex items-center gap-1 text-[11px] text-text-muted hover:text-text-primary"
+                    >
+                      {copiedCodeVersion === 'without' ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedCodeVersion === 'without' ? 'Copied' : 'Copy Code'}</span>
+                    </button>
+                  </div>
+                  <CodeBlock code={CODE_WITHOUT_PURE_SAAS} language="jsx" filename="ApiKeyCard.jsx" />
+                </div>
+              )}
+
+              {(comparisonView === 'split' || comparisonView === 'with') && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs font-bold text-accent">
+                    <span>With Pure SaaS (Tokenized Code)</span>
+                    <button
+                      onClick={() => handleCopyCode('with')}
+                      className="inline-flex items-center gap-1 text-[11px] text-text-muted hover:text-text-primary"
+                    >
+                      {copiedCodeVersion === 'with' ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedCodeVersion === 'with' ? 'Copied' : 'Copy Code'}</span>
+                    </button>
+                  </div>
+                  <CodeBlock code={CODE_WITH_PURE_SAAS} language="tsx" filename="ApiKeyCard.tsx" />
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* ========================================================= */}
-      {/* HOW IT WORKS (3 Simple Steps)                             */}
-      {/* ========================================================= */}
-      <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-elevated/30">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-              How It Works
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
-              Give your AI coding agent a task, use Pure SaaS to guide the work, and review the resulting interface.
+      {/* ================================================================= */}
+      {/* SECTION 3: FAQ                                                    */}
+      {/* ================================================================= */}
+      <section className="py-16 md:py-24 border-b border-border-subtle">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 space-y-8">
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-text-primary">
+              Frequently Asked Questions
             </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent font-bold text-sm flex items-center justify-center">
-                1
-              </div>
-              <h3 className="text-base font-bold text-text-primary">Give your agent a task</h3>
-              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                Describe the interface, screen, or component you want to build in natural language or use a slash command.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent font-bold text-sm flex items-center justify-center">
-                2
-              </div>
-              <h3 className="text-base font-bold text-text-primary">Guide the work with Pure SaaS</h3>
-              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                Pure SaaS provides proven component blueprints, layout standards, and semantic tokens directly to your agent.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle space-y-3">
-              <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent font-bold text-sm flex items-center justify-center">
-                3
-              </div>
-              <h3 className="text-base font-bold text-text-primary">Review the result</h3>
-              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                Inspect clean, production-ready code with responsive layouts, accessible contrast, and zero backend breaking changes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* CORE PRACTICAL CAPABILITIES                               */}
-      {/* ========================================================= */}
-      <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-base">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-              Core Capabilities
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
-              Practical tools for everyday frontend engineering.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-2xl bg-surface-elevated/40 border border-border-subtle space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-2">
-                <SlidersHorizontal className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-text-primary">Semantic Token Architecture</h3>
-              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                Components use semantic CSS variables instead of hardcoded hex values, making light and dark mode transitions automatic and consistent.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-elevated/40 border border-border-subtle space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-2">
-                <Layers className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-text-primary">Proven Component Blueprints</h3>
-              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                Blueprints for dashboards, data tables, modals, authentication, and settings pages that handle all 8 interaction states out of the box.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-elevated/40 border border-border-subtle space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-2">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-text-primary">Zero Backend Breaking Changes</h3>
-              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                Pure SaaS focuses strictly on UI improvement, leaving database models, API routes, authentication logic, and test IDs untouched.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-surface-elevated/40 border border-border-subtle space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-2">
-                <Terminal className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-text-primary">Focused Slash Commands</h3>
-              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-                Specialized commands for design specification, visual polish, evidence audits, live reference analysis, and responsive mobile fixes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* SHOWCASE SECTION TEASER                                   */}
-      {/* ========================================================= */}
-      <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-elevated/20">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          <div className="max-w-xl">
-            <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-              Community Showcase
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-1">
-              Explore websites built by the community using Pure SaaS.
-            </h2>
-            <p className="text-xs sm:text-sm text-text-secondary mt-3 leading-relaxed">
-              Discover real projects created by developers using Pure SaaS, inspect live demos, or submit your own website to be featured.
+            <p className="text-xs sm:text-sm text-text-secondary">
+              Everything you need to know about setting up and using Pure SaaS.
             </p>
-            <div className="mt-6">
-              <Link
-                to="/showcase"
-                className="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-accent text-white text-xs font-semibold hover:opacity-90 transition-opacity shadow-xs"
-              >
-                <span>Browse Showcase Gallery</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
           </div>
 
-          <div className="w-full md:w-80 p-5 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle space-y-3">
-            <div className="text-xs font-semibold text-text-primary">Have you built with Pure SaaS?</div>
-            <p className="text-xs text-text-secondary leading-relaxed">
-              Submit your live website or web application to the showcase and share your work with other developers.
-            </p>
-            <Link
-              to="/showcase"
-              className="inline-block text-xs font-semibold text-accent hover:underline pt-1"
-            >
-              Submit your project →
-            </Link>
+          <div className="space-y-3">
+            {[
+              {
+                q: 'What is Pure SaaS?',
+                a: 'Pure SaaS is an open-source skill and design enforcement toolkit that gives AI coding assistants (Cursor, Windsurf, Claude Code, GitHub Copilot, Gemini) verified design rules, semantic tokens, and component blueprints. It runs locally with zero external network requests.',
+                link: '/docs?slug=getting-started-introduction',
+                linkText: 'Read Introduction'
+              },
+              {
+                q: 'How do I install it?',
+                a: 'Run `npx pure-saas init` in your project root. It inspects your repository, detects your active editor, and configures the appropriate instruction files (.cursorrules, GEMINI.md, or .windsurfrules) automatically.',
+                link: '/docs?slug=getting-started-installation',
+                linkText: 'Installation Guide'
+              },
+              {
+                q: 'Which AI coding agents does it support?',
+                a: 'Pure SaaS natively supports Cursor IDE, Windsurf, Claude Code, Cline, GitHub Copilot, Google Gemini, and Antigravity, as well as standalone CLI execution in any terminal.',
+                link: '/docs?slug=getting-started-installation#step-2-supported-environments',
+                linkText: 'Supported Environments'
+              },
+              {
+                q: 'Does it work with an existing project?',
+                a: 'Yes. Pure SaaS adheres to strict non-regression rules: it preserves 100% of your backend APIs, database schemas, auth tokens, and test IDs, upgrading only the UI design layer and semantic tokens.',
+                link: '/docs?slug=guide-refactoring-legacy-ui',
+                linkText: 'Refactoring Guide'
+              },
+              {
+                q: 'How do I use DESIGN.md, if supported?',
+                a: 'DESIGN.md is the root specification file that defines your color tokens, surface hierarchy, and 1–10 design dials (variance, motion, density). The AI agent inspects this file before generating any code.',
+                link: '/docs?slug=getting-started-configuration',
+                linkText: 'DESIGN.md Documentation'
+              },
+              {
+                q: 'Where can I see websites built with Pure SaaS?',
+                a: 'Browse the curated community showcase and official examples to inspect real SaaS websites, dashboards, and developer tools built with Pure SaaS.',
+                link: '/showcase',
+                linkText: 'Explore Showcase'
+              }
+            ].map((faq, idx) => {
+              const isOpen = Boolean(openFaq[idx]);
+              return (
+                <div
+                  key={idx}
+                  className="rounded-xl bg-surface-base border border-border-subtle overflow-hidden transition-colors"
+                >
+                  <button
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full p-4 sm:p-5 flex items-center justify-between text-left gap-4 font-semibold text-sm text-text-primary hover:text-accent transition-colors"
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-text-muted shrink-0 transition-transform duration-200 ${
+                        isOpen ? 'rotate-180 text-accent' : ''
+                      }`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs text-text-secondary leading-relaxed border-t border-border-subtle/50 mt-1 space-y-2">
+                      <p>{faq.a}</p>
+                      <div>
+                        <Link
+                          to={faq.link}
+                          className="inline-flex items-center gap-1 font-semibold text-accent hover:underline"
+                        >
+                          <span>{faq.linkText}</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ========================================================= */}
-      {/* DOCUMENTATION SECTION TEASER                              */}
-      {/* ========================================================= */}
-      <section className="px-4 sm:px-6 py-20 border-b border-border-subtle bg-surface-base">
-        <div className="max-w-5xl mx-auto text-center space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-            Documentation Portal
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight">
-            Everything you need to install Pure SaaS, learn its commands and start building.
+      {/* ================================================================= */}
+      {/* SECTION 4: FINAL CTA                                              */}
+      {/* ================================================================= */}
+      <section className="py-16 md:py-24 text-center">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 space-y-6">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
+            Ready to build better SaaS interfaces?
           </h2>
-          <p className="text-xs sm:text-sm text-text-secondary max-w-xl mx-auto leading-relaxed">
-            From step-by-step installation guides to detailed command references and CLI manuals.
+          <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
+            Equip your AI coding agent with verified design guidance and start building production-quality interfaces in minutes.
           </p>
-
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <Link
               to="/docs?slug=getting-started-introduction"
-              className="h-11 px-5 rounded-xl bg-accent text-white text-xs font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2 shadow-xs"
-            >
-              <span>Read Documentation</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-            <Link
-              to="/commands"
-              className="h-11 px-5 rounded-xl bg-surface-muted text-text-primary border border-border-subtle text-xs font-medium hover:bg-surface-hover transition-colors inline-flex items-center gap-2"
-            >
-              <span>Commands Guide</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* FINAL CONVERSION SECTION                                  */}
-      {/* ========================================================= */}
-      <section className="px-4 sm:px-6 py-20 bg-canvas text-center">
-        <div className="max-w-2xl mx-auto space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight">
-            Start building better interfaces today.
-          </h2>
-          <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-            Initialize Pure SaaS in your repository in seconds with zero external dependencies.
-          </p>
-          <div className="pt-2 flex items-center justify-center gap-3">
-            <Link
-              to="/docs?slug=getting-started-introduction"
-              className="h-11 px-6 rounded-xl bg-accent text-white text-xs font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2 shadow-subtle"
+              className="h-11 px-6 rounded-xl bg-accent text-white text-xs font-semibold hover:opacity-90 active:scale-98 transition-all inline-flex items-center gap-2 shadow-xs"
             >
               <span>Get Started</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
-            <a
-              href="https://github.com/LMGXENON/pure-saas"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-11 px-5 rounded-xl bg-surface-base border border-border-default text-text-primary text-xs font-medium hover:bg-surface-hover transition-colors inline-flex items-center gap-1.5"
+            <Link
+              to="/showcase"
+              className="h-11 px-5 rounded-xl bg-surface-base border border-border-default text-text-primary text-xs font-semibold hover:bg-surface-hover transition-colors inline-flex items-center gap-2"
             >
-              <span>GitHub</span>
-              <ExternalLink className="w-3 h-3 text-text-muted" />
-            </a>
+              <span>Explore Showcase</span>
+            </Link>
           </div>
         </div>
       </section>

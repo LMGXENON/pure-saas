@@ -1,0 +1,37 @@
+{
+  "official": [
+    {
+      "id": "official-docs-portal",
+      "name": "Pure SaaS Documentation Portal",
+      "tagline": "GitBook-style developer documentation with persistent navigation",
+      "creator": "Pure SaaS Core Team",
+      "creatorHandle": "@puresaas",
+      "creatorUrl": "https://github.com/LMGXENON/pure-saas",
+      "liveUrl": "/docs",
+      "previewUrl": "",
+      "category": "Documentation",
+      "description": "An open-source documentation portal with persistent collapsible sidebars, real-time filtering, sticky article outlines, and responsive drawers.",
+      "isOfficial": true,
+      "status": "approved",
+      "tags": ["React 18", "Tailwind CSS", "Vite", "GitBook Layout"],
+      "createdAt": "2026-10-26T00:00:00.000Z"
+    },
+    {
+      "id": "official-reference-catalog",
+      "name": "Pure SaaS Architectural Reference Catalog",
+      "tagline": "Searchable index of 280+ design systems, component blueprints, and Apple HIG patterns",
+      "creator": "Pure SaaS Core Team",
+      "creatorHandle": "@puresaas",
+      "creatorUrl": "https://github.com/LMGXENON/pure-saas",
+      "liveUrl": "/references",
+      "previewUrl": "",
+      "category": "Developer Tools",
+      "description": "Interactive explorer and reference lookup engine allowing engineers and AI agents to query 280+ verified architectural guides, color ramps, and UX patterns.",
+      "isOfficial": true,
+      "status": "approved",
+      "tags": ["Design System", "Apple HIG", "Architecture", "Tokens"],
+      "createdAt": "2026-10-26T00:00:00.000Z"
+    }
+  ],
+  "submissions": []
+}

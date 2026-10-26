@@ -1,5 +1,5 @@
 // pure-saas-website/src/data/showcaseData.ts
-// Showcase projects data layer: Official Examples and Community Submissions
+// Data layer and types for Pure SaaS Showcase
 
 export interface ShowcaseProject {
   id: string;
@@ -9,22 +9,25 @@ export interface ShowcaseProject {
   creatorHandle?: string;
   creatorUrl?: string;
   liveUrl: string;
+  previewUrl?: string;
   category: 'Dashboard' | 'Developer Tools' | 'Documentation' | 'Marketing';
   description: string;
   isOfficial: boolean;
-  status: 'approved' | 'pending';
+  status: 'approved' | 'pending' | 'rejected';
   tags: string[];
+  createdAt?: string;
 }
 
-export const officialShowcaseProjects: ShowcaseProject[] = [
+export const fallbackOfficialProjects: ShowcaseProject[] = [
   {
-    id: 'pure-saas-docs-portal',
+    id: 'official-docs-portal',
     name: 'Pure SaaS Documentation Portal',
     tagline: 'GitBook-style developer documentation with persistent navigation',
     creator: 'Pure SaaS Core Team',
-    creatorHandle: '@lmgxenon',
-    creatorUrl: 'https://github.com/LMGXENON',
+    creatorHandle: '@puresaas',
+    creatorUrl: 'https://github.com/LMGXENON/pure-saas',
     liveUrl: '/docs',
+    previewUrl: '',
     category: 'Documentation',
     description: 'An open-source documentation portal with persistent collapsible sidebars, real-time filtering, sticky article outlines, and responsive drawers.',
     isOfficial: true,
@@ -32,31 +35,18 @@ export const officialShowcaseProjects: ShowcaseProject[] = [
     tags: ['React 18', 'Tailwind CSS', 'Vite', 'GitBook Layout']
   },
   {
-    id: 'edge-telemetry-console',
-    name: 'Edge Infrastructure Telemetry Console',
-    tagline: 'High-density cloud cluster monitoring interface',
-    creator: 'Pure SaaS Team',
+    id: 'official-reference-catalog',
+    name: 'Pure SaaS Architectural Reference Catalog',
+    tagline: 'Searchable index of 280+ design systems, component blueprints, and Apple HIG patterns',
+    creator: 'Pure SaaS Core Team',
     creatorHandle: '@puresaas',
     creatorUrl: 'https://github.com/LMGXENON/pure-saas',
-    liveUrl: 'https://github.com/LMGXENON/pure-saas',
-    category: 'Dashboard',
-    description: 'A dense monitoring view for cloud engineering teams featuring 1px hairline borders, tabular metrics, and responsive multi-column layouts.',
-    isOfficial: true,
-    status: 'approved',
-    tags: ['Dashboard', 'High Density', 'Tabular Figures']
-  },
-  {
-    id: 'developer-api-portal',
-    name: 'Developer API Key Management Screen',
-    tagline: 'Accessible token generation and rotation workflow',
-    creator: 'Pure SaaS Team',
-    creatorHandle: '@puresaas',
-    creatorUrl: 'https://github.com/LMGXENON/pure-saas',
-    liveUrl: 'https://github.com/LMGXENON/pure-saas',
+    liveUrl: '/references',
+    previewUrl: '',
     category: 'Developer Tools',
-    description: 'An enterprise developer settings screen with granular permission checkboxes, scoped token creation, and accessible modal confirmation dialogs.',
+    description: 'Interactive explorer and reference lookup engine allowing engineers and AI agents to query 280+ verified architectural guides, color ramps, and UX patterns.',
     isOfficial: true,
     status: 'approved',
-    tags: ['Developer Tools', 'Forms', 'Modals']
+    tags: ['Design System', 'Apple HIG', 'Architecture', 'Tokens']
   }
 ];

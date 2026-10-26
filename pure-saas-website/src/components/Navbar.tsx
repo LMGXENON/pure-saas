@@ -84,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
 
           {/* Clear Get Started Action */}
           <Link
-            to="/docs?slug=getting-started-introduction"
+            to="/docs?slug=getting-started-installation"
             className="hidden sm:inline-flex items-center h-8 px-3 rounded-lg bg-accent text-white font-semibold text-xs hover:opacity-90 active:scale-98 transition-all shadow-xs"
           >
             Get Started

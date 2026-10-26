@@ -31,7 +31,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/docs" element={<DocsPage />} />
-          <Route path="/get-started" element={<Navigate to="/docs?slug=getting-started-introduction" replace />} />
+          <Route path="/get-started" element={<Navigate to="/docs?slug=getting-started-installation" replace />} />
           <Route path="/showcase" element={<ShowcasePage />} />
           <Route path="/commands" element={<CommandsPage />} />
           <Route path="/cli" element={<CliPage />} />

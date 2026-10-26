@@ -12,14 +12,22 @@ import {
   ArrowLeft,
   ArrowRight,
   Bookmark,
-  ExternalLink,
   Info,
   Lightbulb,
   AlertTriangle,
   AlertCircle,
   Hash,
   Share2,
-  Check
+  Check,
+  Copy,
+  Rocket,
+  Compass,
+  Terminal,
+  Sliders,
+  HelpCircle,
+  BookOpen,
+  Sparkles,
+  ExternalLink
 } from 'lucide-react';
 
 export const DocsPage: React.FC = () => {
@@ -30,6 +38,7 @@ export const DocsPage: React.FC = () => {
   const [filterQuery, setFilterQuery] = useState<string>('');
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
+  const [copiedPrompt, setCopiedPrompt] = useState<boolean>(false);
 
   // Sync state if URL search param changes
   useEffect(() => {
@@ -65,6 +74,29 @@ export const DocsPage: React.FC = () => {
     setTimeout(() => setCopiedLink(false), 2000);
   };
 
+  const handleCopyPrompt = (promptText: string) => {
+    navigator.clipboard.writeText(promptText);
+    setCopiedPrompt(true);
+    setTimeout(() => setCopiedPrompt(false), 2000);
+  };
+
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'Getting Started':
+        return <Rocket className="w-3.5 h-3.5 text-accent stroke-[1.75] fill-none" />;
+      case 'Guides & Workflows':
+        return <Compass className="w-3.5 h-3.5 text-text-secondary stroke-[1.75] fill-none" />;
+      case 'Commands':
+        return <Terminal className="w-3.5 h-3.5 text-text-secondary stroke-[1.75] fill-none" />;
+      case 'CLI Reference':
+        return <Sliders className="w-3.5 h-3.5 text-text-secondary stroke-[1.75] fill-none" />;
+      case 'Troubleshooting & FAQ':
+        return <HelpCircle className="w-3.5 h-3.5 text-text-secondary stroke-[1.75] fill-none" />;
+      default:
+        return <BookOpen className="w-3.5 h-3.5 text-text-secondary stroke-[1.75] fill-none" />;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-canvas text-text-primary">
       {/* Sub-header / GitBook breadcrumb bar */}
@@ -74,39 +106,30 @@ export const DocsPage: React.FC = () => {
           <div className="flex items-center gap-2 text-text-secondary truncate">
             <button
               onClick={() => setMobileDrawerOpen(true)}
-              className="lg:hidden p-1.5 -ml-1 rounded-lg text-text-primary hover:bg-surface-hover"
+              className="lg:hidden p-1.5 -ml-1 rounded-lg text-text-primary hover:bg-surface-hover transition-colors"
               aria-label="Open documentation navigation"
             >
               <Menu className="w-4 h-4" />
             </button>
-            <Link to="/" className="hover:text-text-primary font-medium">Home</Link>
+            <Link to="/" className="hover:text-text-primary font-medium transition-colors">Home</Link>
             <span className="text-text-muted">/</span>
-            <Link to="/docs" className="hover:text-text-primary font-medium">Docs</Link>
+            <Link to="/docs" className="hover:text-text-primary font-medium transition-colors">Docs</Link>
             <span className="text-text-muted">/</span>
             <span className="text-text-muted">{currentArticle.category}</span>
             <span className="text-text-muted">/</span>
             <span className="text-text-primary font-semibold truncate">{currentArticle.title}</span>
           </div>
 
-          {/* Quick Actions */}
-          <div className="flex items-center gap-3">
+          {/* Quick Actions (Share button with clean alignment, no redundant GitHub link) */}
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={handleCopyPageLink}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-muted border border-border-subtle text-text-secondary hover:text-text-primary text-[11px] font-medium transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-muted border border-border-subtle text-text-secondary hover:text-text-primary text-[11px] font-medium transition-colors hover:bg-surface-hover"
               title="Copy link to current article"
             >
               {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Share2 className="w-3.5 h-3.5" />}
               <span>{copiedLink ? 'Copied' : 'Share'}</span>
             </button>
-            <a
-              href="https://github.com/LMGXENON/pure-saas"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 text-text-secondary hover:text-text-primary text-[11px] font-medium"
-            >
-              <span>GitHub</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
           </div>
         </div>
       </div>
@@ -125,7 +148,7 @@ export const DocsPage: React.FC = () => {
                 value={filterQuery}
                 onChange={(e) => setFilterQuery(e.target.value)}
                 placeholder="Filter documentation..."
-                className="w-full h-8 pl-8 pr-3 text-xs rounded-lg bg-surface-base border border-border-default text-text-primary placeholder-text-muted focus:outline-none focus:ring-1 focus:ring-accent"
+                className="w-full h-8 pl-8 pr-3 text-xs rounded-lg bg-surface-base border border-border-default text-text-primary placeholder-text-muted focus:outline-none focus:ring-1 focus:ring-accent transition-all"
               />
             </div>
 
@@ -144,27 +167,41 @@ export const DocsPage: React.FC = () => {
                   <div key={cat} className="space-y-1">
                     <button
                       onClick={() => toggleCategory(cat)}
-                      className="w-full flex items-center justify-between px-2 py-1.5 text-[11px] font-bold uppercase tracking-wider text-text-muted hover:text-text-primary rounded-md transition-colors"
+                      className="w-full flex items-center justify-between px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-text-muted hover:text-text-primary rounded-lg transition-colors group"
                     >
-                      <span>{cat}</span>
-                      {isCollapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                      <div className="flex items-center gap-2 truncate">
+                        <span className="p-1 rounded-md bg-surface-muted/60 text-accent flex items-center justify-center shrink-0 border border-border-subtle">
+                          {getCategoryIcon(cat)}
+                        </span>
+                        <span className="truncate">{cat}</span>
+                      </div>
+                      {isCollapsed ? (
+                        <ChevronRight className="w-3.5 h-3.5 text-text-muted group-hover:text-text-primary shrink-0" />
+                      ) : (
+                        <ChevronDown className="w-3.5 h-3.5 text-text-muted group-hover:text-text-primary shrink-0" />
+                      )}
                     </button>
 
                     {!isCollapsed && (
-                      <div className="space-y-0.5 pl-1 border-l border-border-subtle ml-2">
+                      <div className="space-y-0.5 pt-0.5">
                         {items.map(art => {
                           const isActive = art.slug === activeSlug;
                           return (
                             <button
                               key={art.slug}
                               onClick={() => handleSelectArticle(art.slug)}
-                              className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs transition-colors flex items-center justify-between ${
+                              className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center justify-between outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-1 focus-visible:ring-offset-canvas ${
                                 isActive
-                                  ? 'bg-accent/10 text-accent font-semibold border-l-2 border-accent -ml-[1px]'
-                                  : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover'
+                                  ? 'bg-accent/10 dark:bg-accent/15 text-accent dark:text-accent font-semibold shadow-xs'
+                                  : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover/80 active:bg-surface-selected'
                               }`}
                             >
-                              <span className="truncate">{art.title}</span>
+                              <div className="flex items-center gap-2 truncate">
+                                {isActive && (
+                                  <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                                )}
+                                <span className="truncate">{art.title}</span>
+                              </div>
                             </button>
                           );
                         })}
@@ -177,7 +214,7 @@ export const DocsPage: React.FC = () => {
           </aside>
 
           {/* ========================================================= */}
-          {/* MOBILE NAVIGATION DRAWER */}
+          {/* MOBILE NAVIGATION DRAWER                                  */}
           {/* ========================================================= */}
           {mobileDrawerOpen && (
             <div className="fixed inset-0 z-50 lg:hidden">
@@ -217,23 +254,27 @@ export const DocsPage: React.FC = () => {
 
                     return (
                       <div key={cat} className="space-y-1">
-                        <div className="text-[11px] font-bold uppercase tracking-wider text-text-muted px-2 py-1">
-                          {cat}
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-text-muted px-2 py-1 flex items-center gap-1.5">
+                          <span>{cat}</span>
                         </div>
                         <div className="space-y-0.5">
-                          {items.map(art => (
-                            <button
-                              key={art.slug}
-                              onClick={() => handleSelectArticle(art.slug)}
-                              className={`w-full text-left px-2.5 py-1.5 rounded-md text-xs ${
-                                art.slug === activeSlug
-                                  ? 'bg-accent/10 text-accent font-semibold'
-                                  : 'text-text-secondary hover:bg-surface-hover'
-                              }`}
-                            >
-                              <span className="truncate">{art.title}</span>
-                            </button>
-                          ))}
+                          {items.map(art => {
+                            const isActive = art.slug === activeSlug;
+                            return (
+                              <button
+                                key={art.slug}
+                                onClick={() => handleSelectArticle(art.slug)}
+                                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-2 ${
+                                  isActive
+                                    ? 'bg-accent/10 text-accent font-semibold'
+                                    : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover'
+                                }`}
+                              >
+                                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />}
+                                <span className="truncate">{art.title}</span>
+                              </button>
+                            );
+                          })}
                         </div>
                       </div>
                     );
@@ -244,7 +285,7 @@ export const DocsPage: React.FC = () => {
           )}
 
           {/* ========================================================= */}
-          {/* MAIN ARTICLE CONTENT */}
+          {/* MAIN ARTICLE CONTENT                                      */}
           {/* ========================================================= */}
           <main className="lg:col-span-6 xl:col-span-6 space-y-8 max-w-3xl">
             {/* Header / Title block */}
@@ -266,6 +307,33 @@ export const DocsPage: React.FC = () => {
                 {currentArticle.summary}
               </p>
             </header>
+
+            {/* Prominent Copyable AI Agent Setup Prompt (if configured) */}
+            {currentArticle.agentPrompt && (
+              <div className="p-4 sm:p-5 rounded-2xl bg-surface-muted/60 border border-accent/20 space-y-3 shadow-xs">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-lg bg-accent text-white flex items-center justify-center shrink-0">
+                      <Sparkles className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-bold text-text-primary">Coding Agent Setup Prompt</h3>
+                      <p className="text-[11px] text-text-secondary">Copy and paste directly into Cursor, Windsurf, Claude Code, or Copilot</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleCopyPrompt(currentArticle.agentPrompt!)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-base border border-border-default text-text-primary hover:border-accent text-xs font-semibold transition-all shrink-0 shadow-2xs"
+                  >
+                    {copiedPrompt ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedPrompt ? 'Copied Prompt' : 'Copy Prompt'}</span>
+                  </button>
+                </div>
+                <div className="p-3 rounded-xl bg-canvas border border-border-subtle text-xs text-text-secondary font-mono leading-relaxed whitespace-pre-wrap select-all">
+                  {currentArticle.agentPrompt}
+                </div>
+              </div>
+            )}
 
             {/* Sections Loop */}
             <div className="space-y-12">
@@ -486,7 +554,7 @@ export const DocsPage: React.FC = () => {
                   rel="noopener noreferrer"
                   className="flex items-center justify-between text-text-secondary hover:text-text-primary transition-colors py-1"
                 >
-                  <span>Edit on GitHub</span>
+                  <span>View Repository</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
                 <Link
@@ -497,10 +565,10 @@ export const DocsPage: React.FC = () => {
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
                 <Link
-                  to="/references"
+                  to="/showcase"
                   className="flex items-center justify-between text-text-secondary hover:text-text-primary transition-colors py-1"
                 >
-                  <span>Search 280+ References</span>
+                  <span>Explore Showcase</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
