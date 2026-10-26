@@ -1166,3 +1166,4 @@ for (const comp of components) {
 }
 
 console.log(`Created ${created} component references in references/components/`);
+

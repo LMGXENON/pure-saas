@@ -503,3 +503,4 @@ for (const p of patterns) {
 }
 
 console.log(`Created ${created} UX pattern references in references/ux-patterns/`);
+

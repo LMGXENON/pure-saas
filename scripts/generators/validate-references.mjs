@@ -89,3 +89,4 @@ if (errors.length > 0) {
 } else {
   console.log(`All markdown files passed validation with zero errors!`);
 }
+

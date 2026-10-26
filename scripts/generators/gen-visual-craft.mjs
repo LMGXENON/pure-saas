@@ -393,3 +393,4 @@ for (const c of crafts) {
 }
 
 console.log(`Created ${created} visual craft references in references/visual-craft/`);
+

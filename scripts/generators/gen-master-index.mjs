@@ -104,3 +104,4 @@ for (const g of rootGuides) {
 
 fs.writeFileSync(path.join(referencesRoot, 'reference-index.md'), indexContent, 'utf8');
 console.log('Successfully generated references/reference-index.md');
+
