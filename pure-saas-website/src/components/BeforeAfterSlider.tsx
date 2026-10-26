@@ -11,7 +11,7 @@ export const BeforeAfterSlider: React.FC<{ item: ShowcaseItem }> = ({ item }) =>
       {/* Header Bar */}
       <div className="p-5 border-b border-border-subtle flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-surface-elevated/40">
         <div>
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-accent font-mono">
+          <span className="text-xs font-semibold uppercase tracking-wider text-accent">
             {item.category}
           </span>
           <h3 className="text-base font-semibold text-text-primary mt-0.5">{item.title}</h3>
@@ -58,14 +58,14 @@ export const BeforeAfterSlider: React.FC<{ item: ShowcaseItem }> = ({ item }) =>
       </div>
 
       {/* Task & Invocations */}
-      <div className="px-5 py-3 border-b border-border-subtle bg-surface-muted/20 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono">
+      <div className="px-5 py-3 border-b border-border-subtle bg-surface-muted/20 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs">
         <div>
           <span className="text-text-muted">Prompt: </span>
           <span className="text-text-primary">"{item.taskPrompt}"</span>
         </div>
         <div>
           <span className="text-text-muted">Command: </span>
-          <span className="text-accent font-semibold">{item.skillCommand}</span>
+          <code className="text-accent font-semibold">{item.skillCommand}</code>
         </div>
       </div>
 
@@ -168,7 +168,7 @@ export const BeforeAfterSlider: React.FC<{ item: ShowcaseItem }> = ({ item }) =>
             <div key={i} className="flex items-center gap-2">
               <span className="text-text-muted">{m.metric}:</span>
               <span className="line-through text-danger-text text-[11px]">{m.beforeVal}</span>
-              <span className="font-semibold text-emerald-600 dark:text-emerald-400 font-mono text-xs">{m.afterVal}</span>
+              <span className="font-semibold text-emerald-600 dark:text-emerald-400 text-xs tabular-nums">{m.afterVal}</span>
             </div>
           ))}
         </div>

@@ -43,7 +43,9 @@ export const CommandsPage: React.FC = () => {
           <tbody className="divide-y divide-border-subtle text-text-secondary">
             {commandsData.map(cmd => (
               <tr key={cmd.id} className="hover:bg-surface-hover/50 transition-colors">
-                <td className="py-3 pr-4 font-mono font-bold text-accent">{cmd.name}</td>
+                <td className="py-3 pr-4 font-bold text-accent">
+                  <code>{cmd.name}</code>
+                </td>
                 <td className="py-3 px-4">{cmd.tagline}</td>
                 <td className="py-3 px-4">{cmd.id === 'review' || cmd.id === 'design' ? 'No' : 'Yes'}</td>
                 <td className="py-3 px-4">{cmd.id === 'polish' ? 'Preserves' : 'Yes'}</td>
@@ -81,11 +83,11 @@ export const CommandsPage: React.FC = () => {
                 }`}
               >
                 <div className="flex items-center justify-between w-full">
-                  <span className={`text-xs font-mono font-bold ${isActive ? 'text-accent' : 'text-text-primary'}`}>
-                    {cmd.name}
+                  <span className={`text-xs font-bold ${isActive ? 'text-accent' : 'text-text-primary'}`}>
+                    <code>{cmd.name}</code>
                   </span>
                   {cmd.id === 'universal' && (
-                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-accent/10 text-accent font-semibold">
+                    <span className="text-[10px] uppercase tracking-wider px-1.5 py-0.2 rounded bg-accent/10 text-accent font-semibold">
                       Universal
                     </span>
                   )}
@@ -100,8 +102,8 @@ export const CommandsPage: React.FC = () => {
         <div className="lg:col-span-8 p-6 sm:p-8 rounded-2xl bg-surface-base border border-border-subtle shadow-elevated space-y-8">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs font-mono px-2 py-0.5 rounded bg-accent/10 text-accent font-bold">
-                {selected.syntax}
+              <span className="text-xs px-2 py-0.5 rounded bg-accent/10 text-accent font-semibold">
+                <code>{selected.syntax}</code>
               </span>
             </div>
             <h2 className="text-2xl font-bold text-text-primary mt-2">{selected.name}</h2>
@@ -124,14 +126,14 @@ export const CommandsPage: React.FC = () => {
           <div className="space-y-4">
             <div>
               <h4 className="text-xs font-semibold uppercase tracking-wider text-text-muted">Verified Example Request</h4>
-              <div className="mt-2 p-3.5 rounded-xl bg-surface-muted/50 border border-border-subtle font-mono text-xs text-text-primary">
-                {selected.exampleRequest}
+              <div className="mt-2 p-3.5 rounded-xl bg-surface-muted/50 border border-border-subtle text-xs text-text-primary">
+                <code>{selected.exampleRequest}</code>
               </div>
             </div>
 
             <div>
               <h4 className="text-xs font-semibold uppercase tracking-wider text-text-muted">Expected Behavior / Artifacts</h4>
-              <div className="mt-2 p-4 rounded-xl bg-surface-elevated/40 border border-border-subtle font-mono text-xs text-text-secondary whitespace-pre-wrap leading-relaxed">
+              <div className="mt-2 p-4 rounded-xl bg-surface-elevated/40 border border-border-subtle text-xs text-text-secondary whitespace-pre-wrap leading-relaxed">
                 {selected.expectedOutput}
               </div>
             </div>
@@ -164,7 +166,7 @@ export const CommandsPage: React.FC = () => {
                 <div key={i} className="p-3 rounded-lg border border-border-subtle bg-surface-elevated/30 flex items-center justify-between text-xs">
                   <div>
                     <span className="font-medium text-text-primary block">{ref.title}</span>
-                    <span className="text-[10px] font-mono text-text-muted">{ref.path}</span>
+                    <span className="text-[10px] text-text-muted"><code>{ref.path}</code></span>
                   </div>
                   <Link to={`/references?q=${encodeURIComponent(ref.title)}`} className="text-accent hover:underline text-[11px] font-semibold">
                     View →

@@ -92,7 +92,7 @@ export const GetStartedPage: React.FC = () => {
       <div className="space-y-12">
         {steps.map((s) => (
           <div key={s.num} className="p-6 sm:p-8 rounded-2xl bg-surface-base border border-border-subtle shadow-subtle flex flex-col md:flex-row gap-6">
-            <div className="w-10 h-10 rounded-xl bg-accent/10 text-accent font-mono font-bold text-base flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-accent/10 text-accent font-bold text-base flex items-center justify-center shrink-0 tabular-nums">
               {s.num}
             </div>
             <div className="flex-1">

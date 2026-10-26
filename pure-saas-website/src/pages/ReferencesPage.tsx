@@ -90,9 +90,9 @@ export const ReferencesPage: React.FC = () => {
       </div>
 
       {/* Active Results Summary */}
-      <div className="flex items-center justify-between text-xs text-text-muted mb-4 font-mono">
+      <div className="flex items-center justify-between text-xs text-text-muted mb-4">
         <span>Showing {filteredGuides.length} reference documents</span>
-        <span>Run "npx pure-saas ref &lt;query&gt;" in CLI</span>
+        <span>Run <code>npx pure-saas ref &lt;query&gt;</code> in CLI</span>
       </div>
 
       {/* Reference Cards Grid */}
@@ -105,11 +105,11 @@ export const ReferencesPage: React.FC = () => {
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-muted text-text-muted">
+                <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-surface-muted text-text-muted">
                   {guide.categoryName}
                 </span>
-                <span className="text-[11px] font-mono text-text-muted opacity-60 group-hover:opacity-100 transition-opacity">
-                  .md
+                <span className="text-xs text-text-muted opacity-60 group-hover:opacity-100 transition-opacity">
+                  <code>.md</code>
                 </span>
               </div>
               <h3 className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors">
@@ -119,9 +119,9 @@ export const ReferencesPage: React.FC = () => {
                 {guide.summary}
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-border-subtle flex items-center justify-between text-[11px] text-text-muted font-mono">
-              <span className="truncate max-w-[200px]">{guide.path}</span>
-              <span className="text-accent font-sans font-medium group-hover:translate-x-0.5 transition-transform">Inspect →</span>
+            <div className="mt-4 pt-3 border-t border-border-subtle flex items-center justify-between text-xs text-text-muted">
+              <span className="truncate max-w-[200px]"><code>{guide.path}</code></span>
+              <span className="text-accent font-medium group-hover:translate-x-0.5 transition-transform">Inspect →</span>
             </div>
           </div>
         ))}
@@ -147,11 +147,11 @@ export const ReferencesPage: React.FC = () => {
           <div className="relative z-10 w-full max-w-2xl rounded-2xl bg-surface-overlay border border-border-default shadow-floating p-6 sm:p-8 max-h-[85vh] overflow-y-auto space-y-6">
             <div className="flex items-start justify-between border-b border-border-subtle pb-4">
               <div>
-                <span className="text-xs font-mono px-2 py-0.5 rounded bg-accent/10 text-accent font-semibold">
+                <span className="text-xs uppercase tracking-wider px-2 py-0.5 rounded bg-accent/10 text-accent font-semibold">
                   {selectedGuide.categoryName}
                 </span>
                 <h2 className="text-xl font-bold text-text-primary mt-2">{selectedGuide.title}</h2>
-                <span className="text-xs font-mono text-text-muted mt-0.5 block">{selectedGuide.path}</span>
+                <span className="text-xs text-text-muted mt-0.5 block"><code>{selectedGuide.path}</code></span>
               </div>
               <button
                 onClick={() => setSelectedGuide(null)}

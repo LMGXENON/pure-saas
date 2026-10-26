@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
           </div>
           <div className="flex items-center gap-1.5">
             <span className="font-bold text-sm tracking-tight text-text-primary">Pure SaaS</span>
-            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-surface-muted text-text-muted border border-border-subtle">
+            <span className="text-[10px] font-semibold px-1.5 py-0.2 rounded bg-surface-muted text-text-muted border border-border-subtle uppercase tracking-wider">
               v1.0
             </span>
           </div>
@@ -116,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
             </NavLink>
           ))}
           <div className="pt-2 border-t border-border-subtle flex items-center justify-between">
-            <span className="text-xs text-text-muted font-mono">v1.0.0 Production</span>
+            <span className="text-xs text-text-muted font-medium">v1.0.0 Production</span>
             <a
               href="https://github.com/LMGXENON/pure-saas"
               target="_blank"

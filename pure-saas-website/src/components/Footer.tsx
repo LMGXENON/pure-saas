@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
             <p className="text-xs text-text-secondary leading-relaxed max-w-sm mb-4">
               Universal AI-agent skill and design enforcement toolkit. Guiding coding assistants to build production-grade web interfaces without generic AI slop.
             </p>
-            <div className="flex items-center gap-3 text-xs text-text-muted font-mono">
+            <div className="flex items-center gap-3 text-xs text-text-muted">
               <span>MIT License</span>
               <span>•</span>
               <a 

@@ -144,7 +144,7 @@ export const ReferenceSearchModal: React.FC<SearchModalProps> = ({ isOpen, onClo
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-medium text-text-primary">{ref.title}</span>
-                        <span className="text-[10px] px-1.5 py-0.2 rounded bg-surface-muted text-text-muted font-mono">{ref.category}</span>
+                        <span className="text-[10px] px-1.5 py-0.2 rounded bg-surface-muted text-text-muted font-medium">{ref.category}</span>
                       </div>
                       <p className="text-xs text-text-secondary line-clamp-1 mt-0.5">{ref.summary}</p>
                     </div>

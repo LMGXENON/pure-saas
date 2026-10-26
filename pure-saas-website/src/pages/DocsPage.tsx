@@ -249,7 +249,7 @@ export const DocsPage: React.FC = () => {
           <main className="lg:col-span-6 xl:col-span-6 space-y-8 max-w-3xl">
             {/* Header / Title block */}
             <header className="space-y-3 pb-6 border-b border-border-subtle">
-              <div className="flex items-center gap-3 text-xs text-text-muted font-mono">
+              <div className="flex items-center gap-3 text-xs text-text-muted">
                 <span className="uppercase text-accent font-semibold px-2 py-0.5 rounded bg-accent/8 border border-accent/20">
                   {currentArticle.category}
                 </span>
@@ -336,7 +336,7 @@ export const DocsPage: React.FC = () => {
                           {section.table.rows.map((row, rIdx) => (
                             <tr key={rIdx} className="hover:bg-surface-hover/50 transition-colors">
                               {row.map((cell, cIdx) => (
-                                <td key={cIdx} className="px-3.5 py-2.5 text-text-secondary font-mono text-[11px]">
+                                <td key={cIdx} className="px-3.5 py-2.5 text-text-secondary text-xs">
                                   {cell}
                                 </td>
                               ))}
@@ -434,7 +434,7 @@ export const DocsPage: React.FC = () => {
                 >
                   <ArrowLeft className="w-4 h-4 text-text-muted group-hover:text-accent shrink-0" />
                   <div>
-                    <div className="text-[10px] uppercase font-mono text-text-muted">Previous</div>
+                    <div className="text-[10px] uppercase font-semibold tracking-wider text-text-muted">Previous</div>
                     <div className="text-xs font-semibold text-text-primary group-hover:text-accent truncate max-w-xs">
                       {currentArticle.prev.title}
                     </div>
@@ -448,7 +448,7 @@ export const DocsPage: React.FC = () => {
                   className="w-full sm:w-auto p-4 rounded-xl bg-surface-base border border-border-subtle hover:border-accent hover:bg-surface-hover transition-colors flex items-center justify-end gap-3 text-right group ml-auto"
                 >
                   <div>
-                    <div className="text-[10px] uppercase font-mono text-text-muted">Next</div>
+                    <div className="text-[10px] uppercase font-semibold tracking-wider text-text-muted">Next</div>
                     <div className="text-xs font-semibold text-text-primary group-hover:text-accent truncate max-w-xs">
                       {currentArticle.next.title}
                     </div>

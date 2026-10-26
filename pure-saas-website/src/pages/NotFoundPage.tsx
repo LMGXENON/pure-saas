@@ -5,7 +5,7 @@ import { Home, Search, BookOpen } from 'lucide-react';
 export const NotFoundPage: React.FC = () => {
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center px-4 py-16 text-center">
-      <span className="text-4xl sm:text-6xl font-bold font-mono text-accent">404</span>
+      <span className="text-4xl sm:text-6xl font-bold tracking-tight text-accent">404</span>
       <h1 className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight mt-3">
         Page Not Found
       </h1>
