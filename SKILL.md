@@ -198,28 +198,15 @@ When integrating multiple sources, making design proposals, or resolving conflic
 
 ---
 
-## 7. Reference Deconstruction Protocol (`/pure-saas reference`)
+## 7. Reference Deconstruction & Website Recreation Protocol (`/pure-saas reference`)
 
-When reverse-engineering a visual reference:
-1. **Inspect:** Use real browser automation and DevTools to inspect DOM hierarchy, computed styles, CSS custom properties, animation curves, loaded assets, and responsive viewports.
-2. **Author 16-Section `DESIGN.md`:**
-   - 1. Reference overview (URL, date, viewports, tools, limitations, confidence)
-   - 2. Design direction (aesthetic, visual identity, brand personality, hierarchy)
-   - 3. Page architecture (section order, dimensions, spacing, transitions)
-   - 4. Layout system (container max-widths, margins, grids, flex, sticky, overflow)
-   - 5. Spacing system (observed and inferred values for sections, headings, cards)
-   - 6. Colour system (background, surface, text, action, border, status variables)
-   - 7. Typography (font families, weights, sizes, line heights, letter spacing, measure)
-   - 8. Component inventory (nav, hero, buttons, cards, media, footer, states)
-   - 9. Assets (source paths, formats, dimensions, aspect ratios, reuse permission)
-   - 10. Motion and interaction (triggers, durations, easing, transitions, reduced-motion)
-   - 11. Responsive behaviour (breakpoints, navigation drawer collapse, stacking)
-   - 12. Technical observations (DOM structure, custom properties, dependencies)
-   - 13. Design tokens (frontmatter tokens and CSS variables)
-   - 14. Implementation architecture (component tree, file structure, styling strategy)
-   - 15. Accessibility and states (keyboard navigation, focus rings, WCAG 2.2 AA, 8 states)
-   - 16. Implementation checklist (complete checklist of sections, components, states)
-3. **Implement & Compare:** Recreate experience for the user's product, run locally, compare side-by-side at 1440px, 768px, and 375px, fix differences, and update `DESIGN.md`.
+Whenever a user provides a website URL as a reference across any Pure SaaS command or workflow:
+1. **Mandatory Website Reference Analysis:** Inspect and document all accessible in-scope pages (URL, title, layout, section order, computed styles, responsive behavior, sticky/interactive elements). Never rely on a single screenshot or homepage alone.
+2. **Complete Capture & Reference Mapping:** Capture full-page screenshots, key scroll positions, animation frames, and responsive viewports (1440px desktop, 768px tablet, 375px mobile). Maintain a page-by-page reference inventory.
+3. **Author 16-Section `DESIGN.md`:** Author or update the implementation-ready specification covering all 16 sections (Overview, Direction, Page Architecture, Layout, Spacing, Colour, Typography, Components, Assets, Motion, Responsive, Technical Observations, Tokens, Architecture, Accessibility/States, Checklist). Validate with `npx pure-saas validate DESIGN.md`.
+4. **Purposeful Motion & Transition System:** Integrate entrance animations, scroll-triggered reveals (`IntersectionObserver`), micro-interactions (150–250ms), physics-based spring curves, and `prefers-reduced-motion` compliance.
+5. **Screenshot-Based Visual Verification:** Run the recreation locally and capture matching screenshots at 1440px, 768px, and 375px. Perform side-by-side visual comparison, iteratively fixing discrepancies.
+6. **11-Item Completion Gate:** Enforce the mandatory completion checklist (reference analysis, captures, 16-section `DESIGN.md`, all sections implemented, faithful styling, motion system, responsive verification, WCAG 2.2 AA contrast, visual comparison, zero slop tokens, honest ledger) before reporting completion.
 
 ---
 

@@ -80,12 +80,12 @@ img {
    Interactive MacBook Notch Shelf Simulator
    ========================================================================== */
 .notch-shelf-simulator {
+  display: none;
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -217,8 +217,154 @@ img {
 }
 
 /* ==========================================================================
-   Header & Navigation
+   Header & Navigation (Island Dock & Legacy Support)
    ========================================================================== */
+.dock-nav-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.dock-nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-dock-bg);
+  color: var(--color-dock-text);
+  height: 44px;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 0 4px 18px var(--color-shadow-dock);
+  position: relative;
+  pointer-events: auto;
+}
+
+.dock-nav-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: 0 var(--space-4);
+}
+
+.nav-wing {
+  position: absolute;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.nav-wing-left {
+  left: -14px;
+}
+
+.nav-wing-right {
+  right: -14px;
+}
+
+.dock-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-dock-text);
+  font-weight: 700;
+  font-size: var(--font-size-body-small);
+  text-decoration: none;
+}
+
+.dock-brand-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+}
+
+.dock-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.dock-link {
+  font-size: var(--font-size-body-small);
+  font-weight: 500;
+  color: var(--color-dock-text-dim);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.dock-link:hover {
+  color: var(--color-dock-text);
+}
+
+.dock-btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-dock-btn-bg);
+  color: var(--color-dock-btn-text);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-body-small);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
+}
+
+.dock-btn-download:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.dock-apple-icon,
+.hero-apple-icon,
+.eyebrow-apple-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   Fixed Honors Ribbon
+   ========================================================================== */
+.ribbon-honors {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  background-color: var(--color-ribbon-bg);
+  color: var(--color-ribbon-text);
+  width: 32px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  padding: var(--space-3) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  box-shadow: -2px 0 10px var(--color-shadow-notch);
+  pointer-events: auto;
+}
+
+.ribbon-w {
+  font-weight: 800;
+  font-size: var(--font-size-body-small);
+  line-height: 1;
+}
+
+.ribbon-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: var(--font-size-micro);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -323,8 +469,135 @@ img {
 }
 
 /* ==========================================================================
-   Hero Section
+   Hero Section & Vibrant Radiant Canvas
    ========================================================================== */
+.hero-vibrant-canvas {
+  background: linear-gradient(180deg, var(--color-hero-grad-start) 0%, var(--color-hero-grad-mid1) 22%, var(--color-hero-grad-mid2) 52%, var(--color-hero-grad-mid3) 80%, var(--color-hero-grad-end) 100%);
+  padding-top: clamp(100px, 14vh, 150px);
+  padding-bottom: var(--space-16);
+  min-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero-gradient-overlay {
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  right: -60px;
+  height: 80%;
+  background: radial-gradient(circle at 50% 10%, var(--color-hero-glow-overlay), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.hero-eyebrow-glowing {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-hero-text);
+  font-size: var(--font-size-body-small);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--space-6);
+  border: none;
+  background: transparent;
+  padding: 0;
+  text-transform: none;
+}
+
+.hero-eyebrow-glowing::before {
+  display: none;
+}
+
+.hero-headline-glowing {
+  color: var(--color-hero-text);
+  font-size: clamp(3.25rem, 6.5vw + 1rem, 5.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: var(--letter-spacing-tighter);
+  margin-bottom: var(--space-6);
+  text-shadow: 0 4px 24px var(--color-shadow-hero-text);
+}
+
+.hero-headline-glowing em {
+  display: block;
+  font-family: var(--font-family-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: var(--letter-spacing-normal);
+  color: var(--color-hero-text);
+  text-shadow: 0 4px 24px var(--color-shadow-hero-text);
+  margin-top: 4px;
+}
+
+.hero-description-glowing {
+  color: var(--color-hero-text-dim);
+  font-size: clamp(1.0625rem, 1.2vw + 0.5rem, 1.25rem);
+  line-height: var(--line-height-body);
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-8);
+  text-shadow: 0 2px 10px var(--color-shadow-hero-subhead);
+}
+
+.hero-actions-glowing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.hero-btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-hero-btn-bg);
+  color: var(--color-hero-btn-text);
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 20px var(--color-shadow-hero-btn);
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.hero-btn-download:hover {
+  background-color: var(--color-hero-btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px var(--color-shadow-hero-hover);
+}
+
+.hero-metadata-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  font-size: var(--font-size-body-small);
+  color: var(--color-hero-text-faint);
+  margin-bottom: var(--space-12);
+  flex-wrap: wrap;
+}
+
+.hero-metadata-strip .meta-dot {
+  opacity: 0.6;
+}
+
 .hero-section {
   padding-top: var(--space-16);
   padding-bottom: var(--space-16);
@@ -1325,6 +1598,23 @@ img {
 
   .notch-drawer {
     width: calc(100vw - 32px);
+  }
+
+  .dock-links {
+    display: none;
+  }
+
+  .dock-nav-content {
+    gap: var(--space-3);
+  }
+
+  .ribbon-honors {
+    display: none;
+  }
+
+  .hero-vibrant-canvas {
+    padding-top: clamp(80px, 12vh, 120px);
+    min-height: auto;
   }
 }
 

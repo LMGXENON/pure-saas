@@ -11,3 +11,7 @@ coverage/
 *.skill
 evals/
 .omc/
+
+# Chrome profiles
+**/.profile-*
+

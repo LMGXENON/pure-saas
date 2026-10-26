@@ -11,6 +11,32 @@
   --color-bg-dark: #000000;
   --color-bg-card: #FFFFFF;
 
+  /* Hero Vibrant Gradient & Dock Island Tokens */
+  --color-hero-grad-start: #190096;
+  --color-hero-grad-mid1: #0080FF;
+  --color-hero-grad-mid2: #78D2FF;
+  --color-hero-grad-mid3: #D4EDFF;
+  --color-hero-grad-end: #FFFFFF;
+  --color-ribbon-bg: #000000;
+  --color-ribbon-text: #FFFFFF;
+  --color-dock-bg: #000000;
+  --color-dock-text: #FFFFFF;
+  --color-dock-btn-bg: #FFFFFF;
+  --color-dock-btn-text: #000000;
+  --color-hero-text: #FFFFFF;
+  --color-hero-btn-bg: #000000;
+  --color-hero-btn-hover: #1A1A1A;
+  --color-hero-btn-text: #FFFFFF;
+  --color-hero-text-dim: rgba(255, 255, 255, 0.9);
+  --color-hero-text-faint: rgba(255, 255, 255, 0.7);
+  --color-dock-text-dim: rgba(255, 255, 255, 0.65);
+  --color-shadow-dock: rgba(0, 0, 0, 0.3);
+  --color-shadow-hero-btn: rgba(0, 0, 0, 0.25);
+  --color-shadow-hero-hover: rgba(0, 0, 0, 0.35);
+  --color-hero-glow-overlay: rgba(255, 255, 255, 0.15);
+  --color-shadow-hero-text: rgba(0, 0, 0, 0.18);
+  --color-shadow-hero-subhead: rgba(0, 0, 0, 0.15);
+
   /* Translucent & Glass Tints */
   --color-glass-surface: rgba(255, 255, 255, 0.85);
   --color-notch-bg: rgba(18, 18, 18, 0.94);

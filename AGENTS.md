@@ -113,3 +113,5 @@ npx pure-saas design-system --product "<type>" --variance <1-10> --motion <1-10>
    - Drift detection: `npx pure-saas drift DESIGN.md observations.json`
    - Tech debt scan: `npx pure-saas check DESIGN.md --source src --known known-defects.json`
    - Token export: `npx pure-saas export-tokens DESIGN.md --format dtcg|tailwind|css`
+11. **Enforce Website Reference Analysis & Complete Visual Verification:**
+   - Whenever recreating or analyzing a reference URL across any command or workflow, coding agents must discover all accessible pages, capture full-page and section screenshots, inspect computed styles and motion dynamics, author the mandatory 16-section `DESIGN.md`, implement purposeful motion (`IntersectionObserver` reveals and physics-based curves), capture local screenshots at matching viewports (1440px, 768px, 375px), perform side-by-side visual comparison, and satisfy the 11-item completion gate before claiming completion (see `references/reference-analysis.md` and `commands/reference.md`).

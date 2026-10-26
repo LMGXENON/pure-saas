@@ -46,8 +46,12 @@ test('Supaste Website: 0 raw colors, 0 anti-slop violations, 0 unresolved tokens
 test('Supaste Website: Authentic content and section structure', () => {
   const html = fs.readFileSync(path.join(SUPASTE_DIR, 'index.html'), 'utf8');
 
-  // Verify core sections and messaging
+  // Verify core sections, dock navigation, and ribbon
   assert.ok(html.includes('Copy once. <em>Reuse anytime.</em>'), 'Must contain exact authentic headline');
+  assert.ok(html.includes('dock-nav'), 'Must contain top attached island dock navbar');
+  assert.ok(html.includes('nav-wing-left') && html.includes('nav-wing-right'), 'Must contain SVG inverted dock corner wings');
+  assert.ok(html.includes('ribbon-honors'), 'Must contain vertical honors ribbon badge');
+  assert.ok(html.includes('hero-vibrant-canvas'), 'Must contain vivid blue gradient hero canvas');
   assert.ok(html.includes('Your clipboard, wherever you need it'), 'Must contain value proposition section');
   assert.ok(html.includes('One price. Lifetime access.'), 'Must contain pricing section headline');
   assert.ok(html.includes('Frequently Asked Questions'), 'Must contain FAQ section');
@@ -55,6 +59,14 @@ test('Supaste Website: Authentic content and section structure', () => {
   assert.ok(html.includes('notch-shelf-simulator'), 'Must contain interactive MacBook notch simulator');
   assert.ok(html.includes('assets/app-icon.png'), 'Must reference downloaded authentic app icon');
   assert.ok(html.includes('assets/hero-screenshot.jpeg'), 'Must reference hero screenshot');
+});
+
+test('Supaste Website: Reference captures and visual assets exist', () => {
+  const refDir = path.join(SUPASTE_DIR, 'reference-captures');
+  assert.ok(fs.existsSync(path.join(refDir, 'live-home-fullpage-1440.png')), 'Full-page reference capture must exist');
+  assert.ok(fs.existsSync(path.join(refDir, 'home-desktop-1440.png')), 'Desktop reference capture must exist');
+  assert.ok(fs.existsSync(path.join(refDir, 'home-tablet-768.png')), 'Tablet reference capture must exist');
+  assert.ok(fs.existsSync(path.join(refDir, 'home-mobile-375.png')), 'Mobile reference capture must exist');
 });
 
 test('Supaste Website: Headless Chrome responsive render across viewports', (t) => {
@@ -88,3 +100,4 @@ test('Supaste Website: Headless Chrome responsive render across viewports', (t) 
     }
   }
 });
+
