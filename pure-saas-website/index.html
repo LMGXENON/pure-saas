@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pure SaaS — Universal AI-Agent Skill & Design Enforcement Toolkit</title>
+    <meta name="description" content="Eliminate AI slop. Production-quality UI/UX design guidance, Apple HIG elegance, WCAG 2.2 AA accessibility, and semantic token enforcement for Claude Code, Cursor, Windsurf, Copilot, and Gemini." />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>" />
+    <!-- Theme Flash Prevention -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('pure-saas-theme');
+          var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved === 'dark' || (!saved && systemDark) ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+          if (theme === 'dark') document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-canvas text-text-primary antialiased selection:bg-accent/20 selection:text-accent min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
